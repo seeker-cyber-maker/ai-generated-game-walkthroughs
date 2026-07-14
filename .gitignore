@@ -1,0 +1,19 @@
+# Never publish copyrighted game content or local evidence captures.
+*.zip
+*.rar
+*.7z
+*.exe
+*.ovl
+vol.*
+words.tok
+object
+logdir
+picdir
+viewdir
+*.agilogic
+*.agiasm
+*.agiview
+*.agisound
+*.sav
+*.sg
+run-logs/private/
