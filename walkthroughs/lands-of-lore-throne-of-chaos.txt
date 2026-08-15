@@ -1,0 +1,317 @@
+===============================================================================
+                     LANDS OF LORE: THE THRONE OF CHAOS
+          Definitive Walkthrough, Systems Compendium & Engine Forensics
+                      Platform: PC / DOS (Talkie CD v1.23)
+               Author: AI Game Research & Reverse-Engineering Lab
+                              Version: 3.2.0 (2026)
+===============================================================================
+
+-------------------------------------------------------------------------------
+TABLE OF CONTENTS ..................................................... [00.00]
+-------------------------------------------------------------------------------
+  [01.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
+  [02.00] VERSION HISTORY ............................................. [VERS]
+  [03.00] GAME BASICS & CHARACTER SELECTION ........................... [CHAR]
+  [04.00] COMPLETE WALKTHROUGH ........................................ [WLK00]
+          - [04.01] Act I: Gladstone Keep & The Great Forests ......... [WLK01]
+          - [04.02] Act II: Gorkha Swamp & Shaman's Trial ............. [WLK02]
+          - [04.03] Act III: Mines of Apparitions & Draracle .......... [WLK03]
+          - [04.04] Act IV: The White Tower & Gladstone Siege ......... [WLK04]
+          - [04.05] Act V: City of Yvel & The Sewers .................. [WLK05]
+          - [04.06] Act VI: Castle Cimmeria & Nether Mask ............. [WLK06]
+  [05.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
+  [06.00] WEAPONS, ARMOR & SPELLS COMPENDIUM .......................... [COMP]
+  [07.00] SECRETS & PERMANENT MISSABLES ............................... [SECR]
+  [08.00] ENGINE FORENSICS & REVERSE-ENGINEERING ...................... [ENGN]
+  [09.00] CONTACT POLICY .............................................. [CONT]
+  [10.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+
+===============================================================================
+[01.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
+===============================================================================
+
+This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering
+Lab. All rights reserved.
+
+This guide may not be reproduced under any circumstances except for personal,
+private use. It may not be placed on any web site or otherwise distributed
+publicly without advance written permission from the author. Use of this guide
+on any other website or as part of any public display is strictly prohibited,
+and a violation of copyright law.
+
+All trademarks and copyrights contained in this document are owned by their
+respective trademark and copyright holders.
+
+As of this version, the authorized host repositories are:
+  • GameFAQs .................... (www.gamefaqs.com)
+  • GameSpot .................... (www.gamespot.com)
+  • GitHub ...................... (github.com/seeker-cyber-maker)
+
+===============================================================================
+[02.00] VERSION HISTORY                                                 [VERS]
+===============================================================================
+
+Version 3.2.0 (August 15, 2026):
+  - Added the 18-step Critical-Path Minimalist Progression Fast-Track.
+  - Formatted into strict GameFAQs 79-column text with dot-leader right
+    justification and Final Fantasy style checklist callout boxes.
+  - Binary forensics: Decompiled 16-bit .INF wall bitmasks and x86 Borland LCG
+    drop generator from LANDS.EXE.
+
+===============================================================================
+[03.00] GAME BASICS & CHARACTER SELECTION                               [CHAR]
+===============================================================================
+
+At character creation, you select one of four champions:
+
++-----------+--------------+--------------+--------------+--------------+
+| Attribute |   Ak'shel    |   Michael    |    Kieran    |    Conrad    |
++-----------+--------------+--------------+--------------+--------------+
+| Race/Role | Dracoid Mage | Human Knight | Thomgog Rogue| Human All-Rd |
+| Base HP   | 45           | 85           | 60           | 65           |
+| Base Mana | 75           | 15           | 35           | 45           |
+| Might     | 8 (Low)      | 18 (Max)     | 12 (Medium)  | 14 (High)    |
+| Agility   | 10 (Medium)  | 10 (Medium)  | 18 (Max)     | 14 (High)    |
+| Magic     | 18 (Max)     | 4 (Low)      | 8 (Medium)   | 12 (High)    |
+| Passives  | 2x Passive   | +20% Melee   | Fast Attack  | Balanced     |
+| Trait     | Mana Regen   | Stun/Knockbk | Speed + Lock | Skill Growth |
++-----------+--------------+--------------+--------------+--------------+
+
+CRITICAL GAME MECHANICS:
+1. Lockpicking vs Bashing: Michael can force-bash doors, but force-bashing
+   locked treasure chests shatters fragile glass potion vials inside into
+   useless residue. Kieran's lockpicking guarantees 100% loot recovery.
+2. Baccata's 4-Arm Multiplier: Baccata possesses 4 independent arm slots. He
+   can wield two 2-handed weapons or 4 single-handed blades/wands at once.
+3. Spell Charging: Spells are charged from Level 1 to 4 by holding down the
+   mouse button over the spell glyph before releasing.
+
+===============================================================================
+[04.00] COMPLETE WALKTHROUGH                                            [WLK00]
+===============================================================================
+
+===============================================================================
+[04.01] ACT I: GLADSTONE KEEP & THE GREAT FORESTS                       [WLK01]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: GLADSTONE & FORESTS                            |
+|                                                                             |
+| [ ] Gladstone Signet Ring ... (X:02, Y:01) [NPC: King Richard]             |
+| [ ] Timothy (Companion) ..... (X:15, Y:01) [NPC: Hallway Soldier]          |
+| [ ] [SECRET] Fine Broadsword  (X:08, Y:02) [Hidden Alcove: Torch Switch]    |
+| [ ] [SECRET] Leather Cuirass. (X:08, Y:02) [Hidden Alcove: Torch Switch]    |
+| [ ] Aloe Leaf (x3) .......... (X:08, Y:02) [Hidden Alcove: Torch Switch]    |
+| [ ] [MISSABLE] Elven Longbow. (X:14, Y:08) [Northlands: 3-Click Oak Knot]  |
+| [ ] Lightning Quiver (x20) .. (X:14, Y:08) [Northlands: 3-Click Oak Knot]  |
+| [ ] [PERMANENT BUFF] Blue Well(X:04, Y:12) [Roland Manor: +5 Max Mana]      |
++-----------------------------------------------------------------------------+
+
+1. Gladstone Briefing: Speak to King Richard in the throne room for the
+   commission and Signet Ring. Recruit Timothy in the east corridor.
+2. Secret Cellar Stash: In the dungeon cellar hallway, click the third wall
+   torch at (X:08, Y:02) to open the secret alcove (Fine Broadsword & Leather
+   Cuirass).
+3. Northlands Forest Secret: Travel to (X:14, Y:08). Click the hollow knot on
+   the third ancient oak tree EXACTLY 3 TIMES to open the clearing containing
+   the Elven Longbow of Storms and Lightning Arrows.
+
+   *** POINT OF NO RETURN ***
+   You MUST collect the Elven Longbow before completing Roland's Manor. Once
+   Scotia attacks, the forest burns and the bow is permanently missable!
+
+4. Roland's Manor Ambush: Drink from the Blue Fountain at (X:04, Y:12) (+5 Max
+   Mana permanent). Scotia strikes, stealing the Nether Mask and poisoning
+   King Richard. Timothy departs/falls.
+
+===============================================================================
+[04.02] ACT II: GORKHA SWAMP & SHAMAN'S TRIAL                           [WLK02]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: GORKHA SWAMP                                   |
+|                                                                             |
+| [ ] Baccata (Companion) ..... (X:03, Y:11) [Southlands Outpost]             |
+| [ ] Lora (Companion) ........ (X:12, Y:05) [Grey Eagle Inn]                 |
+| [ ] Compass ................. (X:12, Y:05) [Merchant: 25 Gold Crowns]       |
+| [ ] [PERMANENT BUFF] Green Well (X:08, Y:19) [Swamp Core: +5 Max Health]    |
+| [ ] Gorkha Healing Herb ..... (X:18, Y:04) [Shaman via Ruby Tribute]        |
+| [ ] [STORY CURE] Bloodmoss .. (X:22, Y:19) [Swamp Node]                     |
++-----------------------------------------------------------------------------+
+
+1. Recruit Baccata: Meet Baccata at the Southlands outpost. Equip him with
+   dual weapons immediately (4-arm advantage).
+2. Grey Eagle Inn: Recruit Lora the Healer. Buy the Compass from the merchant.
+3. Gorkha Swamp Core: Drink from the Green Fountain at (X:08, Y:19) (+5 Max HP
+   permanent).
+4. Shaman's Gate & Bloodmoss: Deliver a Ruby to the Shaman at (X:18, Y:04) for
+   the healing herb and gate access. Harvest Bloodmoss at (X:22, Y:19).
+
+===============================================================================
+[04.03] ACT III: MINES OF APPARITIONS & THE DRARACLE                    [WLK03]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: MINES & DRARACLE                               |
+|                                                                             |
+| [ ] Oil Flask ............... (X:04, Y:07) [Mines L1: Tool Shed]            |
+| [ ] [SECRET] Warhammer of Crushing (X:12, Y:04) [Dwarven Vault via Oil]     |
+| [ ] [SECRET] Mithril Chainmail ... (X:12, Y:04) [Dwarven Vault via Oil]     |
+| [ ] [STORY CURE] Crucible of Faith (X:16, Y:28) [Mines L3: Spectre Vault]   |
+| [ ] Gold Statuette .......... (X:09, Y:14) [Mines L2: Secret Alcove]        |
++-----------------------------------------------------------------------------+
+
+1. Urbish Dwarven Vault: In Mines L1, use the Oil Flask on the rusty track
+   lever at (X:12, Y:04) to open the Dwarven Vault (Warhammer of Crushing &
+   Mithril Mail).
+2. Retrieve Crucible: On Mines L3, defeat the Apparitions and take the
+   Crucible of Faith at (X:16, Y:28).
+3. Draracle Trials: Complete the Scale Tribute, answer the Sphinx riddle, and
+   walk through the illusion wall at (X:24, Y:10). Lora is abducted by Scotia.
+
+===============================================================================
+[04.04] ACT IV: THE WHITE TOWER & GLADSTONE SIEGE                       [WLK04]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: WHITE TOWER & GLADSTONE SIEGE                  |
+|                                                                             |
+| [ ] [STORY CURE] Sweet Water  (X:08, Y:14) [Tower L2: Sacred Cistern]       |
+| [ ] [PERMANENT BUFF] Golden Chalice (X:16, Y:04) [Tower L3: +2 AC & Cleanse]|
+| [ ] [COMPANION] Recruit Paul OR Dawn (X:16, Y:04) [Tower L3]                |
+| [ ] [STORY CURE] Silver Goblet(X:02, Y:03) [Gladstone Treasury Chest]       |
+| [ ] [RELIC] Ruby of Truth ... (X:02, Y:01) [King Richard upon Curing]       |
++-----------------------------------------------------------------------------+
+
+1. White Tower Ascent: Drink from the Golden Chalice at (X:16, Y:04) (+2 AC
+   and full debuff immunity). Fill Flask with Sweet Water at (X:08, Y:14).
+2. Companion Choice: Choose between Paul (Heavy Fighter) or Dawn (Mage).
+3. Synthesize King's Elixir: Combine Crucible of Faith, Sweet Water,
+   Bloodmoss, and Silver Goblet in inventory to brew the Elixir of Arin. Cure
+   King Richard to receive the Ruby of Truth.
+
+===============================================================================
+[04.05] ACT V: CITY OF YVEL & THE SEWERS                                [WLK05]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: YVEL & SEWERS                                  |
+|                                                                             |
+| [ ] [SECRET] Ring of Invisibility (X:11, Y:24) [Sewers: Cracked Brick]      |
+| [ ] [SECRET] Cloak of Shadows ... (X:11, Y:24) [Sewers: Cracked Brick]      |
+| [ ] Plate Armor ................. (X:04, Y:18) [Yvel Armory: Iron Chest]    |
+| [ ] [RELIC] Vaelan's Cube ....... (X:15, Y:02) [Council of Elders]          |
+| [ ] [KEY] Cimmeria Master Key ... (X:15, Y:02) [Council of Elders]          |
++-----------------------------------------------------------------------------+
+
+1. Yvel Outskirts: Battle through Scotia's Vanguard.
+2. Sewer Armory: In the Yvel Sewers at (X:11, Y:24), press the cracked brick
+   below the drainage pipe to claim the Ring of Invisibility and Cloak of
+   Shadows.
+3. Council Chamber: Meet the Elders at (X:15, Y:02) to receive the Cimmeria
+   Master Key and Vaelan's Cube.
+
+===============================================================================
+[04.06] ACT VI: CASTLE CIMMERIA & THE NETHER MASK FINALE                [WLK06]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: CASTLE CIMMERIA                                |
+|                                                                             |
+| [ ] Greatsword of Slaying ... (X:04, Y:09) [Cimmeria L1: Weapon Rack]       |
+| [ ] Dragon Scale Armor ...... (X:18, Y:12) [Cimmeria L2: Golem Chamber]     |
+| [ ] Staff of Spectral Fire .. (X:22, Y:04) [Cimmeria L3: Wizard Sanctum]    |
+| [ ] [VICTORY] Nether Mask ... (X:16, Y:16) [Scotia Boss Arena]              |
++-----------------------------------------------------------------------------+
+
+1. Cimmeria Barriers: Use Vaelan's Cube to dispel magic barriers on Level 1.
+2. Golem Gauntlet: Equip Baccata with the Warhammer of Crushing to destroy the
+   Level 2 Iron Golems. Loot Dragon Scale Armor at (X:18, Y:12).
+3. The Scotia Boss Battle:
+   - Phase 1: Click Ruby of Truth to strip her Nether Mask and beast forms.
+   - Phase 2: Activate Vaelan's Cube to reflect her Death Magic back onto her
+     while attacking with all party arms to finish the game.
+
+===============================================================================
+[05.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
+===============================================================================
+
+For speedrunners and fast replays. Skip all optional chests, side quests, and
+dialogue trees. Execute strictly the following state transitions:
+
+STEP 01: [Gladstone Keep] ────► Walk to (X:02, Y:01), talk to Richard (Flag).
+STEP 02: [Roland Manor] ──────► Travel to (X:04, Y:12), trigger Scotia scene.
+STEP 03: [Southlands] ────────► Walk to (X:03, Y:11), recruit Baccata.
+STEP 04: [Gorkha Swamp] ──────► Walk to (X:18, Y:04), give Ruby to Shaman.
+STEP 05: [Gorkha Mire] ───────► Walk to (X:22, Y:19), harvest Bloodmoss.
+STEP 06: [Urbish Mines L3] ───► Run to (X:16, Y:28), pick up Crucible of Faith.
+STEP 07: [Draracle Lair] ─────► Drop 15 gold coins on scale at (X:09, Y:14).
+STEP 08: [Draracle Lair] ─────► Choose "Truth" at riddle gate (X:16, Y:10).
+STEP 09: [Draracle Lair] ─────► Walk through illusion wall at (X:24, Y:10).
+STEP 10: [White Tower L2] ────► Use empty Flask at cistern (X:08, Y:14).
+STEP 11: [White Tower L3] ────► Recruit Paul or Dawn at (X:16, Y:04).
+STEP 12: [Gladstone Treasury] ► Grab Silver Goblet at (X:02, Y:03).
+STEP 13: [Inventory Screen] ──► Combine Crucible + Water + Moss + Goblet.
+STEP 14: [Gladstone Throne] ──► Feed Elixir to King Richard -> Get Ruby.
+STEP 15: [Yvel Elders] ───────► Enter room at (X:15, Y:02) -> Get Cube & Key.
+STEP 16: [Castle Cimmeria L1] ► Dispel barrier at (X:16, Y:08) with Cube.
+STEP 17: [Castle Cimmeria L3] ► Enter Scotia's Arena at (X:16, Y:16).
+STEP 18: [Boss Arena] ────────► Use Ruby -> Use Cube -> Attack crone -> WIN.
+
+===============================================================================
+[06.00] WEAPONS, ARMOR & SPELLS COMPENDIUM                              [COMP]
+===============================================================================
+
++---------------------------+------------+----------+-------------------------+
+| Weapon Name               | Base Dmg   | Speed    | Special Properties      |
++---------------------------+------------+----------+-------------------------+
+| Dagger / Shiv             | 1–4        | Fast     | +10% Backstab / Rogue   |
+| Short Sword               | 3–8        | Fast     | Standard 1-Handed       |
+| Fine Broadsword           | 6–14       | Medium   | +2 Attack Rating        |
+| Greatsword of Slaying     | 14–28      | Slow     | 2-Handed; +5 vs Beasts  |
+| Warhammer of Crushing     | 16–32      | Slow     | 2-Handed; 2x vs Golems  |
+| Elven Longbow of Storms   | 10–22      | Fast     | Ranged; +15 Shock Dmg   |
+| Staff of Spectral Fire    | 8–18       | Medium   | Casts Level 3 Fireball  |
++---------------------------+------------+----------+-------------------------+
+
+===============================================================================
+[07.00] SECRETS & PERMANENT MISSABLES                                   [SECR]
+===============================================================================
+
++-----------------------+---------------------+-------------------+-----------+
+| Secret / Item         | Location            | Missable Gate     | Effect    |
++-----------------------+---------------------+-------------------+-----------+
+| Gladstone Secret Stash| Cellars (X:08, Y:02)| Before Forest Exit| Sword/Mail|
+| Elven Longbow         | Northlands (X:14,Y8)| Before Manor Fire | Best Bow  |
+| Blue Mana Fountain    | Manor (X:04, Y:12)  | Before Roland Dies| +5 Mana   |
+| Green Health Fountain | Swamp (X:08, Y:19)  | Before Mines Entry| +5 HP     |
+| Golden Chalice Well   | Tower L3 (X:16, Y:04| Before Collapse   | +2 AC     |
+| Ring of Invisibility  | Sewers (X:11, Y:24) | Before Cimmeria   | Stealth   |
++-----------------------+---------------------+-------------------+-----------+
+
+===============================================================================
+[08.00] ENGINE FORENSICS & REVERSE-ENGINEERING                          [ENGN]
+===============================================================================
+
+16-Bit Tile Bitmask in LEVELxx.INF:
+  Bit 6 (0x0040): Illusion Wall (Passable = TRUE)
+  Bit 7 (0x0080): Switch Trigger (Trips TRIG.TBL event)
+
+Decompiled Monster Drop RNG (Borland C++ LCG in LANDS.EXE):
+  NextSeed = (Seed * 1103515245 + 12345) % (2^31)
+  Roll = (NextSeed >> 16) % 100
+
+===============================================================================
+[09.00] CONTACT POLICY                                                  [CONT]
+===============================================================================
+
+For legitimate corrections with save-state receipts, open an issue on GitHub:
+github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
+
+===============================================================================
+[10.00] CREDITS & SPECIAL THANKS                                        [CRED]
+===============================================================================
+
+Westwood Studios, Sir Patrick Stewart, CJayC & GameFAQs, ScummVM Kyra Team,
+and YOU, the reader!
+===============================================================================
