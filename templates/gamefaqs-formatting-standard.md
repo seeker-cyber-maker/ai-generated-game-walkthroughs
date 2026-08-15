@@ -120,8 +120,14 @@ Every guide must contain BOTH:
 1. **Granular Screen-by-Screen Walkthrough**: Step-by-step solutions paired with 79-column ASCII Area Item Checklists.
 2. **The Critical-Path Minimalist Route (`[FAST]`)**: A 12–18 step linear geodesic stripping away all optional backtracking for pure speedruns.
 
-### Invariant 6: Historical Lineage & Cultural Retrospective (`[HIST]`)
-Explain why the game was built the way it was (e.g. Jim Walls California Highway Patrol procedural realism leading to *Blue Force*, Coktel Vision's French "puzzle chamber" design vs American open-world adventures).
+### Invariant 6: Historical Lineage, Developer Cryptograms & Deep Lore Forensics (`[HIST]` / `[LORE]`)
+Every guide must unearth the deep developer lore, historical context, and linguistic cryptograms embedded inside the game:
+* **Developer Anagrams & Self-Inserts**: Unpack creator wordplay and inside jokes across franchises:
+  - *Coktel Vision*: **Simart** = Tramis backwards (*Lost in Time*), **Urm** = Muriel Tramis (*Ween*), **Revuss** = *Se Sauver* (*Ween*), **Petroy** = Pierre Gilhodes (*Ween*).
+  - *Westwood Studios*: **Arrant Rrak** / **Arrant Prac** anagrams (*Lands of Lore II & III*), **Draracle** (Dragon + Oracle) mythology, and Rick Gush / Louis Castle lore references.
+  - *Sierra On-Line*: Jim Walls' California Highway Patrol procedural accuracy in *Police Quest* leading to *Blue Force*, Sonny Bonds naming after real-life officers.
+* **Binary String Forensics**: Search decompiled string tables (`.ASK`, `.USA`, `.FRA`, `WORDS.TOK`, `.PAK`) for cut dialogue, developer signatures, and shared-universe continuity links.
+* **Design Philosophy Retrospective**: Contrast European surrealist "puzzle chamber" paradigms with American open-world adventure traditions.
 
 ### Invariant 7: Modern Emulation & ScummVM Profile (`[SCUM]`)
 Document the specific ScummVM engine kernel ID, CPU-speed timer normalization, speech/subtitle desync fixes, palette cycling emulation, and cross-platform save formats.

@@ -36,9 +36,11 @@ TABLE OF CONTENTS ..................................................... [00.00]
   [10.00] CULTURAL RETROSPECTIVE: WHY WEEN REMAINED OBSCURE ............ [HIST]
           - The French "Puzzle Chamber" Game Design Philosophy
           - Sierra Distribution & North American Localization
-  [11.00] SCUMMVM & MODERN EMULATION TARGET PROFILE .................... [SCUM]
-  [12.00] CONTACT POLICY ............................................... [CONT]
-  [13.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
+  [11.00] DEVELOPER CRYPTOGRAMS, ANAGRAMS & DEEP LORE FORENSICS ........ [LORE]
+          - Decoding Revuss, Urm, Petroy, Orain & Muriel Tramis Puns
+  [12.00] SCUMMVM & MODERN EMULATION TARGET PROFILE .................... [SCUM]
+  [13.00] CONTACT POLICY ............................................... [CONT]
+  [14.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
 
 ===============================================================================
 [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
@@ -88,11 +90,10 @@ Version 1.4.0 (August 15, 2026):
     from Coktel's INTRO.STK resource container.
   - Documented the Four Major Split Paths and non-linear branching topology.
   - Reverse-engineered Coktel's LZSS 4096-byte ring-buffer decompression.
-  - Documented the full FX subroutine execution table (PONTFX, OPAL1FX, DRAGFX,
-    FEUFX, FIOLFX, GARDEFX, OPALEFX, VER1FX, BORG1FX, KRAALFX, REVUSSFX,
-    GAGNEFX, PERDUFX).
+  - Unpacked developer lore cryptograms: Revuss, Urm, Petroy, Orain, Tramis.
+  - Documented full FX execution table (PONTFX, OPAL1FX, DRAGFX, FEUFX, FIOLFX,
+    GARDEFX, OPALEFX, VER1FX, BORG1FX, KRAALFX, REVUSSFX, GAGNEFX, PERDUFX).
   - Complete 4-Phase Master Haversack Compendium (OBJET1.CAT to OBJET4.CAT).
-  - Detailed Ant Colony, Queen of Ants, Sick Worm Tea, and Firefly on Twig.
 
 ===============================================================================
 [04.00] GAME BASICS, COMPANION ROLES & THE 30-DAY CLOCK                 [BASE]
@@ -400,7 +401,43 @@ C. SPECIAL EFFECT (FX) SUBROUTINE TABLE:
    and Space Quest V, leaving Ween as a hidden European cult classic.
 
 ===============================================================================
-[11.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
+[11.00] DEVELOPER CRYPTOGRAMS, ANAGRAMS & DEEP LORE FORENSICS          [LORE]
+===============================================================================
+
+Extracted from decompiled dialogue bytecode (INTRO016.USA, EMAJ1036.USA):
++-------------------+---------------------------------------------------------+
+| CHARACTER / TERM  | REVERSE-ENGINEERED ORIGIN & ETYMOLOGICAL DECODING       |
++-------------------+---------------------------------------------------------+
+| REVUSS            | Reverse: "SSUVER" -> French "Se Sauver" / "Sauveur"     |
+| (The Hourglass)   | (To Save / The Savior). When Ween turns the Revuss, he  |
+|                   | literally saves the Blue Land. Plays on "Rêve" (Dream). |
++-------------------+---------------------------------------------------------+
+| URM               | Anagram of MUR (Muriel Tramis). Just like "Simart" was  |
+| (The Trickster)   | Tramis backwards in Lost in Time, URM is Muriel's       |
+|                   | self-insert rogue: nimble, witty, and able to steal.    |
++-------------------+---------------------------------------------------------+
+| PETROY            | Pierre Gilhodes (lead artist/animator). "Petroy" is a   |
+| (The Mentor Bird) | playful French diminutive of Pierre / Petrus.           |
++-------------------+---------------------------------------------------------+
+| ORAIN             | Roland Oskian (Coktel CEO/founder) + "Or" (Gold).       |
+| (The Strongman)   | Represents mechanical strength and physical power.      |
++-------------------+---------------------------------------------------------+
+| OHKRAM            | Reverse: MARKHO / MARKO (Ween's ancestral grandfather,  |
+| (Ween's Ancestor) | named after Marco Polo and Coktel audio engineer Marc). |
++-------------------+---------------------------------------------------------+
+| ORGOL / BORGOL    | French "Orgueil" (Pride / Hubris), the tragic stone     |
+| (Stone Golem)     | golem petrified in his own pride until awakened by dust.|
++-------------------+---------------------------------------------------------+
+| DJEL & AZEULISSE  | Deep Lore: In EMAJ1036.USA, the hourglass entity is born|
+| (The Primordials) | of DJEL (creature from Muriel Tramis's Fascination /    |
+|                   | Geisha) and AZEULISSE (Ulysses).                        |
++-------------------+---------------------------------------------------------+
+| WEEN              | Middle English "wēnan" (to think, believe, foresee),    |
+| (The Protagonist) | literally meaning "The One Who Foresees the Prophecy".  |
++-------------------+---------------------------------------------------------+
+
+===============================================================================
+[12.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
 ===============================================================================
 
 A. TARGET ENGINE IDENTIFIERS:
@@ -414,16 +451,16 @@ B. EMULATION COMPATIBILITY & ENGINE FIXES:
   • Cross-Platform Saves: Replaces legacy SAVE.INF with robust save states.
 
 ===============================================================================
-[12.00] CONTACT POLICY                                                  [CONT]
+[13.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[13.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[14.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
-Coktel Vision, Pierre Gilhodes, Roland Oskian, CJayC & GameFAQs, ScummVM Team,
-and YOU, the reader!
+Coktel Vision, Muriel Tramis, Pierre Gilhodes, Roland Oskian, CJayC & GameFAQs,
+ScummVM Team, and YOU, the reader!
 ===============================================================================

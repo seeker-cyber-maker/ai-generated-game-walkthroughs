@@ -458,16 +458,65 @@ EMAJ1END (Credits Epilogue)   ──► Victory Sequence
 
 ---
 
-# 11. CONTACT POLICY [CONT]
+# 11. DEVELOPER CRYPTOGRAMS, ANAGRAMS & DEEP LORE FORENSICS [LORE]
+
+Extracted from decompiled dialogue bytecode (`INTRO016.USA`, `EMAJ1036.USA`, `JP3FX.USA`), Coktel Vision filled *Ween: The Prophecy* with creator signatures, French wordplay, and cross-game universe references:
+
+```text
+┌───────────────────┬─────────────────────────────────────────────────────────┐
+│ CHARACTER / TERM  │ REVERSE-ENGINEERED ORIGIN & ETYMOLOGICAL DECODING       │
+├───────────────────┼─────────────────────────────────────────────────────────┤
+│ REVUSS            │ Reverse: "SSUVER" -> French "Se Sauver" / "Sauveur"     │
+│ (The Hourglass)   │ (To Save / The Savior). When Ween turns the Revuss, he  │
+│                   │ literally saves the Blue Land. Plays on "Rêve" (Dream). │
+├───────────────────┼─────────────────────────────────────────────────────────┤
+│ URM               │ Anagram of MUR (Muriel Tramis). Just like "Simart" was  │
+│ (The Trickster)   │ Tramis backwards in Lost in Time, URM is Muriel's       │
+│                   │ self-insert rogue: nimble, witty, and able to steal.    │
+├───────────────────┼─────────────────────────────────────────────────────────┤
+│ PETROY            │ Pierre Gilhodes (lead artist/animator). "Petroy" is a   │
+│ (The Mentor Bird) │ playful French diminutive of Pierre / Petrus.           │
+├───────────────────┼─────────────────────────────────────────────────────────┤
+│ ORAIN             │ Roland Oskian (Coktel Vision CEO/founder) + "Or" (Gold).│
+│ (The Strongman)   │ Represents mechanical strength and physical power.      │
+├───────────────────┼─────────────────────────────────────────────────────────┤
+│ OHKRAM            │ Reverse: MARKHO / MARKO (Ween's ancestral grandfather,  │
+│ (Ween's Ancestor) │ named after Marco Polo and Coktel audio engineer Marc). │
+├───────────────────┼─────────────────────────────────────────────────────────┤
+│ ORGOL / BORGOL    │ French "Orgueil" (Pride / Hubris), the tragic stone     │
+│ (Stone Golem)     │ golem petrified in his own pride until awakened by dust.│
+├───────────────────┼─────────────────────────────────────────────────────────┤
+│ DJEL & AZEULISSE  │ Deep Lore: In EMAJ1036.USA, the hourglass entity is born│
+│ (The Primordials) │ of DJEL (creature from Muriel Tramis's Fascination /    │
+│                   │ Geisha) and AZEULISSE (Ulysses).                        │
+├───────────────────┼─────────────────────────────────────────────────────────┤
+│ WEEN              │ Middle English "wēnan" (to think, believe, foresee),    │
+│ (The Protagonist) │ literally meaning "The One Who Foresees the Prophecy".  │
+└───────────────────┴─────────────────────────────────────────────────────────┘
+```
+
+---
+
+# 12. SCUMMVM & MODERN EMULATION TARGET PROFILE [SCUM]
+
+* **Target Engine ID**: `gob` (Sub-engine: `ween`).
+* **Platform Target**: PC / DOS Floppy Release (1992).
+* **30-Day Timer Normalization**: Fixes CPU clock cycle acceleration in DOSBox to ensure the 30-day countdown advances at the authentic game pace.
+* **Audio Engine**: Supports dual AdLib OPL2 and Roland MT-32 music playback.
+* **Cross-Platform Saves**: Replaces legacy `SAVE.INF` with robust cross-platform save states.
+
+---
+
+# 13. CONTACT POLICY [CONT]
 
 For corrections, save-state submissions, or engine discoveries, open an issue on GitHub:
 `github.com/seeker-cyber-maker/ai-generated-game-walkthroughs`
 
 ---
 
-# 12. CREDITS & SPECIAL THANKS [CRED]
+# 14. CREDITS & SPECIAL THANKS [CRED]
 
 * **Coktel Vision**: For creating one of the most uniquely artistic French puzzle adventures of the DOS era.
-* **Pierre Gilhodes & Roland Oskian**: For brilliant surrealist artwork and ingenious puzzle design.
+* **Muriel Tramis, Pierre Gilhodes & Roland Oskian**: For brilliant surrealist artwork, ingenious puzzles, and timeless storytelling.
 * **The ScummVM Gob Engine Team**: For reverse-engineering and preserving Coktel's `GOB`/`STK` format.
 * **YOU, the reader**: For uncovering the lost gems of adventure gaming history!
