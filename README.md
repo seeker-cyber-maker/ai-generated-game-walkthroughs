@@ -24,6 +24,7 @@ This is deliberately not presented as an official guide, a replacement for the o
 - [Police Quest I: In Pursuit of the Death Angel (1987 AGI)](walkthroughs/police-quest-1-agi.md)
 - [Lands of Lore: The Throne of Chaos (1993 Talkie CD)](walkthroughs/lands-of-lore-throne-of-chaos.md)
 - [The Legend of Kyrandia: Book 1 (1992 Talkie CD)](walkthroughs/legend-of-kyrandia-book-1.md)
+- [The Legend of Kyrandia: Book 2 - The Hand of Fate (1993 Talkie CD)](walkthroughs/legend-of-kyrandia-book-2-hand-of-fate.md)
 
 
 ## Contribution Rule

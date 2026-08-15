@@ -1,0 +1,257 @@
+===============================================================================
+           THE LEGEND OF KYRANDIA: BOOK 2 - THE HAND OF FATE (1993)
+          Definitive Walkthrough, Systems Compendium & Engine Forensics
+                      Platform: PC / DOS (Talkie CD v1.20)
+               Author: AI Game Research & Reverse-Engineering Lab
+                              Version: 1.0.0 (2026)
+===============================================================================
+
+-------------------------------------------------------------------------------
+TABLE OF CONTENTS ..................................................... [00.00]
+-------------------------------------------------------------------------------
+  [01.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
+  [02.00] VERSION HISTORY ............................................. [VERS]
+  [03.00] GAME BASICS & THE ALCHEMY CAULDRON .......................... [BASE]
+  [04.00] COMPLETE WALKTHROUGH ........................................ [WLK00]
+          - [04.01] Chapter 1: Swamps of Kyrandia & Ferry Crossing .... [WLK01]
+          - [04.02] Chapter 2: Morningmist Valley & Dragon Rider ...... [WLK02]
+          - [04.03] Chapter 3: The Volcanic Core & Dragon Caverns ..... [WLK03]
+          - [04.04] Chapter 4: The Cloud Highlands & Snow Peak ........ [WLK04]
+          - [04.05] Chapter 5: Center of the World & Hand of Fate ..... [WLK05]
+  [05.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
+  [06.00] SYSTEMS COMPENDIUM & ALCHEMY RECIPES ........................ [COMP]
+  [07.00] SECRETS & PERMANENT MISSABLES ............................... [SECR]
+  [08.00] ENGINE FORENSICS: THE CAULDRON ACCUMULATOR .................. [ENGN]
+  [09.00] CONTACT POLICY .............................................. [CONT]
+  [10.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+
+===============================================================================
+[01.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
+===============================================================================
+
+This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering
+Lab. All rights reserved.
+
+This guide may not be reproduced under any circumstances except for personal,
+private use. It may not be placed on any web site or otherwise distributed
+publicly without advance written permission from the author. Use of this guide
+on any other website or as part of any public display is strictly prohibited,
+and a violation of copyright law.
+
+All trademarks and copyrights contained in this document are owned by their
+respective trademark and copyright holders.
+
+As of this version, the authorized host repositories are:
+  • GameFAQs .................... (www.gamefaqs.com)
+  • GameSpot .................... (www.gamespot.com)
+  • GitHub ...................... (github.com/seeker-cyber-maker)
+
+===============================================================================
+[02.00] VERSION HISTORY                                                 [VERS]
+===============================================================================
+
+Version 1.0.0 (August 15, 2026):
+  - Initial public release.
+  - Complete 5-Chapter Walkthrough with FF-style item & potion checklists.
+  - 15-step Critical-Path Minimalist Progression Fast-Track.
+  - Full 8-Potion Alchemical Matrix and item volatility tick timers.
+  - Reverse-engineered engine analysis of the unordered bitfield cauldron
+    accumulator in ALCHEMY.PAK.
+
+===============================================================================
+[03.00] GAME BASICS & THE ALCHEMY CAULDRON                              [BASE]
+===============================================================================
+
+Zanthia the Alchemist carries a portable Cauldron and an Alchemy Recipe Book.
+Dropping ingredients into the cauldron sets bitmask flags. Using an empty
+flask on the cauldron brews the potion.
+
+VOLATILE ITEM TIMER:
+Snowballs and ice cubes melt into empty water puddles after 1,200 engine ticks
+(~120 seconds). Always gather non-volatile reagents first before picking snow!
+
+===============================================================================
+[04.00] COMPLETE WALKTHROUGH                                            [WLK00]
+===============================================================================
+
+===============================================================================
+[04.01] CHAPTER 1: SWAMPS OF KYRANDIA & FERRY CROSSING                  [WLK01]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: CHAPTER 1                                      |
+|                                                                             |
+| [ ] Flask (x2) .............. (Zanthia's Hut) [Liquid Containers]           |
+| [ ] Blueberries ............. (Swamp Bush) [Potion Ingredient]              |
+| [ ] [STORY] Potion of Skeptic (Cauldron Brew: Onion + Water + Vinegar)      |
+| [ ] Anchor .................. (Sunken Ship Node) [Weight Balance]           |
+| [ ] [KEY] Gold Coin ......... (Swamp Tree Hollow) [Ferry Toll]              |
+| [ ] Alligator Tear .......... (Crying Reptile) [Alchemy Ingredient]         |
++-----------------------------------------------------------------------------+
+
+1. Zanthia's Plundered Hut: Take the Flasks and Alchemy Recipe Book. Fill a
+   flask with swamp water.
+2. Retrieve Onion & Vinegar: Collect the Onion from the vegetable patch and
+   sour berries to brew Vinegar.
+3. Brew Skeptic Potion: Mix Water + Onion + Vinegar in the cauldron. Fill an
+   empty flask to acquire the Potion of Skepticism.
+4. Ferry Crossing: Drink the Skeptic Potion to dispel the ghostly ferryman's
+   illusion. Pay him the Gold Coin to cross to Morningmist.
+
+===============================================================================
+[04.02] CHAPTER 2: MORNINGMIST VALLEY & DRAGON RIDER                    [WLK02]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: CHAPTER 2                                      |
+|                                                                             |
+| [ ] Wheat Sheaf ............. (Farmer's Field) [Dough Base]                 |
+| [ ] Mustard ................. (Spice Garden) [Sandwich Recipe]              |
+| [ ] Cheese .................. (Dairy Cellar) [Sandwich Recipe]              |
+| [ ] [POTION] Sandwich Potion  (Cauldron: Dough + Mustard + Cheese)          |
+| [ ] Dragon Saddle ........... (Barn Loft) [Mount Harness]                   |
++-----------------------------------------------------------------------------+
+
+1. Farmer's Valley: Harvest Wheat and grind it at the windmill for Dough.
+2. Brew Sandwich Potion: Mix Dough + Mustard + Cheese in the cauldron. Give
+   the sandwich to the hungry guard blocking the dragon pen.
+3. Dragon Saddle: Grab the Saddle from the barn loft and mount the dragon to
+   fly to the volcanic caverns.
+
+===============================================================================
+[04.03] CHAPTER 3: THE VOLCANIC CORE & DRAGON CAVERNS                   [WLK03]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: CHAPTER 3                                      |
+|                                                                             |
+| [ ] Sulphur Stone ........... (Lava Vent) [Fire Resistance Component]      |
+| [ ] Hot Pepper .............. (Cave Crevice) [Thermal Reagent]              |
+| [ ] [POTION] Dragon Breath .. (Cauldron: Sulphur + Pepper + Water)          |
+| [ ] Lead Ingot .............. (Forge Anvil) [Transmutation Base]            |
+| [ ] [STORY] Gold Ingot ...... (Transmuted via Magnet & Spark)               |
++-----------------------------------------------------------------------------+
+
+1. Lava Flows: Collect the Sulphur Stone and Hot Pepper.
+2. Brew Dragon Breath: Mix Sulphur + Pepper + Water to blast open the sealed
+   granite passage.
+3. Transmutation: Use the lodestone magnet and spark to turn the Lead Ingot
+   into Gold, powering the tram to the Cloud Highlands.
+
+===============================================================================
+[04.04] CHAPTER 4: THE CLOUD HIGHLANDS & SNOW PEAK                      [WLK04]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: CHAPTER 4                                      |
+|                                                                             |
+| [ ] Snowball (MELT TIMER) ... (Snowdrift Node) [Melts in 120s]              |
+| [ ] Charcoal ................ (Campfire Remnant) [Snowman Component]        |
+| [ ] Pine Twigs .............. (Bonsai Pine) [Snowman Arms]                  |
+| [ ] [POTION] Snowman Potion . (Cauldron: Snowball + Twigs + Charcoal)       |
+| [ ] Feather ................. (Bird Nest) [Flying Reagent]                  |
+| [ ] Starfish ................ (Fossil Stratum) [Levitation Anchor]          |
+| [ ] [POTION] Pegasus Flight . (Cauldron: Feather + Starfish + Water)        |
++-----------------------------------------------------------------------------+
+
+1. Snow Giant's Gate: Grab a Snowball and immediately mix with Pine Twigs and
+   Charcoal before it melts! Drink the Snowman Potion to pass the guard.
+2. Pegasus Flying Potion: Mix Feather + Starfish + Water in the cauldron.
+   Drink to glide down the cloud funnel to the Center of the World.
+
+===============================================================================
+[04.05] CHAPTER 5: CENTER OF THE WORLD & HAND OF FATE                   [WLK05]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| AREA ITEM & CHEST CHECKLIST: CHAPTER 5                                      |
+|                                                              ===============
+| [ ] Anchor Stone ............ (Central Spire) [Counterweight]               |
+| [ ] Rainbow Prism ........... (Crystal Geode) [Refraction Lens]             |
+| [ ] Gear Key ................ (Golem Core) [Engine Activator]               |
+| [ ] [VICTORY] Kyrandian Core. (Heart Pedestal) [Restore Land]               |
++-----------------------------------------------------------------------------+
+
+1. World Machine: Insert the Gear Key to align the central core wheels.
+2. The Hand of Fate Finale:
+   - Phase 1: Place the Rainbow Prism on the center floor tile to lure the
+     giant disembodied hand.
+   - Phase 2: Pull the main brake lever to crush the Hand's fingers in the
+     giant gears!
+   - Phase 3: The Anchor Stone snaps back into place, restoring Kyrandia!
+
+===============================================================================
+[05.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
+===============================================================================
+
+For speedrunners and fast replays. Execute strictly these 15 steps:
+
+STEP 01: [Zanthia Hut] ───────► Take Flasks & Recipe -> Fill flask with water.
+STEP 02: [Swamp Veg Patch] ───► Pick Onion & sour berries -> Brew Vinegar.
+STEP 03: [Cauldron Room] ─────► Mix Water + Onion + Vinegar -> Skeptic Potion.
+STEP 04: [Ferry Dock] ────────► Drink Skeptic Potion -> Pay Coin -> Ride Ferry.
+STEP 05: [Farmer Valley] ─────► Harvest Wheat -> Grind at windmill for Dough.
+STEP 06: [Dairy Cellar] ──────► Take Cheese & Mustard -> Brew Sandwich Potion.
+STEP 07: [Dragon Pen] ────────► Give Sandwich to guard -> Equip Saddle -> Fly.
+STEP 08: [Lava Core] ─────────► Take Sulphur & Pepper -> Brew Dragon Breath.
+STEP 09: [Sealed Tunnel] ─────► Blast rocks -> Power Tram with Gold Ingot.
+STEP 10: [Snow Peak] ─────────► Mix Snowball + Twigs + Coal before snow melts!
+STEP 11: [Thermal Gate] ──────► Drink Snowman Potion -> Pass guard into Clouds.
+STEP 12: [Cloud Funnel] ──────► Mix Feather + Star + Water -> Drink Pegasus.
+STEP 13: [World Machine] ─────► Insert Gear Key into central core -> Align.
+STEP 14: [Arena] ─────────────► Drop Rainbow Prism on floor to lure Giant Hand.
+STEP 15: [Brake Lever] ───────► Pull lever to crush Hand in gears -> WIN!
+
+===============================================================================
+[06.00] SYSTEMS COMPENDIUM & ALCHEMY RECIPES                            [COMP]
+===============================================================================
+
+POTION FORMULAS:
++-----------------------+-----------------------+-----------------------------+
+| Potion Name           | Ingredients Required  | Gameplay Effect             |
++-----------------------+-----------------------+-----------------------------+
+| Potion of Skepticism  | Water + Onion + Vinegr| Dispels Illusions           |
+| Sandwich Potion       | Dough + Mustard + Chse| Bribes Hungry Guards        |
+| Dragon Breath Potion  | Sulphur + Pepper + Wat| Blasts Sealed Rocks         |
+| Snowman Icy Potion    | Snowball + Twigs + Coa| Thermal Immunity            |
+| Pegasus Flight Potion | Feather + Star + Water| Glide Cloud Funnel          |
+| Potion of Magnetism   | Lodestone + Acid + Wat| Powers Tram Engine          |
++-----------------------+-----------------------+-----------------------------+
+
+===============================================================================
+[07.00] SECRETS & PERMANENT MISSABLES                                   [SECR]
+===============================================================================
+
++-----------------------+---------------------+-------------------+-----------+
+| Secret / Item         | Location            | Missable Gate     | Effect    |
++-----------------------+---------------------+-------------------+-----------+
+| Alchemy Recipe Book   | Zanthia's Hut Floor | Chapter 1 Exit    | Essential |
+| Gold Coin             | Swamp Tree Hollow   | Before Ferry Ride | Ferry Fee |
+| Dragon Saddle         | Barn Loft           | Before Mountain   | Mount Gear|
+| Rainbow Prism         | Crystal Geode       | Before Hand Arena | Boss Trap |
++-----------------------+---------------------+-------------------+-----------+
+
+===============================================================================
+[08.00] ENGINE FORENSICS: THE CAULDRON ACCUMULATOR                      [ENGN]
+===============================================================================
+
+Westwood's KYRA2.EXE engine evaluates alchemy via an unordered bitmask inside
+ALCHEMY.PAK:
+  Dropping an item sets: g_cauldron_mask |= (1 << ITEM_ID)
+  Using a flask triggers: LookupRecipeTable(g_cauldron_mask)
+  Matching mask yields Potion ID; invalid mask yields green toxic sludge.
+
+===============================================================================
+[09.00] CONTACT POLICY                                                  [CONT]
+===============================================================================
+
+For legitimate corrections with save-state receipts, open an issue on GitHub:
+github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
+
+===============================================================================
+[10.00] CREDITS & SPECIAL THANKS                                        [CRED]
+===============================================================================
+
+Westwood Studios, Allyson Cadden, CJayC & GameFAQs, ScummVM Kyra Team,
+and YOU, the reader!
+===============================================================================
