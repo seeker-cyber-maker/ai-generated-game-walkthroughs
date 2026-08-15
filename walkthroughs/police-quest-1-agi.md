@@ -5,7 +5,7 @@ developer: Sierra On-Line (1987)
 engine: Sierra AGI (Adventure Game Interpreter v2.917)
 status: definitive-walkthrough-and-engine-forensics
 author: AI Game Research & Reverse-Engineering Lab
-version: 2.0.0
+version: 2.1.0
 target_build_sha256: 51d93876d09ef7e0f7be7e1ee7b9ae9b1b4d12e5a7b4bbf06629aa019fc5c428
 ---
 
@@ -29,15 +29,15 @@ target_build_sha256: 51d93876d09ef7e0f7be7e1ee7b9ae9b1b4d12e5a7b4bbf06629aa019fc
 3. [The Critical-Path Minimalist Route (Progression Fast-Track)](#3-the-critical-path-minimalist-route) . [FAST]
 4. [Master 245-Point Score Reconciliation Ledger](#4-master-245-point-score-reconciliation-ledger) ..... [SCOR]
 5. [The Complete Police Quest 1 Parser Dictionary (`WORDS.TOK`)](#5-the-complete-police-quest-1-parser-dictionary) [DICT]
-   - Core Police Action Verbs & Synonyms
-   - Entities, Objects & Vehicle Nouns
-   - Radio 10-Codes & Police Terminology
-6. [Engine Forensics & AGI Logic Decompilation](#6-engine-forensics--agi-logic-decompilation) ........... [ENGN]
+6. [Character Origins, Real-Life Inspirations & Franchise Lineage](#6-character-origins-real-life-inspirations--franchise-lineage) [LORE]
+   - Real-Life CHP & Sierra Team Inspirations
+   - Character Continuity across PQ2, PQ3, and Jim Walls' *Blue Force*
+7. [Engine Forensics & AGI Logic Decompilation](#7-engine-forensics--agi-logic-decompilation) ........... [ENGN]
    - The Title Screen Random Bullet Hole Shot Engine (`LOGIC.001`)
    - The Drunk Driver (Art Serabian) FST State Machine (`LOGIC.014`)
    - Easter Eggs & Secret Parser Responses
-7. [Version History & Build Provenance](#7-version-history--build-provenance) ............. [VERS]
-8. [Credits & Special Thanks](#8-credits--special-thanks) ................................. [CRED]
+8. [Version History & Build Provenance](#8-version-history--build-provenance) ............. [VERS]
+9. [Credits & Special Thanks](#9-credits--special-thanks) ................................. [CRED]
 
 ---
 
@@ -329,21 +329,21 @@ Authorized hosting repositories:
                THE BARE-BONES PROGRESSION GEODESIC (16 STEPS)
 ===============================================================================
 STEP 01: [Locker #26] ────────► Open locker 269 -> Take gun, cuffs, ammo, belt.
-STEP 02: [Briefing Room] ─────► Read newspaper -> Sit before 08:00 -> Take memo.
+STEP 02: [Briefing Room] ─────► Read paper -> Sit before 08:00 -> Take memo.
 STEP 03: [Parking Lot] ───────► 4-point circle inspection -> Enter cruiser 83.
 STEP 04: [Patrol Grid] ───────► Radio 10-8 -> Stop Helen Hots at 4th & Peach.
-STEP 05: [Patrol Grid] ───────► Stop swerving sedan -> FST + Breathalyzer -> Jail.
-STEP 06: [Highway 83] ────────► 10-33 Stolen Mercedes -> High-risk felony arrest.
+STEP 05: [Patrol Grid] ───────► Stop swerving sedan -> FST + Breathalyzer.
+STEP 06: [Highway 83] ────────► 10-33 Stolen Mercedes -> High-risk felony stop.
 STEP 07: [Courthouse] ────────► Gun in locker 3 -> Testify -> Mention tattoo.
 STEP 08: [Chief Office] ──────► Report to Morgan -> Transfer to Vice/Narcotics.
 STEP 09: [Park Stakeout] ─────► Binoculars on bench -> Bust Simms drug drop.
 STEP 10: [Wino Willy's] ──────► Talk Marie -> Buy drink -> Get Delphoria tip.
 STEP 11: [Locker Room] ───────► Dye hair blonde -> Store badge & extender.
 STEP 12: [Hotel Delphoria] ───► Rent Room 214 -> Buy round of drinks in lounge.
-STEP 13: [VIP Poker Room] ────► Play 3 winning hands -> Win invite to Suite 216.
+STEP 13: [VIP Poker Room] ────► Play 3 hands -> Win invite to Suite 216.
 STEP 14: [Room 214] ──────────► Radio SWAT backup -> Coordinate breach plan.
 STEP 15: [Room 216 Penthouse] ► Knock -> Enter -> Trigger SWAT breach signal.
-STEP 16: [Penthouse Arena] ───► Disarm Bains -> Apply cuffs -> 245/245 MAX SCORE!
+STEP 16: [Penthouse Arena] ───► Disarm Bains -> Apply cuffs -> 245/245 WIN!
 ===============================================================================
 ```
 
@@ -395,21 +395,7 @@ Token 268: CALL, CONTACT, EXTENDER, EXTENDERS, RADIO, RADIO EXTENDER
 Token 288: DRAW
 ```
 
-### B. Police Equipment & Entity Nouns
-```text
-Token  15: BACKUP, BACKUPS
-Token  19: ACCIDENT, AREA, LOCATION, SCENE, SPOT
-Token  88: BELT, GUN BELT, GUNBELT, HOLSTER
-Token 109: AUTO, AUTOMOBILE, AUTOMOBILES, AUTOS, CAR, CARS, PATROL CAR
-Token 180: AMBULANCE
-Token 243: AIR, AIR PRESSURE, TIRES
-Token 252: AMMO, AMMUNITION, BULLET, BULLETS, CARTRIDGE, ROUNDS
-Token 258: AUTOMATIC, GUN, PISTOL, REVOLVER, WEAPON
-Token 272: ART, ART SERABIAN, DRUNK, SERABIAN
-Token 319: ASSHOLE, BASTARD, BITCH, DAMN, FUCK, SHIT (Profanity Token)
-```
-
-### C. Radio 10-Codes & Operational Terminology
+### B. Radio 10-Codes & Operational Terminology
 * `10-4` — Message Acknowledged / Understood
 * `10-7` — Out of Service (End of Shift / Coffee Break)
 * `10-8` — In Service / On Active Patrol
@@ -422,7 +408,53 @@ Token 319: ASSHOLE, BASTARD, BITCH, DAMN, FUCK, SHIT (Profanity Token)
 
 ---
 
-# 6. ENGINE FORENSICS & AGI LOGIC DECOMPILATION [ENGN]
+# 6. CHARACTER ORIGINS, REAL-LIFE INSPIRATIONS & FRANCHISE LINEAGE [LORE]
+
+### A. Real-Life Origins & Sierra Studio In-Jokes
+* **Art Serabian (The Drunk Driver)**: Named after **Arthur "Art" Serabian**, a close real-life personal friend of programmer/designer **Al Lowe** (*Leisure Suit Larry* creator). In the 1987 EGA release, Serabian’s pixel sprite (balding head, mustache, glasses) was drawn as a **direct self-caricature of Al Lowe himself**! (In the 1992 VGA remake, he was renamed *William J. Barnum*).
+* **Sonny Bonds**: Named as a dual wordplay on "Bail Bonds" and 1970s pop-icon/California politician Sonny Bono, reflecting Jim Walls' classic California Highway Patrol archetype.
+* **Helen Hots**: Classic Al Lowe wordplay on "Hell on Wheels" and "Hell 'n Hot".
+* **Sergeant John Dooley**: Modeled on strict, no-nonsense watch commanders Jim Walls served under during his 15 years in the California Highway Patrol (CHP).
+* **The City of Lytton**: Named after **Lytton Springs, California** in Sonoma County, a familiar stomping ground for California law enforcement.
+* **Caffeine Carol**: Named after Carolly Hauks, a long-time member of Sierra On-Line's Oakhurst production team.
+
+---
+
+### B. Character Lineage Across *Police Quest 2*, *3*, and Jim Walls' *Blue Force*
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      THE JIM WALLS POLICE UNIVERSE                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ `PQ1` (1987) ──► Sonny Bonds arrests Jessie Bains; meets Marie Wilkins      │
+│ `PQ2` (1988) ──► Bains escapes prison; murders Jack Cobb; kidnapped Marie   │
+│ `PQ3` (1991) ──► Sonny marries Marie; Marie stabbed by Michael Bains cult   │
+│ `Blue Force` ──► Jim Walls departs Sierra; creates Jake Ryan & Lyle Jameson │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+1. **Sonny Bonds**:
+   - *Police Quest 1 (1987)*: Starts as Patrol Officer, promoted to Narcotics Detective after arresting Jessie Bains.
+   - *Police Quest 2: The Vengeance (1988)*: Promoted to Homicide Detective. Bains escapes prison and targets everyone involved in his arrest; Sonny tracks Bains down and shoots him dead in the steelworks finale.
+   - *Police Quest 3: The Kindred (1991)*: Promoted to Sergeant. Sonny marries Marie. Marie is stabbed by a cult run by Jessie's brother, **Michael Bains**; Sonny uncovers police corruption to save Marie.
+2. **Marie Wilkins ("Sweet Cheeks")**:
+   - *PQ1*: High-school classmate turned Hotel Delphoria informant.
+   - *PQ2*: Sonny's girlfriend/fiancée; kidnapped by Bains and rescued from the sewer catacombs.
+   - *PQ3*: Sonny's wife; spends much of the game in a coma at Lytton Memorial Hospital while Sonny races to solve the cult conspiracy.
+3. **Officer Jack Cobb**:
+   - *PQ1*: Veteran officer who confides in Sonny at the Blue Room bar about his daughter's tragic drug overdose.
+   - *PQ2*: **Tragically murdered by Jessie Bains** in a park ambush early in the story, driving Sonny's pursuit of vengeance.
+4. **Jessie Bains & The Bains Crime Family**:
+   - *PQ1*: Primary antagonist ("The Death Angel").
+   - *PQ2*: Escapes McNeil Island Penitentiary with a revenge hit-list; slain by Sonny.
+   - *PQ3*: His brother, **Michael Bains**, carries on the blood vendetta.
+5. **Jim Walls' Departure & *Blue Force* (1993, Tsunami Media)**:
+   - After departing Sierra following creative differences during PQ3/PQ4, Jim Walls created **Blue Force** at Tsunami Media.
+   - *Blue Force* carried on the exact procedural DNA: protagonist **Jake Ryan** investigates his parents' murder in Jackson Harbor, using authentic radio 10-codes, weapon locker safety procedures, and vehicle maintenance checks with mentor **Lyle Jameson** (the spiritual successor to Dooley and Cobb).
+
+---
+
+# 7. ENGINE FORENSICS & AGI LOGIC DECOMPILATION [ENGN]
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -473,7 +505,7 @@ When Sonny patrols River Avenue, the engine executes a lane-swerving oscillation
 
 ---
 
-# 7. VERSION HISTORY & BUILD PROVENANCE [VERS]
+# 8. VERSION HISTORY & BUILD PROVENANCE [VERS]
 
 ### A. Release Editions Comparison
 * **1987 DOS AGI Release (v2.00–v2.917)**: 16-color EGA 320x200 graphics, text parser, internal PC speaker sound.
@@ -487,7 +519,7 @@ When Sonny patrols River Avenue, the engine executes a lane-swerving oscillation
 
 ---
 
-# 8. CREDITS & SPECIAL THANKS [CRED]
+# 9. CREDITS & SPECIAL THANKS [CRED]
 
 * **Jim Walls** — For bringing authentic California Highway Patrol procedural realism to gaming.
 * **Ken & Roberta Williams / Sierra On-Line** — For the legendary AGI engine.

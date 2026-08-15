@@ -3,7 +3,7 @@
      Definitive 245/245 Walkthrough, Parser Dictionary & Engine Forensics
                       Platform: PC / DOS (AGI v2.917)
                Author: AI Game Research & Reverse-Engineering Lab
-                              Version: 2.0.0 (2026)
+                              Version: 2.1.0 (2026)
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -23,9 +23,10 @@ TABLE OF CONTENTS ..................................................... [00.00]
   [05.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
   [06.00] MASTER 245-POINT SCORE RECONCILIATION LEDGER ................ [SCOR]
   [07.00] THE COMPLETE PARSER DICTIONARY (WORDS.TOK) .................. [DICT]
-  [08.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION .................. [ENGN]
-  [09.00] CONTACT POLICY .............................................. [CONT]
-  [10.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [08.00] CHARACTER ORIGINS, SEQUELS & BLUE FORCE LINEAGE .............. [LORE]
+  [09.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION .................. [ENGN]
+  [10.00] CONTACT POLICY .............................................. [CONT]
+  [11.00] CREDITS & SPECIAL THANKS .................................... [CRED]
 
 ===============================================================================
 [01.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
@@ -52,7 +53,10 @@ As of this version, the authorized host repositories are:
 [02.00] VERSION HISTORY                                                 [VERS]
 ===============================================================================
 
-Version 2.0.0 (August 15, 2026):
+Version 2.1.0 (August 15, 2026):
+  - Added Section [08.00] detailing character origins, real-life CHP and
+    Sierra studio inspirations, and character continuity across Police Quest
+    2, Police Quest 3, and Jim Walls' spiritual successor Blue Force.
   - Complete 245/245 maximum score point reconciliation.
   - Complete vocabulary dictionary extracted from master binary WORDS.TOK
     (1,126 words / 358 token groups).
@@ -161,7 +165,7 @@ over or reprimand!
 
 +-----------------------------------------------------------------------------+
 | ACT 4 SCORE CHECKLIST (TARGET: 31 / 245)                                    |
-|                                                                             |
+|                                                              ===============
 | [ ] Deposit service weapon in Courthouse Gun Locker #3 ............... (+3) |
 | [ ] Testify with precise case notes before Judge Palmer .............. (+5) |
 | [ ] Mention suspect's death-angel tattoo to deny bail ................ (+3) |
@@ -224,7 +228,7 @@ over or reprimand!
 2. Check-In: Drive to hotel (+3), rent room 214 (+3), inspect room (+2).
 3. High Stakes Poker: Buy drinks in lounge (+3), enter VIP poker den (+5).
    Play winning hands (+10), catch cheating dealer (+5), win invite to
-   Penthouse Suite 216 (+5).
+   Suite 216 (+5).
 
 ===============================================================================
 [04.07] ACT 7: PENTHOUSE RAID & BAINS BUST (30 PTS)                     [WLK07]
@@ -324,7 +328,43 @@ RADIO 10-CODES & TERMINOLOGY:
 FST (Field Sobriety Test), DUII (Driving Under Influence).
 
 ===============================================================================
-[08.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION                      [ENGN]
+[08.00] CHARACTER ORIGINS, SEQUELS & BLUE FORCE LINEAGE                 [LORE]
+===============================================================================
+
+A. REAL-LIFE INSPIRATIONS & SIERRA STUDIO IN-JOKES:
+  • Art Serabian: Named after Arthur Serabian, real-life friend of Al Lowe.
+    In the 1987 EGA release, Serabian's sprite was drawn as an exact self-
+    caricature of Al Lowe himself (glasses, mustache, balding head).
+  • Sonny Bonds: Named as a wordplay on "Bail Bonds" and Sonny Bono.
+  • Helen Hots: Classic Al Lowe pun on "Hell on Wheels" / "Hell 'n Hot".
+  • Sergeant Dooley: Modeled on real strict California Highway Patrol watch
+    commanders Jim Walls served under during his 15 years on duty.
+  • City of Lytton: Named after Lytton Springs in Sonoma County, California.
+  • Caffeine Carol: Named after Carolly Hauks, Sierra Oakhurst office staff.
+
+B. CHARACTER CONTINUITY IN SEQUELS & BLUE FORCE:
+  1. Sonny Bonds:
+     - PQ1 (1987): Patrolman -> Promoted to Narcotics Detective.
+     - PQ2 (1988): Homicide Detective; tracks Bains and shoots him in finale.
+     - PQ3 (1991): Promoted to Sergeant; marries Marie Wilkins.
+  2. Marie Wilkins ("Sweet Cheeks"):
+     - PQ1: High-school acquaintance turned hotel informant.
+     - PQ2: Sonny's fiancée; kidnapped by Bains and rescued in catacombs.
+     - PQ3: Sonny's wife; stabbed by Michael Bains' cult; in hospital coma.
+  3. Officer Jack Cobb:
+     - PQ1: Fellow officer at Blue Room whose daughter overdosed.
+     - PQ2: Murdered by escaped convict Jessie Bains early in the game.
+  4. Jessie Bains & Michael Bains:
+     - PQ1: Primary villain ("The Death Angel"); arrested in Suite 216.
+     - PQ2: Escapes prison with hit-list; slain by Sonny.
+     - PQ3: Brother Michael Bains seeks vengeance through the Kindred cult.
+  5. Jim Walls' Departure & Blue Force (1993, Tsunami Media):
+     - Jim Walls left Sierra in 1992 and created Blue Force, starring rookie
+       cop Jake Ryan and veteran mentor Lyle Jameson (successors to Bonds and
+       Dooley/Cobb), retaining all authentic 10-codes and weapon safety checks.
+
+===============================================================================
+[09.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION                      [ENGN]
 ===============================================================================
 
 TITLE SCREEN BULLET HOLE GENERATOR (LOGIC.001):
@@ -342,14 +382,14 @@ EASTER EGGS:
   LOOK KEN / LOOK AL / TALK JIM displays Sierra creator tributes.
 
 ===============================================================================
-[09.00] CONTACT POLICY                                                  [CONT]
+[10.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[10.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[11.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Jim Walls, Ken & Roberta Williams, Sierra On-Line, CJayC & GameFAQs,

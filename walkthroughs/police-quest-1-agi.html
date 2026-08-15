@@ -287,6 +287,7 @@
         <li><a href="#fasttrack" style="color: var(--accent); font-weight: bold;">⚡ Bare-Bones Fast-Track <span class="nav-tag">[FAST]</span></a></li>
         <li><a href="#score">Score Reconciliation <span class="nav-tag">[SCOR]</span></a></li>
         <li><a href="#dict">WORDS.TOK Dictionary <span class="nav-tag">[DICT]</span></a></li>
+        <li><a href="#lore">Character Lore & Sequels <span class="nav-tag">[LORE]</span></a></li>
         <li><a href="#forensics">Engine Forensics (AGI) <span class="nav-tag">[ENGN]</span></a></li>
         <li><a href="#versions">Versions & Provenance <span class="nav-tag">[VERS]</span></a></li>
         <li><a href="#credits">Credits & Thanks <span class="nav-tag">[CRED]</span></a></li>
@@ -381,9 +382,27 @@
       </div>
     </section>
 
-    <!-- Section 4: Dictionary -->
+    <!-- Section 4: Score Reconciliation -->
+    <section id="score">
+      <h2>4. Master 245-Point Score Ledger <span class="nav-tag">[SCOR]</span></h2>
+      <table>
+        <thead><tr><th>Act Description</th><th>Points</th><th>Cumulative</th></tr></thead>
+        <tbody>
+          <tr><td>Act 1: Station Briefing & Prep</td><td>21 pts</td><td>21 / 245</td></tr>
+          <tr><td>Act 2: Traffic Patrol & Drunk Driver</td><td>34 pts</td><td>55 / 245</td></tr>
+          <tr><td>Act 3: Carol's & Stolen Mercedes Felony Stop</td><td>45 pts</td><td>100 / 245</td></tr>
+          <tr><td>Act 4: Court Conviction & Narcotics Promotion</td><td>31 pts</td><td>131 / 245</td></tr>
+          <tr><td>Act 5: Park Stakeout & Marie Interrogation</td><td>43 pts</td><td>174 / 245</td></tr>
+          <tr><td>Act 6: Hotel Delphoria & VIP Poker Game</td><td>41 pts</td><td>215 / 245</td></tr>
+          <tr><td>Act 7: Penthouse Raid & Death Angel Arrest</td><td>30 pts</td><td>245 / 245</td></tr>
+          <tr style="font-weight: bold; color: var(--gold);"><td>THEORETICAL MAXIMUM PERFECT SCORE</td><td>245 pts</td><td>245 / 245</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 5: Dictionary -->
     <section id="dict">
-      <h2>4. The Complete WORDS.TOK Parser Dictionary <span class="nav-tag">[DICT]</span></h2>
+      <h2>5. The Complete WORDS.TOK Parser Dictionary <span class="nav-tag">[DICT]</span></h2>
       <p>Directly extracted from master binary <code>WORDS.TOK</code> (1,126 words / 358 token groups):</p>
       <table>
         <thead><tr><th>Token ID</th><th>Primary Command</th><th>Accepted Synonym Set</th></tr></thead>
@@ -400,9 +419,22 @@
       </table>
     </section>
 
-    <!-- Section 5: Forensics -->
+    <!-- Section 6: Lore & Sequels -->
+    <section id="lore">
+      <h2>6. Character Origins, Sequels & Blue Force Lineage <span class="nav-tag">[LORE]</span></h2>
+      <p><strong>Art Serabian</strong>: Real friend of Al Lowe; in EGA version, Serabian's face was an exact self-caricature of Al Lowe himself.</p>
+      <p><strong>Franchise Lineage</strong>:</p>
+      <ul>
+        <li><strong>Sonny Bonds</strong>: Rises from Patrolman (PQ1) to Homicide (PQ2) to Sergeant (PQ3).</li>
+        <li><strong>Marie Wilkins</strong>: High-school informant (PQ1) becomes Sonny's fiancée (PQ2) and wife (PQ3).</li>
+        <li><strong>Jack Cobb</strong>: Partner in PQ1, murdered by Jessie Bains early in PQ2.</li>
+        <li><strong>Blue Force (1993)</strong>: Created by Jim Walls at Tsunami Media after leaving Sierra, starring Jake Ryan and Lyle Jameson with the same authentic procedural mechanics.</li>
+      </ul>
+    </section>
+
+    <!-- Section 7: Forensics -->
     <section id="forensics">
-      <h2>5. Engine Forensics & AGI Logic Decompilation <span class="nav-tag">[ENGN]</span></h2>
+      <h2>7. Engine Forensics & AGI Logic Decompilation <span class="nav-tag">[ENGN]</span></h2>
       <pre>
 Title Screen Random Bullet Hole Shot Engine (LOGIC.001):
 random 30 130 v_bullet_x    ; Pick random X coordinate on badge
@@ -412,9 +444,9 @@ sound 1 f_sound_done        ; Trigger gunshot audio
       </pre>
     </section>
 
-    <!-- Section 6: Versions -->
+    <!-- Section 8: Versions -->
     <section id="versions">
-      <h2>6. Version History & Build Provenance <span class="nav-tag">[VERS]</span></h2>
+      <h2>8. Version History & Build Provenance <span class="nav-tag">[VERS]</span></h2>
       <table>
         <thead><tr><th>Build Attribute</th><th>Cryptographic Target</th></tr></thead>
         <tbody>
@@ -426,9 +458,9 @@ sound 1 f_sound_done        ; Trigger gunshot audio
       </table>
     </section>
 
-    <!-- Section 7: Credits -->
+    <!-- Section 9: Credits -->
     <section id="credits">
-      <h2>7. Credits & Special Thanks <span class="nav-tag">[CRED]</span></h2>
+      <h2>9. Credits & Special Thanks <span class="nav-tag">[CRED]</span></h2>
       <p>Jim Walls, Ken & Roberta Williams, Sierra On-Line, CJayC & GameFAQs, and the Retro Gaming Community.</p>
     </section>
   </main>
