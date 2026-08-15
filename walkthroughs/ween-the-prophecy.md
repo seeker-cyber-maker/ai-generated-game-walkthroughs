@@ -5,7 +5,7 @@ developer: "Coktel Vision / Sierra On-Line (1992)"
 engine: "Coktel Gob Engine (GOB / STK Kernel)"
 status: "definitive-walkthrough-and-engine-forensics"
 author: "AI Cybersecurity Researcher and Reverse-Engineer"
-version: "1.3.0"
+version: "1.4.0"
 target_build_sha256: "f7bdd21a59a6c508f9854b4b821a572bf299bec3395cfa1f3aef92d579c6a50a"
 ---
 
@@ -49,9 +49,10 @@ target_build_sha256: "f7bdd21a59a6c508f9854b4b821a572bf299bec3395cfa1f3aef92d579
 8. [In-Depth Systems Compendium & Synthesis Matrix](#8-in-depth-systems-compendium--synthesis-matrix) . [COMP]
    - Complete Mortar Grinding & Cauldron Brewing Recipes
    - Dead Ends & Permanent Failure Triggers
-9. [Engine Forensics: Coktel's Gob Engine Decompilation](#9-engine-forensics-coktels-gob-engine-decompilation) [ENGN]
-   - The GOB/STK Archive Architecture (`INTRO.STK`)
-   - Bytecode Script Execution (`ALL.ASK` and `EMAJ10xx.TOT`)
+9. [Binary Forensics: Coktel's 39-Screen Bytecode State Machine](#9-binary-forensics-coktels-39-screen-bytecode-state-machine) [ENGN]
+   - The STK Container & LZSS Ring Buffer Decompression
+   - The 39-Screen Directed Transition Graph (`EMAJ1000`–`EMAJ1038`)
+   - The Special Effect (FX) Subroutine Table
    - ScummVM (`gob` / `ween`) Target Engine Profile & Timer Fixes
 10. [Cultural Retrospective: Why Ween Remained Obscure](#10-cultural-retrospective-why-ween-remained-obscure) [HIST]
     - The French "Puzzle Chamber" Game Design Philosophy
@@ -83,13 +84,12 @@ Authorized hosting repositories:
 
 # 3. VERSION HISTORY [VERS]
 
-* **Version 1.3.0 (August 15, 2026)**:
-  - Deep in-engine decompilation of `INTRO.STK`, `ALL.ASK`, and `OBJET1.CAT` through `OBJET4.CAT`.
-  - Added the complete 4-Phase Master Haversack Compendium extracted from binary catalogs.
-  - Fully documented the Ant Colony & Queen of Ants (`BORG1FX.USA` / `EMAJ1023` / `EMAJ1032`).
-  - Fully documented the Sick Worm & Chamomile Herbal Tea synthesis puzzle (`EMAJ1031`).
-  - Added the Glue (`GLU`), Firefly (`LUCIOLE`), and Twig illuminated probe mechanics (`OBJET4.CAT` / `EMAJ1034`).
-  - Documented the three ancient magic spells: `MORPHOSYS`, `LUCIFERYS`, and `VITALYS`.
+* **Version 1.4.0 (August 15, 2026)**:
+  - Decompiled and mapped all 39 screen modules (`EMAJ1000.TOT` to `EMAJ1038.TOT`) from Coktel's `INTRO.STK` archive.
+  - Reverse-engineered Coktel's LZSS 4096-byte ring-buffer decompression algorithm.
+  - Documented the full FX subroutine execution table (`PONTFX`, `OPAL1FX`, `DRAGFX`, `FEUFX`, `FIOLFX`, `GARDEFX`, `OPALEFX`, `VER1FX`, `BORG1FX`, `KRAALFX`, `REVUSSFX`, `GAGNEFX`, `PERDUFX`).
+  - Added complete 4-Phase Master Haversack Compendium (`OBJET1.CAT`–`OBJET4.CAT`).
+  - Detailed the Ant Colony, Queen of Ants, Sick Worm Chamomile Tea, and Firefly-on-Twig probe puzzles.
 
 ---
 
@@ -106,7 +106,7 @@ Authorized hosting repositories:
 ```
 
 ### A. The 30-Day Hard Time Limit
-Every screen transition and night of rest advances the internal calendar. If Day 30 arrives before all 3 Grains of Sand are placed into the Great Hourglass of Revuss, Kraal's darkness overruns the kingdom, resulting in an immediate game over.
+Every screen transition and night of rest advances the internal calendar. If Day 30 arrives before all 3 Grains of Sand are placed into the Great Hourglass of Revuss, Kraal's darkness overruns the kingdom, resulting in an immediate game over (`PERDUFX`).
 
 ### B. Companion Specialization Matrix
 * **Ween (Protagonist)**: Apprentice wizard. Picks up items, mixes reagents, casts spells (`MORPHOSYS`, `LUCIFERYS`, `VITALYS`), and combines tools in the haversack.
@@ -277,7 +277,7 @@ Extracted directly from Coktel's binary catalogs (`OBJET1.CAT` through `OBJET4.C
    - Left Socket: **Golden Grain of Sand**
    - Center Socket: **Silver Grain of Sand**
    - Right Socket: **Crystal Grain of Sand**
-4. Turn the celestial wheel of the Hourglass. Golden light banishes Kraal into an eternal temporal loop, fulfilling the ancient prophecy and saving Blue Land forever!
+4. Turn the celestial wheel of the Hourglass. Golden light banishes Kraal into an eternal temporal loop (`GAGNEFX`), fulfilling the ancient prophecy and saving Blue Land forever!
 
 ---
 
@@ -289,13 +289,13 @@ Extracted directly from Coktel's binary catalogs (`OBJET1.CAT` through `OBJET4.C
 ===============================================================================
 STEP 01: [Porch] ────────────► Forage Straw, Wooden Sticks, Strawberries.
 STEP 02: [Porch Mechanism] ──► Stick on gutter -> Unlatch door -> Enter.
-STEP 03: [Laboratory] ───────► Take Brass Key, Mortar & Pestle -> Cook Jam.
+STEP 03: [Laboratory] ───────► Take Brass Key, Mortar -> Cook Strawberry Jam.
 STEP 04: [Cellar] ───────────► Unlock door -> Take Flask, Mandrake, Sulfur.
 STEP 05: [Forest Crossroads] ► Cut Shinbone Spear -> Get Woodpecker Feather.
 STEP 06: [Pine Tree] ────────► Gather sticky Amber Resin.
 STEP 07: [Inventory Mortar] ─► Grind Mandrake + Sulfur -> Awakening Dust.
 STEP 08: [Golem Orgol] ──────► Blow Dust in Golem eyes -> GET GRAIN 1 (GOLD).
-STEP 09: [Ant Mound] ────────► Mongoose + Strawberry Jam to Queen -> Pass tunnel.
+STEP 09: [Ant Mound] ────────► Mongoose + Jam to Queen -> Pass tunnel.
 STEP 10: [Bat Cavern] ───────► Petroy squeaks -> Scrape Guano -> Set Prism.
 STEP 11: [Smelting Forge] ───► Orain pumps bellows -> Melt gold -> Cast Key.
 STEP 12: [Dragon Altar] ─────► Lure dragon with Resin -> Unlock -> GRAIN 2.
@@ -316,41 +316,92 @@ STEP 17: [Revuss Finale] ────► Rotate Hourglass of Revuss -> 100% VICT
 ┌─────────────────────────┬─────────────────────────┬─────────────────────────┐
 │ Target Synthesis        │ Ingredients Required    │ Functional Purpose      │
 ├─────────────────────────┼─────────────────────────┼─────────────────────────┤
-│ Awakening Dust          │ Mandrake Root + Sulfur  │ Awakens Stone Golem     │
-│ Strawberry Jam          │ Strawberries + Fire Pot │ Calms the Ant Queen     │
+│ Awakening Dust          │ Mandrake Root + Sulfur  │ Awakens Stone Golem Orgol│
+│ Strawberry Jam          │ Strawberries + Pot      │ Calms the Ant Queen     │
 │ Chamomile Herbal Tea    │ Chamomile + Blueberries │ Cures Sick Worm Stomach │
 │ Illuminated Twig Probe  │ Twig + Glue + Firefly   │ Lights Dark Wall Slit   │
 │ Blinding Flash Powder   │ Bat Guano + Sulfur      │ Stuns Citadel Guards    │
-│ Dissolving Aqua Regia   │ Caustic Acid + Saltpeter│ Dissolves Moat Chains   │
+│ Dissolving Aqua Regia   │ Caustic Acid + Salt     │ Dissolves Moat Chains   │
 │ Shinbone Spear          │ Tibia Bone + Knife      │ Weapon & Lever Tool     │
 └─────────────────────────┴─────────────────────────┴─────────────────────────┘
 ```
 
 ---
 
-# 9. ENGINE FORENSICS: COKTEL'S GOB ENGINE DECOMPILATION [ENGN]
+# 9. BINARY FORENSICS: COKTEL'S 39-SCREEN BYTECODE STATE MACHINE [ENGN]
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    COKTEL VISION GOB ENGINE ARCHITECTURE                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. `INTRO.STK`: Monolithic 7.12 MB packed resource container containing all │
-│    vignette background bitmaps, sprite animations, and sound effects.       │
-│ 2. `ALL.ASK`: 11 KB interactive dialog & script bytecode table executing    │
-│    vignette condition triggers and companion state machines.                │
-│ 3. `OBJET1.CAT`–`OBJET4.CAT`: Inventory state catalogs across the 4 acts.   │
-│ 4. `*.GDR`: Hardware graphics display drivers:                              │
-│    - `LVGA.GDR`: 320x200 256-color VGA Driver                               │
-│    - `LEGA.GDR`: 320x200 16-color EGA Driver                                │
-│    - `L360.GDR`: 360x240 Tweaked Mode-X Driver                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+### A. The LZSS 4096-Byte Ring Buffer Architecture
+All compiled script chunks (`.TOT`) in `INTRO.STK` are packed using Coktel's proprietary LZSS variant:
+- **Ring Buffer Size**: 4096 bytes initialized with ASCII spaces (`0x20`).
+- **Extended Mode Signature**: Magic `0x1234, 0x5678` expands maximum copy window from 18 to 274 bytes.
+- **Bitstream Decoding**:
+  ```c
+  cmd >>= 1;
+  if ((cmd & 0x0100) == 0) cmd = read_byte() | 0xFF00;
+  if (cmd & 1) {
+      *dest++ = read_byte(); // Literal copy
+  } else {
+      off = byte1 | ((byte2 & 0xF0) << 4);
+      len = (byte2 & 0x0F) + 3; // Reference copy from ring buffer
+  }
+  ```
+
+### B. The Decompiled 39-Screen Directed State Graph
+Decompiled directly from raw `.TOT` script tables, the entire progression graph maps across 39 distinct module nodes:
+
+```text
+EMAJ1000 (Cottage Porch)      ──► EMAJ1001, EMAJ1002
+EMAJ1001 (Magician's Lab)     ──► EMAJ1000, EMAJ1002
+EMAJ1002 (Cellar Vault)       ──► EMAJ1000, EMAJ1001, EMAJ1003
+EMAJ1003 (Forest Crossroads)  ──► PONTFX, EMAJ1004
+EMAJ1004 (Woodland Trail)     ──► EMAJ1003, EMAJ1005
+EMAJ1005 (Golem Shrine)       ──► EMAJ1006 [GRAIN 1]
+EMAJ1006 (Shrine Sanctum)     ──► EMAJ1007
+EMAJ1007 (Swamp Crossing)     ──► EMAJ1008, EMAJ1010
+EMAJ1008 (Cavern Entrance)    ──► EMAJ1009
+EMAJ1009 (Bat Abyss)          ──► OPAL1FX, EMAJ1010
+EMAJ1010 (Crystal Cavern)     ──► EMAJ1011
+EMAJ1011 (Prism Pillar)       ──► OPAL1FX, EMAJ1012
+EMAJ1012 (Volcanic Edge)      ──► DRAGFX, EMAJ1013
+EMAJ1013 (Smelting Forge)     ──► EMAJ1014
+EMAJ1014 (Key Casting Anvil)  ──► EMAJ1015, EMAJ1017, EMAJ1018
+EMAJ1015 (Forge Sluice)       ──► EMAJ1016, EMAJ1018
+EMAJ1016 (Lava Crucible)      ──► EMAJ1017, EMAJ1018
+EMAJ1017 (Dragon Altar)       ──► EMAJ1019 [GRAIN 2]
+EMAJ1018 (Volcano Corridor)   ──► EMAJ1014, EMAJ1015, EMAJ1016
+EMAJ1019 (Citadel Approach)   ──► FEUFX, FIOLFX, GARDEFX, EMAJ1020
+EMAJ1020 (Moat Perimeter)     ──► OPALEFX, EMAJ1021
+EMAJ1021 (Outer Barbican)     ──► EMAJ1022, EMAJ1023
+EMAJ1022 (Gate Mechanism)     ──► EMAJ1024, EMAJ1025
+EMAJ1023 (Ant Colony Mound)   ──► BORG1FX, EMAJ1024 (Queen of Ants)
+EMAJ1024 (Rampart Wall)       ──► EMAJ1026
+EMAJ1025 (Drawbridge Winch)   ──► EMAJ1022
+EMAJ1026 (Island Seashore)    ──► EMAJ1027 (Haversack Tier 3)
+EMAJ1027 (Volcanic Beach)     ──► EMAJ1028, EMAJ1038
+EMAJ1028 (Ruined Portcullis)  ──► EMAJ1029
+EMAJ1029 (Old Hermit Cabin)   ──► EMAJ1028, EMAJ1030
+EMAJ1030 (Alchemy Greenhouse) ──► EMAJ1031
+EMAJ1031 (Worm's Hollow)      ──► VER1FX (Chamomile Tea for Sick Worm)
+EMAJ1032 (Borgol Altar)       ──► BORG1FX, KRAALFX, EMAJ1033, EMAJ1034
+EMAJ1033 (Tower Stairwell)    ──► EMAJ1032
+EMAJ1034 (Moat Drawbridge)    ──► KRAALFX (Glue + Firefly on Twig)
+EMAJ1035 (Upper Citadel)      ──► EMAJ1036
+EMAJ1036 (Hourglass Chamber)  ──► REVUSSFX, PERDUFX, GAGNEFX [VICTORY]
+EMAJ1038 (Underground River)  ──► EMAJ1027
+EMAJ1END (Credits Epilogue)   ──► Victory Sequence
 ```
 
-### ScummVM `gob` Engine Compatibility Profile
-* **Target Engine ID**: `gob` (Sub-engine target: `ween`).
-* **Timer Emulation**: Corrects CPU-speed-dependent timer loops in DOSBox that caused the 30-day clock to advance too fast on modern PCs.
-* **Sound Engine**: Native support for AdLib OPL2 and Roland MT-32 MIDI playback.
-* **Savegame Format**: Modern cross-platform save slots replace legacy `SAVE.INF` DOS binary dumps.
+### C. The Special Effect (FX) Subroutine Table
+* `PONTFX`: Rope bridge collapse and balancing physics.
+* `OPAL1FX` / `OPALEFX`: Quartz prism refraction beam calculations.
+* `DRAGFX`: Sleeping dragon detection radius and bait consumption.
+* `FEUFX` / `FIOLFX` / `GARDEFX`: Citadel guard alert and flash powder blinding.
+* `VER1FX`: Giant worm stomach ache logic and tea delivery.
+* `BORG1FX`: Stone Golem Orgol voice and ant kingdom quest prompt.
+* `KRAALFX`: Shadow demon spell collision and mirror deflection.
+* `REVUSSFX`: Hourglass slot bitmask validation (`0x07` = all 3 grains present).
+* `PERDUFX`: Day 30 timeout failure sequence.
+* `GAGNEFX`: Eternal temporal loop banishment victory epilogue.
 
 ---
 

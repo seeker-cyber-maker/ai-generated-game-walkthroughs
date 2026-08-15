@@ -284,7 +284,7 @@
         <li><a href="#act3" style="padding-left: 20px;">Act III: Sick Worm & Citadel <span class="nav-tag">[WLK03]</span></a></li>
         <li><a href="#fasttrack" style="color: var(--accent); font-weight: bold;">⚡ Bare-Bones Fast-Track <span class="nav-tag">[FAST]</span></a></li>
         <li><a href="#compendium">Reagents & Synthesis Matrix <span class="nav-tag">[COMP]</span></a></li>
-        <li><a href="#forensics">Coktel Gob Engine Forensics <span class="nav-tag">[ENGN]</span></a></li>
+        <li><a href="#forensics">39-Screen Bytecode State Graph <span class="nav-tag">[ENGN]</span></a></li>
         <li><a href="#history">Cultural Retrospective <span class="nav-tag">[HIST]</span></a></li>
         <li><a href="#credits">Credits & Thanks <span class="nav-tag">[CRED]</span></a></li>
       </ul>
@@ -296,7 +296,7 @@
     <header>
       <div class="meta-badge">Coktel Vision / Sierra (1992)</div>
       <div class="meta-badge">Gob Engine Kernel</div>
-      <div class="meta-badge">Floppy DOS Edition v1.3.0</div>
+      <div class="meta-badge">Floppy DOS Edition v1.4.0</div>
       <h1>Ween: The Prophecy</h1>
       <p>Definitive GameFAQs Walkthrough, Systems Compendium & Coktel Gob Engine Forensics.</p>
 
@@ -441,19 +441,47 @@ PHASE 4: CITADEL OF KRAAL & REVUSS (OBJET4.CAT)
 
     <!-- Section 7: Forensics -->
     <section id="forensics">
-      <h2>7. Engine Forensics: Coktel's Gob Engine Decompilation <span class="nav-tag">[ENGN]</span></h2>
+      <h2>7. Binary Forensics: 39-Screen Bytecode State Machine <span class="nav-tag">[ENGN]</span></h2>
       <pre>
-COKTEL VISION GOB ENGINE ARCHITECTURE:
-  • INTRO.STK (7.12 MB): Monolithic resource container containing all screen
-    backgrounds, sprite animations, and audio effects.
-  • ALL.ASK (11 KB): Bytecode script table evaluating triggers, companion
-    actions, and state transitions.
-  • OBJET1.CAT - OBJET4.CAT: Dynamic item catalogs across the 4 acts.
-  • *.GDR Display Drivers: LVGA.GDR (256-color VGA), LEGA.GDR (16-color EGA).
-
-ScummVM Compatibility Profile:
-  • Target Engine ID: gob (Sub-engine target: ween).
-  • Normalizes CPU-dependent 30-day timer cycles.
+COKTEL VISION GOB ENGINE DECOMPILED STATE GRAPH (39 SCREENS):
+  EMAJ1000 (Cottage Porch)      --> EMAJ1001, EMAJ1002
+  EMAJ1001 (Magician's Lab)     --> EMAJ1000, EMAJ1002
+  EMAJ1002 (Cellar Vault)       --> EMAJ1000, EMAJ1001, EMAJ1003
+  EMAJ1003 (Forest Crossroads)  --> PONTFX, EMAJ1004
+  EMAJ1004 (Woodland Trail)     --> EMAJ1003, EMAJ1005
+  EMAJ1005 (Golem Shrine)       --> EMAJ1006 [GRAIN 1]
+  EMAJ1006 (Shrine Sanctum)     --> EMAJ1007
+  EMAJ1007 (Swamp Crossing)     --> EMAJ1008, EMAJ1010
+  EMAJ1008 (Cavern Entrance)    --> EMAJ1009
+  EMAJ1009 (Bat Abyss)          --> OPAL1FX, EMAJ1010
+  EMAJ1010 (Crystal Cavern)     --> EMAJ1011
+  EMAJ1011 (Prism Pillar)       --> OPAL1FX, EMAJ1012
+  EMAJ1012 (Volcanic Edge)      --> DRAGFX, EMAJ1013
+  EMAJ1013 (Smelting Forge)     --> EMAJ1014
+  EMAJ1014 (Key Casting Anvil)  --> EMAJ1015, EMAJ1017, EMAJ1018
+  EMAJ1015 (Forge Sluice)       --> EMAJ1016, EMAJ1018
+  EMAJ1016 (Lava Crucible)      --> EMAJ1017, EMAJ1018
+  EMAJ1017 (Dragon Altar)       --> EMAJ1019 [GRAIN 2]
+  EMAJ1018 (Volcano Corridor)   --> EMAJ1014, EMAJ1015, EMAJ1016
+  EMAJ1019 (Citadel Approach)   --> FEUFX, FIOLFX, GARDEFX, EMAJ1020
+  EMAJ1020 (Moat Perimeter)     --> OPALEFX, EMAJ1021
+  EMAJ1021 (Outer Barbican)     --> EMAJ1022, EMAJ1023
+  EMAJ1022 (Gate Mechanism)     --> EMAJ1024, EMAJ1025
+  EMAJ1023 (Ant Colony Mound)   --> BORG1FX, EMAJ1024 (Queen of Ants)
+  EMAJ1024 (Rampart Wall)       --> EMAJ1026
+  EMAJ1025 (Drawbridge Winch)   --> EMAJ1022
+  EMAJ1026 (Island Seashore)    --> EMAJ1027 (Haversack Tier 3)
+  EMAJ1027 (Volcanic Beach)     --> EMAJ1028, EMAJ1038
+  EMAJ1028 (Ruined Portcullis)  --> EMAJ1029
+  EMAJ1029 (Old Hermit Cabin)   --> EMAJ1028, EMAJ1030
+  EMAJ1030 (Alchemy Greenhouse) --> EMAJ1031
+  EMAJ1031 (Worm's Hollow)      --> VER1FX (Chamomile Tea for Sick Worm)
+  EMAJ1032 (Borgol Altar)       --> BORG1FX, KRAALFX, EMAJ1033, EMAJ1034
+  EMAJ1033 (Tower Stairwell)    --> EMAJ1032
+  EMAJ1034 (Moat Drawbridge)    --> KRAALFX (Glue + Firefly on Twig)
+  EMAJ1035 (Upper Citadel)      --> EMAJ1036
+  EMAJ1036 (Hourglass Chamber)  --> REVUSSFX, PERDUFX, GAGNEFX [VICTORY]
+  EMAJ1038 (Underground River)  --> EMAJ1027
       </pre>
     </section>
 
