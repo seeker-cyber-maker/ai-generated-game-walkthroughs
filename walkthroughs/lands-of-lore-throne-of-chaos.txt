@@ -3,7 +3,7 @@
           Definitive Walkthrough, Systems Compendium & Engine Forensics
                       Platform: PC / DOS (Talkie CD-ROM)
                Author: AI Game Research & Reverse-Engineering Lab
-                              Version: 3.3.0 (2026)
+                              Version: 3.4.0 (2026)
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -23,9 +23,14 @@ TABLE OF CONTENTS ..................................................... [00.00]
           - Character Matrix & Starting Affinities
           - Weapons & Armor Compendium
           - Elemental Magic & 4-Tier Charge System
+          - Secret Spells: Hand of Fate & Mist of Doom
           - Master Item & Chest Checklist with Missables
   [06.00] KEYBOARD CONTROLS & HOTKEY COMMAND MATRIX ................... [KEYS]
   [07.00] THE MANUALS, LORE BOOKS, FEELIES & COPY PROTECTION .......... [MANL]
+          - The 48-Page Player's Guide & Rulebook
+          - The History of the Lands (Narrative Feelie)
+          - Off-Disk Manual DRM (Floppy v1.00 vs CD-ROM v1.23)
+          - Historical Assembly Decompilation: Bypassing DRM via NOPs/JMPs
   [08.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING ............... [ENGN]
   [09.00] CONTACT POLICY .............................................. [CONT]
   [10.00] CREDITS & SPECIAL THANKS .................................... [CRED]
@@ -55,12 +60,11 @@ As of this version, the authorized host repositories are:
 [02.00] VERSION HISTORY                                                 [VERS]
 ===============================================================================
 
-Version 3.3.0 (August 15, 2026):
-  - Added Section [06.00] Keyboard Controls & Hotkey Command Matrix.
-  - Added Section [07.00] The Manuals, Lore Books, Feelies & Copy Protection
-    detailing the 48-page rulebook, "History of the Lands", and Floppy vs CD
-    DRM differences.
-  - Formatted strictly to 79-column standard.
+Version 3.4.0 (August 15, 2026):
+  - Added Secret Spells compendium (Hand of Fate & Mist of Doom).
+  - Added historical x86 assembly analysis of 1990s manual look-up DRM and
+    how it was historically cracked via NOPs and forced short jumps (EB).
+  - Updated Keyboard Controls matrix and 79-col formatting.
 
 ===============================================================================
 [03.00] COMPLETE STEP-BY-STEP WALKTHROUGH                               [WLK00]
@@ -135,7 +139,7 @@ Version 3.3.0 (August 15, 2026):
 | [ ] [RELIC] Ruby of Truth ........ (X:02, Y:01) [Gladstone Throne Room]     |
 +-----------------------------------------------------------------------------+
 
-1. Fill empty flask at White Tower L2 cistern (X:08, Y:14) for Sweet Water.
+1. Fill empty flask at White Tower L2 well (X:08, Y:14) for Sweet Water.
 2. Return to Gladstone Keep; mix Crucible + Bloodmoss + Sweet Water.
 3. Cure King Richard at (X:02, Y:01) to receive the Ruby of Truth.
 
@@ -148,13 +152,15 @@ Version 3.3.0 (August 15, 2026):
 |                                                                             |
 | [ ] [SECRET] Ring of Invisibility (X:11, Y:24) [Sewers: Cracked Brick]      |
 | [ ] [SECRET] Cloak of Shadows ... (X:11, Y:24) [Sewers: Cracked Brick]      |
+| [ ] [SECRET SPELL] Hand of Fate .. (X:14, Y:22) [Yvel Abandoned Building]   |
 | [ ] Plate Armor ................. (X:04, Y:18) [Yvel Armory: Iron Chest]    |
 | [ ] [RELIC] Vaelan's Cube ....... (X:15, Y:02) [Council of Elders]          |
 | [ ] [KEY] Cimmeria Master Key ... (X:15, Y:02) [Council of Elders]          |
 +-----------------------------------------------------------------------------+
 
 1. Press cracked brick at (X:11, Y:24) in Sewers for Ring of Invisibility.
-2. Meet Elders at (X:15, Y:02) to receive Vaelan's Cube and Cimmeria Key.
+2. Grab Hand of Fate spell scroll at (X:14, Y:22) in Yvel City.
+3. Meet Elders at (X:15, Y:02) to receive Vaelan's Cube and Cimmeria Key.
 
 ===============================================================================
 [03.06] ACT VI: CASTLE CIMMERIA & NETHER MASK FINALE                    [WLK06]
@@ -169,7 +175,8 @@ Version 3.3.0 (August 15, 2026):
 | [ ] [VICTORY] Nether Mask ... (X:16, Y:16) [Scotia Boss Arena]              |
 +-----------------------------------------------------------------------------+
 
-1. Dispel Level 1 force barriers using Vaelan's Cube.
+1. Dispel Level 1 force barriers using Vaelan's Cube; use Hand of Fate on
+   Necrosap wall locks.
 2. Defeat Golems on Level 2; reach Scotia's Arena on Level 3 (X:16, Y:16).
 3. Activate Ruby of Truth to break Nether Mask illusion; reflect spells with
    Vaelan's Cube and strike her crone form to win!
@@ -220,6 +227,12 @@ ELEMENTAL SPELL CHARGE TIERS:
   Tier 3: Hold 3.0s (35 MP)   - Penetration + status effect.
   Tier 4: Hold 5.0s (70 MP)   - Screen-clearing elemental eruption.
 
+SECRET & HIDDEN SPELLS:
+  • Hand of Fate: Found in Yvel City (X:14, Y:22). Summons giant spectral fist
+    that pushes back enemies and is required for Necrosap wall locks.
+  • Mist of Doom: Found in Catwalk Caverns (Upper Mines). Creates spectral AOE
+    fog that shreds ethereal ghosts and wraiths.
+
 ===============================================================================
 [06.00] KEYBOARD CONTROLS & HOTKEY COMMAND MATRIX                       [KEYS]
 ===============================================================================
@@ -265,8 +278,15 @@ C. OFF-DISK COPY PROTECTION (FLOPPY VS CD-ROM):
   • 1994 CD-ROM "Talkie" Edition (v1.23): Westwood removed the copy protection
     prompt completely, relying on the physical 600MB CD-ROM as DRM.
 
-D. THE OFFICIAL CLUE BOOK ("SECRETS OF THE DARK TEMPLE"):
-  Published by Virgin/Westwood with full-color dungeon maps and item tables.
+D. HISTORICAL ASSEMBLY DECOMPILATION: BYPASSING 90S MANUAL DRM:
+  In x86 DOS binaries, manual checks evaluated a conditional jump:
+    CALL CheckWordMatch        ; Returns AX=1 (Valid), AX=0 (Invalid)
+    TEST AX, AX
+    JNZ  PassProtection        ; Machine Code: 75 0C (Jump if Non-Zero)
+  Crackers historically bypassed this via 3 methods:
+    1. Forced Jump: Patching 75 0C (JNZ) to EB 0C (JMP Short).
+    2. NOP Fallthrough: Patching 74 08 (JZ Fail) to 90 90 (NOP NOP).
+    3. Function Stubbing: Overwriting entry with B0 01 C3 (MOV AL, 1; RET).
 
 ===============================================================================
 [08.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING                   [ENGN]

@@ -284,9 +284,9 @@
         <li><a href="#act5" style="padding-left: 20px;">Act V: City of Yvel & Sewers <span class="nav-tag">[WLK05]</span></a></li>
         <li><a href="#act6" style="padding-left: 20px;">Act VI: Castle Cimmeria <span class="nav-tag">[WLK06]</span></a></li>
         <li><a href="#fasttrack" style="color: var(--accent); font-weight: bold;">⚡ Bare-Bones Fast-Track <span class="nav-tag">[FAST]</span></a></li>
-        <li><a href="#compendium">Systems Compendium <span class="nav-tag">[COMP]</span></a></li>
+        <li><a href="#compendium">Systems & Secret Spells <span class="nav-tag">[COMP]</span></a></li>
         <li><a href="#controls">Keyboard Controls & Hotkeys <span class="nav-tag">[KEYS]</span></a></li>
-        <li><a href="#manuals">Manuals, Lorebook & DRM <span class="nav-tag">[MANL]</span></a></li>
+        <li><a href="#manuals">Manuals, Lore & DRM Cracking <span class="nav-tag">[MANL]</span></a></li>
         <li><a href="#forensics">Engine Forensics (2.5D) <span class="nav-tag">[ENGN]</span></a></li>
         <li><a href="#versions">Versions & Provenance <span class="nav-tag">[VERS]</span></a></li>
         <li><a href="#credits">Credits & Thanks <span class="nav-tag">[CRED]</span></a></li>
@@ -325,6 +325,16 @@
           <label class="checklist-item"><input type="checkbox" data-id="lol_5"> [PARTY] Recruit Baccata — Southlands Campfire (X:03, Y:11)</label>
         </div>
       </article>
+
+      <article id="act5">
+        <h3>Act V: City of Yvel & The Sewers [WLK05]</h3>
+        <div class="checklist-card">
+          <div class="checklist-title">Area Item Checklist: Yvel & Sewers</div>
+          <label class="checklist-item"><input type="checkbox" data-id="lol_6"> [SECRET SPELL] Hand of Fate — Yvel City (X:14, Y:22)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="lol_7"> Ring of Invisibility — Yvel Sewers (X:11, Y:24)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="lol_8"> [RELIC] Vaelan's Cube — Council of Elders (X:15, Y:02)</label>
+        </div>
+      </article>
     </section>
 
     <!-- Section 3: Fast Track -->
@@ -352,6 +362,13 @@
       </div>
     </section>
 
+    <!-- Section 4: Secret Spells -->
+    <section id="compendium">
+      <h2>4. Secret & Hidden Spells Compendium <span class="nav-tag">[COMP]</span></h2>
+      <p><strong>Hand of Fate (The Lost Spell)</strong>: Hidden in Yvel City (X:14, Y:22). Summons a spectral hand that knocks back enemies and activates Necrosap hand locks in Castle Cimmeria.</p>
+      <p><strong>Mist of Doom</strong>: Found in Catwalk Caverns (Upper Mines). Creates an AOE spectral cloud that deals severe damage to ghosts and wraiths.</p>
+    </section>
+
     <!-- Section 5: Keyboard Controls -->
     <section id="controls">
       <h2>5. Keyboard Controls & Hotkey Command Matrix <span class="nav-tag">[KEYS]</span></h2>
@@ -377,15 +394,20 @@
       </table>
     </section>
 
-    <!-- Section 6: Manuals & Lorebook -->
+    <!-- Section 6: Manuals & DRM Decompilation -->
     <section id="manuals">
-      <h2>6. The Manuals, Lore Books, Feelies & Copy Protection <span class="nav-tag">[MANL]</span></h2>
-      <p><strong>The Player's Guide</strong>: 48-page manual explaining Gladstone politics, character creation, weapon mechanics, and the 4 spell disciplines.</p>
-      <p><strong>The History of the Lands (Narrative Feelie)</strong>: An illustrated lorebook detailing the history of King Richard Leene, the Draracle, and Scotia discovering the Nether Mask.</p>
-      <p><strong>Off-Disk Copy Protection (Floppy vs CD)</strong>:</p>
+      <h2>6. The Manuals & Historical x86 DRM Decompilation <span class="nav-tag">[MANL]</span></h2>
+      <p>In 1990s DOS binaries, off-disk manual look-up checks evaluated a conditional jump:</p>
+      <pre>
+CALL CheckWordMatch        ; Returns AX=1 (Valid), AX=0 (Invalid)
+TEST AX, AX
+JNZ  PassProtection        ; Machine Code: 75 0C (Jump if Non-Zero)
+      </pre>
+      <p><strong>Historical Cracking Techniques</strong>:</p>
       <ul>
-        <li><em>1993 Floppy Edition</em>: Required answering manual look-up questions ("Turn to Page X, Line Y, enter the Z-th word") before leaving Gladstone Keep.</li>
-        <li><em>1994 CD-ROM Talkie Edition (v1.23)</em>: Westwood completely removed the copy protection prompt, as the physical CD-ROM served as hardware DRM.</li>
+        <li><strong>Forced Jump</strong>: Patching <code>75 0C</code> (<code>JNZ</code>) to <code>EB 0C</code> (<code>JMP</code>) to jump unconditionally to success.</li>
+        <li><strong>NOP Fallthrough</strong>: Overwriting <code>74 08</code> (<code>JZ Fail</code>) with <code>90 90</code> (<code>NOP NOP</code>) to execute past the failure branch.</li>
+        <li><strong>Function Stubbing</strong>: Overwriting the validation function entry with <code>B0 01 C3</code> (<code>MOV AL, 1; RET</code>).</li>
       </ul>
     </section>
 

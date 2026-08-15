@@ -5,7 +5,7 @@ developer: Westwood Studios / Virgin Interactive (1993)
 engine: Westwood Proprietary C/x86 Assembly 2.5D Grid Engine
 status: definitive-walkthrough-and-engine-forensics
 author: AI Game Research & Reverse-Engineering Lab
-version: 3.3.0
+version: 3.4.0
 target_build_sha256: bcf25b2723a76fd9ae68c2552003e3e34e0fa89192f08f25421ad0c5f86abbc7
 ---
 
@@ -30,12 +30,14 @@ target_build_sha256: bcf25b2723a76fd9ae68c2552003e3e34e0fa89192f08f25421ad0c5f86
    - Character Matrix & Starting Affinities
    - Weapons & Armor Compendium
    - Elemental Magic & 4-Tier Charge System
+   - Secret & Hidden Spells (Hand of Fate & Mist of Doom)
    - Master Item & Chest Checklist with Missables
 5. [Keyboard Controls & Hotkey Command Matrix](#5-keyboard-controls--hotkey-command-matrix) ............. [KEYS]
 6. [The Manuals, Lore Books, Feelies & Copy Protection](#6-the-manuals-lore-books-feelies--copy-protection) [MANL]
    - The Player's Guide & 48-Page Rulebook
    - The History of the Lands (Illustrated Narrative Lorebook)
    - Off-Disk Copy Protection (Floppy v1.00 vs CD-ROM v1.23)
+   - Historical Assembly Decompilation: How 90s DRM was Bypassed via NOPs / Forced Jumps
    - The Official Clue Book (*Secrets of the Dark Temple*)
 7. [Engine Forensics & Binary Reverse-Engineering](#7-engine-forensics--binary-reverse-engineering) ...... [ENGN]
    - How Secret Walls & Illusions Are Stored (`LEVELxx.INF`)
@@ -171,6 +173,7 @@ As of this version, the authorized host repositories are:
 |                                                                             |
 | [ ] [SECRET] Ring of Invisibility (X:11, Y:24) [Sewers: Cracked Brick]      |
 | [ ] [SECRET] Cloak of Shadows ... (X:11, Y:24) [Sewers: Cracked Brick]      |
+| [ ] [SECRET SPELL] Hand of Fate .. (X:14, Y:22) [Yvel City: Abandoned House] |
 | [ ] Plate Armor ................. (X:04, Y:18) [Yvel Armory: Iron Chest]    |
 | [ ] [RELIC] Vaelan's Cube ....... (X:15, Y:02) [Council of Elders]          |
 | [ ] [KEY] Cimmeria Master Key ... (X:15, Y:02) [Council of Elders]          |
@@ -179,7 +182,8 @@ As of this version, the authorized host repositories are:
 
 1. **Yvel Outskirts**: Battle through Scotia’s Vanguard.
 2. **Sewer Armory**: In the Yvel Sewers at **(X:11, Y:24)**, press the cracked brick below the drainage pipe. Enter the secret stash to claim the **Ring of Invisibility** (reduces monster aggro radius to 1 cell) and **Cloak of Shadows**.
-3. **Council Chamber**: Meet the Elders at **(X:15, Y:02)** to receive the **Cimmeria Master Key** and **Vaelan's Cube**.
+3. **Secret Spell: Hand of Fate**: At **(X:14, Y:22)** in Yvel City, unlock the boarded abandoned building to discover the **Hand of Fate Spell Scroll** inside a reinforced chest.
+4. **Council Chamber**: Meet the Elders at **(X:15, Y:02)** to receive the **Cimmeria Master Key** and **Vaelan's Cube**.
 
 ---
 
@@ -200,7 +204,7 @@ As of this version, the authorized host repositories are:
 +-----------------------------------------------------------------------------+
 ```
 
-1. **Cimmeria Barriers**: Use **Vaelan's Cube** to shatter the force barriers on Level 1.
+1. **Cimmeria Barriers**: Use **Vaelan's Cube** to shatter the force barriers on Level 1. Use the **Hand of Fate** spell to trigger the hand-shaped Necrosap locks.
 2. **Golem Gauntlet**: Equip Baccata with the **Warhammer of Crushing** to destroy the Level 2 Iron Golems. Loot the **Dragon Scale Armor** at **(X:18, Y:12)**.
 3. **The Scotia Nether Mask Showdown (Boss Strategy)**:
    - *Phase 1 (The Illusion)*: Scotia attacks as an invincible Dragon / Beholder. Standard weapons deal $0\text{ damage}$.
@@ -225,7 +229,7 @@ STEP 06: [Urbish Mines L3] ───► Run to (X:16, Y:28), pick up Crucible of
 STEP 07: [Draracle Lair] ─────► Drop 15 gold coins on scale at (X:09, Y:14).
 STEP 08: [Draracle Lair] ─────► Choose "Truth" at riddle gate (X:16, Y:10).
 STEP 09: [Draracle Lair] ─────► Walk through illusion wall at (X:24, Y:10).
-STEP 10: [White Tower L2] ────► Use empty Flask at cistern (X:08, Y:14) (Sweet Water).
+STEP 10: [White Tower L2] ────► Use flask at well (X:08, Y:14) (Sweet Water).
 STEP 11: [White Tower L3] ────► Recruit Paul or Dawn at (X:16, Y:04).
 STEP 12: [Gladstone Treasury] ► Grab Silver Goblet at (X:02, Y:03).
 STEP 13: [Inventory Screen] ──► Combine Crucible + Sweet Water + Bloodmoss + Goblet.
@@ -250,7 +254,7 @@ STEP 18: [Boss Arena] ────────► Use Ruby of Truth -> Use Vaela
 │ Specialty │ Pure Mage    │ Heavy Fighter│ Rogue/Scout  │ Balanced Pal │
 │ Base HP   │ 55           │ 85           │ 65           │ 75           │
 │ Base MP   │ 90           │ 20           │ 45           │ 50           │
-│ Top Skill │ Magic (Lvl 3)│ Might (Lvl 3)│ Agility (L3) │ All (Lvl 2)  │
+│ Top Skill │ Magic (Lvl 3)| Might (Lvl 3)| Agility (L3) │ All (Lvl 2)  │
 └───────────┴──────────────┴──────────────┴──────────────┴──────────────┘
 ```
 
@@ -259,6 +263,15 @@ STEP 18: [Boss Arena] ────────► Use Ruby of Truth -> Use Vaela
 * **Tier 2 (Hold 1.5s)**: Enhanced damage + splash radius ($15\text{ MP}$).
 * **Tier 3 (Hold 3.0s)**: Full room penetration + status affliction ($35\text{ MP}$).
 * **Tier 4 (Hold 5.0s / Max Master)**: Screen-clearing elemental eruption ($70\text{ MP}$).
+
+## C. Secret & Hidden Spells
+* **Hand of Fate (The Lost Spell)**:
+  - *Location*: Yvel City (X:14, Y:22) inside a locked building chest.
+  - *Effect*: Summons a massive spectral fist that pushes back incoming enemy swarms.
+  - *Puzzle Mechanic*: It is the **only spell capable of depressing Necrosap hand-print wall locks** in Castle Cimmeria. Can also be cast via the *Dark Gauntlet*.
+* **Mist of Doom**:
+  - *Location*: Catwalk Caverns (Upper Mines).
+  - *Effect*: Summons an ominous spectral fog dealing continuous area damage to ethereal ghosts and wraiths. Can also be triggered via the *Death Stick* or blue *Oblivion Ace*.
 
 ---
 
@@ -310,8 +323,37 @@ Westwood included a separate illustrated narrative booklet chronicling the ancie
 * **1994 CD-ROM "Talkie" Edition (v1.23)**:
   - Westwood **completely removed the manual question prompt**. The presence of the physical 600MB CD-ROM disc (containing Patrick Stewart's voice audio) served as physical hardware copy protection in 1994.
 
-### D. The Official Clue Book (*Secrets of the Dark Temple*)
-Published by Virgin/Westwood, the clue book contained hand-drafted $32 \times 32$ grid dungeon maps and monster drop indices—some of which contained slight printing discrepancies that our binary decompilation of `LEVELxx.INF` and `LANDS.EXE` mathematically resolved!
+---
+
+### D. Historical Assembly Decompilation: How 90s DRM was Bypassed via NOPs & Forced Jumps
+
+In 1990s real-mode / protected-mode x86 DOS binaries, manual look-up copy protection was implemented as a simple conditional branching subroutine:
+
+```assembly
+; Disassembly of Typical 1990s DOS Manual Look-up Subroutine
+CheckManualProtection:
+    call PromptRandomManualWordIndex  ; Selects random Page, Line, Word
+    call ReadPlayerInputString        ; Reads player text into input buffer
+    call CompareStringToManualHash    ; Returns AX=1 (Valid), AX=0 (Invalid)
+    test ax, ax                       ; Test return value
+    jnz  PassCopyProtection           ; Machine code: 75 0C (Jump if Non-Zero)
+
+FailCopyProtection:
+    call LockKeepGates                ; Trigger failure reprimand
+    call TerminateGameToDOS           ; Exit process (INT 21h, AH=4Ch)
+
+PassCopyProtection:
+    call UnlockKeepGates              ; Normal game execution continues
+    ret
+```
+
+#### The 3 Classic Historical Cracking Techniques:
+1. **The Forced Jump (`JNZ` $\rightarrow$ `JMP` or `75` $\rightarrow$ `EB`)**:
+   - The cracker locates the conditional jump opcode `75 0C` (`JNZ PassCopyProtection`) and changes the byte `0x75` to `0xEB` (`JMP Short`). Regardless of what word is typed (or if left blank), the CPU unconditionally jumps directly to `PassCopyProtection`.
+2. **The `NOP` Fallthrough (`90 90`)**:
+   - If the code checked for failure with `74 0A` (`JZ FailCopyProtection`), the cracker overwrote the two bytes with `90 90` (`NOP NOP`). The CPU simply executes past the branch, falling straight into the success code path.
+3. **Function Stubbing (`MOV AL, 01; RET` $\rightarrow$ `B0 01 C3`)**:
+   - Instead of modifying the caller, crackers patched the entry point of `CompareStringToManualHash` with `B0 01 C3` (`MOV AL, 1; RET`). Every call to the validator immediately returned `TRUE` in 3 machine cycles without reading memory or prompting the user.
 
 ---
 
