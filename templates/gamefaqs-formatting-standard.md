@@ -77,6 +77,59 @@ Gladstone Dungeons & Northlands Secret
 
 ## 📦 4. Final Fantasy Style Item & Chest Checklist Boxes
 
+---
+
+## 🔬 4. Content Quality Invariants (The "Lands of Lore" Forensic Benchmark)
+
+Every guide produced in this repository must meet the rigorous technical and forensic standard established in our *Lands of Lore: The Throne of Chaos* master suite. Superficial, hand-waving, or purely narrative walkthroughs are **STRICTLY PROHIBITED**. Every walkthrough must fulfill the following 7 Non-Negotiable Invariants:
+
+```text
++-----------------------------------------------------------------------------+
+| THE 7 NON-NEGOTIABLE FORENSIC CONTENT INVARIANTS                            |
++-----------------------------------------------------------------------------+
+| 1. Binary Disassembly & Bytecode State Machine Mapping ([ENGN])             |
+| 2. Historical Copy-Protection & Reverse-Engineered Patch Vectors            |
+| 3. Hidden Spells, Easter Eggs & Deterministic PRNG Registers                |
+| 4. Exhaustive Data Tables & Dynamic Item Catalogs (Zero Placeholders)       |
+| 5. Dual Walkthrough Architecture (Granular Checklist + [FAST] Geodesic)     |
+| 6. Historical Lineage, Design Philosophy & Cultural Retrospective ([HIST]) |
+| 7. Modern Emulation Engine & ScummVM Profile ([SCUM])                       |
++-----------------------------------------------------------------------------+
+```
+
+### Invariant 1: Binary Disassembly & Engine Bytecode Mapping (`[ENGN]`)
+Walkthroughs must decompile the game's actual internal binary architecture:
+* **Sierra AGI / SCI**: Disassemble logic scripts, object flags, and extract master vocabulary tables (`WORDS.TOK`).
+* **Westwood Kyra / LoL**: Disassemble `.PAK` archives, item bitfield masks (`ALCHEMY.PAK`), and memory registers.
+* **Coktel Gob**: Unpack `.STK` archives via LZSS 4096-byte ring-buffers and map the full directed state machine (`EMAJ1000.TOT`–`EMAJ1038.TOT`).
+
+### Invariant 2: Historical Copy-Protection & Reverse-Engineered Cracks
+Document the original retail DRM (manual symbol lookups, dial wheels, spellbook prompts) and explain the low-level assembly disassembly and bypass:
+* Document the exact conditional jump opcodes (e.g. `JZ` `0x74` -> `JMP` `0xEB`, or NOPing `0x90 0x90`).
+* Preserve the historical computing context of how early crackers defeated manual lookups.
+
+### Invariant 3: Hidden Spells, Secrets & Session PRNG Registers
+* Document all hidden spells (e.g. Hand of Fate Level 4), unlisted developer easter eggs, and secret debug shortcuts.
+* Dissect pseudo-random number generators (e.g. Borland LCG `Seed = (Seed * 1103515245 + 12345) % 2^31`), differentiating true session RNG from static graphs with reused background tiles.
+
+### Invariant 4: Complete Exhaustive Data Tables (Zero Placeholders)
+* Provide complete, un-truncated tables: full 4-tier inventory catalogs (`OBJET1.CAT`–`OBJET4.CAT`), potion synthesis matrices, point ledgers, or damage/defense statistics.
+
+### Invariant 5: Dual Walkthrough Architecture
+Every guide must contain BOTH:
+1. **Granular Screen-by-Screen Walkthrough**: Step-by-step solutions paired with 79-column ASCII Area Item Checklists.
+2. **The Critical-Path Minimalist Route (`[FAST]`)**: A 12–18 step linear geodesic stripping away all optional backtracking for pure speedruns.
+
+### Invariant 6: Historical Lineage & Cultural Retrospective (`[HIST]`)
+Explain why the game was built the way it was (e.g. Jim Walls California Highway Patrol procedural realism leading to *Blue Force*, Coktel Vision's French "puzzle chamber" design vs American open-world adventures).
+
+### Invariant 7: Modern Emulation & ScummVM Profile (`[SCUM]`)
+Document the specific ScummVM engine kernel ID, CPU-speed timer normalization, speech/subtitle desync fixes, palette cycling emulation, and cross-platform save formats.
+
+---
+
+## 🗺️ 5. Area Item Checklists & Maze Topology
+
 Every distinct region or act must open with a 79-column ASCII checklist box:
 
 ```text
@@ -92,50 +145,47 @@ Every distinct region or act must open with a 79-column ASCII checklist box:
 +-----------------------------------------------------------------------------+
 ```
 
----
-
-## 🔬 5. Maze Topology & Procedural Randomness Documentation
-
-When documenting mazes, labyrinths, or random encounters (e.g. *Kyrandia 1* Caverns of Twilight or *Fate of Atlantis* Knossos Labyrinth):
+When documenting mazes (e.g. *Kyrandia 1* Caverns of Twilight or *Fate of Atlantis* Knossos Labyrinth):
 1. **Deconstruct the Topology**: Clarify whether the maze is a true procedural generator or a static directed graph utilizing modular art tile reuse.
-2. **State Variable Tracking**: Document all runtime RNG registers (e.g. `v_berry_charge`, `v_sun_alignment`, `gem_req_slot2`).
-3. **Failure Bounds**: Explicitly warn the reader of step-counter expiration, trap triggers, or soft locks.
+2. **State Variable Tracking**: Document all runtime RNG registers (e.g. `v_berry_charge`, `gem_req_slot2`).
+3. **Failure Bounds**: Explicitly document step-counter expiration, trap triggers, or soft locks.
 
 ---
 
-## 🕹️ 6. ScummVM & Modern Emulation Profile (`[SCUM]`)
-
-Every retro guide must treat modern open-source engines (e.g., **ScummVM**, **DOSBox-Staging**, **PCem**) as first-class version targets:
-1. **Target Engine ID**: Document the specific ScummVM engine kernel (e.g. `kyra1`, `kyra2`, `sci`, `agi`, `scumm`).
-2. **Emulation Quirks & Bug Fixes**:
-   - Document any audio/speech desynchronization fixes (speech vs subtitle timing).
-   - Document collision detection or bounding-box clipping differences between pure DOS and modern interpreters.
-   - Document palette cycling behavior (VGA DAC register cycling in dark rooms).
-3. **Savegame Compatibility**: Document cross-platform save paths (`.s00`–`.s99`) versus native DOS binary snapshots.
-
----
-
-## 🤖 7. Automated Python Verification Script
+## 🤖 6. Automated Python Verification Script
 
 Run this script to certify that any `.txt` file complies 100% with the standard before submission:
 
 ```python
-import sys
+import sys, re
 
 def verify_gamefaqs_txt(filepath):
     with open(filepath, "r", encoding="utf-8") as f:
         lines = f.readlines()
+        content = "".join(lines)
     
     errors = []
+    in_toc = False
     for i, line in enumerate(lines, 1):
         clean = line.rstrip("\r\n")
         if "\t" in clean:
             errors.append(f"Line {i}: Contains TAB character.")
+        if "—" in clean:
+            errors.append(f"Line {i}: Contains em-dash.")
         if len(clean) > 79:
             errors.append(f"Line {i}: Exceeds 79 cols ({len(clean)} chars): \"{clean[:40]}...\"")
-            
+        if "TABLE OF CONTENTS" in clean:
+            in_toc = True
+        elif in_toc and clean.startswith("==="):
+            in_toc = False
+        if in_toc and re.search(r"\.{3,}\s+\[[A-Z0-9]+\]$", clean):
+            if len(clean) != 79:
+                errors.append(f"Line {i}: TOC dot-leader not aligned to col 79 (length={len(clean)})")
+
+    if "AI Cybersecurity Researcher and Reverse-Engineer" not in content:
+        errors.append("Missing exact title in Author Preface")
     if errors:
-        print(f"FAILED: Found {len(errors)} formatting violations:")
+        print(f"FAILED: Found {len(errors)} formatting violations in {filepath}:")
         for err in errors[:10]:
             print("  ", err)
         return False
