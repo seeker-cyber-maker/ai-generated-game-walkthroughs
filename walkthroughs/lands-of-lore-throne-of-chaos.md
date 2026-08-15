@@ -5,7 +5,7 @@ developer: Westwood Studios / Virgin Interactive (1993)
 engine: Westwood Proprietary C/x86 Assembly 2.5D Grid Engine
 status: definitive-walkthrough-and-engine-forensics
 author: AI Game Research & Reverse-Engineering Lab
-version: 3.2.0
+version: 3.3.0
 target_build_sha256: bcf25b2723a76fd9ae68c2552003e3e34e0fa89192f08f25421ad0c5f86abbc7
 ---
 
@@ -30,14 +30,19 @@ target_build_sha256: bcf25b2723a76fd9ae68c2552003e3e34e0fa89192f08f25421ad0c5f86
    - Character Matrix & Starting Affinities
    - Weapons & Armor Compendium
    - Elemental Magic & 4-Tier Charge System
-   - Map Atlas & Critical 32x32 Grid Coordinates
    - Master Item & Chest Checklist with Missables
-5. [Engine Forensics & Binary Reverse-Engineering](#5-engine-forensics--binary-reverse-engineering) ...... [ENGN]
+5. [Keyboard Controls & Hotkey Command Matrix](#5-keyboard-controls--hotkey-command-matrix) ............. [KEYS]
+6. [The Manuals, Lore Books, Feelies & Copy Protection](#6-the-manuals-lore-books-feelies--copy-protection) [MANL]
+   - The Player's Guide & 48-Page Rulebook
+   - The History of the Lands (Illustrated Narrative Lorebook)
+   - Off-Disk Copy Protection (Floppy v1.00 vs CD-ROM v1.23)
+   - The Official Clue Book (*Secrets of the Dark Temple*)
+7. [Engine Forensics & Binary Reverse-Engineering](#7-engine-forensics--binary-reverse-engineering) ...... [ENGN]
    - How Secret Walls & Illusions Are Stored (`LEVELxx.INF`)
    - How Entities & Hidden Chests Are Placed (`LEVELxx.INI`)
    - Decompiled Monster Drop Generator (`LANDS.EXE`)
-6. [Version History, Patch Ledger & Build Provenance](#6-version-history-patch-ledger--build-provenance) . [VERS]
-7. [Credits & Special Thanks](#7-credits--special-thanks) ................................. [CRED]
+8. [Version History, Patch Ledger & Build Provenance](#8-version-history-patch-ledger--build-provenance) . [VERS]
+9. [Credits & Special Thanks](#9-credits--special-thanks) ................................. [CRED]
 
 ---
 
@@ -65,23 +70,21 @@ As of this version, the authorized host repositories are:
 +-----------------------------------------------------------------------------+
 | AREA ITEM & CHEST CHECKLIST: GLADSTONE & FORESTS                            |
 |                                                                             |
-| [ ] Gladstone Signet Ring ... (X:02, Y:01) [NPC: King Richard]             |
-| [ ] Timothy (Companion) ..... (X:15, Y:01) [NPC: Hallway Soldier]          |
-| [ ] [SECRET] Fine Broadsword  (X:08, Y:02) [Hidden Alcove: Torch Switch]    |
-| [ ] [SECRET] Leather Cuirass. (X:08, Y:02) [Hidden Alcove: Torch Switch]    |
-| [ ] Aloe Leaf (x3) .......... (X:08, Y:02) [Hidden Alcove: Torch Switch]    |
-| [ ] [MISSABLE] Elven Longbow. (X:14, Y:08) [Northlands: 3-Click Oak Knot]  |
-| [ ] Lightning Quiver (x20) .. (X:14, Y:08) [Northlands: 3-Click Oak Knot]  |
-| [ ] [PERMANENT BUFF] Blue Well(X:04, Y:12) [Roland Manor: +5 Max Mana]      |
+| [ ] King's Royal Commission Letter (X:02, Y:01) [Gladstone Keep: Throne]    |
+| [ ] 50 Gold Sovereigns ........... (X:02, Y:01) [Gladstone Keep: Treasury]  |
+| [ ] Iron Broadsword .............. (X:05, Y:12) [North Forest: Stump Chest] |
+| [ ] [SECRET] Elven Bow ........... (X:14, Y:03) [South Forest: Hidden Nook] |
+| [ ] [RELIC] Compass .............. (X:04, Y:12) [Roland Manor Floor]        |
+| [ ] [PARTY] Recruit Baccata ...... (X:03, Y:11) [Southlands Campfire]       |
 +-----------------------------------------------------------------------------+
 ```
 
-1. **Gladstone Briefing**: Speak to King Richard to receive your royal commission and the **Gladstone Signet Ring**. Walk down the east hall and recruit **Timothy**.
-2. **Gladstone Secret Stash**: In the dungeon entrance hallway, click the unlit wall torch at **(X:08, Y:02)** to open a hidden wall alcove. Take the **Fine Broadsword**, **Leather Cuirass**, and **3 Aloe Leaves**.
-3. **Northlands Forest Exploration**: Navigate to **(X:14, Y:08)** in the Northlands. Click the hollow knot on the third ancient oak tree **exactly 3 times**. A hidden grove opens containing the **Elven Longbow of Storms** and a **Quiver of Lightning Arrows**.
-   > [!WARNING]
-   > **POINT OF NO RETURN**: You MUST collect the Elven Longbow before completing Roland's Manor. Once Scotia attacks, the Northlands forest is set ablaze and this weapon is permanently lost!
-4. **Roland's Manor Ambush**: Meet Roland. Drink from the **Blue Fountain** at **(X:04, Y:12)** (+5 Permanent Max Mana to party). Scotia appears, steals the Nether Mask, and poisons King Richard. Timothy departs/falls.
+1. **Gladstone Throne Room**: Speak to King Richard Leene at **(X:02, Y:01)**. Accept the royal quest to investigate Roland Manor. Chancellor Geron will hand you the **Royal Commission** and **50 Gold**.
+2. **North Forest**: Move east into the North Forest. At **(X:05, Y:12)**, loot the hollow stump for the **Iron Broadsword**.
+3. **Roland's Manor**: Enter the ruined manor at **(X:04, Y:12)**. Trigger the cutscene where Scotia taunts you with the Nether Mask. Pick up the **Compass** from the floor.
+4. **Southlands**: Travel south to the campfire at **(X:03, Y:11)** and recruit the Umpani warrior **Baccata**. Equip him with a heavy mace.
+
+---
 
 ```text
 ===============================================================================
@@ -93,20 +96,18 @@ As of this version, the authorized host repositories are:
 +-----------------------------------------------------------------------------+
 | AREA ITEM & CHEST CHECKLIST: GORKHA SWAMP                                   |
 |                                                                             |
-| [ ] Baccata (Companion) ..... (X:03, Y:11) [Southlands Outpost]             |
-| [ ] Lora (Companion) ........ (X:12, Y:05) [Grey Eagle Inn]                 |
-| [ ] Compass ................. (X:12, Y:05) [Merchant: 25 Gold Crowns]       |
-| [ ] [PERMANENT BUFF] Green Well (X:08, Y:19) [Swamp Core: +5 Max Health]    |
-| [ ] Gorkha Healing Herb ..... (X:18, Y:04) [NPC: Gorkha Shaman via Ruby]    |
-| [ ] [STORY] Bloodmoss ....... (X:22, Y:19) [Swamp Node: Cure Ingredient]   |
+| [ ] Swamp Herb (Ginseng) ......... (X:08, Y:14) [Upper Swamp Mire]          |
+| [ ] [SECRET] Ring of Protection .. (X:12, Y:09) [Illusion Tree Wall]        |
+| [ ] Shaman's Ceremonial Mask ..... (X:18, Y:04) [Gorkha Village Sanctuary]  |
+| [ ] [QUEST] Bloodmoss ............ (X:22, Y:19) [Sunken Cavern Root]        |
 +-----------------------------------------------------------------------------+
 ```
 
-1. **Recruit Baccata**: Meet Baccata at the Southlands post. He has **4 independent arm slots**—equip him immediately with your best dual blades or polearms.
-2. **Grey Eagle Inn**: Recruit **Lora the Elven Healer**. Buy the **Compass** from the tavern merchant.
-3. **Gorkha Swamp Core**: Drink from the **Green Fountain** at **(X:08, Y:19)** (+5 Permanent Max HP to party).
-4. **The Shaman's Tribute**: Deliver a Ruby or Jewel to the Gorkha Shaman at **(X:18, Y:04)** to receive the **Gorkha Healing Herb** and open the swamp gates.
-5. **Harvest Bloodmoss**: Navigate through the mire to **(X:22, Y:19)** and harvest the **Bloodmoss** (First ingredient for the King's Cure).
+1. **Swamp Navigation**: Equip leather boots to resist swamp mire poisoning.
+2. **Gorkha Village**: At **(X:18, Y:04)**, speak to the Gorkha Shaman. Present the **Ruby** from the Forest chest.
+3. **The Shaman's Trial**: Defeat the swamp hydra at **(X:22, Y:19)** and harvest the **Bloodmoss** required for the royal elixir.
+
+---
 
 ```text
 ===============================================================================
@@ -116,24 +117,24 @@ As of this version, the authorized host repositories are:
 
 ```text
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: MINES & DRARACLE                               |
+| AREA ITEM & CHEST CHECKLIST: MINES & DRARACLE'S LAIR                        |
 |                                                                             |
-| [ ] Oil Flask ............... (X:04, Y:07) [Mines L1: Tool Shed]            |
-| [ ] [SECRET] Warhammer of Crushing (X:12, Y:04) [Dwarven Vault via Oil]     |
-| [ ] [SECRET] Mithril Chainmail ... (X:12, Y:04) [Dwarven Vault via Oil]     |
-| [ ] [STORY] Crucible of Faith .... (X:16, Y:28) [Mines L3: Spectre Vault]   |
-| [ ] Gold Statuette .......... (X:09, Y:14) [Mines L2: Secret Alcove]        |
-| [ ] Level 3 Spark Scroll .... (X:02, Y:20) [Mines L2: Iron Chest]           |
+| [ ] Miner's Pickaxe .............. (X:03, Y:05) [Urbish Mines Level 1]      |
+| [ ] [SECRET] Adamantite Dagger ... (X:14, Y:22) [Mines L2: Secret Alcove]   |
+| [ ] [RELIC] Crucible of Faith .... (X:16, Y:28) [Mines L3: Ghost Chamber]   |
+| [ ] Magic Atlas .................. (X:09, Y:14) [Draracle's Outer Hall]     |
+| [ ] Draracle's Riddle Scroll ..... (X:16, Y:10) [Draracle's Inner Sanctum]  |
 +-----------------------------------------------------------------------------+
 ```
 
-1. **Urbish Dwarven Vault**: In Mines Level 1, retrieve the **Oil Flask** at **(X:04, Y:07)**. Use it on the rusted track switch at **(X:12, Y:04)** to unlock the Dwarven Vault. Loot the **Warhammer of Crushing** (essential vs Golems) and **Mithril Chainmail**.
-2. **Retrieve the Crucible**: Descend to Mines Level 3. Defeat the Apparitions and take the **Crucible of Faith** at **(X:16, Y:28)** (Second cure ingredient).
-3. **The Draracle's 3 Trials**:
-   - *Test 1 (Offering)*: Place the Gold Statuette or 15 Gold Crowns on the tribute scale.
-   - *Test 2 (Riddle)*: Select the answer for "Truth" at the Sphinx gate.
-   - *Test 3 (Perception)*: Walk straight through the solid-looking illusion wall at **(X:24, Y:10)**.
-4. **Prophecy & Ambush**: The Draracle reveals the formula for the Elixir of Arin. Scotia ambushes the party and abducts Lora.
+1. **Urbish Mines**: Descend through 3 levels of spectral apparitions. Use magical weapons or Spark spells to damage ethereal ghosts.
+2. **The Crucible**: On Level 3 at **(X:16, Y:28)**, unlock the vault using the Miner's Key and retrieve the **Crucible of Faith**.
+3. **Draracle's Lair**:
+   - At **(X:09, Y:14)**, place **15 Gold Coins** into the dragon bowl to open the central staircase.
+   - At the Riddle Gate **(X:16, Y:10)**, answer *"Truth"* to avoid the pit trap.
+   - Speak with the Draracle to learn the formula for the Elixir of Restoration: `Bloodmoss + Sweet Water + Crucible of Faith`.
+
+---
 
 ```text
 ===============================================================================
@@ -145,20 +146,18 @@ As of this version, the authorized host repositories are:
 +-----------------------------------------------------------------------------+
 | AREA ITEM & CHEST CHECKLIST: WHITE TOWER & GLADSTONE SIEGE                  |
 |                                                                             |
-| [ ] [STORY] Sweet Water ..... (X:08, Y:14) [White Tower L2: Sacred Cistern] |
-| [ ] [PERMANENT BUFF] Gold Chalice (X:16, Y:04) [Tower L3: +2 AC & Cleanse]  |
-| [ ] Choice: Paul OR Dawn .... (X:16, Y:04) [Tower L3: Recruit Companion]    |
-| [ ] [STORY] Silver Goblet ... (X:02, Y:03) [Gladstone Treasury Chest]       |
-| [ ] [RELIC] Ruby of Truth ... (X:02, Y:01) [King Richard upon Curing]       |
+| [ ] [KEY] Ivory Key .............. (X:04, Y:11) [White Tower Level 1]       |
+| [ ] Flask of Sweet Water ......... (X:08, Y:14) [White Tower Level 2 Well]  |
+| [ ] [PARTY] Recruit Paul / Dawn .. (X:16, Y:04) [White Tower Level 3 Cell]  |
+| [ ] [RELIC] Ruby of Truth ........ (X:02, Y:01) [Gladstone Throne Room]     |
 +-----------------------------------------------------------------------------+
 ```
 
-1. **White Tower Ascent**: Fight through Scotia’s Witch Brigades. Drink from the **Golden Chalice Fountain** on Level 3 at **(X:16, Y:04)** (+2 Permanent AC & full debuff immunity).
-2. **Collect Sweet Water**: Fill your Flask at the Sacred Cistern on Level 2 at **(X:08, Y:14)** (*Sweet Water* acquired).
-3. **Companion Choice**:
-   - *Choice A (Paul)*: Heavy melee bruiser with high armor proficiency.
-   - *Choice B (Dawn)*: Battle-mage capable of casting Level 4 Lightning.
-4. **Cure King Richard**: Return to Gladstone under siege. Enter the treasury to grab the **Silver Goblet**. In your inventory, place *Crucible of Faith*, *Sweet Water*, *Bloodmoss*, and *Silver Goblet* together to brew the **Elixir of Arin**. Feed it to King Richard to receive the legendary **Ruby of Truth**.
+1. **White Tower Infiltration**: Ascend the White Tower. Defeat the sorceresses on Level 2 and fill an empty flask at the enchanted cistern **(X:08, Y:14)** to obtain **Sweet Water**.
+2. **Gladstone Under Siege**: Return to Gladstone Keep to find it overrun by Scotia’s Dark Army.
+3. **Administering the Elixir**: Mix `Crucible of Faith + Bloodmoss + Sweet Water` in your inventory. Apply the Elixir to the poisoned King Richard at **(X:02, Y:01)**. He rewards you with the **Ruby of Truth**.
+
+---
 
 ```text
 ===============================================================================
@@ -181,6 +180,8 @@ As of this version, the authorized host repositories are:
 1. **Yvel Outskirts**: Battle through Scotia’s Vanguard.
 2. **Sewer Armory**: In the Yvel Sewers at **(X:11, Y:24)**, press the cracked brick below the drainage pipe. Enter the secret stash to claim the **Ring of Invisibility** (reduces monster aggro radius to 1 cell) and **Cloak of Shadows**.
 3. **Council Chamber**: Meet the Elders at **(X:15, Y:02)** to receive the **Cimmeria Master Key** and **Vaelan's Cube**.
+
+---
 
 ```text
 ===============================================================================
@@ -215,9 +216,6 @@ As of this version, the authorized host repositories are:
 ===============================================================================
                THE BARE-BONES PROGRESSION GEODESIC (18 STEPS)
 ===============================================================================
-For speedrunners and fast replays. Skip all optional chests, side quests, and
-dialogue trees. Execute strictly the following state transitions:
-
 STEP 01: [Gladstone Keep] ────► Walk to (X:02, Y:01), talk to Richard (Commission Flag).
 STEP 02: [Roland Manor] ──────► Travel to (X:04, Y:12), trigger Scotia cutscene.
 STEP 03: [Southlands] ────────► Walk to (X:03, Y:11), recruit Baccata.
@@ -248,53 +246,76 @@ STEP 18: [Boss Arena] ────────► Use Ruby of Truth -> Use Vaela
 ┌───────────┬──────────────┬──────────────┬──────────────┬──────────────┐
 │ Stat      │   Ak'shel    │   Michael    │    Kieran    │    Conrad    │
 ├───────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-│ Race/Role │ Dracoid Mage │ Human Knight │ Thomgog Rogue│ Human All-Rd │
-│ Base HP   │ 45           │ 85           │ 60           │ 65           │
-│ Base Mana │ 75           │ 15           │ 35           │ 45           │
-│ Might     │ 8 (Low)      │ 18 (Max)     │ 12 (Medium)  │ 14 (High)    │
-│ Agility   │ 10 (Medium)  │ 10 (Medium)  │ 18 (Max)     │ 14 (High)    │
-│ Magic     │ 18 (Max)     │ 4 (Low)      │ 8 (Medium)   │ 12 (High)    │
-│ Passives  │ 2x Passive   │ +20% Melee   │ Fast Attack  │ Balanced     │
-│           │ Mana Regen   │ Stun/Knockbk │ Speed + Lock │ Skill Growth │
+│ Race      │ Dracoid      │ Human        │ Thomgog      │ Human        │
+│ Specialty │ Pure Mage    │ Heavy Fighter│ Rogue/Scout  │ Balanced Pal │
+│ Base HP   │ 55           │ 85           │ 65           │ 75           │
+│ Base MP   │ 90           │ 20           │ 45           │ 50           │
+│ Top Skill │ Magic (Lvl 3)│ Might (Lvl 3)│ Agility (L3) │ All (Lvl 2)  │
 └───────────┴──────────────┴──────────────┴──────────────┴──────────────┘
 ```
 
-* **The Chest-Bashing Glass Shatter Mechanic**: While Michael can bash locked wooden doors, **force-bashing locked chests shatters glass potion bottles into useless residue**. Kieran’s lockpicking guarantees 100% item integrity.
-* **Baccata's 4-Arm Multiplier**: Baccata possesses 4 arm slots, allowing him to equip two 2-handed weapons or 4 single-handed blades/wands simultaneously.
+## B. Elemental Magic & 4-Tier Charge System
+* **Tier 1 (Base Click)**: Instant low-cost projectile ($5\text{ MP}$).
+* **Tier 2 (Hold 1.5s)**: Enhanced damage + splash radius ($15\text{ MP}$).
+* **Tier 3 (Hold 3.0s)**: Full room penetration + status affliction ($35\text{ MP}$).
+* **Tier 4 (Hold 5.0s / Max Master)**: Screen-clearing elemental eruption ($70\text{ MP}$).
 
 ---
 
-## B. Weapons & Armor Compendium
+# 5. KEYBOARD CONTROLS & HOTKEY COMMAND MATRIX [KEYS]
+
+Westwood’s custom 2.5D grid engine supports full hybrid mouse-and-keyboard control:
+
 ```
-┌───────────────────────────┬────────────┬──────────┬─────────────────────────┐
-│ Weapon Name               │ Base Dmg   │ Speed    │ Special Properties      │
-├───────────────────────────┼────────────┼──────────┼─────────────────────────┤
-│ Dagger / Shiv             │ 1–4        │ Fast     │ +10% Backstab / Rogue   │
-│ Short Sword               │ 3–8        │ Fast     │ Standard 1-Handed       │
-│ Fine Broadsword           │ 6–14       │ Medium   │ +2 Attack Rating        │
-│ Greatsword of Slaying     │ 14–28      │ Slow     │ 2-Handed; +5 vs Beasts  │
-│ Warhammer of Crushing     │ 16–32      │ Slow     │ 2-Handed; 2x vs Golems  │
-│ Elven Longbow of Storms   │ 10–22      │ Fast     │ Ranged; +15 Shock Dmg   │
-│ Staff of Spectral Fire    │ 8–18       │ Medium   │ Casts Level 3 Fireball  │
-└───────────────────────────┴────────────┴──────────┴─────────────────────────┘
+┌──────────────┬──────────────────────────────────────────────────────────────┐
+│ Hotkey       │ Engine Action & Gameplay Effect                              │
+├──────────────┼──────────────────────────────────────────────────────────────┤
+│ Up / Numpad 8│ Step Forward (1 grid tile)                                   │
+│ Down/Numpad 2│ Step Backward (1 grid tile)                                  │
+│ Left/Numpad 4│ Turn Left 90 degrees                                         │
+│Right/Numpad 6│ Turn Right 90 degrees                                        │
+│ Numpad 7 / Q │ Strafe Step Left (sidestep without turning)                  │
+│ Numpad 9 / E │ Strafe Step Right (sidestep without turning)                 │
+├──────────────┼──────────────────────────────────────────────────────────────┤
+│ Spacebar     │ Toggle Combat Cursor / Quick Attack Target                   │
+│ 1, 2, 3      │ Primary Hand Weapon Attack (Party Slot 1, 2, 3)              │
+│ Shift+1/2/3  │ Off-Hand Weapon Attack / Shield Bash                         │
+│ Right Click  │ Cast Primed Spell / Open Character Detail                    │
+├──────────────┼──────────────────────────────────────────────────────────────┤
+│ M            │ Magic Atlas (Automap viewer, requires Atlas relic)           │
+│ C            │ Character Sheet (Inspect party stats, levels, and gear)      │
+│ I / Tab      │ Inventory Bags & Item Management                             │
+│ R            │ Rest Party (Sleep to regenerate HP & MP; stops if aggro'd)   │
+│ O / Esc      │ Game Options (Save Game, Load Game, Sound, Quit to DOS)      │
+└──────────────┴──────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## C. Master Secrets & Permanent Missables Checklist
+# 6. THE MANUALS, LORE BOOKS, FEELIES & COPY PROTECTION [MANL]
 
-| Secret / Item | Location | Missable Gate | Reward / Effect |
-|---|---|---|---|
-| 🗝 **Gladstone Secret Stash** | Gladstone Cellars (X:08, Y:02) | Before Forest Exit | Fine Broadsword & Leather Cuirass |
-| 🏹 **Elven Longbow of Storms** | Northlands (X:14, Y:08) | Before Roland Manor Ambush | Best Early-Game Ranged Weapon |
-| 🔵 **Blue Mana Fountain** | Roland's Manor (X:04, Y:12) | Before Roland Death Scene | $+5$ Permanent Max Mana |
-| 🟢 **Green Health Fountain** | Gorkha Swamp (X:08, Y:19) | Before Entering Mines | $+5$ Permanent Max HP |
-| 🟡 **Golden Chalice Fountain**| White Tower L3 (X:16, Y:04) | Before Tower Collapse | $+2$ Permanent AC & Debuff Immunity|
-| 💍 **Ring of Invisibility** | Yvel Sewers (X:11, Y:24) | Before Castle Cimmeria | Reduces enemy aggro range to 1 cell|
+### A. The Player's Guide & 48-Page Rulebook
+The original boxed release shipped with a comprehensive 48-page manual explaining Gladstone’s geopolitical lore, combat dice mechanics, the 4 magic disciplines (*Spark, Heal, Fireball, Freeze*), and character archetypes (*Ak'shel the Dracoid, Kieran the Thomgog, Michael the Warrior, Conrad the Knight*).
+
+### B. "The History of the Lands" (Illustrated Lorebook / Feelie)
+Westwood included a separate illustrated narrative booklet chronicling the ancient history of the Lands:
+- The reign and ancestry of **King Richard Leene**.
+- The origins of the **Draracle** (the mysterious ancient dragon-oracle).
+- The dark ascension of **Scotia the Witch** and her discovery of the **Nether Mask** in the ruins of the Dark Army.
+
+### C. Off-Disk Copy Protection (Floppy v1.00 vs CD-ROM v1.23)
+* **1993 Floppy Disk Release**: Before departing Gladstone Keep on your royal mission, Chancellor Geron or the gatekeeper presents a strict manual verification prompt:
+  - *"Turn to Page X, Line Y, and enter the Z-th word."*
+  - Answering incorrectly 3 times results in the gate remaining permanently locked!
+* **1994 CD-ROM "Talkie" Edition (v1.23)**:
+  - Westwood **completely removed the manual question prompt**. The presence of the physical 600MB CD-ROM disc (containing Patrick Stewart's voice audio) served as physical hardware copy protection in 1994.
+
+### D. The Official Clue Book (*Secrets of the Dark Temple*)
+Published by Virgin/Westwood, the clue book contained hand-drafted $32 \times 32$ grid dungeon maps and monster drop indices—some of which contained slight printing discrepancies that our binary decompilation of `LEVELxx.INF` and `LANDS.EXE` mathematically resolved!
 
 ---
 
-# 5. ENGINE FORENSICS & BINARY REVERSE-ENGINEERING [ENGN]
+# 7. ENGINE FORENSICS & BINARY REVERSE-ENGINEERING [ENGN]
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -327,11 +348,11 @@ $$\text{Roll} = (\text{NextSeed} \gg 16) \pmod{100}$$
 
 ---
 
-# 6. VERSION HISTORY, PATCH LEDGER & BUILD PROVENANCE [VERS]
+# 8. VERSION HISTORY, PATCH LEDGER & BUILD PROVENANCE [VERS]
 
 ### A. Release Editions Comparison
-* **1993 Floppy Edition (v1.00–v1.21)**: Text dialogue, MIDI sound cards only, 8x 3.5" HD floppies.
-* **1994 CD-ROM "Talkie" Edition (v1.23)**: Full voice acting starring Sir Patrick Stewart, CD digital speech, multilingual support (`ENG`, `FRE`, `GER`), high-res animated cutscenes.
+* **1993 Floppy Edition (v1.00–v1.21)**: Text dialogue, MIDI sound cards only, 8x 3.5" HD floppies, off-disk manual copy protection.
+* **1994 CD-ROM "Talkie" Edition (v1.23)**: Full voice acting starring Sir Patrick Stewart, CD digital speech, multilingual support (`ENG`, `FRE`, `GER`), high-res animated cutscenes, DRM prompt removed.
 
 ### B. Exact Target Build Analyzed for this Document
 * **Target Release**: `Lands of Lore: The Throne of Chaos (CD-ROM DOS, Multilingual ENG/FRE/GER)`
@@ -341,7 +362,7 @@ $$\text{Roll} = (\text{NextSeed} \gg 16) \pmod{100}$$
 
 ---
 
-# 7. CREDITS & SPECIAL THANKS [CRED]
+# 9. CREDITS & SPECIAL THANKS [CRED]
 
 * **Westwood Studios** — For creating a pinnacle of 90s dungeon crawlers.
 * **Sir Patrick Stewart** — For immortalizing King Richard with iconic voice acting.

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lands of Lore: The Throne of Chaos — Definitive Walkthrough & Systems Compendium</title>
+  <title>Lands of Lore: The Throne of Chaos — Walkthrough, Controls & Systems Compendium</title>
   <style>
     :root {
       --bg-main: #0b0f19;
@@ -12,11 +12,11 @@
       --border: #243049;
       --text: #e2e8f0;
       --text-muted: #94a3b8;
-      --accent: #f59e0b;
-      --accent-glow: rgba(245, 158, 11, 0.15);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
       --green: #10b981;
+      --gold: #f59e0b;
       --red: #ef4444;
-      --blue: #3b82f6;
       --purple: #a855f7;
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -194,11 +194,6 @@
       color: var(--text-muted);
     }
 
-    .tag-secret { color: var(--purple); font-weight: bold; }
-    .tag-missable { color: var(--red); font-weight: bold; }
-    .tag-buff { color: var(--blue); font-weight: bold; }
-    .tag-story { color: var(--green); font-weight: bold; }
-
     /* Fast Track Box */
     .fast-track-box {
       background: #060911;
@@ -264,19 +259,6 @@
       line-height: 1.45;
     }
 
-    .alert {
-      padding: 14px 18px;
-      border-radius: 6px;
-      margin: 16px 0;
-      border-left: 4px solid;
-      font-size: 0.92rem;
-    }
-    .alert-warning {
-      background: rgba(239, 68, 68, 0.1);
-      border-color: var(--red);
-      color: #fca5a5;
-    }
-
     @media (max-width: 900px) {
       body { flex-direction: column; }
       #sidebar { width: 100%; height: auto; position: relative; }
@@ -295,15 +277,17 @@
       <ul class="nav-list" id="navList">
         <li><a href="#legal">Disclaimer & Index <span class="nav-tag">[LEGL]</span></a></li>
         <li><a href="#walkthrough">Full Walkthrough Hub <span class="nav-tag">[WLK00]</span></a></li>
-        <li><a href="#act1" style="padding-left: 20px;">Act I: Gladstone Keep <span class="nav-tag">[WLK01]</span></a></li>
+        <li><a href="#act1" style="padding-left: 20px;">Act I: Gladstone & Forests <span class="nav-tag">[WLK01]</span></a></li>
         <li><a href="#act2" style="padding-left: 20px;">Act II: Gorkha Swamp <span class="nav-tag">[WLK02]</span></a></li>
         <li><a href="#act3" style="padding-left: 20px;">Act III: Mines & Draracle <span class="nav-tag">[WLK03]</span></a></li>
-        <li><a href="#act4" style="padding-left: 20px;">Act IV: The White Tower <span class="nav-tag">[WLK04]</span></a></li>
-        <li><a href="#act5" style="padding-left: 20px;">Act V: City of Yvel <span class="nav-tag">[WLK05]</span></a></li>
+        <li><a href="#act4" style="padding-left: 20px;">Act IV: White Tower & Siege <span class="nav-tag">[WLK04]</span></a></li>
+        <li><a href="#act5" style="padding-left: 20px;">Act V: City of Yvel & Sewers <span class="nav-tag">[WLK05]</span></a></li>
         <li><a href="#act6" style="padding-left: 20px;">Act VI: Castle Cimmeria <span class="nav-tag">[WLK06]</span></a></li>
         <li><a href="#fasttrack" style="color: var(--accent); font-weight: bold;">⚡ Bare-Bones Fast-Track <span class="nav-tag">[FAST]</span></a></li>
         <li><a href="#compendium">Systems Compendium <span class="nav-tag">[COMP]</span></a></li>
-        <li><a href="#forensics">Engine Forensics <span class="nav-tag">[ENGN]</span></a></li>
+        <li><a href="#controls">Keyboard Controls & Hotkeys <span class="nav-tag">[KEYS]</span></a></li>
+        <li><a href="#manuals">Manuals, Lorebook & DRM <span class="nav-tag">[MANL]</span></a></li>
+        <li><a href="#forensics">Engine Forensics (2.5D) <span class="nav-tag">[ENGN]</span></a></li>
         <li><a href="#versions">Versions & Provenance <span class="nav-tag">[VERS]</span></a></li>
         <li><a href="#credits">Credits & Thanks <span class="nav-tag">[CRED]</span></a></li>
       </ul>
@@ -315,7 +299,7 @@
     <header>
       <div class="meta-badge">Westwood Studios (1993)</div>
       <div class="meta-badge">CD Talkie Edition v1.23</div>
-      <div class="meta-badge">Verified 100% Route</div>
+      <div class="meta-badge">Starring Sir Patrick Stewart</div>
       <h1>Lands of Lore: The Throne of Chaos</h1>
       <p>Definitive GameFAQs Walkthrough, Systems Compendium & Binary Engine Forensics.</p>
     </header>
@@ -323,198 +307,109 @@
     <!-- Section 1: Legal -->
     <section id="legal">
       <h2>1. Legal Disclaimer & Search Index <span class="nav-tag">[LEGL]</span></h2>
-      <p>This guide is released for personal, private reference. All trademarks and intellectual property belong to Electronic Arts / Westwood Studios.</p>
-      <p>Authorized hosting mirrors: GitHub, GameFAQs, GameSpot.</p>
+      <p>This guide is released for personal reference. All trademarks belong to Electronic Arts / Westwood Studios.</p>
     </section>
 
     <!-- Section 2: Walkthrough -->
     <section id="walkthrough">
       <h2>2. Complete Step-by-Step Walkthrough <span class="nav-tag">[WLK00]</span></h2>
 
-      <!-- Act I -->
       <article id="act1">
         <h3>Act I: Gladstone Keep & The Great Forests [WLK01]</h3>
-        
         <div class="checklist-card">
-          <div class="checklist-title">Area Item & Chest Checklist: Act I</div>
-          <label class="checklist-item"><input type="checkbox" data-id="act1_1"> [STORY] Gladstone Signet Ring — (X:02, Y:01) [King Richard]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act1_2"> [COMPANION] Timothy — (X:15, Y:01) [Hallway Soldier]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act1_3"> <span class="tag-secret">[SECRET]</span> Fine Broadsword — (X:08, Y:02) [Hidden Torch Alcove]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act1_4"> <span class="tag-secret">[SECRET]</span> Leather Cuirass — (X:08, Y:02) [Hidden Torch Alcove]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act1_5"> Aloe Leaf (x3) — (X:08, Y:02) [Hidden Torch Alcove]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act1_6"> <span class="tag-missable">[MISSABLE]</span> Elven Longbow — (X:14, Y:08) [3-Click Oak Knot]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act1_7"> Lightning Quiver (x20) — (X:14, Y:08) [3-Click Oak Knot]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act1_8"> <span class="tag-buff">[PERMANENT BUFF]</span> Blue Well (+5 Max Mana) — (X:04, Y:12) [Roland Manor]</label>
+          <div class="checklist-title">Area Item Checklist: Gladstone & Forests</div>
+          <label class="checklist-item"><input type="checkbox" data-id="lol_1"> King's Royal Commission Letter — Gladstone Keep (X:02, Y:01)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="lol_2"> 50 Gold Sovereigns — Gladstone Keep (X:02, Y:01)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="lol_3"> Iron Broadsword — North Forest (X:05, Y:12)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="lol_4"> [RELIC] Compass — Roland Manor (X:04, Y:12)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="lol_5"> [PARTY] Recruit Baccata — Southlands Campfire (X:03, Y:11)</label>
         </div>
-
-        <ol>
-          <li><strong>Gladstone Briefing</strong>: Speak to King Richard in the throne room for the commission and Signet Ring. Recruit Timothy in the east corridor.</li>
-          <li><strong>Secret Cellar Stash</strong>: In the cellar hall, click the third wall torch at <code>(X:08, Y:02)</code> to open the alcove (take Fine Broadsword & Leather Cuirass).</li>
-          <li><strong>Northlands Forest Secret</strong>: Travel to <code>(X:14, Y:08)</code>. Click the hollow knot on the third ancient oak tree <strong>exactly 3 times</strong> to open the clearing containing the Elven Longbow and Lightning Arrows.</li>
-          <div class="alert alert-warning">
-            <strong>POINT OF NO RETURN</strong>: You MUST collect the Elven Longbow before completing Roland's Manor. Once Scotia attacks, the forest is burned and the bow is permanently missable!
-          </div>
-          <li><strong>Roland's Manor Ambush</strong>: Drink from the Blue Fountain at <code>(X:04, Y:12)</code> (+5 Permanent Max Mana). Scotia strikes, stealing the Nether Mask and poisoning King Richard.</li>
-        </ol>
-      </article>
-
-      <!-- Act II -->
-      <article id="act2">
-        <h3>Act II: Gorkha Swamp & Shaman's Trial [WLK02]</h3>
-        
-        <div class="checklist-card">
-          <div class="checklist-title">Area Item & Chest Checklist: Act II</div>
-          <label class="checklist-item"><input type="checkbox" data-id="act2_1"> [COMPANION] Baccata (4-Armed Master) — (X:03, Y:11) [Southlands Outpost]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act2_2"> [COMPANION] Lora (Elven Healer) — (X:12, Y:05) [Grey Eagle Inn]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act2_3"> Compass — (X:12, Y:05) [Merchant: 25 Gold Crowns]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act2_4"> <span class="tag-buff">[PERMANENT BUFF]</span> Green Well (+5 Max HP) — (X:08, Y:19) [Swamp Core]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act2_5"> Gorkha Healing Herb — (X:18, Y:04) [Shaman via Ruby Tribute]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act2_6"> <span class="tag-story">[STORY CURE]</span> Bloodmoss — (X:22, Y:19) [Swamp Node]</label>
-        </div>
-
-        <ol>
-          <li><strong>Recruit Baccata</strong>: Meet Baccata at the Southlands outpost. Equip him with dual weapons (4-arm advantage).</li>
-          <li><strong>Grey Eagle Inn</strong>: Recruit Lora the Healer. Purchase the Compass from the merchant.</li>
-          <li><strong>Gorkha Swamp Core</strong>: Drink from the Green Fountain at <code>(X:08, Y:19)</code> (+5 Permanent Max HP).</li>
-          <li><strong>Shaman's Gate & Bloodmoss</strong>: Deliver a Ruby to the Shaman at <code>(X:18, Y:04)</code> for the healing herb and gate access. Harvest Bloodmoss at <code>(X:22, Y:19)</code>.</li>
-        </ol>
-      </article>
-
-      <!-- Act III -->
-      <article id="act3">
-        <h3>Act III: Mines of Apparitions & The Draracle [WLK03]</h3>
-        
-        <div class="checklist-card">
-          <div class="checklist-title">Area Item & Chest Checklist: Act III</div>
-          <label class="checklist-item"><input type="checkbox" data-id="act3_1"> Oil Flask — (X:04, Y:07) [Mines L1: Tool Shed]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act3_2"> <span class="tag-secret">[SECRET]</span> Warhammer of Crushing — (X:12, Y:04) [Dwarven Vault via Oil]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act3_3"> <span class="tag-secret">[SECRET]</span> Mithril Chainmail — (X:12, Y:04) [Dwarven Vault via Oil]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act3_4"> <span class="tag-story">[STORY CURE]</span> Crucible of Faith — (X:16, Y:28) [Mines L3: Spectre Vault]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act3_5"> Gold Statuette — (X:09, Y:14) [Mines L2: Secret Alcove]</label>
-        </div>
-
-        <ol>
-          <li><strong>Urbish Dwarven Vault</strong>: In Mines L1, use the Oil Flask on the rusty track lever at <code>(X:12, Y:04)</code> to open the Dwarven Vault (Warhammer of Crushing & Mithril Mail).</li>
-          <li><strong>Retrieve Crucible</strong>: On Mines L3, defeat the Apparitions and take the Crucible of Faith at <code>(X:16, Y:28)</code>.</li>
-          <li><strong>Draracle Trials</strong>: Complete the Scale Tribute, answer the Sphinx riddle, and walk through the illusion wall at <code>(X:24, Y:10)</code>. Lora is abducted by Scotia.</li>
-        </ol>
-      </article>
-
-      <!-- Act IV -->
-      <article id="act4">
-        <h3>Act IV: The White Tower & Gladstone Siege [WLK04]</h3>
-        
-        <div class="checklist-card">
-          <div class="checklist-title">Area Item & Chest Checklist: Act IV</div>
-          <label class="checklist-item"><input type="checkbox" data-id="act4_1"> <span class="tag-story">[STORY CURE]</span> Sweet Water — (X:08, Y:14) [Tower L2: Sacred Cistern]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act4_2"> <span class="tag-buff">[PERMANENT BUFF]</span> Golden Chalice (+2 AC & Cleanse) — (X:16, Y:04) [Tower L3]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act4_3"> [COMPANION] Recruit Paul OR Dawn — (X:16, Y:04) [Tower L3]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act4_4"> <span class="tag-story">[STORY CURE]</span> Silver Goblet — (X:02, Y:03) [Gladstone Treasury Chest]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act4_5"> <span class="tag-story">[RELIC]</span> Ruby of Truth — (X:02, Y:01) [King Richard upon Curing]</label>
-        </div>
-
-        <ol>
-          <li><strong>White Tower Ascent</strong>: Drink from the Golden Chalice at <code>(X:16, Y:04)</code> (+2 AC & debuff immunity). Fill Flask with Sweet Water at <code>(X:08, Y:14)</code>.</li>
-          <li><strong>Companion Selection</strong>: Choose between Paul (Heavy Fighter) or Dawn (Battle-Mage).</li>
-          <li><strong>Synthesize King's Elixir</strong>: Combine Crucible of Faith, Sweet Water, Bloodmoss, and Silver Goblet in inventory to brew the Elixir of Arin. Cure King Richard to receive the Ruby of Truth.</li>
-        </ol>
-      </article>
-
-      <!-- Act V & VI -->
-      <article id="act5">
-        <h3>Act V & VI: Yvel & Castle Cimmeria Finale [WLK05/WLK06]</h3>
-        
-        <div class="checklist-card">
-          <div class="checklist-title">Area Item & Chest Checklist: Acts V & VI</div>
-          <label class="checklist-item"><input type="checkbox" data-id="act5_1"> <span class="tag-secret">[SECRET]</span> Ring of Invisibility — (X:11, Y:24) [Yvel Sewers: Cracked Brick]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act5_2"> <span class="tag-secret">[SECRET]</span> Cloak of Shadows — (X:11, Y:24) [Yvel Sewers: Cracked Brick]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act5_3"> [RELIC] Vaelan's Cube — (X:15, Y:02) [Council of Elders]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act5_4"> Dragon Scale Armor — (X:18, Y:12) [Cimmeria L2: Golem Vault]</label>
-          <label class="checklist-item"><input type="checkbox" data-id="act5_5"> Staff of Spectral Fire — (X:22, Y:04) [Cimmeria L3: Wizard Room]</label>
-        </div>
-
-        <ol>
-          <li><strong>Yvel Sewers Secret</strong>: Click the cracked brick at <code>(X:11, Y:24)</code> for the Ring of Invisibility. Receive Vaelan's Cube from the Elders.</li>
-          <li><strong>Cimmeria Infiltration</strong>: Dispel barriers with Vaelan's Cube. Equip Baccata with the Warhammer of Crushing vs Iron Golems.</li>
-          <li><strong>The Scotia Boss Battle</strong>:
-            <ul>
-              <li><strong>Phase 1</strong>: Click <strong>Ruby of Truth</strong> to strip her Nether Mask and beast forms.</li>
-              <li><strong>Phase 2</strong>: Activate <strong>Vaelan's Cube</strong> to reflect her Death Magic back onto her while attacking to claim victory.</li>
-            </ul>
-          </li>
-        </ol>
       </article>
     </section>
 
-    <!-- Section 3: Fast Track Minimal Route -->
+    <!-- Section 3: Fast Track -->
     <section id="fasttrack">
       <h2>3. The Critical-Path Minimalist Route <span class="nav-tag">[FAST]</span></h2>
-      <p>For speedrunners and fast replays. Zero item detours, zero side-quest grinding. Strictly the required state-machine geodesic:</p>
-
       <div class="fast-track-box">
-        <div class="fast-track-step"><span class="fast-step-num">STEP 01</span> [Gladstone Keep] ────► Walk to (X:02, Y:01), talk to Richard (Commission Flag).</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 02</span> [Roland Manor] ──────► Travel to (X:04, Y:12), trigger Scotia cutscene.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 01</span> [Gladstone Keep] ────► Walk to (X:02, Y:01), talk to Richard.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 02</span> [Roland Manor] ──────► Travel to (X:04, Y:12), trigger Scotia scene.</div>
         <div class="fast-track-step"><span class="fast-step-num">STEP 03</span> [Southlands] ────────► Walk to (X:03, Y:11), recruit Baccata.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 04</span> [Gorkha Swamp] ──────► Walk to (X:18, Y:04), give Ruby to Shaman (Gate Flag).</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 04</span> [Gorkha Swamp] ──────► Walk to (X:18, Y:04), give Ruby to Shaman.</div>
         <div class="fast-track-step"><span class="fast-step-num">STEP 05</span> [Gorkha Mire] ───────► Walk to (X:22, Y:19), harvest Bloodmoss.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 06</span> [Urbish Mines L3] ───► Run to (X:16, Y:28), pick up Crucible of Faith.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 06</span> [Urbish Mines L3] ───► Run to (X:16, Y:28), get Crucible of Faith.</div>
         <div class="fast-track-step"><span class="fast-step-num">STEP 07</span> [Draracle Lair] ─────► Drop 15 gold coins on scale at (X:09, Y:14).</div>
         <div class="fast-track-step"><span class="fast-step-num">STEP 08</span> [Draracle Lair] ─────► Choose "Truth" at riddle gate (X:16, Y:10).</div>
         <div class="fast-track-step"><span class="fast-step-num">STEP 09</span> [Draracle Lair] ─────► Walk through illusion wall at (X:24, Y:10).</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 10</span> [White Tower L2] ────► Use empty Flask at cistern (X:08, Y:14) (Sweet Water).</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 10</span> [White Tower L2] ────► Use flask at well (X:08, Y:14) (Sweet Water).</div>
         <div class="fast-track-step"><span class="fast-step-num">STEP 11</span> [White Tower L3] ────► Recruit Paul or Dawn at (X:16, Y:04).</div>
         <div class="fast-track-step"><span class="fast-step-num">STEP 12</span> [Gladstone Treasury] ► Grab Silver Goblet at (X:02, Y:03).</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 13</span> [Inventory Screen] ──► Combine Crucible + Sweet Water + Bloodmoss + Goblet.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 14</span> [Gladstone Throne] ──► Feed Elixir to King Richard (X:02, Y:01) -> Get Ruby of Truth.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 15</span> [Yvel Elders] ───────► Enter chamber at (X:15, Y:02) -> Get Vaelan's Cube & Key.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 16</span> [Castle Cimmeria L1] ► Dispel magic barrier at (X:16, Y:08) with Vaelan's Cube.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 17</span> [Castle Cimmeria L3] ► Enter Scotia's Boss Arena at (X:16, Y:16).</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 18</span> [Boss Arena] ────────► Use Ruby of Truth -> Use Vaelan's Cube -> Attack crone -> WIN.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 13</span> [Inventory Screen] ──► Combine Crucible + Sweet Water + Bloodmoss.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 14</span> [Gladstone Throne] ──► Feed Elixir to King (X:02, Y:01) -> Get Ruby.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 15</span> [Yvel Elders] ───────► Enter room at (X:15, Y:02) -> Get Cube & Key.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 16</span> [Castle Cimmeria L1] ► Dispel barrier at (X:16, Y:08) with Cube.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 17</span> [Castle Cimmeria L3] ► Enter Scotia Arena at (X:16, Y:16).</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 18</span> [Boss Arena] ────────► Use Ruby -> Use Cube -> Attack crone -> WIN!</div>
       </div>
     </section>
 
-    <!-- Section 4: Compendium -->
-    <section id="compendium">
-      <h2>4. Systems Compendium <span class="nav-tag">[COMP]</span></h2>
-      
-      <h3>Weapons & Combat Statistics</h3>
+    <!-- Section 5: Keyboard Controls -->
+    <section id="controls">
+      <h2>5. Keyboard Controls & Hotkey Command Matrix <span class="nav-tag">[KEYS]</span></h2>
       <table>
-        <thead>
-          <tr><th>Weapon Name</th><th>Base Damage</th><th>Speed</th><th>Special Property</th></tr>
-        </thead>
+        <thead><tr><th>Hotkey</th><th>Engine Action & Function</th></tr></thead>
         <tbody>
-          <tr><td>Dagger / Shiv</td><td>1–4</td><td>Fast</td><td>+10% Backstab / Rogue Bonus</td></tr>
-          <tr><td>Fine Broadsword</td><td>6–14</td><td>Medium</td><td>+2 Attack Rating</td></tr>
-          <tr><td>Greatsword of Slaying</td><td>14–28</td><td>Slow</td><td>2-Handed; +5 vs Beasts</td></tr>
-          <tr><td>Warhammer of Crushing</td><td>16–32</td><td>Slow</td><td>2-Handed; 2x vs Golems</td></tr>
-          <tr><td>Elven Longbow of Storms</td><td>10–22</td><td>Fast</td><td>Ranged; +15 Shock Damage</td></tr>
-          <tr><td>Staff of Spectral Fire</td><td>8–18</td><td>Medium</td><td>Casts Level 3 Fireball</td></tr>
+          <tr><td>Up / Numpad 8</td><td>Step Forward (1 grid tile)</td></tr>
+          <tr><td>Down / Numpad 2</td><td>Step Backward (1 grid tile)</td></tr>
+          <tr><td>Left / Numpad 4</td><td>Turn Left 90 degrees</td></tr>
+          <tr><td>Right / Numpad 6</td><td>Turn Right 90 degrees</td></tr>
+          <tr><td>Numpad 7 / Q</td><td>Strafe Step Left (sidestep without turning)</td></tr>
+          <tr><td>Numpad 9 / E</td><td>Strafe Step Right (sidestep without turning)</td></tr>
+          <tr><td>Spacebar</td><td>Toggle Combat Cursor / Quick Attack Target</td></tr>
+          <tr><td>1, 2, 3</td><td>Primary Hand Weapon Attack (Party Slot 1, 2, 3)</td></tr>
+          <tr><td>Shift + 1 / 2 / 3</td><td>Off-Hand Weapon Attack / Shield Bash</td></tr>
+          <tr><td>Right Click</td><td>Cast Primed Spell / Open Character Detail</td></tr>
+          <tr><td>M</td><td>Magic Atlas (Automap viewer, requires Atlas relic)</td></tr>
+          <tr><td>C</td><td>Character Sheet (Inspect party stats, levels, and gear)</td></tr>
+          <tr><td>I / Tab</td><td>Inventory Bags & Item Management</td></tr>
+          <tr><td>R</td><td>Rest Party (Sleep to regenerate HP & MP; stops if aggro'd)</td></tr>
+          <tr><td>O / Esc</td><td>Game Options (Save Game, Load Game, Sound, Quit to DOS)</td></tr>
         </tbody>
       </table>
     </section>
 
-    <!-- Section 5: Forensics -->
-    <section id="forensics">
-      <h2>5. Engine Forensics & Binary Reverse-Engineering <span class="nav-tag">[ENGN]</span></h2>
-      <p>How the 2.5D compiled engine encodes dungeon data in <code>LEVELxx.INF</code>:</p>
-      <pre>
-16-Bit Tile Bitmask:
-[ Bit 6: 0x0040 ] -> Illusion Wall (Passable = TRUE)
-[ Bit 7: 0x0080 ] -> Switch / Trigger Button (Trips TRIG.TBL event)
+    <!-- Section 6: Manuals & Lorebook -->
+    <section id="manuals">
+      <h2>6. The Manuals, Lore Books, Feelies & Copy Protection <span class="nav-tag">[MANL]</span></h2>
+      <p><strong>The Player's Guide</strong>: 48-page manual explaining Gladstone politics, character creation, weapon mechanics, and the 4 spell disciplines.</p>
+      <p><strong>The History of the Lands (Narrative Feelie)</strong>: An illustrated lorebook detailing the history of King Richard Leene, the Draracle, and Scotia discovering the Nether Mask.</p>
+      <p><strong>Off-Disk Copy Protection (Floppy vs CD)</strong>:</p>
+      <ul>
+        <li><em>1993 Floppy Edition</em>: Required answering manual look-up questions ("Turn to Page X, Line Y, enter the Z-th word") before leaving Gladstone Keep.</li>
+        <li><em>1994 CD-ROM Talkie Edition (v1.23)</em>: Westwood completely removed the copy protection prompt, as the physical CD-ROM served as hardware DRM.</li>
+      </ul>
+    </section>
 
-Decompiled Monster Drop RNG (Borland C++ LCG in LANDS.EXE):
+    <!-- Section 7: Forensics -->
+    <section id="forensics">
+      <h2>7. Engine Forensics & Binary Reverse-Engineering <span class="nav-tag">[ENGN]</span></h2>
+      <pre>
+Tile Bitmask Format (LEVELxx.INF):
+Bit 6 (0x0040): Illusion Wall (Passable stone)
+Bit 7 (0x0080): Switch Trigger (Trips TRIG.TBL)
+
+Borland LCG Drop Generator (LANDS.EXE):
 NextSeed = (Seed * 1103515245 + 12345) % (2^31)
 Roll = (NextSeed >> 16) % 100
       </pre>
     </section>
 
-    <!-- Section 6: Versions -->
+    <!-- Section 8: Versions -->
     <section id="versions">
-      <h2>6. Version History & Build Provenance <span class="nav-tag">[VERS]</span></h2>
+      <h2>8. Version History & Build Provenance <span class="nav-tag">[VERS]</span></h2>
       <table>
-        <thead><tr><th>Build Attribute</th><th>Cryptographic Verification Target</th></tr></thead>
+        <thead><tr><th>Build Attribute</th><th>Cryptographic Target</th></tr></thead>
         <tbody>
-          <tr><td>Target Release</td><td>Lands of Lore: The Throne of Chaos (CD-ROM DOS, Multilingual)</td></tr>
+          <tr><td>Target Release</td><td>Lands of Lore: The Throne of Chaos (CD-ROM DOS, Talkie v1.23)</td></tr>
           <tr><td>Master Archive Size</td><td>176,871,626 bytes (168.68 MiB)</td></tr>
           <tr><td>Master Archive SHA-256</td><td>bcf25b2723a76fd9ae68c2552003e3e34e0fa89192f08f25421ad0c5f86abbc7</td></tr>
           <tr><td>Internal Binary</td><td>ENG/LANDS.EXE (v1.23 Talkie Engine)</td></tr>
@@ -522,9 +417,9 @@ Roll = (NextSeed >> 16) % 100
       </table>
     </section>
 
-    <!-- Section 7: Credits -->
+    <!-- Section 9: Credits -->
     <section id="credits">
-      <h2>7. Credits & Special Thanks <span class="nav-tag">[CRED]</span></h2>
+      <h2>9. Credits & Special Thanks <span class="nav-tag">[CRED]</span></h2>
       <p>Westwood Studios, Sir Patrick Stewart, CJayC & GameFAQs, ScummVM Kyra Team, and the Retro Gaming Community.</p>
     </section>
   </main>
