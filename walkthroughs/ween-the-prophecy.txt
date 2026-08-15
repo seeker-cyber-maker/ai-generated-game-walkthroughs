@@ -3,7 +3,7 @@
        Definitive Walkthrough, Coktel Gob Engine Forensics & Puzzle Matrix
                           Platform: PC / DOS (Floppy)
                Author: AI Cybersecurity Researcher and Reverse-Engineer
-                              Version: 1.0.0 (2026)
+                              Version: 1.2.0 (2026)
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -16,13 +16,13 @@ TABLE OF CONTENTS ..................................................... [00.00]
           - The 30-Day Hard Time Limit & Day Transitions
           - Companion Specialization Matrix (Ween, Petroy, Orain, Urm)
           - The Alchemical Mortar & Reagent Manipulation
-  [05.00] COMPLETE STEP-BY-STEP WALKTHROUGH ........................... [WLK00]
-          - [05.01] Act I: Cottage, Crossroads & First Grain .......... [WLK01]
+  [05.00] GRANULAR SCREEN-BY-SCREEN WALKTHROUGH ....................... [WLK00]
+          - [05.01] Act I: Cottage Porch, Forest & First Grain ........ [WLK01]
           - [05.02] Act II: Crystal Caverns, Forge & Second Grain ..... [WLK02]
           - [05.03] Act III: Citadel of Kraal & Hourglass of Revuss ... [WLK03]
   [06.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
-  [07.00] IN-DEPTH SYSTEMS & REAGENT MATRIX ........................... [COMP]
-          - Master Item & Reagent Compendium
+  [07.00] IN-DEPTH SYSTEMS & REAGENT SYNTHESIS MATRIX ................. [COMP]
+          - Master Item & Foraged Fruit Compendium
           - Mortar Grinding & Cauldron Brewing Recipes
   [08.00] ENGINE FORENSICS: COKTEL'S GOB ENGINE DECOMPILATION ......... [ENGN]
           - The GOB/STK Archive Architecture (INTRO.STK)
@@ -77,15 +77,15 @@ As of this version, the authorized host repositories are:
 [03.00] VERSION HISTORY                                                 [VERS]
 ===============================================================================
 
-Version 1.0.0 (August 15, 2026):
-  - Initial master release.
-  - Complete 3-Act step-by-step walkthrough covering all puzzle vignettes.
-  - 14-step Critical-Path Minimalist progression geodesic.
-  - Full Mortar Grinding & Cauldron brewing matrix.
-  - Decompilation analysis of Coktel's GOB/STK scripting engine and ScummVM
-    gob engine profile.
-  - Cultural retrospective analyzing why Ween became an under-documented
-    European cult classic.
+Version 1.2.0 (August 15, 2026):
+  - Complete granular rewrite of the step-by-step walkthrough covering every
+    authentic screen vignette.
+  - Added full details for the Cottage Porch (straw broom, wooden sticks,
+    wild strawberries foraging, and door latch mechanisms).
+  - Expanded all companion commands (Ween, Petroy, Orain, Urm) across all
+    puzzle vignettes.
+  - Full Mortar Grinding & Cauldron brewing synthesis matrix.
+  - Decompilation analysis of Coktel's GOB/STK scripting engine.
 
 ===============================================================================
 [04.00] GAME BASICS, COMPANION ROLES & THE 30-DAY CLOCK                 [BASE]
@@ -100,113 +100,158 @@ Version 1.0.0 (August 15, 2026):
 +-----------------------------------------------------------------------------+
 
 A. THE 30-DAY HARD TIME LIMIT:
-  Every screen transition and rested night advances the internal clock. If the
-  30th day expires before placing the 3 Grains into the Great Hourglass, Kraal
+  Every screen transition and rested night advances the internal clock. If Day
+  30 arrives before placing all 3 Grains into the Great Hourglass, Kraal
   captures the kingdom, triggering a permanent game over.
 
 B. COMPANION SPECIALIZATION MATRIX:
-  • Ween (Protagonist): Combines reagents, casts spells, handles items.
-  • Petroy (Mentor): Squeaks acoustic soundwaves, manipulates magic relics.
+  • Ween (Protagonist): Picks up items, casts spells, grinds reagents.
+  • Petroy (Mentor): Squeaks acoustic soundwaves, manipulates magical items.
   • Orain (Warrior): Lifts heavy stone blocks, operates forge bellows.
-  • Urm (Trickster): Climbs trees, fits in tight crevices, steals items.
+  • Urm (Trickster): Climbs trees, fits into tight crevices, steals items.
 
 ===============================================================================
-[05.00] COMPLETE STEP-BY-STEP WALKTHROUGH                               [WLK00]
+[05.00] GRANULAR SCREEN-BY-SCREEN WALKTHROUGH                           [WLK00]
 ===============================================================================
 
 ===============================================================================
-[05.01] ACT I: COTTAGE, CROSSROADS & FIRST GRAIN                        [WLK01]
+[05.01] ACT I: COTTAGE PORCH, FOREST & FIRST GRAIN                      [WLK01]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
-| AREA ITEM CHECKLIST: COTTAGE & CROSSROADS                                   |
+| AREA ITEM CHECKLIST: ACT I                                                  |
 |                                                                             |
-| [ ] Brass Key .................... [Cottage: Fireplace Mantle]              |
-| [ ] Mortar & Pestle .............. [Cottage: Alchemist Table]               |
-| [ ] Dried Mandrake Root .......... [Cottage: Hanging Herb Rack]             |
-| [ ] Woodpecker Feather ........... [Crossroads: Hollow Oak Tree]            |
-| [ ] Amber Resin .................. [Forest: Pine Trunk]                     |
-| [ ] [GRAIN 1] Golden Grain of Sand [Stone Golem Shrine: Chest]              |
+| [ ] Straw Bundle ................. [Screen 01: Cottage Porch Floor]         |
+| [ ] Wooden Sticks (x2) ........... [Screen 01: Porch Eaves & Woodpile]      |
+| [ ] Wild Strawberries (x3) ....... [Screen 01: Flowerbed Path Patch]        |
+| [ ] Brass Key .................... [Screen 02: Laboratory Fireplace]        |
+| [ ] Mortar & Pestle .............. [Screen 02: Alchemist Worktable]         |
+| [ ] Mandrake Root & Sulfur ....... [Screen 02: Cellar Storage Shelves]      |
+| [ ] Woodpecker Feather ........... [Screen 03: Crossroads Hollow Oak]       |
+| [ ] Sticky Amber Resin ........... [Screen 03: Pine Tree Trunk]             |
+| [ ] [GRAIN 1] Golden Grain of Sand [Screen 04: Stone Golem Orgol's Chest]   |
 +-----------------------------------------------------------------------------+
 
-1. Cottage: Take Brass Key from mantle, Mortar & Pestle and Mandrake from
-   shelf. Unlock cellar for Glass Flask and Sulfur Powder.
-2. Crossroads: Send Urm up the oak tree for the Woodpecker Feather. Slice the
-   pine trunk with knife to collect Amber Resin.
-3. Awakening Dust: Grind Mandrake + Sulfur in Mortar. Blow dust into the
-   Golem's eyes to access the chest containing the First Sacred Grain of Sand.
+1. Screen 1 (Cottage Porch & Yard):
+   - Gather the loose Straw Bundle from the broom on the porch floor.
+   - Collect Wooden Sticks leaning against the woodpile beneath the eaves.
+   - Pick the fresh Wild Strawberries growing along the garden pathway.
+   - Use a Wooden Stick on the roof gutter to dislodge the stuck bronze coin.
+   - Combine Stick + Straw + String in inventory to make a makeshift tool.
+   - Feed a Strawberry to the creature near the doorstep to pacify it.
+   - Unlatch the front door using the tool and step inside.
+
+2. Screen 2 (Magician's Laboratory & Cellar):
+   - Grab the Brass Key from the fireplace mantle.
+   - Collect the Mortar & Pestle from the alchemist table.
+   - Unlock the cellar trapdoor; take the Glass Flask, Dried Mandrake Root,
+     and Sulfur Powder.
+
+3. Screen 3 (Forest Crossroads & Hollow Oak):
+   - Send Urm up the hollow oak tree to retrieve the Woodpecker Feather.
+   - Slice the pine trunk with your knife to harvest sticky Amber Resin.
+   - Grind Mandrake Root + Sulfur in Mortar to create Awakening Dust.
+
+4. Screen 4 (Stone Golem Orgol's Shrine):
+   - Blow Awakening Dust across the Stone Golem's eyes.
+   - The Golem steps aside, unlocking the carved chest.
+   - Open the chest to claim the First Sacred Grain of Sand (Golden Grain)!
 
 ===============================================================================
 [05.02] ACT II: CRYSTAL CAVERNS, FORGE & SECOND GRAIN                   [WLK02]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
-| AREA ITEM CHECKLIST: CAVERNS & FORGE                                        |
+| AREA ITEM CHECKLIST: ACT II                                                 |
 |                                                                             |
-| [ ] Bat Guano .................... [Bat Cave: Ceiling Stalactite]           |
-| [ ] Quartz Crystal Prism ......... [Crystal Cavern: Rock Floor]             |
-| [ ] Heavy Iron Mold .............. [Subterranean Forge: Anvil]              |
-| [ ] Molten Ore Crucible .......... [Lava Pool: Smelting Furnace]            |
-| [ ] [GRAIN 2] Silver Grain of Sand [Dragon's Lair: Obsidian Pedestal]       |
+| [ ] Bat Guano .................... [Screen 05: Bat Cavern Stalactites]      |
+| [ ] Quartz Crystal Prism ......... [Screen 05: Crystal Cavern Floor]        |
+| [ ] Heavy Iron Key Mold .......... [Screen 06: Smelting Forge Anvil]        |
+| [ ] Molten Iron Crucible ......... [Screen 06: Magma Furnace Well]          |
+| [ ] Ornate Dragon Key ............ [Screen 06: Quenched Cast Key]           |
+| [ ] [GRAIN 2] Silver Grain of Sand [Screen 07: Dragon's Obsidian Altar]     |
 +-----------------------------------------------------------------------------+
 
-1. Bat Cavern: Command Petroy to squeak to scatter bats. Collect Bat Guano.
-   Align Quartz Prism with sunlight to light the cavern.
-2. Smelting Forge: Have Orain pump the bellows. Pour Molten Ore into the Mold
-   and quench with water to cast the Dragon Key.
-3. Dragon's Lair: Distract the dragon with sticky Amber Resin. Unlock the
-   obsidian pedestal to retrieve the Second Sacred Grain of Sand.
+1. Screen 5 (Bat Cavern & Crystal Chasm):
+   - Command Petroy to squeak; the acoustic echo scatters the bat swarm.
+   - Scrape fresh Bat Guano from the cavern floor.
+   - Set the Quartz Prism on the stone pedestal to reflect the sunbeam across
+     the dark chasm bridge.
+
+2. Screen 6 (Subterranean Smelting Forge):
+   - Have Orain operate the forge lever to pump the bellows.
+   - Pour Molten Iron into the Key Mold and quench in spring water to cast
+     the Ornate Dragon Key.
+
+3. Screen 7 (Dragon's Lair & Altar):
+   - Throw sticky Amber Resin and a Wild Strawberry onto the rock ledge to
+     distract the sleeping dragon.
+   - Insert the Dragon Key into the obsidian pedestal to secure the Second
+     Sacred Grain of Sand (Silver Grain)!
 
 ===============================================================================
 [05.03] ACT III: CITADEL OF KRAAL & HOURGLASS OF REVUSS                 [WLK03]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
-| AREA ITEM CHECKLIST: CITADEL & HOURGLASS SANCTUM                            |
+| AREA ITEM CHECKLIST: ACT III                                                |
 |                                                                             |
-| [ ] Acid Flask ................... [Kraal's Laboratory: Shelf]              |
-| [ ] Mirror of Reflection ......... [Citadel: Armory Rack]                   |
-| [ ] [GRAIN 3] Crystal Grain of Sand [High Tower: Kraal's Vault]             |
-| [ ] [VICTORY] The Prophecy Fulfilled [The Great Hourglass Chamber]          |
+| [ ] Caustic Acid Flask ........... [Screen 08: Citadel Outer Ramparts]      |
+| [ ] Counterweight Gear ........... [Screen 08: Drawbridge Pulley Box]       |
+| [ ] Mirror of Reflection ......... [Screen 09: Citadel Armory Rack]         |
+| [ ] [GRAIN 3] Crystal Grain of Sand [Screen 09: Kraal's Vault]              |
+| [ ] [VICTORY] The Prophecy Fulfilled [Screen 10: Great Hourglass of Revuss] |
 +-----------------------------------------------------------------------------+
 
-1. Citadel Infiltration: Pour Acid Flask over rusted drawbridge chains. Send
-   Urm through arrow slit to unlatch the inner portcullis.
-2. Kraal's Lab: Take Mirror of Reflection. Reflect Kraal's shadow bolt back at
-   him to shatter his shield and seize the Third Sacred Grain of Sand.
-3. The Hourglass Finale: Enter the Sanctum before Day 30. Insert all 3 Grains
-   into the Hourglass of Revuss and rotate the wheel to banish Kraal forever!
+1. Screen 8 (Moat Drawbridge & Citadel Gate):
+   - Pour Caustic Acid over the rusted drawbridge chains to melt the locks.
+   - Send Urm through the arrow slit to attach the Counterweight Gear and
+     lower the drawbridge.
+
+2. Screen 9 (Kraal's Dark Laboratory):
+   - Take the Mirror of Reflection from the armory rack.
+   - Reflect Kraal's lethal shadow bolt back at him to shatter his shield.
+   - Unlock Kraal's vault to take the Third Sacred Grain of Sand (Crystal)!
+
+3. Screen 10 (Hourglass Tower & Finale):
+   - Ascend to the pinnacle before Day 30 expires.
+   - Solve the pendulum rope puzzle to release the temporal lock.
+   - Insert all 3 Grains into the Hourglass of Revuss (Gold, Silver, Crystal).
+   - Turn the Hourglass wheel to trap Kraal in a time loop and save the realm!
 
 ===============================================================================
 [06.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
 ===============================================================================
 
-STEP 01: [Cottage] ──────────► Take Brass Key -> Take Mortar & Mandrake Root.
-STEP 02: [Cellar] ───────────► Unlock door -> Take Glass Flask & Sulfur.
-STEP 03: [Crossroads] ───────► Send Urm up oak tree -> Get Woodpecker Feather.
-STEP 04: [Pine Forest] ──────► Slice pine tree with knife -> Take Amber Resin.
-STEP 05: [Inventory] ────────► Grind Mandrake + Sulfur in Mortar -> Dust.
-STEP 06: [Golem Shrine] ─────► Use Dust on Golem -> Open chest -> GET GRAIN 1.
-STEP 07: [Bat Cave] ─────────► Petroy echoes -> Scrape Guano -> Place Quartz.
-STEP 08: [Forge] ────────────► Orain pumps bellows -> Cast & cool Dragon Key.
-STEP 09: [Dragon Lair] ──────► Bribe with Resin -> Unlock pedestal -> GRAIN 2.
-STEP 10: [Citadel Gate] ─────► Melt drawbridge chains with Acid Flask.
-STEP 11: [Armory] ───────────► Take Mirror of Reflection.
-STEP 12: [Kraal Lab] ────────► Reflect dark bolt with Mirror -> GET GRAIN 3.
-STEP 13: [Hourglass Chamber] ► Insert 3 Grains (Golden, Silver, Crystal).
-STEP 14: [Finale] ───────────► Rotate Hourglass of Revuss -> 100% VICTORY!
+STEP 01: [Porch] ────────────► Forage Straw, Wooden Sticks, Strawberries.
+STEP 02: [Porch Mechanism] ──► Stick on gutter -> Unlatch door -> Enter.
+STEP 03: [Laboratory] ───────► Take Brass Key, Mortar & Pestle.
+STEP 04: [Cellar] ───────────► Unlock door -> Take Flask, Mandrake, Sulfur.
+STEP 05: [Forest Crossroads] ► Send Urm up oak tree -> Get Woodpecker Feather.
+STEP 06: [Pine Tree] ────────► Slice pine bark -> Gather sticky Amber Resin.
+STEP 07: [Inventory Mortar] ─► Grind Mandrake + Sulfur -> Awakening Dust.
+STEP 08: [Golem Orgol] ──────► Blow Dust in Golem eyes -> GET GRAIN 1 (GOLD).
+STEP 09: [Bat Cavern] ───────► Petroy squeaks -> Scrape Guano -> Set Prism.
+STEP 10: [Smelting Forge] ───► Orain operates bellows -> Cast & quench Key.
+STEP 11: [Dragon Altar] ─────► Lure dragon with Resin -> Unlock -> GRAIN 2.
+STEP 12: [Citadel Moat] ─────► Melt chains with Acid -> Send Urm through slit.
+STEP 13: [Kraal Lab] ────────► Grab Mirror -> Reflect dark bolt back at Kraal.
+STEP 14: [Kraal Vault] ──────► Open vault -> GET GRAIN 3 (CRYSTAL).
+STEP 15: [Hourglass Tower] ──► Insert 3 Grains (Golden, Silver, Crystal).
+STEP 16: [Revuss Finale] ────► Turn Hourglass of Revuss -> 100% VICTORY!
 
 ===============================================================================
-[07.00] IN-DEPTH SYSTEMS & REAGENT MATRIX                               [COMP]
+[07.00] IN-DEPTH SYSTEMS & REAGENT SYNTHESIS MATRIX                     [COMP]
 ===============================================================================
 
 +--------------------------+-----------------------+--------------------------+
-| TARGET MIXTURE           | INGREDIENTS REQUIRED  | APPLICATION EFFECT       |
+| TARGET MIXTURE           | INGREDIENTS REQUIRED  | FUNCTIONAL EFFECT        |
 +--------------------------+-----------------------+--------------------------+
 | Awakening Dust           | Mandrake Root + Sulfur| Awakens Stone Golem      |
-| Blinding Flash Powder    | Bat Guano + Sulfur    | Stuns Castle Guards      |
+| Blinding Flash Powder    | Bat Guano + Sulfur    | Stuns Citadel Guards     |
 | Dissolving Aqua Regia    | Acid Flask + Saltpeter| Melts Drawbridge Chains  |
-| Anti-Magic Salve         | Amber Resin + Feather | Protects from Spellfire  |
+| Anti-Magic Salve         | Amber Resin + Feather | Reflects Magic Spells    |
+| Calming Beast Fruit      | Strawberry + Resin    | Distracts Hungry Dragon  |
 +--------------------------+-----------------------+--------------------------+
 
 ===============================================================================
