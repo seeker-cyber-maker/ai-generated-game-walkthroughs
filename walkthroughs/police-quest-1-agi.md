@@ -42,9 +42,9 @@ target_build_sha256: 51d93876d09ef7e0f7be7e1ee7b9ae9b1b4d12e5a7b4bbf06629aa019fc
 ---
 
 > ### 🎮 Author's Preface & Research Philosophy
-> Even though this guide was generated, formatted, and verified with the assistance of modern AI tooling and binary disassembly pipelines, it is born from a deep, lifelong love for classic gaming. The author spent countless cherished hours playing, mapping, and loving these games as a kid, teenager, adult—and even yesterday.
+> Even though this guide was generated, formatted, and verified with the assistance of modern AI tooling and binary disassembly pipelines, it is born from a deep, lifelong love for classic gaming. The author spent countless cherished hours playing, mapping, and loving these games as a kid, teenager, adult, and even yesterday.
 >
-> While traditional walkthroughs and secrets have been known for decades, approaching them today from the perspective of an **AI Cybersecurity Researcher and Reverse-Engineer** offers a new dimension of appreciation. By peering directly beneath the hood into decompiled assembly, memory registers, and state-machine bytecode, we can finally understand—deterministically and mathematically—what made these cherished old games tick, every single tick.
+> While traditional walkthroughs and secrets have been known for decades, approaching them today from the perspective of an **AI Cybersecurity Researcher and Reverse-Engineer** offers a new dimension of appreciation. By peering directly beneath the hood into decompiled assembly, memory registers, and state-machine bytecode, we can finally understand (deterministically and mathematically) what made these cherished old games tick, every single tick.
 
 ---
 
@@ -403,15 +403,15 @@ Token 288: DRAW
 ```
 
 ### B. Radio 10-Codes & Operational Terminology
-* `10-4` — Message Acknowledged / Understood
-* `10-7` — Out of Service (End of Shift / Coffee Break)
-* `10-8` — In Service / On Active Patrol
-* `10-20` — Report Current Location
-* `10-33` — Emergency Traffic / Officer Needs Assistance
-* `10-97` — Arrived at Scene of Incident
-* `10-98` — Completed Assignment / Clearing Scene
-* `FST` — Field Sobriety Test (Walk-and-turn / One-leg stand)
-* `DUII` — Driving Under the Influence of Intoxicants
+* `10-4`: Message Acknowledged / Understood
+* `10-7`: Out of Service (End of Shift / Coffee Break)
+* `10-8`: In Service / On Active Patrol
+* `10-20`: Report Current Location
+* `10-33`: Emergency Traffic / Officer Needs Assistance
+* `10-97`: Arrived at Scene of Incident
+* `10-98`: Completed Assignment / Clearing Scene
+* `FST`: Field Sobriety Test (Walk-and-turn / One-leg stand)
+* `DUII`: Driving Under the Influence of Intoxicants
 
 ---
 
@@ -528,7 +528,7 @@ When Sonny patrols River Avenue, the engine executes a lane-swerving oscillation
 
 # 9. CREDITS & SPECIAL THANKS [CRED]
 
-* **Jim Walls** — For bringing authentic California Highway Patrol procedural realism to gaming.
-* **Ken & Roberta Williams / Sierra On-Line** — For the legendary AGI engine.
-* **CJayC & GameFAQs** — For immortalizing text walkthroughs.
-* **YOU, the reader** — For serving and protecting Lytton!
+* **Jim Walls**: For bringing authentic California Highway Patrol procedural realism to gaming.
+* **Ken & Roberta Williams / Sierra On-Line**: For the legendary AGI engine.
+* **CJayC & GameFAQs**: For immortalizing text walkthroughs.
+* **YOU, the reader**: For serving and protecting Lytton!

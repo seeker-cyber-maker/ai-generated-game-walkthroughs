@@ -49,9 +49,9 @@ target_build_sha256: bcf25b2723a76fd9ae68c2552003e3e34e0fa89192f08f25421ad0c5f86
 ---
 
 > ### 🎮 Author's Preface & Research Philosophy
-> Even though this guide was generated, formatted, and verified with the assistance of modern AI tooling and binary disassembly pipelines, it is born from a deep, lifelong love for classic gaming. The author spent countless cherished hours playing, mapping, and loving these games as a kid, teenager, adult—and even yesterday.
+> Even though this guide was generated, formatted, and verified with the assistance of modern AI tooling and binary disassembly pipelines, it is born from a deep, lifelong love for classic gaming. The author spent countless cherished hours playing, mapping, and loving these games as a kid, teenager, adult, and even yesterday.
 >
-> While traditional walkthroughs and secrets have been known for decades, approaching them today from the perspective of an **AI Cybersecurity Researcher and Reverse-Engineer** offers a new dimension of appreciation. By peering directly beneath the hood into decompiled assembly, memory registers, and state-machine bytecode, we can finally understand—deterministically and mathematically—what made these cherished old games tick, every single tick.
+> While traditional walkthroughs and secrets have been known for decades, approaching them today from the perspective of an **AI Cybersecurity Researcher and Reverse-Engineer** offers a new dimension of appreciation. By peering directly beneath the hood into decompiled assembly, memory registers, and state-machine bytecode, we can finally understand (deterministically and mathematically) what made these cherished old games tick, every single tick.
 
 ---
 
@@ -385,8 +385,8 @@ Each 32x32 dungeon map stores cells as 1,024 16-bit little-endian words:
 │ T │ P │ D │ S │ I │ F │   Wall Flags    │    Texture / Mesh ID  │
 └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
 ```
-* **Bit 6 (`0x0040` — `I` Illusion Flag)**: Wall renders as solid 3D stone, but collision returns `PASSABLE = TRUE`.
-* **Bit 7 (`0x0080` — `S` Switch Trigger Flag)**: Secret Push Button / Torch Marker. Clicking trips `TRIG.TBL`.
+* **Bit 6 (`0x0040`, `I` Illusion Flag)**: Wall renders as solid 3D stone, but collision returns `PASSABLE = TRUE`.
+* **Bit 7 (`0x0080`, `I` Switch Trigger Flag)**: Secret Push Button / Torch Marker. Clicking trips `TRIG.TBL`.
 
 ### B. Decompiled Drop Rate Math (`LANDS.EXE`)
 When an enemy entity hits 0 HP, `LANDS.EXE` executes the Borland C++ Linear Congruential Generator:
@@ -413,8 +413,8 @@ $$\text{Roll} = (\text{NextSeed} \gg 16) \pmod{100}$$
 
 # 9. CREDITS & SPECIAL THANKS [CRED]
 
-* **Westwood Studios** — For creating a pinnacle of 90s dungeon crawlers.
-* **Sir Patrick Stewart** — For immortalizing King Richard with iconic voice acting.
-* **GameFAQs & CJayC** — For establishing the gold standard of game walkthrough documentation.
-* **The ScummVM Kyra Team** — For preserving retro engine architecture.
-* **YOU, the reader** — For taking the time to read this research guide!
+* **Westwood Studios**: For creating a pinnacle of 90s dungeon crawlers.
+* **Sir Patrick Stewart**: For immortalizing King Richard with iconic voice acting.
+* **GameFAQs & CJayC**: For establishing the gold standard of game walkthrough documentation.
+* **The ScummVM Kyra Team**: For preserving retro engine architecture.
+* **YOU, the reader**: For taking the time to read this research guide!

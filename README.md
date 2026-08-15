@@ -3,9 +3,9 @@
 ![Are ya winning, son? Yes, Dad.](docs/assets/are-ya-winning-son.png)
 
 > ### 🎮 Author's Preface & Research Philosophy
-> Even though these guides are assembled, formatted, and mathematically validated with the assistance of modern AI tooling and binary disassembly pipelines, they are born from a deep, lifelong love for classic gaming. The author spent countless cherished hours playing, mapping, and loving these games as a kid, teenager, adult—and even yesterday.
+> Even though these guides are assembled, formatted, and mathematically validated with the assistance of modern AI tooling and binary disassembly pipelines, they are born from a deep, lifelong love for classic gaming. The author spent countless cherished hours playing, mapping, and loving these games as a kid, teenager, adult, and even yesterday.
 >
-> While traditional narrative walkthroughs have been known for decades and their secrets cataloged, revisiting them today from the perspective of an **AI Cybersecurity Researcher and Reverse-Engineer** offers a new dimension of appreciation. By peering directly beneath the hood into decompiled assembly, memory registers, and state-machine bytecode, we can finally understand—deterministically and mathematically—what made these cherished old games tick, every single tick.
+> While traditional narrative walkthroughs have been known for decades and their secrets cataloged, revisiting them today from the perspective of an **AI Cybersecurity Researcher and Reverse-Engineer** offers a new dimension of appreciation. By peering directly beneath the hood into decompiled assembly, memory registers, and state-machine bytecode, we can finally understand (deterministically and mathematically) what made these cherished old games tick, every single tick.
 
 ---
 

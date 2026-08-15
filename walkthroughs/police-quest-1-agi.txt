@@ -43,8 +43,8 @@ While traditional narrative walkthroughs and secrets have been known for
 decades, approaching them today from the perspective of an AI Cybersecurity
 Researcher and Reverse-Engineer offers a new dimension of appreciation. By
 peering directly beneath the hood into decompiled assembly, memory
-registers, and state-machine bytecode, we can finally understand--
-deterministically and mathematically--what made these cherished old games
+registers, and state-machine bytecode, we can finally understand
+(deterministically and mathematically) what made these cherished old games
 tick, every single tick.
 
 ===============================================================================

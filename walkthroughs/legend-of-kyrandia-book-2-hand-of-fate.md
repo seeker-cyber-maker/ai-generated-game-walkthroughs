@@ -39,9 +39,9 @@ target_build_sha256: 073a5d5bc574426bfade0411426707623f44da13ece5c337fc89023c4c5
 ---
 
 > ### 🎮 Author's Preface & Research Philosophy
-> Even though this guide was generated, formatted, and verified with the assistance of modern AI tooling and binary disassembly pipelines, it is born from a deep, lifelong love for classic gaming. The author spent countless cherished hours playing, mapping, and loving these games as a kid, teenager, adult—and even yesterday.
+> Even though this guide was generated, formatted, and verified with the assistance of modern AI tooling and binary disassembly pipelines, it is born from a deep, lifelong love for classic gaming. The author spent countless cherished hours playing, mapping, and loving these games as a kid, teenager, adult, and even yesterday.
 >
-> While traditional walkthroughs and secrets have been known for decades, approaching them today from the perspective of an **AI Cybersecurity Researcher and Reverse-Engineer** offers a new dimension of appreciation. By peering directly beneath the hood into decompiled assembly, memory registers, and state-machine bytecode, we can finally understand—deterministically and mathematically—what made these cherished old games tick, every single tick.
+> While traditional walkthroughs and secrets have been known for decades, approaching them today from the perspective of an **AI Cybersecurity Researcher and Reverse-Engineer** offers a new dimension of appreciation. By peering directly beneath the hood into decompiled assembly, memory registers, and state-machine bytecode, we can finally understand (deterministically and mathematically) what made these cherished old games tick, every single tick.
 
 ---
 
@@ -296,7 +296,7 @@ int EvaluateCauldronBrew(uint16_t current_mask) {
 
 # 7. CREDITS & SPECIAL THANKS [CRED]
 
-* **Westwood Studios** — For creating one of the most charming adventure games in PC history.
-* **Allyson Cadden** — For the brilliant voice acting performance as Zanthia.
-* **The ScummVM Kyra Team** — For reverse-engineering and preserving the Kyra 2 engine.
-* **YOU, the reader** — For saving Kyrandia from disappearing!
+* **Westwood Studios**: For creating one of the most charming adventure games in PC history.
+* **Allyson Cadden**: For the brilliant voice acting performance as Zanthia.
+* **The ScummVM Kyra Team**: For reverse-engineering and preserving the Kyra 2 engine.
+* **YOU, the reader**: For saving Kyrandia from disappearing!
