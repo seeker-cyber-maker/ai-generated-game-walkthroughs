@@ -4,7 +4,7 @@ game: Lands of Lore - The Throne of Chaos
 developer: Westwood Studios / Virgin Interactive (1993)
 engine: Westwood Proprietary C/x86 Assembly 2.5D Grid Engine
 status: definitive-walkthrough-and-engine-forensics
-author: AI Game Research & Reverse-Engineering Lab
+author: AI Cybersecurity Researcher and Reverse-Engineer
 version: 3.4.0
 target_build_sha256: bcf25b2723a76fd9ae68c2552003e3e34e0fa89192f08f25421ad0c5f86abbc7
 ---
@@ -57,7 +57,7 @@ target_build_sha256: bcf25b2723a76fd9ae68c2552003e3e34e0fa89192f08f25421ad0c5f86
 
 # 1. LEGAL DISCLAIMER & SEARCH INDEX [LEGL]
 
-This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering Lab. All rights reserved.
+This document is Copyright (c) 2026 by AI Cybersecurity Researcher and Reverse-Engineer. All rights reserved.
 
 This guide may not be reproduced under any circumstances except for personal, private use. It may not be placed on any web site or otherwise distributed publicly without advance written permission. All trademarks and copyrights contained in this document are owned by their respective trademark and copyright holders.
 
@@ -417,4 +417,15 @@ $$\text{Roll} = (\text{NextSeed} \gg 16) \pmod{100}$$
 * **Sir Patrick Stewart**: For immortalizing King Richard with iconic voice acting.
 * **GameFAQs & CJayC**: For establishing the gold standard of game walkthrough documentation.
 * **The ScummVM Kyra Team**: For preserving retro engine architecture.
-* **YOU, the reader**: For taking the time to read this research guide!
+* **YOU, the reader**: For taking the time to read this research guide!---
+
+# 10. SCUMMVM & MODERN EMULATION TARGET PROFILE [SCUM]
+
+* **Target Engine ID**: `kyra` (Sub-engine: `lol`).
+* **Platform Target**: PC / DOS CD-ROM Talkie Edition (1994).
+* **Audio Driver**: Native General MIDI / Roland MT-32 emulation alongside simultaneous 22 kHz digital speech narration.
+* **Auto-Map State**: Preserves complete automap discovery flags across cross-platform `.s00`–`.s99` save files.
+
+---
+
+

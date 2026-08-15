@@ -2,7 +2,7 @@
                  THE LEGEND OF KYRANDIA: BOOK 1 (1992)
           Definitive Walkthrough, Systems Compendium & Engine Forensics
                       Platform: PC / DOS (Talkie CD-ROM)
-               Author: AI Game Research & Reverse-Engineering Lab
+               Author: AI Cybersecurity Researcher and Reverse-Engineer
                               Version: 1.2.0 (2026)
 ===============================================================================
 
@@ -10,28 +10,28 @@
 TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
   [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
-  [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
-  [03.00] VERSION HISTORY ............................................. [VERS]
+  [02.00] LEGAL DISCLAIMER & PERMITTED SITES ........................... [LEGL]
+  [03.00] VERSION HISTORY .............................................. [VERS]
   [04.00] COMPLETE STEP-BY-STEP WALKTHROUGH ........................... [WLK00]
           - [04.01] Act I: Timbermist Woods & Brandon's Awakening ..... [WLK01]
           - [04.02] Act II: The Great Tree & Serpent's Grotto ......... [WLK02]
           - [04.03] Act III: Caverns of Twilight & Firefly Maze ....... [WLK03]
           - [04.04] Act IV: Zanthia's Realm & Royal Alchemy Lab ....... [WLK04]
           - [04.05] Act V: Malcolm's Castle & Kyragem Finale .......... [WLK05]
-  [05.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
-  [06.00] IN-DEPTH SYSTEMS COMPENDIUM ................................. [COMP]
+  [05.00] THE CRITICAL-PATH MINIMALIST ROUTE ........................... [FAST]
+  [06.00] IN-DEPTH SYSTEMS COMPENDIUM .................................. [COMP]
           - The 12 Kyrandian Birthstones & Gemstone Table
           - Zanthia's Alchemy Matrix (All Potion Formulas)
           - Kyragem Amulet Spells & Power Progression
-  [07.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING ............... [ENGN]
+  [07.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING ................ [ENGN]
           - Deconstructing the 4-Slot Birthstone Altar Engine
           - The 16-Room Outdoor Forest Respawn Pool Algorithm
           - Maze Topology & RNG Illusion vs Indiana Jones (SCUMM)
-  [08.00] VERSION HISTORY & SCUMMVM COMPATIBILITY PROFILE ............. [SCUM]
+  [08.00] VERSION HISTORY & SCUMMVM COMPATIBILITY PROFILE .............. [SCUM]
           - Floppy vs Talkie CD Release Differences
           - ScummVM (kyra1) Implementation & Bug Fix History
-  [09.00] CONTACT POLICY .............................................. [CONT]
-  [10.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [09.00] CONTACT POLICY ............................................... [CONT]
+  [10.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
 
 ===============================================================================
 [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
@@ -55,8 +55,8 @@ tick, every single tick.
 [02.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
 ===============================================================================
 
-This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering
-Lab. All rights reserved.
+This document is Copyright (c) 2026 by AI Cybersecurity Researcher and
+Reverse-Engineer. All rights reserved.
 
 This guide may not be reproduced under any circumstances except for personal,
 private use. It may not be placed on any web site or otherwise distributed

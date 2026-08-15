@@ -4,7 +4,7 @@ game: Police Quest I - In Pursuit of the Death Angel
 developer: Sierra On-Line (1987)
 engine: Sierra AGI (Adventure Game Interpreter v2.917)
 status: definitive-walkthrough-and-engine-forensics
-author: AI Game Research & Reverse-Engineering Lab
+author: AI Cybersecurity Researcher and Reverse-Engineer
 version: 2.1.0
 target_build_sha256: 51d93876d09ef7e0f7be7e1ee7b9ae9b1b4d12e5a7b4bbf06629aa019fc5c428
 ---
@@ -50,7 +50,7 @@ target_build_sha256: 51d93876d09ef7e0f7be7e1ee7b9ae9b1b4d12e5a7b4bbf06629aa019fc
 
 # 1. LEGAL DISCLAIMER & SEARCH INDEX [LEGL]
 
-This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering Lab. All rights reserved.
+This document is Copyright (c) 2026 by AI Cybersecurity Researcher and Reverse-Engineer. All rights reserved.
 
 This guide may not be reproduced under any circumstances except for personal, private use. It may not be placed on any web site or otherwise distributed publicly without advance written permission. All trademarks belong to Sierra On-Line / Activision / Vivendi.
 
@@ -531,4 +531,16 @@ When Sonny patrols River Avenue, the engine executes a lane-swerving oscillation
 * **Jim Walls**: For bringing authentic California Highway Patrol procedural realism to gaming.
 * **Ken & Roberta Williams / Sierra On-Line**: For the legendary AGI engine.
 * **CJayC & GameFAQs**: For immortalizing text walkthroughs.
-* **YOU, the reader**: For serving and protecting Lytton!
+* **YOU, the reader**: For serving and protecting Lytton!---
+
+# 11. SCUMMVM & MODERN EMULATION TARGET PROFILE [SCUM]
+
+* **Target Engine ID**: `agi` (Sub-target: `pq1`).
+* **Native Sierra AGI Interpreter**: v2.917 (1987).
+* **DOSBox-X Configuration**: `core=normal`, `cycles=fixed 1000`.
+* **Speed Normalization**: Set in-game speed to "Normal" (`v_speed = 2`) to prevent timer overshooting.
+* **Sound Engine**: Supports PC Speaker, Tandy 3-voice synthesis, and CMS/Game Blaster audio.
+
+---
+
+

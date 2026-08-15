@@ -2,7 +2,7 @@
                      LANDS OF LORE: THE THRONE OF CHAOS
           Definitive Walkthrough, Systems Compendium & Engine Forensics
                       Platform: PC / DOS (Talkie CD-ROM)
-               Author: AI Game Research & Reverse-Engineering Lab
+               Author: AI Cybersecurity Researcher and Reverse-Engineer
                               Version: 3.5.0 (2026)
 ===============================================================================
 
@@ -10,8 +10,8 @@
 TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
   [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
-  [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
-  [03.00] VERSION HISTORY ............................................. [VERS]
+  [02.00] LEGAL DISCLAIMER & PERMITTED SITES ........................... [LEGL]
+  [03.00] VERSION HISTORY .............................................. [VERS]
   [04.00] COMPLETE STEP-BY-STEP WALKTHROUGH ........................... [WLK00]
           - [04.01] Act I: Gladstone Keep & The Great Forests ......... [WLK01]
           - [04.02] Act II: Gorkha Swamp & Shaman's Trial ............. [WLK02]
@@ -19,22 +19,22 @@ TABLE OF CONTENTS ..................................................... [00.00]
           - [04.04] Act IV: The White Tower & Siege of Gladstone ...... [WLK04]
           - [04.05] Act V: City of Yvel & The Sewers .................. [WLK05]
           - [04.06] Act VI: Castle Cimmeria & Nether Mask Finale ...... [WLK06]
-  [05.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
-  [06.00] IN-DEPTH SYSTEMS COMPENDIUM ................................. [COMP]
+  [05.00] THE CRITICAL-PATH MINIMALIST ROUTE ........................... [FAST]
+  [06.00] IN-DEPTH SYSTEMS COMPENDIUM .................................. [COMP]
           - Character Matrix & Starting Affinities
           - Weapons & Armor Compendium
           - Elemental Magic & 4-Tier Charge System
           - Secret Spells: Hand of Fate & Mist of Doom
           - Master Item & Chest Checklist with Missables
-  [07.00] KEYBOARD CONTROLS & HOTKEY COMMAND MATRIX ................... [KEYS]
-  [08.00] THE MANUALS, LORE BOOKS, FEELIES & COPY PROTECTION .......... [MANL]
+  [07.00] KEYBOARD CONTROLS & HOTKEY COMMAND MATRIX .................... [KEYS]
+  [08.00] THE MANUALS, LORE BOOKS, FEELIES & COPY PROTECTION ........... [MANL]
           - The 48-Page Player's Guide & Rulebook
           - The History of the Lands (Narrative Feelie)
           - Off-Disk Manual DRM (Floppy v1.00 vs CD-ROM v1.23)
           - Historical Assembly Decompilation: Bypassing DRM via NOPs/JMPs
-  [09.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING ............... [ENGN]
-  [10.00] CONTACT POLICY .............................................. [CONT]
-  [11.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [09.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING ................ [ENGN]
+  [11.00] CONTACT POLICY ............................................... [CONT]
+  [12.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
 
 ===============================================================================
 [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
@@ -58,8 +58,8 @@ tick, every single tick.
 [02.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
 ===============================================================================
 
-This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering
-Lab. All rights reserved.
+This document is Copyright (c) 2026 by AI Cybersecurity Researcher and
+Reverse-Engineer. All rights reserved.
 
 This guide may not be reproduced under any circumstances except for personal,
 private use. It may not be placed on any web site or otherwise distributed
@@ -319,14 +319,30 @@ BORLAND LCG DROP GENERATOR (LANDS.EXE):
   Roll = (NextSeed >> 16) % 100
 
 ===============================================================================
-[10.00] CONTACT POLICY                                                  [CONT]
+[10.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
+===============================================================================
+
+A. TARGET ENGINE IDENTIFIERS:
+  • ScummVM Engine Target: kyra (Sub-engine: lol).
+  • Supported CD Talkie Build: 1994 Westwood Multilingual Release.
+
+B. EMULATION COMPATIBILITY & AUDIO CONFIGURATION:
+  • Audio Driver: Native General MIDI / Roland MT-32 music emulation
+    alongside simultaneous 22 kHz 8-bit digital voice narration.
+  • Auto-Map Persistence: ScummVM automatically preserves the in-game automap
+    state across cross-platform save slots (.s00 to .s99).
+  • Mouse Acceleration: Corrects DOS interrupt 0x33 mouse jitter on modern
+    high-DPI monitors.
+
+===============================================================================
+[11.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[11.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[12.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Westwood Studios, Sir Patrick Stewart, CJayC & GameFAQs, ScummVM Kyra Team,

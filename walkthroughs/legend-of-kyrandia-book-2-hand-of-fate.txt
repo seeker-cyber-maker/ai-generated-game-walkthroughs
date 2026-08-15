@@ -2,7 +2,7 @@
            THE LEGEND OF KYRANDIA: BOOK 2 - THE HAND OF FATE (1993)
           Definitive Walkthrough, Systems Compendium & Engine Forensics
                       Platform: PC / DOS (Talkie CD v1.20)
-               Author: AI Game Research & Reverse-Engineering Lab
+               Author: AI Cybersecurity Researcher and Reverse-Engineer
                               Version: 1.1.0 (2026)
 ===============================================================================
 
@@ -10,21 +10,21 @@
 TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
   [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
-  [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
-  [03.00] VERSION HISTORY ............................................. [VERS]
-  [04.00] GAME BASICS & THE ALCHEMY CAULDRON .......................... [BASE]
+  [02.00] LEGAL DISCLAIMER & PERMITTED SITES ........................... [LEGL]
+  [03.00] VERSION HISTORY .............................................. [VERS]
+  [04.00] GAME BASICS & THE ALCHEMY CAULDRON ........................... [BASE]
   [05.00] COMPLETE WALKTHROUGH ........................................ [WLK00]
           - [05.01] Chapter 1: Swamps of Kyrandia & Ferry Crossing .... [WLK01]
           - [05.02] Chapter 2: Morningmist Valley & Dragon Rider ...... [WLK02]
           - [05.03] Chapter 3: The Volcanic Core & Dragon Caverns ..... [WLK03]
           - [05.04] Chapter 4: The Cloud Highlands & Snow Peak ........ [WLK04]
           - [05.05] Chapter 5: Center of the World & Hand of Fate ..... [WLK05]
-  [06.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
-  [07.00] SYSTEMS COMPENDIUM & ALCHEMY RECIPES ........................ [COMP]
-  [08.00] SECRETS & PERMANENT MISSABLES ............................... [SECR]
-  [09.00] ENGINE FORENSICS: THE CAULDRON ACCUMULATOR .................. [ENGN]
-  [10.00] CONTACT POLICY .............................................. [CONT]
-  [11.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [06.00] THE CRITICAL-PATH MINIMALIST ROUTE ........................... [FAST]
+  [07.00] SYSTEMS COMPENDIUM & ALCHEMY RECIPES ......................... [COMP]
+  [08.00] SECRETS & PERMANENT MISSABLES ................................ [SECR]
+  [09.00] ENGINE FORENSICS: THE CAULDRON ACCUMULATOR ................... [ENGN]
+  [11.00] CONTACT POLICY ............................................... [CONT]
+  [12.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
 
 ===============================================================================
 [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
@@ -48,8 +48,8 @@ tick, every single tick.
 [02.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
 ===============================================================================
 
-This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering
-Lab. All rights reserved.
+This document is Copyright (c) 2026 by AI Cybersecurity Researcher and
+Reverse-Engineer. All rights reserved.
 
 This guide may not be reproduced under any circumstances except for personal,
 private use. It may not be placed on any web site or otherwise distributed
@@ -245,14 +245,29 @@ This architecture allows ingredients to be dropped in ANY order without
 failing the recipe!
 
 ===============================================================================
-[10.00] CONTACT POLICY                                                  [CONT]
+[10.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
+===============================================================================
+
+A. TARGET ENGINE IDENTIFIERS:
+  • ScummVM Engine Target: kyra (Sub-engine: kyra2).
+  • Platform Target: PC / DOS CD-ROM Talkie Edition (1993).
+
+B. EMULATION COMPATIBILITY & ENGINE FIXES:
+  • Speech & Subtitle Sync: Resolves classic DOS timer desync between Zanthia's
+    voice acting and on-screen dialogue boxes.
+  • Palette Cycling: Full emulation of 256-color VGA DAC palette animation for
+    bubbling cauldron potions and rainbow prisms.
+  • Cross-Platform Saves: Uses unified .s00-.s99 savegame slots.
+
+===============================================================================
+[11.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[11.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[12.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Westwood Studios, Rick Gush, Frank Klepacki, CJayC & GameFAQs, ScummVM Team,

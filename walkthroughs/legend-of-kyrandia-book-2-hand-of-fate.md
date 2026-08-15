@@ -4,7 +4,7 @@ game: The Legend of Kyrandia - Book 2: The Hand of Fate
 developer: Westwood Studios / Virgin Interactive (1993)
 engine: Westwood Kyra 2 Proprietary Adventure Engine
 status: definitive-walkthrough-and-engine-forensics
-author: AI Game Research & Reverse-Engineering Lab
+author: AI Cybersecurity Researcher and Reverse-Engineer
 version: 1.0.0
 target_build_sha256: 073a5d5bc574426bfade0411426707623f44da13ece5c337fc89023c4c509f18
 ---
@@ -47,7 +47,7 @@ target_build_sha256: 073a5d5bc574426bfade0411426707623f44da13ece5c337fc89023c4c5
 
 # 1. LEGAL DISCLAIMER & SEARCH INDEX [LEGL]
 
-This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering Lab. All rights reserved.
+This document is Copyright (c) 2026 by AI Cybersecurity Researcher and Reverse-Engineer. All rights reserved.
 
 This guide may not be reproduced under any circumstances except for personal, private use. It may not be placed on any web site or otherwise distributed publicly without advance written permission. All trademarks and copyrights contained in this document are owned by their respective trademark and copyright holders.
 
@@ -299,4 +299,15 @@ int EvaluateCauldronBrew(uint16_t current_mask) {
 * **Westwood Studios**: For creating one of the most charming adventure games in PC history.
 * **Allyson Cadden**: For the brilliant voice acting performance as Zanthia.
 * **The ScummVM Kyra Team**: For reverse-engineering and preserving the Kyra 2 engine.
-* **YOU, the reader**: For saving Kyrandia from disappearing!
+* **YOU, the reader**: For saving Kyrandia from disappearing!---
+
+# 10. SCUMMVM & MODERN EMULATION TARGET PROFILE [SCUM]
+
+* **Target Engine ID**: `kyra` (Sub-engine: `kyra2`).
+* **Platform Target**: PC / DOS CD-ROM Talkie Edition (1993).
+* **Speech & Subtitle Sync**: Corrects classic DOS timer desync between Zanthia's voice acting and on-screen dialogue boxes.
+* **Palette Cycling**: Full emulation of 256-color VGA DAC palette animation for bubbling cauldron potions.
+
+---
+
+

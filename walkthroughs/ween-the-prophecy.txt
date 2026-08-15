@@ -10,13 +10,13 @@
 TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
   [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
-  [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
-  [03.00] VERSION HISTORY ............................................. [VERS]
-  [04.00] GAME BASICS, COMPANION ROLES & THE 30-DAY CLOCK ............. [BASE]
+  [02.00] LEGAL DISCLAIMER & PERMITTED SITES ........................... [LEGL]
+  [03.00] VERSION HISTORY .............................................. [VERS]
+  [04.00] GAME BASICS, COMPANION ROLES & THE 30-DAY CLOCK .............. [BASE]
           - The 30-Day Hard Time Limit & Day Transitions
           - Companion Specialization Matrix (Ween, Petroy, Orain, Urm)
           - The Three Ancient Spells (Morphosys, Luciferys, Vitalys)
-  [05.00] THE MASTER HAVERSACK COMPENDIUM (PHASES 1-4) ................ [HAVE]
+  [05.00] THE MASTER HAVERSACK COMPENDIUM (PHASES 1-4) ................. [HAVE]
           - Phase 1: Cottage, Porch & Forest (OBJET1.CAT)
           - Phase 2: Caverns, Swamp & Ant Mound (OBJET2.CAT)
           - Phase 3: Island, Coast & Worm's Hollow (OBJET3.CAT)
@@ -25,19 +25,19 @@ TABLE OF CONTENTS ..................................................... [00.00]
           - [06.01] Act I: Cottage Porch, Forest & First Grain ........ [WLK01]
           - [06.02] Act II: Ant Mound, Queen of Ants & Second Grain ... [WLK02]
           - [06.03] Act III: Sick Worm, Citadel & Hourglass of Revuss . [WLK03]
-  [07.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
-  [08.00] IN-DEPTH SYSTEMS & REAGENT SYNTHESIS MATRIX ................. [COMP]
+  [07.00] THE CRITICAL-PATH MINIMALIST ROUTE ........................... [FAST]
+  [08.00] IN-DEPTH SYSTEMS & REAGENT SYNTHESIS MATRIX .................. [COMP]
           - Master Synthesis & Cauldron Recipes Table
-  [09.00] BINARY FORENSICS: 39-SCREEN BYTECODE STATE MACHINE .......... [ENGN]
+  [09.00] BINARY FORENSICS: 39-SCREEN BYTECODE STATE MACHINE ........... [ENGN]
           - The LZSS 4096-Byte Ring Buffer Architecture
           - The Decompiled 39-Screen Transition Graph
           - Special Effect (FX) Subroutine Table
           - ScummVM (gob / ween) Target Profile & Timer Fixes
-  [10.00] CULTURAL RETROSPECTIVE: WHY WEEN REMAINED OBSCURE ........... [HIST]
+  [10.00] CULTURAL RETROSPECTIVE: WHY WEEN REMAINED OBSCURE ............ [HIST]
           - The French "Puzzle Chamber" Game Design Philosophy
           - Sierra Distribution & North American Localization
-  [11.00] CONTACT POLICY .............................................. [CONT]
-  [12.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [12.00] CONTACT POLICY ............................................... [CONT]
+  [13.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
 
 ===============================================================================
 [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
@@ -362,14 +362,28 @@ C. SPECIAL EFFECT (FX) SUBROUTINE TABLE:
    and Space Quest V, leaving Ween as a hidden European cult classic.
 
 ===============================================================================
-[11.00] CONTACT POLICY                                                  [CONT]
+[11.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
+===============================================================================
+
+A. TARGET ENGINE IDENTIFIERS:
+  • ScummVM Engine Target: gob (Sub-engine: ween).
+  • Platform Target: PC / DOS Floppy Release (1992).
+
+B. EMULATION COMPATIBILITY & ENGINE FIXES:
+  • 30-Day Timer Normalization: Fixes CPU clock cycle acceleration in DOSBox
+    to ensure the 30-day countdown advances at the authentic game pace.
+  • Audio Engine: Supports dual AdLib OPL2 and Roland MT-32 music playback.
+  • Cross-Platform Saves: Replaces legacy SAVE.INF with robust save states.
+
+===============================================================================
+[12.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[12.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[13.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Coktel Vision, Pierre Gilhodes, Roland Oskian, CJayC & GameFAQs, ScummVM Team,

@@ -2,7 +2,7 @@
        POLICE QUEST I: IN PURSUIT OF THE DEATH ANGEL (1987 AGI)
      Definitive 245/245 Walkthrough, Parser Dictionary & Engine Forensics
                       Platform: PC / DOS (AGI v2.917)
-               Author: AI Game Research & Reverse-Engineering Lab
+               Author: AI Cybersecurity Researcher and Reverse-Engineer
                               Version: 2.1.0 (2026)
 ===============================================================================
 
@@ -10,9 +10,9 @@
 TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
   [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
-  [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
-  [03.00] VERSION HISTORY ............................................. [VERS]
-  [04.00] GAME BASICS & PROCEDURAL PROTOCOL ........................... [BASE]
+  [02.00] LEGAL DISCLAIMER & PERMITTED SITES ........................... [LEGL]
+  [03.00] VERSION HISTORY .............................................. [VERS]
+  [04.00] GAME BASICS & PROCEDURAL PROTOCOL ............................ [BASE]
   [05.00] COMPLETE 245/245 WALKTHROUGH ................................ [WLK00]
           - [05.01] Act 1: Shift Preparation & Briefing (21 pts) ...... [WLK01]
           - [05.02] Act 2: Morning Traffic & Drunk Driver (34 pts) .... [WLK02]
@@ -21,13 +21,13 @@ TABLE OF CONTENTS ..................................................... [00.00]
           - [05.05] Act 5: Park Stakeout & Marie Talk (43 pts) ........ [WLK05]
           - [05.06] Act 6: Hotel Delphoria & Poker (41 pts) ........... [WLK06]
           - [05.07] Act 7: Penthouse Raid & Bains Bust (30 pts) ....... [WLK07]
-  [06.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
-  [07.00] MASTER 245-POINT SCORE RECONCILIATION LEDGER ................ [SCOR]
-  [08.00] THE COMPLETE PARSER DICTIONARY (WORDS.TOK) .................. [DICT]
+  [06.00] THE CRITICAL-PATH MINIMALIST ROUTE ........................... [FAST]
+  [07.00] MASTER 245-POINT SCORE RECONCILIATION LEDGER ................. [SCOR]
+  [08.00] THE COMPLETE PARSER DICTIONARY (WORDS.TOK) ................... [DICT]
   [09.00] CHARACTER ORIGINS, SEQUELS & BLUE FORCE LINEAGE .............. [LORE]
-  [10.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION .................. [ENGN]
-  [11.00] CONTACT POLICY .............................................. [CONT]
-  [12.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [10.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION ................... [ENGN]
+  [12.00] CONTACT POLICY ............................................... [CONT]
+  [13.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
 
 ===============================================================================
 [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
@@ -51,8 +51,8 @@ tick, every single tick.
 [02.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
 ===============================================================================
 
-This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering
-Lab. All rights reserved.
+This document is Copyright (c) 2026 by AI Cybersecurity Researcher and
+Reverse-Engineer. All rights reserved.
 
 This guide may not be reproduced under any circumstances except for personal,
 private use. It may not be placed on any web site or otherwise distributed
@@ -402,14 +402,31 @@ EASTER EGGS:
   LOOK KEN / LOOK AL / TALK JIM displays Sierra creator tributes.
 
 ===============================================================================
-[11.00] CONTACT POLICY                                                  [CONT]
+[11.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
+===============================================================================
+
+A. TARGET ENGINE IDENTIFIERS:
+  • ScummVM Engine Target: agi (Sub-target: pq1).
+  • Native Sierra AGI Interpreter: v2.917 (1987).
+  • DOSBox-X Emulation Config: core=normal, cycles=fixed 1000.
+
+B. EMULATION COMPATIBILITY & ENGINE QUIRKS:
+  • Speed Normalization: Classic AGI speed loops in DOSBox must be set to
+    "Normal" (v_speed = 2) to prevent Sonny from overshooting triggers.
+  • Predictive Word Completion: ScummVM AGI enables built-in tab completion
+    for Sierra WORDS.TOK vocabulary tokens.
+  • Sound Emulation: Full support for PC Speaker single-voice square wave,
+    Tandy 3-voice synthesis, and CMS/Game Blaster audio.
+
+===============================================================================
+[12.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[12.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[13.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Jim Walls, Ken & Roberta Williams, Sierra On-Line, CJayC & GameFAQs,

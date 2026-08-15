@@ -4,7 +4,7 @@ game: The Legend of Kyrandia - Book 1: Fables and Fiends
 developer: Westwood Studios / Virgin Interactive (1992)
 engine: Westwood Kyra 1 Proprietary 2D Adventure Engine
 status: definitive-walkthrough-and-engine-forensics
-author: AI Game Research & Reverse-Engineering Lab
+author: AI Cybersecurity Researcher and Reverse-Engineer
 version: 1.1.0
 target_build_sha256: 3ed7707ff0bb7b6bb07e68dc589269836cc6b0eaf123f6c3d684f3e3c0e3cfc6
 ---
@@ -52,7 +52,7 @@ target_build_sha256: 3ed7707ff0bb7b6bb07e68dc589269836cc6b0eaf123f6c3d684f3e3c0e
 
 # 1. LEGAL DISCLAIMER & SEARCH INDEX [LEGL]
 
-This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering Lab. All rights reserved.
+This document is Copyright (c) 2026 by AI Cybersecurity Researcher and Reverse-Engineer. All rights reserved.
 
 This guide may not be reproduced under any circumstances except for personal, private use. It may not be placed on any web site or otherwise distributed publicly without advance written permission. All trademarks and copyrights contained in this document are owned by their respective trademark and copyright holders.
 
