@@ -3,7 +3,7 @@
        Definitive Walkthrough, Coktel Gob Engine Forensics & Puzzle Matrix
                           Platform: PC / DOS (Floppy)
                Author: AI Cybersecurity Researcher and Reverse-Engineer
-                              Version: 1.2.0 (2026)
+                              Version: 1.3.0 (2026)
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -15,24 +15,28 @@ TABLE OF CONTENTS ..................................................... [00.00]
   [04.00] GAME BASICS, COMPANION ROLES & THE 30-DAY CLOCK ............. [BASE]
           - The 30-Day Hard Time Limit & Day Transitions
           - Companion Specialization Matrix (Ween, Petroy, Orain, Urm)
-          - The Alchemical Mortar & Reagent Manipulation
-  [05.00] GRANULAR SCREEN-BY-SCREEN WALKTHROUGH ....................... [WLK00]
-          - [05.01] Act I: Cottage Porch, Forest & First Grain ........ [WLK01]
-          - [05.02] Act II: Crystal Caverns, Forge & Second Grain ..... [WLK02]
-          - [05.03] Act III: Citadel of Kraal & Hourglass of Revuss ... [WLK03]
-  [06.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
-  [07.00] IN-DEPTH SYSTEMS & REAGENT SYNTHESIS MATRIX ................. [COMP]
-          - Master Item & Foraged Fruit Compendium
-          - Mortar Grinding & Cauldron Brewing Recipes
-  [08.00] ENGINE FORENSICS: COKTEL'S GOB ENGINE DECOMPILATION ......... [ENGN]
+          - The Three Ancient Spells (Morphosys, Luciferys, Vitalys)
+  [05.00] THE MASTER HAVERSACK COMPENDIUM (PHASES 1-4) ................ [HAVE]
+          - Phase 1: Cottage, Porch & Forest (OBJET1.CAT)
+          - Phase 2: Caverns, Swamp & Ant Mound (OBJET2.CAT)
+          - Phase 3: Island, Coast & Worm's Hollow (OBJET3.CAT)
+          - Phase 4: Citadel of Kraal & Revuss (OBJET4.CAT)
+  [06.00] GRANULAR SCREEN-BY-SCREEN WALKTHROUGH ....................... [WLK00]
+          - [06.01] Act I: Cottage Porch, Forest & First Grain ........ [WLK01]
+          - [06.02] Act II: Ant Mound, Queen of Ants & Second Grain ... [WLK02]
+          - [06.03] Act III: Sick Worm, Citadel & Hourglass of Revuss . [WLK03]
+  [07.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
+  [08.00] IN-DEPTH SYSTEMS & REAGENT SYNTHESIS MATRIX ................. [COMP]
+          - Master Synthesis & Cauldron Recipes Table
+  [09.00] ENGINE FORENSICS: COKTEL'S GOB ENGINE DECOMPILATION ......... [ENGN]
           - The GOB/STK Archive Architecture (INTRO.STK)
           - Script Execution Pipeline (*.GDR and ALL.ASK)
           - ScummVM (gob / ween) Target Engine Profile
-  [09.00] CULTURAL RETROSPECTIVE: WHY WEEN REMAINED OBSCURE ........... [HIST]
+  [10.00] CULTURAL RETROSPECTIVE: WHY WEEN REMAINED OBSCURE ........... [HIST]
           - The French "Puzzle Chamber" Game Design Philosophy
           - Sierra Distribution & North American Localization
-  [10.00] CONTACT POLICY .............................................. [CONT]
-  [11.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [11.00] CONTACT POLICY .............................................. [CONT]
+  [12.00] CREDITS & SPECIAL THANKS .................................... [CRED]
 
 ===============================================================================
 [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
@@ -77,15 +81,13 @@ As of this version, the authorized host repositories are:
 [03.00] VERSION HISTORY                                                 [VERS]
 ===============================================================================
 
-Version 1.2.0 (August 15, 2026):
-  - Complete granular rewrite of the step-by-step walkthrough covering every
-    authentic screen vignette.
-  - Added full details for the Cottage Porch (straw broom, wooden sticks,
-    wild strawberries foraging, and door latch mechanisms).
-  - Expanded all companion commands (Ween, Petroy, Orain, Urm) across all
-    puzzle vignettes.
-  - Full Mortar Grinding & Cauldron brewing synthesis matrix.
-  - Decompilation analysis of Coktel's GOB/STK scripting engine.
+Version 1.3.0 (August 15, 2026):
+  - Deep in-engine decompilation of INTRO.STK, ALL.ASK, and OBJET1-4.CAT.
+  - Added complete 4-Phase Master Haversack Compendium.
+  - Documented Ant Colony & Queen of Ants (BORG1FX.USA, EMAJ1023, EMAJ1032).
+  - Documented Sick Worm & Chamomile Herbal Tea synthesis puzzle (EMAJ1031).
+  - Added Glue (Glu), Firefly (Luciole), and Twig probe mechanics (EMAJ1034).
+  - Documented the 3 ancient spells: Morphosys, Luciferys, and Vitalys.
 
 ===============================================================================
 [04.00] GAME BASICS, COMPANION ROLES & THE 30-DAY CLOCK                 [BASE]
@@ -105,157 +107,184 @@ A. THE 30-DAY HARD TIME LIMIT:
   captures the kingdom, triggering a permanent game over.
 
 B. COMPANION SPECIALIZATION MATRIX:
-  • Ween (Protagonist): Picks up items, casts spells, grinds reagents.
-  • Petroy (Mentor): Squeaks acoustic soundwaves, manipulates magical items.
+  • Ween (Protagonist): Apprentice wizard. Combines reagents, casts spells
+    (Morphosys, Luciferys, Vitalys), and mixes items in the haversack.
+  • Petroy (Mentor): Squeaks acoustic soundwaves, manipulates magical conduits.
   • Orain (Warrior): Lifts heavy stone blocks, operates forge bellows.
   • Urm (Trickster): Climbs trees, fits into tight crevices, steals items.
 
 ===============================================================================
-[05.00] GRANULAR SCREEN-BY-SCREEN WALKTHROUGH                           [WLK00]
+[05.00] THE MASTER HAVERSACK COMPENDIUM (PHASES 1-4)                    [HAVE]
+===============================================================================
+
+Extracted directly from Coktel's binary catalogs (OBJET1.CAT to OBJET4.CAT):
+
+PHASE 1: COTTAGE, PORCH & FOREST (OBJET1.CAT)
+  • Strawberries (Fraises)          • Wooden Sticks (Bois)
+  • Straw Bundle (Paille)           • Small Knife (Couteau)
+  • Copper Ball (Boule Cuivre)      • Pincers / Broken Pincers (Pince)
+  • Golden Key (Clef en Or)         • Lard / Grease (Saindoux)
+  • Alchemical Cauldron (Chaudron)  • Flute (Flute)
+  • Wooden Mold (Moule)             • Reeds (Roseau)
+  • Signet Ring (Bague)             • Stone Tablet (Tablette)
+  • Statuettes (Statuettes)         • Wooden Planks (Planches)
+  • Soporific Drug (Soporifique)    • Strawberry Jam (Confiture)
+  • Shinbone Spear (Tibia-Lance)    • Oil (Huile) / Bowl (Ecuelle)
+
+PHASE 2: CAVERNS, SWAMP & ANT MOUND (OBJET2.CAT)
+  • Sacred Chalice (Calice)         • Iron Gauntlet (Gant)
+  • Petrified Heart (Coeur)         • Polished Mirrors (Miroirs)
+  • Mandrake Root (Racine)          • Amber Resin (Resine)
+  • Leather Bag (Sac)               • Tamed Snake (Serpent)
+  • River Pearls (Perles)           • Foxglove / Digitalis (Digitales)
+  • Thighbone (Femur)               • Alchemical Mixture (Mixture)
+  • Stone Basin (Vasque)            • Mongoose (Mangouste)
+  • Heavy Hammer (Marteau)          • Golden Shield Coin (Ecu)
+  • Storm Lightning (Eclair)        • Amphora (Amphore) / Gargoyle
+
+PHASE 3: ISLAND, COAST & WORM'S HOLLOW (OBJET3.CAT)
+  • Bamboo Stalk (Bambou)           • Coconut (Noix de Coco)
+  • Wooden Oar (Rame)               • Fishing Net (Filet)
+  • Barrel Hoops (Arceaux)          • Wild Bird Eggs (Oeufs)
+  • Boat Sail (Voile)               • Lobster Pots / Traps (Nasses)
+  • Fresh Fish (Poisson)            • The Giant Worm (Ver)
+  • Black Truffle (Truffe)          • Walking Cane (Canne)
+  • Wild Blueberries (Myrtilles)    • Flower Pollen (Pollen)
+  • Snake Venom (Venin)             • Chamomile Flowers & Tea (Camomille)
+  • Spell: Morphosys                • Spell: Luciferys / Vitalys
+
+PHASE 4: CITADEL OF KRAAL & REVUSS SANCTUM (OBJET4.CAT)
+  • Carved Jewel (Bijou)            • Broken Jewel Fragment (Bijou Casse)
+  • Glowing Firefly (Luciole)       • Dry Twig (Brindille)
+  • Birdlime Glue (Glu)             • Firefly on Glued Twig (Luciole + Glu)
+  • Iron Nail (Clou)                • Steel Needle / Pin (Epingle)
+  • Broadsword (Epee)               • Hunting Bow (Arc)
+  • Royal Diadem (Diademe)          • The 3 Grains of Sand (3 Grains)
+
+===============================================================================
+[06.00] GRANULAR SCREEN-BY-SCREEN WALKTHROUGH                           [WLK00]
 ===============================================================================
 
 ===============================================================================
-[05.01] ACT I: COTTAGE PORCH, FOREST & FIRST GRAIN                      [WLK01]
+[06.01] ACT I: COTTAGE PORCH, FOREST & FIRST GRAIN                      [WLK01]
 ===============================================================================
-
-+-----------------------------------------------------------------------------+
-| AREA ITEM CHECKLIST: ACT I                                                  |
-|                                                                             |
-| [ ] Straw Bundle ................. [Screen 01: Cottage Porch Floor]         |
-| [ ] Wooden Sticks (x2) ........... [Screen 01: Porch Eaves & Woodpile]      |
-| [ ] Wild Strawberries (x3) ....... [Screen 01: Flowerbed Path Patch]        |
-| [ ] Brass Key .................... [Screen 02: Laboratory Fireplace]        |
-| [ ] Mortar & Pestle .............. [Screen 02: Alchemist Worktable]         |
-| [ ] Mandrake Root & Sulfur ....... [Screen 02: Cellar Storage Shelves]      |
-| [ ] Woodpecker Feather ........... [Screen 03: Crossroads Hollow Oak]       |
-| [ ] Sticky Amber Resin ........... [Screen 03: Pine Tree Trunk]             |
-| [ ] [GRAIN 1] Golden Grain of Sand [Screen 04: Stone Golem Orgol's Chest]   |
-+-----------------------------------------------------------------------------+
 
 1. Screen 1 (Cottage Porch & Yard):
-   - Gather the loose Straw Bundle from the broom on the porch floor.
-   - Collect Wooden Sticks leaning against the woodpile beneath the eaves.
-   - Pick the fresh Wild Strawberries growing along the garden pathway.
-   - Use a Wooden Stick on the roof gutter to dislodge the stuck bronze coin.
+   - Gather loose Straw from the broom on the porch.
+   - Collect Wooden Sticks leaning against the woodpile under the eaves.
+   - Pick fresh Wild Strawberries along the dirt garden path.
+   - Use a Wooden Stick on the roof gutter to dislodge the bronze coin.
    - Combine Stick + Straw + String in inventory to make a makeshift tool.
    - Feed a Strawberry to the creature near the doorstep to pacify it.
    - Unlatch the front door using the tool and step inside.
 
-2. Screen 2 (Magician's Laboratory & Cellar):
-   - Grab the Brass Key from the fireplace mantle.
-   - Collect the Mortar & Pestle from the alchemist table.
-   - Unlock the cellar trapdoor; take the Glass Flask, Dried Mandrake Root,
-     and Sulfur Powder.
+2. Screen 2 (Laboratory, Cellar & Strawberry Jam):
+   - Grab Brass Key from mantle, Mortar & Pestle from desk.
+   - Cook strawberries in copper pot over hearth fire -> Strawberry Jam.
+   - Unlock cellar; take Flask, Dried Mandrake Root, and Sulfur Powder.
 
-3. Screen 3 (Forest Crossroads & Hollow Oak):
+3. Screen 3 (Forest Crossroads & Shinbone Spear):
+   - Take the ancient Shinbone (Tibia) from the cairn.
+   - Combine Tibia + Small Knife to fashion the sharp Tibia Spear.
    - Send Urm up the hollow oak tree to retrieve the Woodpecker Feather.
-   - Slice the pine trunk with your knife to harvest sticky Amber Resin.
-   - Grind Mandrake Root + Sulfur in Mortar to create Awakening Dust.
+   - Slice pine bark to gather sticky Amber Resin.
+   - Grind Mandrake + Sulfur in Mortar -> Awakening Dust.
 
 4. Screen 4 (Stone Golem Orgol's Shrine):
    - Blow Awakening Dust across the Stone Golem's eyes.
-   - The Golem steps aside, unlocking the carved chest.
-   - Open the chest to claim the First Sacred Grain of Sand (Golden Grain)!
+   - Orgol awakens and unlocks the secret carved chest.
+   - Claim the First Sacred Grain of Sand (Golden Grain)!
 
 ===============================================================================
-[05.02] ACT II: CRYSTAL CAVERNS, FORGE & SECOND GRAIN                   [WLK02]
+[06.02] ACT II: ANT MOUND, QUEEN OF ANTS & SECOND GRAIN                 [WLK02]
 ===============================================================================
 
-+-----------------------------------------------------------------------------+
-| AREA ITEM CHECKLIST: ACT II                                                 |
-|                                                                             |
-| [ ] Bat Guano .................... [Screen 05: Bat Cavern Stalactites]      |
-| [ ] Quartz Crystal Prism ......... [Screen 05: Crystal Cavern Floor]        |
-| [ ] Heavy Iron Key Mold .......... [Screen 06: Smelting Forge Anvil]        |
-| [ ] Molten Iron Crucible ......... [Screen 06: Magma Furnace Well]          |
-| [ ] Ornate Dragon Key ............ [Screen 06: Quenched Cast Key]           |
-| [ ] [GRAIN 2] Silver Grain of Sand [Screen 07: Dragon's Obsidian Altar]     |
-+-----------------------------------------------------------------------------+
+1. Screen 5 (Ant Mound & Queen of Ants):
+   - Orgol advises: "Talk to the king of the ants." Enter ant mound.
+   - Deploy Mongoose to drive off guard snakes.
+   - Offer sweet Strawberry Jam to the Ant Queen (Reine).
+   - Worker ants clear the blocked earthen tunnel to let Ween pass.
 
-1. Screen 5 (Bat Cavern & Crystal Chasm):
-   - Command Petroy to squeak; the acoustic echo scatters the bat swarm.
-   - Scrape fresh Bat Guano from the cavern floor.
-   - Set the Quartz Prism on the stone pedestal to reflect the sunbeam across
-     the dark chasm bridge.
+2. Screen 6 (Bat Cavern & Crystal Prism):
+   - Command Petroy to squeak; echo scatters bat swarm.
+   - Scrape fresh Bat Guano from cavern floor.
+   - Mount Quartz Prism on pillar to reflect sunbeam across chasm bridge.
 
-2. Screen 6 (Subterranean Smelting Forge):
-   - Have Orain operate the forge lever to pump the bellows.
-   - Pour Molten Iron into the Key Mold and quench in spring water to cast
-     the Ornate Dragon Key.
+3. Screen 7 (Smelting Forge & Dragon Key):
+   - Have Orain pump forge bellows.
+   - Melt gold bullion in crucible -> Molten Gold.
+   - Pour into Wooden Mold; quench in spring water -> Ornate Dragon Key.
 
-3. Screen 7 (Dragon's Lair & Altar):
-   - Throw sticky Amber Resin and a Wild Strawberry onto the rock ledge to
-     distract the sleeping dragon.
-   - Insert the Dragon Key into the obsidian pedestal to secure the Second
-     Sacred Grain of Sand (Silver Grain)!
+4. Screen 8 (Dragon's Lair & Second Grain):
+   - Throw sticky Amber Resin and Strawberries onto ledge to distract dragon.
+   - Unlock obsidian pedestal with Dragon Key -> GET SECOND GRAIN (SILVER)!
 
 ===============================================================================
-[05.03] ACT III: CITADEL OF KRAAL & HOURGLASS OF REVUSS                 [WLK03]
+[06.03] ACT III: SICK WORM, CITADEL & HOURGLASS OF REVUSS               [WLK03]
 ===============================================================================
 
-+-----------------------------------------------------------------------------+
-| AREA ITEM CHECKLIST: ACT III                                                |
-|                                                                             |
-| [ ] Caustic Acid Flask ........... [Screen 08: Citadel Outer Ramparts]      |
-| [ ] Counterweight Gear ........... [Screen 08: Drawbridge Pulley Box]       |
-| [ ] Mirror of Reflection ......... [Screen 09: Citadel Armory Rack]         |
-| [ ] [GRAIN 3] Crystal Grain of Sand [Screen 09: Kraal's Vault]              |
-| [ ] [VICTORY] The Prophecy Fulfilled [Screen 10: Great Hourglass of Revuss] |
-+-----------------------------------------------------------------------------+
+1. Screen 9 (Giant Worm & Chamomile Herbal Tea):
+   - The Giant Worm (Ver) is writhing with a severe stomach ache.
+   - Boil spring water in cauldron over hearth fire.
+   - Add Chamomile Flowers (Camomille) and Blueberries (Myrtilles) -> Tea.
+   - Feed Chamomile Tea to worm; cured of pain, worm yields the jewel key!
 
-1. Screen 8 (Moat Drawbridge & Citadel Gate):
-   - Pour Caustic Acid over the rusted drawbridge chains to melt the locks.
-   - Send Urm through the arrow slit to attach the Counterweight Gear and
-     lower the drawbridge.
+2. Screen 10 (Citadel Moat, Glue & Firefly Twig Probe):
+   - Pour Caustic Acid over rusted drawbridge chains.
+   - Catch a glowing Firefly (Luciole) in undergrowth.
+   - Apply Glue (Glu) to dry Twig (Brindille); attach Firefly -> Probe.
+   - Insert glowing probe into wall slit for Urm to drop drawbridge.
 
-2. Screen 9 (Kraal's Dark Laboratory):
-   - Take the Mirror of Reflection from the armory rack.
-   - Reflect Kraal's lethal shadow bolt back at him to shatter his shield.
-   - Unlock Kraal's vault to take the Third Sacred Grain of Sand (Crystal)!
+3. Screen 11 (Kraal's Laboratory):
+   - Take Mirror of Reflection from wall rack; cast Luciferys spell.
+   - Reflect Kraal's dark bolt back at him to shatter his shield.
+   - Unlock Kraal's vault -> GET THIRD GRAIN (CRYSTAL)!
 
-3. Screen 10 (Hourglass Tower & Finale):
-   - Ascend to the pinnacle before Day 30 expires.
-   - Solve the pendulum rope puzzle to release the temporal lock.
-   - Insert all 3 Grains into the Hourglass of Revuss (Gold, Silver, Crystal).
-   - Turn the Hourglass wheel to trap Kraal in a time loop and save the realm!
+4. Screen 12 (Hourglass Tower & Finale):
+   - Ascend pinnacle before Day 30 expires. Solve pendulum rope puzzle.
+   - Insert all 3 Grains into Hourglass of Revuss (Gold, Silver, Crystal).
+   - Turn the celestial wheel to trap Kraal in a time loop forever!
 
 ===============================================================================
-[06.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
+[07.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
 ===============================================================================
 
 STEP 01: [Porch] ────────────► Forage Straw, Wooden Sticks, Strawberries.
 STEP 02: [Porch Mechanism] ──► Stick on gutter -> Unlatch door -> Enter.
-STEP 03: [Laboratory] ───────► Take Brass Key, Mortar & Pestle.
+STEP 03: [Laboratory] ───────► Take Brass Key, Mortar -> Cook Strawberry Jam.
 STEP 04: [Cellar] ───────────► Unlock door -> Take Flask, Mandrake, Sulfur.
-STEP 05: [Forest Crossroads] ► Send Urm up oak tree -> Get Woodpecker Feather.
-STEP 06: [Pine Tree] ────────► Slice pine bark -> Gather sticky Amber Resin.
+STEP 05: [Forest Crossroads] ► Cut Shinbone Spear -> Get Woodpecker Feather.
+STEP 06: [Pine Tree] ────────► Gather sticky Amber Resin.
 STEP 07: [Inventory Mortar] ─► Grind Mandrake + Sulfur -> Awakening Dust.
 STEP 08: [Golem Orgol] ──────► Blow Dust in Golem eyes -> GET GRAIN 1 (GOLD).
-STEP 09: [Bat Cavern] ───────► Petroy squeaks -> Scrape Guano -> Set Prism.
-STEP 10: [Smelting Forge] ───► Orain operates bellows -> Cast & quench Key.
-STEP 11: [Dragon Altar] ─────► Lure dragon with Resin -> Unlock -> GRAIN 2.
-STEP 12: [Citadel Moat] ─────► Melt chains with Acid -> Send Urm through slit.
-STEP 13: [Kraal Lab] ────────► Grab Mirror -> Reflect dark bolt back at Kraal.
-STEP 14: [Kraal Vault] ──────► Open vault -> GET GRAIN 3 (CRYSTAL).
-STEP 15: [Hourglass Tower] ──► Insert 3 Grains (Golden, Silver, Crystal).
-STEP 16: [Revuss Finale] ────► Turn Hourglass of Revuss -> 100% VICTORY!
+STEP 09: [Ant Mound] ────────► Mongoose + Jam to Queen -> Pass tunnel.
+STEP 10: [Bat Cavern] ───────► Petroy squeaks -> Scrape Guano -> Set Prism.
+STEP 11: [Smelting Forge] ───► Orain pumps bellows -> Melt gold -> Cast Key.
+STEP 12: [Dragon Altar] ─────► Lure dragon with Resin -> Unlock -> GRAIN 2.
+STEP 13: [Worm's Hollow] ────► Brew Chamomile Tea in Cauldron -> Cure Worm.
+STEP 14: [Citadel Moat] ─────► Glue + Firefly on Twig -> Urm drops drawbridge.
+STEP 15: [Kraal Lab] ────────► Reflect dark bolt with Mirror -> GET GRAIN 3.
+STEP 16: [Hourglass Tower] ──► Solve pendulum rope -> Insert 3 Grains.
+STEP 17: [Revuss Finale] ────► Rotate Hourglass of Revuss -> 100% VICTORY!
 
 ===============================================================================
-[07.00] IN-DEPTH SYSTEMS & REAGENT SYNTHESIS MATRIX                     [COMP]
+[08.00] IN-DEPTH SYSTEMS & REAGENT SYNTHESIS MATRIX                     [COMP]
 ===============================================================================
 
 +--------------------------+-----------------------+--------------------------+
-| TARGET MIXTURE           | INGREDIENTS REQUIRED  | FUNCTIONAL EFFECT        |
+| TARGET SYNTHESIS         | INGREDIENTS REQUIRED  | FUNCTIONAL PURPOSE       |
 +--------------------------+-----------------------+--------------------------+
 | Awakening Dust           | Mandrake Root + Sulfur| Awakens Stone Golem      |
+| Strawberry Jam           | Strawberries + Pot    | Calms the Ant Queen      |
+| Chamomile Herbal Tea     | Chamomile + Blueberry | Cures Sick Worm Stomach  |
+| Illuminated Twig Probe   | Twig + Glue + Firefly | Lights Dark Wall Slit    |
 | Blinding Flash Powder    | Bat Guano + Sulfur    | Stuns Citadel Guards     |
-| Dissolving Aqua Regia    | Acid Flask + Saltpeter| Melts Drawbridge Chains  |
-| Anti-Magic Salve         | Amber Resin + Feather | Reflects Magic Spells    |
-| Calming Beast Fruit      | Strawberry + Resin    | Distracts Hungry Dragon  |
+| Dissolving Aqua Regia    | Caustic Acid + Salt   | Dissolves Moat Chains    |
+| Shinbone Spear           | Tibia Bone + Knife    | Weapon & Lever Tool      |
 +--------------------------+-----------------------+--------------------------+
 
 ===============================================================================
-[08.00] ENGINE FORENSICS: COKTEL'S GOB ENGINE DECOMPILATION             [ENGN]
+[09.00] ENGINE FORENSICS: COKTEL'S GOB ENGINE DECOMPILATION             [ENGN]
 ===============================================================================
 
 A. GOB / STK ARCHITECTURE:
@@ -263,8 +292,8 @@ A. GOB / STK ARCHITECTURE:
     backgrounds, sprite animations, and audio effects.
   • ALL.ASK (11 KB): Bytecode script table evaluating triggers, companion
     actions, and state transitions.
-  • *.GDR Display Drivers: LVGA.GDR (256-color VGA), LEGA.GDR (16-color EGA),
-    and L360.GDR (Tweaked Mode-X).
+  • OBJET1.CAT - OBJET4.CAT: Dynamic item catalogs across the 4 acts.
+  • *.GDR Display Drivers: LVGA.GDR (256-color VGA), LEGA.GDR (16-color EGA).
 
 B. SCUMMVM (GOB / WEEN) TARGET PROFILE:
   • Target Engine ID: gob (Sub-engine: ween).
@@ -273,25 +302,25 @@ B. SCUMMVM (GOB / WEEN) TARGET PROFILE:
   • Savegame Format: Modern cross-platform save slots.
 
 ===============================================================================
-[09.00] CULTURAL RETROSPECTIVE: WHY WEEN REMAINED OBSCURE               [HIST]
+[10.00] CULTURAL RETROSPECTIVE: WHY WEEN REMAINED OBSCURE               [HIST]
 ===============================================================================
 
 1. The French "Puzzle Chamber" Design: Coktel Vision prioritized dense,
    mathematically rigorous self-contained puzzle screens over open exploration.
-2. Severe Difficulty & Reagents: Multi-step chemical synthesis without modern
-   hints challenged even veteran puzzle fans.
+2. Esoteric Reagents: From curing a sick worm with chamomile tea to glueing a
+   firefly to a twig, puzzles required deep lateral thinking.
 3. 1992 Sierra Lineup: Sierra focused their marketing budget on King's Quest VI
    and Space Quest V, leaving Ween as a hidden European cult classic.
 
 ===============================================================================
-[10.00] CONTACT POLICY                                                  [CONT]
+[11.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[11.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[12.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Coktel Vision, Pierre Gilhodes, Roland Oskian, CJayC & GameFAQs, ScummVM Team,
