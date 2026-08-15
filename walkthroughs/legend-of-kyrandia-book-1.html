@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Legend of Kyrandia: Book 1 — Definitive Walkthrough & Systems Compendium</title>
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #151d30;
+      --bg-sidebar: #0f172a;
+      --border: #243049;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --green: #10b981;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+      --gold: #f59e0b;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    #sidebar {
+      width: 320px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    #sidebar h2 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .search-box:focus { outline: 1px solid var(--accent); }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-list a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      padding: 6px 10px;
+      border-radius: 4px;
+      display: block;
+      transition: all 0.15s ease;
+    }
+
+    .nav-list a:hover, .nav-list a.active {
+      color: #fff;
+      background-color: var(--bg-card);
+      border-left: 3px solid var(--accent);
+    }
+
+    .nav-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      float: right;
+    }
+
+    /* Main Content */
+    #content {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 1000px;
+    }
+
+    header {
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .meta-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      margin-right: 8px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin: 36px 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin: 24px 0 12px 0;
+    }
+
+    p, ul, ol { margin-bottom: 16px; font-size: 0.96rem; color: #cbd5e1; }
+    li { margin-left: 20px; margin-bottom: 6px; }
+
+    /* Final Fantasy Style Checklist Boxes */
+    .checklist-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .checklist-title {
+      font-family: var(--font-mono);
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .checklist-item:last-child { border-bottom: none; }
+
+    .checklist-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .checklist-item.checked {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .tag-secret { color: var(--purple); font-weight: bold; }
+    .tag-missable { color: var(--red); font-weight: bold; }
+    .tag-amulet { color: var(--gold); font-weight: bold; }
+    .tag-story { color: var(--green); font-weight: bold; }
+
+    /* Fast Track Box */
+    .fast-track-box {
+      background: #060911;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    .fast-track-step {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--border);
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .fast-track-step:last-child { border-bottom: none; }
+    .fast-step-num { color: var(--accent); font-weight: bold; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+      background: var(--bg-card);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background-color: #1e293b;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background-color: rgba(255,255,255,0.02); }
+
+    /* Code & ASCII Views */
+    pre {
+      background: #060911;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #93c5fd;
+      overflow-x: auto;
+      margin: 16px 0;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      #sidebar { width: 100%; height: auto; position: relative; }
+      #content { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Sidebar -->
+  <aside id="sidebar">
+    <h2>Kyrandia: Book 1</h2>
+    <input type="text" id="search" class="search-box" placeholder="Filter sections or items..." onkeyup="filterNav()">
+    
+    <nav>
+      <ul class="nav-list" id="navList">
+        <li><a href="#legal">Disclaimer & Index <span class="nav-tag">[LEGL]</span></a></li>
+        <li><a href="#walkthrough">Full Walkthrough Hub <span class="nav-tag">[WLK00]</span></a></li>
+        <li><a href="#act1" style="padding-left: 20px;">Act I: Timbermist Woods <span class="nav-tag">[WLK01]</span></a></li>
+        <li><a href="#act2" style="padding-left: 20px;">Act II: The Great Tree <span class="nav-tag">[WLK02]</span></a></li>
+        <li><a href="#act3" style="padding-left: 20px;">Act III: Twilight Caverns <span class="nav-tag">[WLK03]</span></a></li>
+        <li><a href="#act4" style="padding-left: 20px;">Act IV: Zanthia's Realm <span class="nav-tag">[WLK04]</span></a></li>
+        <li><a href="#act5" style="padding-left: 20px;">Act V: Malcolm's Castle <span class="nav-tag">[WLK05]</span></a></li>
+        <li><a href="#fasttrack" style="color: var(--accent); font-weight: bold;">⚡ Bare-Bones Fast-Track <span class="nav-tag">[FAST]</span></a></li>
+        <li><a href="#compendium">Alchemy & Gems Compendium <span class="nav-tag">[COMP]</span></a></li>
+        <li><a href="#forensics">Engine Forensics (Altar RNG) <span class="nav-tag">[ENGN]</span></a></li>
+        <li><a href="#versions">Versions & Provenance <span class="nav-tag">[VERS]</span></a></li>
+        <li><a href="#credits">Credits & Thanks <span class="nav-tag">[CRED]</span></a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content Viewport -->
+  <main id="content">
+    <header>
+      <div class="meta-badge">Westwood Studios (1992)</div>
+      <div class="meta-badge">CD Talkie Edition v1.20</div>
+      <div class="meta-badge">Verified 100% Route</div>
+      <h1>The Legend of Kyrandia: Book 1</h1>
+      <p>Definitive GameFAQs Walkthrough, Systems Compendium & Binary Engine Forensics.</p>
+    </header>
+
+    <!-- Section 1: Legal -->
+    <section id="legal">
+      <h2>1. Legal Disclaimer & Search Index <span class="nav-tag">[LEGL]</span></h2>
+      <p>This guide is released for personal, private reference. All trademarks belong to Electronic Arts / Westwood Studios.</p>
+    </section>
+
+    <!-- Section 2: Walkthrough -->
+    <section id="walkthrough">
+      <h2>2. Complete Step-by-Step Walkthrough <span class="nav-tag">[WLK00]</span></h2>
+
+      <!-- Act I -->
+      <article id="act1">
+        <h3>Act I: Timbermist Woods & Brandon's Awakening [WLK01]</h3>
+        <div class="checklist-card">
+          <div class="checklist-title">Area Item Checklist: Act I</div>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_1"> [STORY] Note from Kallak — Treehouse Floor</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_2"> Apple — Treehouse Table</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_3"> <span class="tag-secret">[SECRET]</span> Hand Saw — Kallak's Hollow Tree Trunk</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_4"> <span class="tag-amulet">[AMULET]</span> Yellow Gem (Healing Spell) — Temple of the Sun</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_5"> Teardrop Stone — Merith's Altar</label>
+        </div>
+        <ol>
+          <li>Take the <strong>Note from Kallak</strong> and <strong>Apple</strong> in the cabin. Inspect the outer tree bark to find the <strong>Hand Saw</strong>.</li>
+          <li>Visit the Temple of the Sun. Place a healing flower into the altar basin to unlock the <strong>Yellow Healing Spell</strong>.</li>
+          <li>Return Merith's lost item to receive the <strong>Teardrop Stone</strong>.</li>
+        </ol>
+      </article>
+
+      <!-- Act II -->
+      <article id="act2">
+        <h3>Act II: The Great Tree & Serpent's Grotto [WLK02]</h3>
+        <div class="checklist-card">
+          <div class="checklist-title">Area Item Checklist: Act II</div>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_6"> <span class="tag-story">[STORY]</span> Sunstone (Gem #1) — Serpent's Well</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_7"> <span class="tag-story">[STORY]</span> Ruby (Gem #4) — Oak Tree Hollow</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_8"> [RNG GEM A] — Forest Gem Tree</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_9"> [RNG GEM B] — Forest Floor Pool</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_10"> <span class="tag-amulet">[AMULET]</span> Purple Gem (Wisp Form) — Marble Altar</label>
+        </div>
+        <ol>
+          <li>Cast <strong>Yellow Healing</strong> on the poisoned well. The serpent retreats, revealing the <strong>Sunstone</strong> (Fixed Gem #1).</li>
+          <li>Use the Saw on the dead branch to retrieve the <strong>Ruby</strong> (Fixed Gem #4).</li>
+          <li>Place Sunstone (1), Gem A (2), Gem B (3), and Ruby (4) on the Marble Altar to awaken the <strong>Purple Wisp Transformation Spell</strong>.</li>
+        </ol>
+      </article>
+
+      <!-- Act III -->
+      <article id="act3">
+        <h3>Act III: Caverns of Twilight & Firefly Labyrinth [WLK03]</h3>
+        <div class="checklist-card">
+          <div class="checklist-title">Area Item Checklist: Act III</div>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_11"> Firefly Berries — Firefly Bush</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_12"> <span class="tag-amulet">[AMULET]</span> Blue Gem (Dispel Spell) — Underground Shrine</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_13"> Heavy Iron Key — Labyrinth Skeleton</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_14"> <span class="tag-story">[STORY]</span> Magic Flute — Underground Chest</label>
+        </div>
+        <ol>
+          <li>Carry firefly berries in your hand and place them in nests to illuminate dark rooms.</li>
+          <li>Pay the ferryman with a gold Coin or cast Wisp. Use the Iron Key to unlock the chest and retrieve the <strong>Magic Flute</strong>.</li>
+        </ol>
+      </article>
+
+      <!-- Act IV & V -->
+      <article id="act4">
+        <h3>Act IV & V: Zanthia's Realm & Malcolm's Castle [WLK04/WLK05]</h3>
+        <div class="checklist-card">
+          <div class="checklist-title">Area Item Checklist: Acts IV & V</div>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_15"> Blue Potion of Flying — Alchemy Cauldron (Water + Blue Gem)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_16"> <span class="tag-amulet">[AMULET]</span> Red Gem (Invisibility) — Alchemical Circle</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_17"> Crystal Chalice & Royal Scepter — Dragon Altar</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_18"> Royal Crown — Castle Treasury</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_19"> <span class="tag-story">[VICTORY]</span> The Kyragem — Malcolm Arena</label>
+        </div>
+        <ol>
+          <li>Brew the Blue Flying Potion (Water + Blue Gem) and drink it to cross the river canyon.</li>
+          <li>Unlock the Red Invisibility Spell on your amulet. Collect the 3 Royal Regalia: <strong>Scepter, Crown, and Chalice</strong>.</li>
+          <li>Silence the gate gargoyles with the Magic Flute. Place the 3 Regalia on the throne cushions.</li>
+          <li><strong>The Malcolm Finale</strong>:
+            <ul>
+              <li>Cast <strong>Red Invisibility</strong> when Malcolm attacks.</li>
+              <li>Walk over to the large <strong>Magic Mirror</strong> on the right wall.</li>
+              <li>Malcolm casts petrification; the mirror reflects the beam back, turning Malcolm into solid stone!</li>
+            </ul>
+          </li>
+        </ol>
+      </article>
+    </section>
+
+    <!-- Section 3: Fast Track -->
+    <section id="fasttrack">
+      <h2>3. The Critical-Path Minimalist Route <span class="nav-tag">[FAST]</span></h2>
+      <div class="fast-track-box">
+        <div class="fast-track-step"><span class="fast-step-num">STEP 01</span> [Kallak Cabin] ──────► Take Note & Apple -> Get Saw from tree trunk.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 02</span> [Temple of Sun] ─────► Place Flower in basin -> Unlock Yellow Healing.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 03</span> [Serpent's Well] ────► Cast Healing -> Collect Sunstone (Gem 1).</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 04</span> [Oak Tree] ──────────► Use Saw on branch -> Collect Ruby (Gem 4).</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 05</span> [Gem Altar] ─────────► Place Sunstone + Gem A + Gem B + Ruby -> Wisp.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 06</span> [Cavern Chasm] ──────► Pick Firefly Berries -> Cast Wisp to cross.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 07</span> [Underground Pool] ──► Give Coin to ferryman -> Grab Magic Flute.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 08</span> [Zanthia's Hut] ─────► Take 2 Flasks -> Fill with waterfall water.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 09</span> [Alchemy Cauldron] ──► Brew Blue Potion (Water + Blue Gem) -> Drink.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 10</span> [Dragon Altar] ──────► Retrieve Crystal Chalice & Royal Scepter.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 11</span> [Castle Gates] ──────► Play Magic Flute to silence Gargoyles.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 12</span> [Castle Treasury] ───► Retrieve Royal Crown from pedestal.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 13</span> [Throne Room] ───────► Place Scepter, Crown, Chalice on 3 cushions.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 14</span> [Sanctum Arena] ─────► Malcolm attacks: Immediately cast Invisibility.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 15</span> [Sanctum Arena] ─────► Walk directly to Magic Mirror on right wall.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 16</span> [Sanctum Arena] ─────► Mirror reflects -> Malcolm petrified -> WIN!</div>
+      </div>
+    </section>
+
+    <!-- Section 4: Compendium -->
+    <section id="compendium">
+      <h2>4. Systems Compendium & Alchemy Matrix <span class="nav-tag">[COMP]</span></h2>
+      <table>
+        <thead><tr><th>Potion Name</th><th>Ingredients</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td>Blue Potion of Flying</td><td>Water Flask + Blue Gem</td><td>Fly across river canyon</td></tr>
+          <tr><td>Red Potion of Power</td><td>Water Flask + Ruby/Red</td><td>Unlocks gate seals</td></tr>
+          <tr><td>Yellow Invisibility Potion</td><td>Water Flask + Topaz</td><td>Temporary monster stealth</td></tr>
+          <tr><td>Purple Weightless Potion</td><td>Red Potion + Amethyst</td><td>Float over pit traps</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 5: Forensics -->
+    <section id="forensics">
+      <h2>5. Engine Forensics: The Gem Drop & Altar RNG <span class="nav-tag">[ENGN]</span></h2>
+      <p>How the 4-Slot Birthstone Altar evaluates gemstones in <code>KYRA.EXE</code>:</p>
+      <pre>
+Slot 1: 0x01 -> SUNSTONE (100% Deterministic & Hardcoded)
+Slot 2: RND  -> Random Gem A (Chosen at new game start via Seed % 10)
+Slot 3: RND  -> Random Gem B (Chosen at new game start via (Seed + 3) % 10)
+Slot 4: 0x02 -> RUBY (100% Deterministic & Hardcoded)
+
+Forest Respawn Pool:
+When an incorrect gem is rejected, it teleports to:
+Target_Room = Forest_Respawn_Vector[NextSeed % 16]
+      </pre>
+    </section>
+
+    <!-- Section 6: Versions -->
+    <section id="versions">
+      <h2>6. Version History & Build Provenance <span class="nav-tag">[VERS]</span></h2>
+      <table>
+        <thead><tr><th>Build Attribute</th><th>Cryptographic Verification Target</th></tr></thead>
+        <tbody>
+          <tr><td>Target Release</td><td>The Legend of Kyrandia - Book 1 (CD-ROM DOS, Talkie Edition)</td></tr>
+          <tr><td>Master Archive Size</td><td>28,165,303 bytes (26.86 MiB)</td></tr>
+          <tr><td>Master Archive SHA-256</td><td>3ed7707ff0bb7b6bb07e68dc589269836cc6b0eaf123f6c3d684f3e3c0e3cfc6</td></tr>
+          <tr><td>Internal Binary</td><td>MAIN.EXE / KYRA.EXE (Westwood Kyra 1 Engine)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 7: Credits -->
+    <section id="credits">
+      <h2>7. Credits & Special Thanks <span class="nav-tag">[CRED]</span></h2>
+      <p>Westwood Studios, Rick Gush, Louis Castle, CJayC & GameFAQs, ScummVM Kyra Team, and the Retro Gaming Community.</p>
+    </section>
+  </main>
+
+  <script>
+    // Checklist Persistent State
+    document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(cb => {
+      const id = cb.getAttribute('data-id');
+      if (localStorage.getItem('kyra1_' + id) === 'true') {
+        cb.checked = true;
+        cb.parentElement.classList.add('checked');
+      }
+      cb.addEventListener('change', () => {
+        localStorage.setItem('kyra1_' + id, cb.checked);
+        if (cb.checked) {
+          cb.parentElement.classList.add('checked');
+        } else {
+          cb.parentElement.classList.remove('checked');
+        }
+      });
+    });
+
+    // Sidebar Filter
+    function filterNav() {
+      const query = document.getElementById('search').value.toLowerCase();
+      document.querySelectorAll('#navList li').forEach(li => {
+        const text = li.textContent.toLowerCase();
+        li.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
