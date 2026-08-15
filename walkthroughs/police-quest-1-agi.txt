@@ -9,27 +9,46 @@
 -------------------------------------------------------------------------------
 TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
-  [01.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
-  [02.00] VERSION HISTORY ............................................. [VERS]
-  [03.00] GAME BASICS & PROCEDURAL PROTOCOL ........................... [BASE]
-  [04.00] COMPLETE 245/245 WALKTHROUGH ................................ [WLK00]
-          - [04.01] Act 1: Shift Preparation & Briefing (21 pts) ...... [WLK01]
-          - [04.02] Act 2: Morning Traffic & Drunk Driver (34 pts) .... [WLK02]
-          - [04.03] Act 3: Caffeine Carol's & Felony Stop (45 pts) .... [WLK03]
-          - [04.04] Act 4: Courthouse & Narcotics Transfer (31 pts) ... [WLK04]
-          - [04.05] Act 5: Park Stakeout & Marie Talk (43 pts) ........ [WLK05]
-          - [04.06] Act 6: Hotel Delphoria & Poker (41 pts) ........... [WLK06]
-          - [04.07] Act 7: Penthouse Raid & Bains Bust (30 pts) ....... [WLK07]
-  [05.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
-  [06.00] MASTER 245-POINT SCORE RECONCILIATION LEDGER ................ [SCOR]
-  [07.00] THE COMPLETE PARSER DICTIONARY (WORDS.TOK) .................. [DICT]
-  [08.00] CHARACTER ORIGINS, SEQUELS & BLUE FORCE LINEAGE .............. [LORE]
-  [09.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION .................. [ENGN]
-  [10.00] CONTACT POLICY .............................................. [CONT]
-  [11.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
+  [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
+  [03.00] VERSION HISTORY ............................................. [VERS]
+  [04.00] GAME BASICS & PROCEDURAL PROTOCOL ........................... [BASE]
+  [05.00] COMPLETE 245/245 WALKTHROUGH ................................ [WLK00]
+          - [05.01] Act 1: Shift Preparation & Briefing (21 pts) ...... [WLK01]
+          - [05.02] Act 2: Morning Traffic & Drunk Driver (34 pts) .... [WLK02]
+          - [05.03] Act 3: Caffeine Carol's & Felony Stop (45 pts) .... [WLK03]
+          - [05.04] Act 4: Courthouse & Narcotics Transfer (31 pts) ... [WLK04]
+          - [05.05] Act 5: Park Stakeout & Marie Talk (43 pts) ........ [WLK05]
+          - [05.06] Act 6: Hotel Delphoria & Poker (41 pts) ........... [WLK06]
+          - [05.07] Act 7: Penthouse Raid & Bains Bust (30 pts) ....... [WLK07]
+  [06.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
+  [07.00] MASTER 245-POINT SCORE RECONCILIATION LEDGER ................ [SCOR]
+  [08.00] THE COMPLETE PARSER DICTIONARY (WORDS.TOK) .................. [DICT]
+  [09.00] CHARACTER ORIGINS, SEQUELS & BLUE FORCE LINEAGE .............. [LORE]
+  [10.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION .................. [ENGN]
+  [11.00] CONTACT POLICY .............................................. [CONT]
+  [12.00] CREDITS & SPECIAL THANKS .................................... [CRED]
 
 ===============================================================================
-[01.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
+[01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
+===============================================================================
+
+While this document was assembled and mathematically verified with the
+assistance of modern AI tooling and binary disassembly pipelines, it is born
+from a deep, lifelong love for classic gaming. The author spent countless
+cherished hours playing, mapping, and loving these games as a kid, teenager,
+adult, and even yesterday.
+
+While traditional narrative walkthroughs and secrets have been known for
+decades, approaching them today from the perspective of an AI Researcher,
+Software Developer, and AI Cybersecurity Reverse-Engineer offers a new
+dimension of appreciation. By peering directly beneath the hood into
+decompiled assembly, memory registers, and state-machine bytecode, we can
+finally understand--deterministically and mathematically--what made these
+cherished old games tick, every single tick.
+
+===============================================================================
+[02.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
 ===============================================================================
 
 This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering
@@ -50,11 +69,12 @@ As of this version, the authorized host repositories are:
   • GitHub ...................... (github.com/seeker-cyber-maker)
 
 ===============================================================================
-[02.00] VERSION HISTORY                                                 [VERS]
+[03.00] VERSION HISTORY                                                 [VERS]
 ===============================================================================
 
 Version 2.1.0 (August 15, 2026):
-  - Added Section [08.00] detailing character origins, real-life CHP and
+  - Added Author's Preface & Research Philosophy.
+  - Added Section [09.00] detailing character origins, real-life CHP and
     Sierra studio inspirations, and character continuity across Police Quest
     2, Police Quest 3, and Jim Walls' spiritual successor Blue Force.
   - Complete 245/245 maximum score point reconciliation.
@@ -64,7 +84,7 @@ Version 2.1.0 (August 15, 2026):
     and LOGIC.014 drunk driver state machine.
 
 ===============================================================================
-[03.00] GAME BASICS & PROCEDURAL PROTOCOL                               [BASE]
+[04.00] GAME BASICS & PROCEDURAL PROTOCOL                               [BASE]
 ===============================================================================
 
 Police Quest 1 is a procedural simulator designed by retired police officer Jim
@@ -73,11 +93,11 @@ drawing your gun unlawfully, or forgetting handcuffs) results in instant game
 over or reprimand!
 
 ===============================================================================
-[04.00] COMPLETE 245/245 WALKTHROUGH                                    [WLK00]
+[05.00] COMPLETE 245/245 WALKTHROUGH                                    [WLK00]
 ===============================================================================
 
 ===============================================================================
-[04.01] ACT 1: SHIFT PREPARATION & BRIEFING (21 PTS)                    [WLK01]
+[05.01] ACT 1: SHIFT PREPARATION & BRIEFING (21 PTS)                    [WLK01]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -106,7 +126,7 @@ over or reprimand!
    and get in (+1).
 
 ===============================================================================
-[04.02] ACT 2: MORNING TRAFFIC & DRUNK DRIVER (34 PTS)                  [WLK02]
+[05.02] ACT 2: MORNING TRAFFIC & DRUNK DRIVER (34 PTS)                  [WLK02]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -134,7 +154,7 @@ over or reprimand!
    jail booking (+5).
 
 ===============================================================================
-[04.03] ACT 3: CAFFEINE CAROL'S & FELONY STOP (45 PTS)                  [WLK03]
+[05.03] ACT 3: CAFFEINE CAROL'S & FELONY STOP (45 PTS)                  [WLK03]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -160,7 +180,7 @@ over or reprimand!
    suspect at station (+5).
 
 ===============================================================================
-[04.04] ACT 4: COURTHOUSE & NARCOTICS TRANSFER (31 PTS)                 [WLK04]
+[05.04] ACT 4: COURTHOUSE & NARCOTICS TRANSFER (31 PTS)                 [WLK04]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -182,7 +202,7 @@ over or reprimand!
    unmarked car keys (+5), and study Bains' file (+5).
 
 ===============================================================================
-[04.05] ACT 5: PARK STAKEOUT & MARIE TALK (43 PTS)                      [WLK05]
+[05.05] ACT 5: PARK STAKEOUT & MARIE TALK (43 PTS)                      [WLK05]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -206,7 +226,7 @@ over or reprimand!
    reveals Bains' poker ring at Hotel Delphoria (+5).
 
 ===============================================================================
-[04.06] ACT 6: HOTEL DELPHORIA & POKER (41 PTS)                         [WLK06]
+[05.06] ACT 6: HOTEL DELPHORIA & POKER (41 PTS)                         [WLK06]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -231,7 +251,7 @@ over or reprimand!
    Suite 216 (+5).
 
 ===============================================================================
-[04.07] ACT 7: PENTHOUSE RAID & BAINS BUST (30 PTS)                     [WLK07]
+[05.07] ACT 7: PENTHOUSE RAID & BAINS BUST (30 PTS)                     [WLK07]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -256,7 +276,7 @@ over or reprimand!
    and arrest Bains (+5), seize ledger (+3), receive Medal of Valor (+2)!
 
 ===============================================================================
-[05.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
+[06.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
 ===============================================================================
 
 Execute strictly these 16 state-machine transitions:
@@ -279,7 +299,7 @@ STEP 15: [Room 216 Penthouse] ► Knock -> Enter -> Trigger SWAT breach signal.
 STEP 16: [Penthouse Arena] ───► Disarm Bains -> Apply cuffs -> 245/245 WIN!
 
 ===============================================================================
-[06.00] MASTER 245-POINT SCORE RECONCILIATION LEDGER                    [SCOR]
+[07.00] MASTER 245-POINT SCORE RECONCILIATION LEDGER                    [SCOR]
 ===============================================================================
 
 +--------------------------------------------------------+--------+-----------+
@@ -297,7 +317,7 @@ STEP 16: [Penthouse Arena] ───► Disarm Bains -> Apply cuffs -> 245/245 W
 +--------------------------------------------------------+--------+-----------+
 
 ===============================================================================
-[07.00] THE COMPLETE PARSER DICTIONARY (WORDS.TOK)                      [DICT]
+[08.00] THE COMPLETE PARSER DICTIONARY (WORDS.TOK)                      [DICT]
 ===============================================================================
 
 Directly extracted from master WORDS.TOK (1,126 words / 358 token groups):
@@ -328,7 +348,7 @@ RADIO 10-CODES & TERMINOLOGY:
 FST (Field Sobriety Test), DUII (Driving Under Influence).
 
 ===============================================================================
-[08.00] CHARACTER ORIGINS, SEQUELS & BLUE FORCE LINEAGE                 [LORE]
+[09.00] CHARACTER ORIGINS, SEQUELS & BLUE FORCE LINEAGE                 [LORE]
 ===============================================================================
 
 A. REAL-LIFE INSPIRATIONS & SIERRA STUDIO IN-JOKES:
@@ -364,7 +384,7 @@ B. CHARACTER CONTINUITY IN SEQUELS & BLUE FORCE:
        Dooley/Cobb), retaining all authentic 10-codes and weapon safety checks.
 
 ===============================================================================
-[09.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION                      [ENGN]
+[10.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION                      [ENGN]
 ===============================================================================
 
 TITLE SCREEN BULLET HOLE GENERATOR (LOGIC.001):
@@ -382,14 +402,14 @@ EASTER EGGS:
   LOOK KEN / LOOK AL / TALK JIM displays Sierra creator tributes.
 
 ===============================================================================
-[10.00] CONTACT POLICY                                                  [CONT]
+[11.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[11.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[12.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Jim Walls, Ken & Roberta Williams, Sierra On-Line, CJayC & GameFAQs,

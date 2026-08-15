@@ -3,40 +3,59 @@
           Definitive Walkthrough, Systems Compendium & Engine Forensics
                       Platform: PC / DOS (Talkie CD-ROM)
                Author: AI Game Research & Reverse-Engineering Lab
-                              Version: 3.4.0 (2026)
+                              Version: 3.5.0 (2026)
 ===============================================================================
 
 -------------------------------------------------------------------------------
 TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
-  [01.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
-  [02.00] VERSION HISTORY ............................................. [VERS]
-  [03.00] COMPLETE STEP-BY-STEP WALKTHROUGH ........................... [WLK00]
-          - [03.01] Act I: Gladstone Keep & The Great Forests ......... [WLK01]
-          - [03.02] Act II: Gorkha Swamp & Shaman's Trial ............. [WLK02]
-          - [03.03] Act III: Mines of Apparitions & Draracle's Lair ... [WLK03]
-          - [03.04] Act IV: The White Tower & Siege of Gladstone ...... [WLK04]
-          - [03.05] Act V: City of Yvel & The Sewers .................. [WLK05]
-          - [03.06] Act VI: Castle Cimmeria & Nether Mask Finale ...... [WLK06]
-  [04.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
-  [05.00] IN-DEPTH SYSTEMS COMPENDIUM ................................. [COMP]
+  [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
+  [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
+  [03.00] VERSION HISTORY ............................................. [VERS]
+  [04.00] COMPLETE STEP-BY-STEP WALKTHROUGH ........................... [WLK00]
+          - [04.01] Act I: Gladstone Keep & The Great Forests ......... [WLK01]
+          - [04.02] Act II: Gorkha Swamp & Shaman's Trial ............. [WLK02]
+          - [04.03] Act III: Mines of Apparitions & Draracle's Lair ... [WLK03]
+          - [04.04] Act IV: The White Tower & Siege of Gladstone ...... [WLK04]
+          - [04.05] Act V: City of Yvel & The Sewers .................. [WLK05]
+          - [04.06] Act VI: Castle Cimmeria & Nether Mask Finale ...... [WLK06]
+  [05.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
+  [06.00] IN-DEPTH SYSTEMS COMPENDIUM ................................. [COMP]
           - Character Matrix & Starting Affinities
           - Weapons & Armor Compendium
           - Elemental Magic & 4-Tier Charge System
           - Secret Spells: Hand of Fate & Mist of Doom
           - Master Item & Chest Checklist with Missables
-  [06.00] KEYBOARD CONTROLS & HOTKEY COMMAND MATRIX ................... [KEYS]
-  [07.00] THE MANUALS, LORE BOOKS, FEELIES & COPY PROTECTION .......... [MANL]
+  [07.00] KEYBOARD CONTROLS & HOTKEY COMMAND MATRIX ................... [KEYS]
+  [08.00] THE MANUALS, LORE BOOKS, FEELIES & COPY PROTECTION .......... [MANL]
           - The 48-Page Player's Guide & Rulebook
           - The History of the Lands (Narrative Feelie)
           - Off-Disk Manual DRM (Floppy v1.00 vs CD-ROM v1.23)
           - Historical Assembly Decompilation: Bypassing DRM via NOPs/JMPs
-  [08.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING ............... [ENGN]
-  [09.00] CONTACT POLICY .............................................. [CONT]
-  [10.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [09.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING ............... [ENGN]
+  [10.00] CONTACT POLICY .............................................. [CONT]
+  [11.00] CREDITS & SPECIAL THANKS .................................... [CRED]
 
 ===============================================================================
-[01.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
+[01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
+===============================================================================
+
+While this document was assembled and mathematically verified with the
+assistance of modern AI tooling and binary disassembly pipelines, it is born
+from a deep, lifelong love for classic gaming. The author spent countless
+cherished hours playing, mapping, and loving these games as a kid, teenager,
+adult, and even yesterday.
+
+While traditional narrative walkthroughs and secrets have been known for
+decades, approaching them today from the perspective of an AI Researcher,
+Software Developer, and AI Cybersecurity Reverse-Engineer offers a new
+dimension of appreciation. By peering directly beneath the hood into
+decompiled assembly, memory registers, and state-machine bytecode, we can
+finally understand--deterministically and mathematically--what made these
+cherished old games tick, every single tick.
+
+===============================================================================
+[02.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
 ===============================================================================
 
 This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering
@@ -57,21 +76,22 @@ As of this version, the authorized host repositories are:
   • GitHub ...................... (github.com/seeker-cyber-maker)
 
 ===============================================================================
-[02.00] VERSION HISTORY                                                 [VERS]
+[03.00] VERSION HISTORY                                                 [VERS]
 ===============================================================================
 
-Version 3.4.0 (August 15, 2026):
+Version 3.5.0 (August 15, 2026):
+  - Added Author's Preface & Research Philosophy.
   - Added Secret Spells compendium (Hand of Fate & Mist of Doom).
   - Added historical x86 assembly analysis of 1990s manual look-up DRM and
     how it was historically cracked via NOPs and forced short jumps (EB).
   - Updated Keyboard Controls matrix and 79-col formatting.
 
 ===============================================================================
-[03.00] COMPLETE STEP-BY-STEP WALKTHROUGH                               [WLK00]
+[04.00] COMPLETE STEP-BY-STEP WALKTHROUGH                               [WLK00]
 ===============================================================================
 
 ===============================================================================
-[03.01] ACT I: GLADSTONE KEEP & THE GREAT FORESTS                       [WLK01]
+[04.01] ACT I: GLADSTONE KEEP & THE GREAT FORESTS                       [WLK01]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -91,7 +111,7 @@ Version 3.4.0 (August 15, 2026):
 4. Recruit Baccata at the campfire at (X:03, Y:11).
 
 ===============================================================================
-[03.02] ACT II: GORKHA SWAMP & SHAMAN'S TRIAL                           [WLK02]
+[04.02] ACT II: GORKHA SWAMP & SHAMAN'S TRIAL                           [WLK02]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -108,7 +128,7 @@ Version 3.4.0 (August 15, 2026):
 3. Defeat the swamp hydra and harvest Bloodmoss at (X:22, Y:19).
 
 ===============================================================================
-[03.03] ACT III: MINES OF APPARITIONS & DRARACLE'S LAIR                 [WLK03]
+[04.03] ACT III: MINES OF APPARITIONS & DRARACLE'S LAIR                 [WLK03]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -127,65 +147,63 @@ Version 3.4.0 (August 15, 2026):
 4. Answer "Truth" at Riddle Gate (X:16, Y:10) to obtain the Elixir formula.
 
 ===============================================================================
-[03.04] ACT IV: THE WHITE TOWER & SIEGE OF GLADSTONE                    [WLK04]
+[04.04] ACT IV: THE WHITE TOWER & SIEGE OF GLADSTONE                    [WLK04]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
 | AREA ITEM & CHEST CHECKLIST: WHITE TOWER & GLADSTONE SIEGE                  |
 |                                                                             |
-| [ ] [KEY] Ivory Key .............. (X:04, Y:11) [White Tower Level 1]       |
-| [ ] Flask of Sweet Water ......... (X:08, Y:14) [White Tower Level 2 Well]  |
-| [ ] [PARTY] Recruit Paul / Dawn .. (X:16, Y:04) [White Tower Level 3 Cell]  |
-| [ ] [RELIC] Ruby of Truth ........ (X:02, Y:01) [Gladstone Throne Room]     |
+| [ ] [QUEST] Sweet Water Flask .... (X:08, Y:14) [White Tower Level 2 Well]  |
+| [ ] [PARTY] Recruit Paul / Dawn .. (X:16, Y:04) [White Tower Level 3 Cells] |
+| [ ] Silver Goblet ................ (X:02, Y:03) [Gladstone Treasury Chest]  |
+| [ ] [RELIC] Ruby of Truth ........ (X:02, Y:01) [King Richard's Sickbed]    |
 +-----------------------------------------------------------------------------+
 
-1. Fill empty flask at White Tower L2 well (X:08, Y:14) for Sweet Water.
-2. Return to Gladstone Keep; mix Crucible + Bloodmoss + Sweet Water.
-3. Cure King Richard at (X:02, Y:01) to receive the Ruby of Truth.
+1. Fill empty flask with Sweet Water at (X:08, Y:14).
+2. Recruit Dawn or Paul on Level 3.
+3. Retrieve Silver Goblet at Gladstone Treasury.
+4. Combine Crucible + Sweet Water + Bloodmoss = Elixir of Life.
+5. Administer Elixir to King Richard; receive the Ruby of Truth.
 
 ===============================================================================
-[03.05] ACT V: CITY OF YVEL & THE SEWERS                                [WLK05]
+[04.05] ACT V: CITY OF YVEL & THE SEWERS                                [WLK05]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
 | AREA ITEM & CHEST CHECKLIST: YVEL & SEWERS                                  |
 |                                                                             |
-| [ ] [SECRET] Ring of Invisibility (X:11, Y:24) [Sewers: Cracked Brick]      |
-| [ ] [SECRET] Cloak of Shadows ... (X:11, Y:24) [Sewers: Cracked Brick]      |
-| [ ] [SECRET SPELL] Hand of Fate .. (X:14, Y:22) [Yvel Abandoned Building]   |
-| [ ] Plate Armor ................. (X:04, Y:18) [Yvel Armory: Iron Chest]    |
-| [ ] [RELIC] Vaelan's Cube ....... (X:15, Y:02) [Council of Elders]          |
-| [ ] [KEY] Cimmeria Master Key ... (X:15, Y:02) [Council of Elders]          |
+| [ ] [SECRET SPELL] Hand of Fate .. (X:14, Y:22) [Yvel Abandoned House]      |
+| [ ] Ring of Invisibility ......... (X:11, Y:24) [Yvel Sewers Secret Chest]  |
+| [ ] [RELIC] Vaelan's Cube ........ (X:15, Y:02) [Council of Elders Hall]    |
+| [ ] Cimmeria Dungeon Key ......... (X:15, Y:02) [Council of Elders Hall]    |
 +-----------------------------------------------------------------------------+
 
-1. Press cracked brick at (X:11, Y:24) in Sewers for Ring of Invisibility.
-2. Grab Hand of Fate spell scroll at (X:14, Y:22) in Yvel City.
-3. Meet Elders at (X:15, Y:02) to receive Vaelan's Cube and Cimmeria Key.
+1. Cast Hand of Fate or equip Dark Gauntlet to depress hand impression locks.
+2. Navigate Yvel Sewers to access the Council of Elders at (X:15, Y:02).
+3. Receive Vaelan's Cube and Cimmeria Key.
 
 ===============================================================================
-[03.06] ACT VI: CASTLE CIMMERIA & NETHER MASK FINALE                    [WLK06]
+[04.06] ACT VI: CASTLE CIMMERIA & NETHER MASK FINALE                    [WLK06]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: CASTLE CIMMERIA                                |
+| AREA ITEM & CHEST CHECKLIST: CASTLE CIMMERIA & FINALE                       |
 |                                                                             |
-| [ ] Greatsword of Slaying ... (X:04, Y:09) [Cimmeria L1: Weapon Rack]       |
-| [ ] Dragon Scale Armor ...... (X:18, Y:12) [Cimmeria L2: Golem Chamber]     |
-| [ ] Staff of Spectral Fire .. (X:22, Y:04) [Cimmeria L3: Wizard Sanctum]    |
-| [ ] [VICTORY] Nether Mask ... (X:16, Y:16) [Scotia Boss Arena]              |
+| [ ] [RELIC] Dark Gauntlet ........ (X:04, Y:16) [Cimmeria L1: Guard Room]   |
+| [ ] Dragon Plate Armor ........... (X:20, Y:12) [Cimmeria L2: Armory Chest] |
+| [ ] [VICTORY] Scotia Apprehended . (X:16, Y:16) [Cimmeria L3: Nether Sanct] |
 +-----------------------------------------------------------------------------+
 
-1. Dispel Level 1 force barriers using Vaelan's Cube; use Hand of Fate on
-   Necrosap wall locks.
-2. Defeat Golems on Level 2; reach Scotia's Arena on Level 3 (X:16, Y:16).
-3. Activate Ruby of Truth to break Nether Mask illusion; reflect spells with
-   Vaelan's Cube and strike her crone form to win!
+1. Use Vaelan's Cube to dissolve magical force fields.
+2. Ascend to Level 3; enter Scotia's Sanctum at (X:16, Y:16).
+3. Boss Strategy:
+   - When Scotia shifts into the Nether Beast, use the Ruby of Truth.
+   - Use Vaelan's Cube to shatter her shape-shifting matrix.
+   - Strike her true form with high-tier melee attacks to save the realm!
 
 ===============================================================================
-[04.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
+[05.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
 ===============================================================================
-
-Execute strictly the following 18-step state transition chain:
 
 STEP 01: [Gladstone Keep] ────► Walk to (X:02, Y:01), talk to Richard.
 STEP 02: [Roland Manor] ──────► Travel to (X:04, Y:12), trigger Scotia scene.
@@ -207,7 +225,7 @@ STEP 17: [Castle Cimmeria L3] ► Enter Scotia Arena at (X:16, Y:16).
 STEP 18: [Boss Arena] ────────► Use Ruby -> Use Cube -> Attack crone -> WIN!
 
 ===============================================================================
-[05.00] IN-DEPTH SYSTEMS COMPENDIUM                                     [COMP]
+[06.00] IN-DEPTH SYSTEMS COMPENDIUM                                     [COMP]
 ===============================================================================
 
 CHARACTER MATRIX:
@@ -234,7 +252,7 @@ SECRET & HIDDEN SPELLS:
     fog that shreds ethereal ghosts and wraiths.
 
 ===============================================================================
-[06.00] KEYBOARD CONTROLS & HOTKEY COMMAND MATRIX                       [KEYS]
+[07.00] KEYBOARD CONTROLS & HOTKEY COMMAND MATRIX                       [KEYS]
 ===============================================================================
 
 +--------------+--------------------------------------------------------------+
@@ -260,7 +278,7 @@ SECRET & HIDDEN SPELLS:
 +--------------+--------------------------------------------------------------+
 
 ===============================================================================
-[07.00] THE MANUALS, LORE BOOKS, FEELIES & COPY PROTECTION              [MANL]
+[08.00] THE MANUALS, LORE BOOKS, FEELIES & COPY PROTECTION              [MANL]
 ===============================================================================
 
 A. THE PLAYER'S GUIDE & 48-PAGE RULEBOOK:
@@ -289,7 +307,7 @@ D. HISTORICAL ASSEMBLY DECOMPILATION: BYPASSING 90S MANUAL DRM:
     3. Function Stubbing: Overwriting entry with B0 01 C3 (MOV AL, 1; RET).
 
 ===============================================================================
-[08.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING                   [ENGN]
+[09.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING                   [ENGN]
 ===============================================================================
 
 TILE BITMASK FORMAT (LEVELxx.INF):
@@ -301,14 +319,14 @@ BORLAND LCG DROP GENERATOR (LANDS.EXE):
   Roll = (NextSeed >> 16) % 100
 
 ===============================================================================
-[09.00] CONTACT POLICY                                                  [CONT]
+[10.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[10.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[11.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Westwood Studios, Sir Patrick Stewart, CJayC & GameFAQs, ScummVM Kyra Team,

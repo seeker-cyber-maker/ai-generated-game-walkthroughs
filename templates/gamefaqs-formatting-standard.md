@@ -33,9 +33,10 @@ The Table of Contents must use **Dot-Leaders (`....`)** extending to right-justi
 -------------------------------------------------------------------------------
 TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
-  [01.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
-  [02.00] VERSION HISTORY ............................................. [VERS]
-  [03.00] GAME BASICS & COMBAT MECHANICS .............................. [BASE]
+  [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
+  [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
+  [03.00] VERSION HISTORY ............................................. [VERS]
+  [04.00] GAME BASICS & COMBAT MECHANICS .............................. [BASE]
   [04.00] COMPLETE WALKTHROUGH ........................................ [WLK00]
           - [04.01] Act I: Gladstone Keep & The Great Forests ......... [WLK01]
           - [04.02] Act II: Gorkha Swamp & Shaman's Trial ............. [WLK02]
