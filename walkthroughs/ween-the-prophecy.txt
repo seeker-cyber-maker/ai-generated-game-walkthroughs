@@ -25,6 +25,7 @@ TABLE OF CONTENTS ..................................................... [00.00]
           - [06.01] Act I: Cottage Porch, Forest & First Grain ........ [WLK01]
           - [06.02] Act II: Ant Mound, Queen of Ants & Second Grain ... [WLK02]
           - [06.03] Act III: Sick Worm, Citadel & Hourglass of Revuss . [WLK03]
+          - [06.04] The Four Major Split Paths & Branching Topology .... [SPLT]
   [07.00] THE CRITICAL-PATH MINIMALIST ROUTE ........................... [FAST]
   [08.00] IN-DEPTH SYSTEMS & REAGENT SYNTHESIS MATRIX .................. [COMP]
           - Master Synthesis & Cauldron Recipes Table
@@ -32,10 +33,10 @@ TABLE OF CONTENTS ..................................................... [00.00]
           - The LZSS 4096-Byte Ring Buffer Architecture
           - The Decompiled 39-Screen Transition Graph
           - Special Effect (FX) Subroutine Table
-          - ScummVM (gob / ween) Target Profile & Timer Fixes
   [10.00] CULTURAL RETROSPECTIVE: WHY WEEN REMAINED OBSCURE ............ [HIST]
           - The French "Puzzle Chamber" Game Design Philosophy
           - Sierra Distribution & North American Localization
+  [11.00] SCUMMVM & MODERN EMULATION TARGET PROFILE .................... [SCUM]
   [12.00] CONTACT POLICY ............................................... [CONT]
   [13.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
 
@@ -85,6 +86,7 @@ As of this version, the authorized host repositories are:
 Version 1.4.0 (August 15, 2026):
   - Decompiled and mapped all 39 screen modules (EMAJ1000.TOT to EMAJ1038.TOT)
     from Coktel's INTRO.STK resource container.
+  - Documented the Four Major Split Paths and non-linear branching topology.
   - Reverse-engineered Coktel's LZSS 4096-byte ring-buffer decompression.
   - Documented the full FX subroutine execution table (PONTFX, OPAL1FX, DRAGFX,
     FEUFX, FIOLFX, GARDEFX, OPALEFX, VER1FX, BORG1FX, KRAALFX, REVUSSFX,
@@ -247,6 +249,42 @@ PHASE 4: CITADEL OF KRAAL & REVUSS SANCTUM (OBJET4.CAT)
    - Ascend pinnacle before Day 30 expires. Solve pendulum rope puzzle.
    - Insert all 3 Grains into Hourglass of Revuss (Gold, Silver, Crystal).
    - Turn the celestial wheel to trap Kraal in a time loop forever (GAGNEFX)!
+
+===============================================================================
+[06.04] THE FOUR MAJOR SPLIT PATHS & BRANCHING TOPOLOGY                 [SPLT]
+===============================================================================
+
+Unlike linear adventure games, Ween features 4 major non-linear branching forks
+that allow players to bypass hazard rooms or solve regional puzzles via
+different companion abilities:
+
+BRANCH 1: ACT II CROSSING (CAVERN ABYSS VS LOTUS POND)
+  • Split Origin: Screen EMAJ1007 (Swamp Crossing).
+  • Path A (Bat Abyss - EMAJ1008 -> EMAJ1009 -> EMAJ1010): Use Petroy acoustic
+    squeak to clear bats, scrape Bat Guano, and align the Quartz Prism.
+  • Path B (Lotus Pond - EMAJ1010 -> EMAJ1011): Play Reed Flute (ROSEAU +
+    FLUTE) with flower pollen to hop floating lotus pads across the lake.
+
+BRANCH 2: BARBICAN INFILTRATION (FRONT WINCH VS SUBTERRANEAN ANT MOUND)
+  • Split Origin: Screen EMAJ1021 (Outer Barbican).
+  • Path A (Castle Ramparts - EMAJ1022 -> EMAJ1024 -> EMAJ1025): Direct Orain
+    to muscle the heavy iron winch and counterweights to smash the gate.
+  • Path B (Ant Mound Tunnel - EMAJ1023 -> EMAJ1024): Deploy Mongoose against
+    guard snakes and bribe the Ant Queen (Reine) with Strawberry Jam.
+
+BRANCH 3: COASTAL PROGRESSION (HERMIT GREENHOUSE VS UNDERGROUND RIVER RAFT)
+  • Split Origin: Screen EMAJ1027 (Volcanic Beach).
+  • Path A (Hermit Greenhouse - EMAJ1028 -> EMAJ1029 -> EMAJ1030): Bridge gap
+    with Wooden Planks (PLANCHES) and harvest herbs in the greenhouse.
+  • Path B (River Raft - EMAJ1038 -> EMAJ1027): Construct the Bamboo Raft
+    (BAMBOU, RAME, VOILE, ARCEAUX, NASSES) to navigate river cavern currents.
+
+BRANCH 4: UPPER CITADEL INFILTRATION (STAIRWELL VS EXTERIOR TWIG MOAT PROBE)
+  • Split Origin: Screen EMAJ1032 (Borgol Altar).
+  • Path A (Interior Stairs - EMAJ1033 -> EMAJ1035 -> EMAJ1036): Climb the
+    spiral stone stairwell dodging gargoyle dart traps to reach the hourglass.
+  • Path B (Exterior Drawbridge - EMAJ1034 -> EMAJ1035): Glue a Firefly to a
+    dry Twig (LUCIOLE + GLU + BRINDILLE) and slide it into the wall crevice.
 
 ===============================================================================
 [07.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]

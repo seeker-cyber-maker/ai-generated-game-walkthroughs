@@ -248,6 +248,48 @@ Extracted directly from Coktel's binary catalogs (`OBJET1.CAT` through `OBJET4.C
 
 ```text
 ===============================================================================
+[6.4] THE FOUR MAJOR SPLIT PATHS & NON-LINEAR BRANCHING TOPOLOGY        [SPLT]
+===============================================================================
+```
+
+Unlike linear American point-and-click adventure games, Coktel Vision built *Ween: The Prophecy* with multiple distinct branching pathways that allow the player to bypass entire hazard rooms or solve regional puzzles via alternate companion mechanics.
+
+### Branch 1: The Act II Crossing (Cavern Abyss vs Direct Lotus Pond)
+* **Split Origin**: Screen `EMAJ1007` (Swamp Crossing)
+* **Path A (Subterranean Bat Abyss - `EMAJ1008` ➔ `EMAJ1009` ➔ `EMAJ1010`)**: 
+  - Enter the underground cavern.
+  - Deploy **Petroy's acoustic echo** to scatter the bat swarm.
+  - Scrape **Bat Guano** from the floor and mount the **Quartz Prism** on the stone pillar to bounce the sunbeam across the chasm.
+* **Path B (Lotus Pond Waterway - `EMAJ1010` ➔ `EMAJ1011`)**:
+  - Use the **Reed Flute** (`ROSEAU` + `FLUTE`) and flower pollen to navigate floating lotus blossom pads across the marsh lake, completely bypassing the bat chasm.
+
+### Branch 2: Barbican Infiltration (Castle Ramparts vs Subterranean Ant Mound)
+* **Split Origin**: Screen `EMAJ1021` (Outer Barbican)
+* **Path A (Front Ramparts & Winch - `EMAJ1022` ➔ `EMAJ1024` ➔ `EMAJ1025`)**:
+  - Direct **Orain** to muscle the heavy iron drawbridge winch and stone counterweight gears to breach the castle portcullis.
+* **Path B (Subterranean Ant Mound - `EMAJ1023` ➔ `EMAJ1024`)**:
+  - Squeeze through the ant mound tunnel.
+  - Deploy the **Mongoose** against guard snakes.
+  - Bribe the **Ant Queen (Reine)** with **Strawberry Jam** to have worker ants excavate a tunnel surfacing directly behind the fortress ramparts.
+
+### Branch 3: Coastal Seashore (Hermit Greenhouse vs Subterranean River Raft)
+* **Split Origin**: Screen `EMAJ1027` (Volcanic Beach)
+* **Path A (Hermit Cabin & Greenhouse - `EMAJ1028` ➔ `EMAJ1029` ➔ `EMAJ1030`)**:
+  - Repair the ruined wooden bridge with planks (`PLANCHES`).
+  - Visit the old hermit to unlock the alchemy greenhouse for Chamomile and Blueberries.
+* **Path B (Subterranean River Raft - `EMAJ1038` ➔ `EMAJ1027`)**:
+  - Assemble the Bamboo Raft (`BAMBOU`, `RAME`, `VOILE`, `ARCEAUX`, `NASSES`).
+  - Pilot the raft through the underground river cavern currents directly.
+
+### Branch 4: Upper Citadel Infiltration (Tower Stairwell vs Exterior Twig Moat Probe)
+* **Split Origin**: Screen `EMAJ1032` (Borgol Altar)
+* **Path A (Interior Spiral Stairwell - `EMAJ1033` ➔ `EMAJ1035` ➔ `EMAJ1036`)**:
+  - Fight up the spiraling stone stairs, dodging gargoyle dart traps to reach the upper hourglass sanctum.
+* **Path B (Exterior Drawbridge & Glued Twig Probe - `EMAJ1034` ➔ `EMAJ1035`)**:
+  - Catch a glowing **Firefly** (`LUCIOLE`) and glue it to a dry **Twig** (`BRINDILLE`) using birdlime (`GLU`).
+  - Slide the illuminated probe through the narrow exterior wall crevice for **Urm** to trip the drawbridge latch from the outside.
+
+---
 [6.3] ACT III: THE SICK WORM, CITADEL & HOURGLASS OF REVUSS             [WLK03]
 ===============================================================================
 ```
