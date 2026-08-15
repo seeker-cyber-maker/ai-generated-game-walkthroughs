@@ -120,12 +120,14 @@ Every guide must contain BOTH:
 1. **Granular Screen-by-Screen Walkthrough**: Step-by-step solutions paired with 79-column ASCII Area Item Checklists.
 2. **The Critical-Path Minimalist Route (`[FAST]`)**: A 12–18 step linear geodesic stripping away all optional backtracking for pure speedruns.
 
-### Invariant 6: Historical Lineage, Developer Cryptograms & Deep Lore Forensics (`[HIST]` / `[LORE]`)
-Every guide must unearth the deep developer lore, historical context, and linguistic cryptograms embedded inside the game:
-* **Developer Anagrams & Self-Inserts**: Unpack creator wordplay and inside jokes across franchises:
-  - *Coktel Vision*: **Simart** = Tramis backwards (*Lost in Time*), **Urm** = Muriel Tramis (*Ween*), **Revuss** = *Se Sauver* (*Ween*), **Petroy** = Pierre Gilhodes (*Ween*).
-  - *Westwood Studios*: **Arrant Rrak** / **Arrant Prac** anagrams (*Lands of Lore II & III*), **Draracle** (Dragon + Oracle) mythology, and Rick Gush / Louis Castle lore references.
-  - *Sierra On-Line*: Jim Walls' California Highway Patrol procedural accuracy in *Police Quest* leading to *Blue Force*, Sonny Bonds naming after real-life officers.
+### Invariant 6: Historical Lineage, Sequel Bridges & Character Evolution (`[HIST]` / `[LORE]` / `[SEQL]`)
+Every guide must trace the narrative lineage, character evolution, and thematic connections that carry forward into subsequent sequels:
+* **Franchise Sequel Bridges & Character Evolution**:
+  - *Sierra Police Quest & SWAT Series*: Sonny Bonds & Marie Wilkerson evolving across *PQ1*, *PQ2: The Vengeance*, *PQ3: The Kindred*, *PQ: Open Season*, and Jim Walls' *Blue Force*.
+  - *Westwood Lands of Lore Series*: King Richard, Scotia's curse passing to her son Luther in *Lands of Lore II: Guardians of Destiny*, Gladstone Keep's destruction in *Lands of Lore III*, and the cosmic role of the Draracle and Arrant Rrak.
+  - *Westwood The Legend of Kyrandia Trilogy*: Brandon's coronation in *Book 1*, Zanthia's solo journey to save the sinking world in *Book 2: The Hand of Fate*, and Malcolm's petrification escape and innocence trial in *Book 3: Malcolm's Revenge*.
+  - *Coktel Vision Coktelverse*: Character dynamic evolution from *Ween* and *Gobliiins 1–3* into *Woodruff and the Schnibble of Azimuth* and *Lost in Time*.
+* **Developer Anagrams & Cryptograms**: Unpack creator wordplay and inside jokes across franchises (e.g. *Simart* = Tramis, *Urm* = Muriel, *Revuss* = Se Sauver, *Arrant Rrak/Prac*).
 * **Binary String Forensics**: Search decompiled string tables (`.ASK`, `.USA`, `.FRA`, `WORDS.TOK`, `.PAK`) for cut dialogue, developer signatures, and shared-universe continuity links.
 * **Design Philosophy Retrospective**: Contrast European surrealist "puzzle chamber" paradigms with American open-world adventure traditions.
 

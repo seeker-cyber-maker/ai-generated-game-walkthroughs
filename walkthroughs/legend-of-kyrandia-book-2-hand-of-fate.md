@@ -301,7 +301,17 @@ int EvaluateCauldronBrew(uint16_t current_mask) {
 * **The ScummVM Kyra Team**: For reverse-engineering and preserving the Kyra 2 engine.
 * **YOU, the reader**: For saving Kyrandia from disappearing!---
 
-# 10. SCUMMVM & MODERN EMULATION TARGET PROFILE [SCUM]
+---
+
+# 9. SEQUEL BRIDGES, CHARACTER EVOLUTION & MALCOLM'S REVENGE [SEQL]
+
+### A. Zanthia's Character Arc & The Disappearing Realm
+*Hand of Fate* elevates Zanthia from supporting mystic into the quick-witted, pragmatic lead of the trilogy. Her quest reveals that the disappearing land was orchestrated by the Giant Hand (Marko's rogue glove animated by cosmic magic), setting up the physical restoration of Kyrandia.
+
+### B. Marko & The Continuity to Malcolm's Revenge (Book 3)
+The bungling magician Marko, who assists Zanthia in Book 2, returns in *The Legend of Kyrandia: Book 3 - Malcolm's Revenge* (1994). The political fallout from Book 2's near-catastrophe leads directly to the royal court's suspicion and the high-stakes trial of Malcolm.
+
+# 11. SCUMMVM & MODERN EMULATION TARGET PROFILE [SCUM]
 
 * **Target Engine ID**: `kyra` (Sub-engine: `kyra2`).
 * **Platform Target**: PC / DOS CD-ROM Talkie Edition (1993).

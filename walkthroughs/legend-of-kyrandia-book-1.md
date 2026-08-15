@@ -347,7 +347,29 @@ In 1992, players widely assumed the **Caverns of Twilight (Dark Maze)** were pro
 
 ---
 
-# 7. CREDITS & SPECIAL THANKS [CRED]
+---
+
+# 8. SEQUEL BRIDGES, CHARACTER EVOLUTION & KYRANDIA TRILOGY [SEQL]
+
+### A. Brandon: From Orphan Woodsman to Monarch
+Brandon begins as a naive peasant boy, discovering his royal heritage as King William's heir. In *Book 2: Hand of Fate*, Brandon rules Kyrandia alongside the Mystics, and in *Book 3: Malcolm's Revenge*, he presides as the severe prosecutor during Malcolm's trial.
+
+### B. Malcolm: The Complex Jester & Redemption in Book 3
+In Book 1, Malcolm appears as a purely sadistic jester who petrifies Kallak. However, in *Book 3: Malcolm's Revenge* (1994), Malcolm escapes his stone prison and sets out to prove his innocence, revealing that the royal murders were actually committed by the malevolent spirit Gunther!
+
+### C. Zanthia: From Supporting Alchemist to Solo Heroine in Book 2
+Zanthia transitions from Brandon's potion mentor in Book 1 into the spunky, witty protagonist of *The Legend of Kyrandia: Hand of Fate* (1993), venturing to the center of the world to save the realm from disappearing.
+
+---
+
+# 9. CONTACT POLICY [CONT]
+
+For corrections, save-state submissions, or engine discoveries, open an issue on GitHub:
+`github.com/seeker-cyber-maker/ai-generated-game-walkthroughs`
+
+---
+
+# 10. CREDITS & SPECIAL THANKS [CRED]
 
 * **Westwood Studios**: For creating one of the most magical point-and-click adventure universes of the 1990s.
 * **Rick Gush & Louis Castle**: For visionary game design and writing.

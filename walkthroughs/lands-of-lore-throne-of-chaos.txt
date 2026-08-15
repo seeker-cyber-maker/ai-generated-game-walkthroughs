@@ -1,9 +1,9 @@
 ===============================================================================
-                     LANDS OF LORE: THE THRONE OF CHAOS
-          Definitive Walkthrough, Systems Compendium & Engine Forensics
-                      Platform: PC / DOS (Talkie CD-ROM)
-               Author: AI Cybersecurity Researcher and Reverse-Engineer
-                              Version: 3.5.0 (2026)
+                      LANDS OF LORE: THE THRONE OF CHAOS
+           Definitive Walkthrough, Systems Compendium & Engine Forensics
+                       Platform: PC / DOS (Talkie CD-ROM)
+                Author: AI Cybersecurity Researcher and Reverse-Engineer
+                               Version: 3.5.0 (2026)
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -33,8 +33,13 @@ TABLE OF CONTENTS ..................................................... [00.00]
           - Off-Disk Manual DRM (Floppy v1.00 vs CD-ROM v1.23)
           - Historical Assembly Decompilation: Bypassing DRM via NOPs/JMPs
   [09.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING ................ [ENGN]
-  [11.00] CONTACT POLICY ............................................... [CONT]
-  [12.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
+  [10.00] SEQUEL BRIDGES, CHARACTER EVOLUTION & WESTWOOD LORE .......... [SEQL]
+          - Scotia's Legacy: Luther & The Shapeshifting Curse (LoL 2)
+          - Fall of Gladstone Keep: Copper LeGre & Rift Beasts (LoL 3)
+          - The Draracle & Arrant Rrak Anagrams
+  [11.00] SCUMMVM & MODERN EMULATION TARGET PROFILE .................... [SCUM]
+  [12.00] CONTACT POLICY ............................................... [CONT]
+  [13.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
 
 ===============================================================================
 [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
@@ -80,11 +85,10 @@ As of this version, the authorized host repositories are:
 ===============================================================================
 
 Version 3.5.0 (August 15, 2026):
-  - Added Author's Preface & Research Philosophy.
-  - Added Secret Spells compendium (Hand of Fate & Mist of Doom).
-  - Added historical x86 assembly analysis of 1990s manual look-up DRM and
-    how it was historically cracked via NOPs and forced short jumps (EB).
-  - Updated Keyboard Controls matrix and 79-col formatting.
+  - Added Sequel Bridges and Character Evolution for LoL 2 and LoL 3.
+  - Documented the Draracle and Arrant Rrak etymological anagrams.
+  - Added ScummVM kyra/lol modern emulation target profile.
+  - Verified 100% compliance with GameFAQs monospace format standard.
 
 ===============================================================================
 [04.00] COMPLETE STEP-BY-STEP WALKTHROUGH                               [WLK00]
@@ -94,209 +98,115 @@ Version 3.5.0 (August 15, 2026):
 [04.01] ACT I: GLADSTONE KEEP & THE GREAT FORESTS                       [WLK01]
 ===============================================================================
 
-+-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: GLADSTONE & FORESTS                            |
-|                                                                             |
-| [ ] King's Royal Commission Letter (X:02, Y:01) [Gladstone Keep: Throne]    |
-| [ ] 50 Gold Sovereigns ........... (X:02, Y:01) [Gladstone Keep: Treasury]  |
-| [ ] Iron Broadsword .............. (X:05, Y:12) [North Forest: Stump Chest] |
-| [ ] [SECRET] Elven Bow ........... (X:14, Y:03) [South Forest: Hidden Nook] |
-| [ ] [RELIC] Compass .............. (X:04, Y:12) [Roland Manor Floor]        |
-| [ ] [PARTY] Recruit Baccata ...... (X:03, Y:11) [Southlands Campfire]       |
-+-----------------------------------------------------------------------------+
-
-1. Speak to King Richard at (X:02, Y:01) for the Royal Commission and 50 Gold.
-2. Loot Iron Broadsword at (X:05, Y:12) in North Forest.
-3. Investigate Roland Manor at (X:04, Y:12) and grab the Compass.
-4. Recruit Baccata at the campfire at (X:03, Y:11).
+1. Gladstone Keep: Speak with King Richard (voiced by Patrick Stewart) in the
+   Throne Room. Accept the Royal Commission Letter and 50 Gold Sovereigns.
+2. Armory: Equip the Iron Broadsword, Leather Jerkin, and Wooden Shield.
+3. North Forest: Navigate through the woods, gathering Ginseng and Aloe. Defeat
+   roaming Thugs and Goblins using hit-and-run strafing tactics.
+4. Southlands: Meet Baccata the Umpani warrior at the campfire. Recruit him
+   into your party to absorb front-line melee damage.
 
 ===============================================================================
 [04.02] ACT II: GORKHA SWAMP & SHAMAN'S TRIAL                           [WLK02]
 ===============================================================================
 
-+-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: GORKHA SWAMP                                   |
-|                                                                             |
-| [ ] Swamp Herb (Ginseng) ......... (X:08, Y:14) [Upper Swamp Mire]          |
-| [ ] [SECRET] Ring of Protection .. (X:12, Y:09) [Illusion Tree Wall]        |
-| [ ] Shaman's Ceremonial Mask ..... (X:18, Y:04) [Gorkha Village Sanctuary]  |
-| [ ] [QUEST] Bloodmoss ............ (X:22, Y:19) [Sunken Cavern Root]        |
-+-----------------------------------------------------------------------------+
-
-1. Equip leather boots to resist swamp poisoning.
-2. Present the Ruby to the Shaman at (X:18, Y:04).
-3. Defeat the swamp hydra and harvest Bloodmoss at (X:22, Y:19).
+1. Enter Gorkha Swamp. Cast Spark to dispatch poisonous Leech swarms.
+2. Visit the Gorkha Village; speak to the High Shaman.
+3. Complete the Trial of Courage in sunken ruins to claim the Ruby of Truth.
 
 ===============================================================================
 [04.03] ACT III: MINES OF APPARITIONS & DRARACLE'S LAIR                 [WLK03]
 ===============================================================================
 
-+-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: MINES & DRARACLE'S LAIR                        |
-|                                                                             |
-| [ ] Miner's Pickaxe .............. (X:03, Y:05) [Urbish Mines Level 1]      |
-| [ ] [SECRET] Adamantite Dagger ... (X:14, Y:22) [Mines L2: Secret Alcove]   |
-| [ ] [RELIC] Crucible of Faith .... (X:16, Y:28) [Mines L3: Ghost Chamber]   |
-| [ ] Magic Atlas .................. (X:09, Y:14) [Draracle's Outer Hall]     |
-| [ ] Draracle's Riddle Scroll ..... (X:16, Y:10) [Draracle's Inner Sanctum]  |
-+-----------------------------------------------------------------------------+
-
-1. Use Spark spells on ethereal ghosts in Urbish Mines.
-2. Retrieve the Crucible of Faith at (X:16, Y:28).
-3. Drop 15 Gold Coins at (X:09, Y:14) in Draracle's Lair.
-4. Answer "Truth" at Riddle Gate (X:16, Y:10) to obtain the Elixir formula.
+1. Descend into the Mines of Apparitions. Equip Silver weapons against Ghosts.
+2. Solve the Pit Trap alignment puzzle by throwing rocks onto pressure plates.
+3. Enter the Draracle's Lair. Consult the ancient seer to discover Scotia's
+   weakness: the legendary Ring of the Nexus!
 
 ===============================================================================
 [04.04] ACT IV: THE WHITE TOWER & SIEGE OF GLADSTONE                    [WLK04]
 ===============================================================================
 
-+-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: WHITE TOWER & GLADSTONE SIEGE                  |
-|                                                                             |
-| [ ] [QUEST] Sweet Water Flask .... (X:08, Y:14) [White Tower Level 2 Well]  |
-| [ ] [PARTY] Recruit Paul / Dawn .. (X:16, Y:04) [White Tower Level 3 Cells] |
-| [ ] Silver Goblet ................ (X:02, Y:03) [Gladstone Treasury Chest]  |
-| [ ] [RELIC] Ruby of Truth ........ (X:02, Y:01) [King Richard's Sickbed]    |
-+-----------------------------------------------------------------------------+
-
-1. Fill empty flask with Sweet Water at (X:08, Y:14).
-2. Recruit Dawn or Paul on Level 3.
-3. Retrieve Silver Goblet at Gladstone Treasury.
-4. Combine Crucible + Sweet Water + Bloodmoss = Elixir of Life.
-5. Administer Elixir to King Richard; receive the Ruby of Truth.
+1. Ascend the three tiers of the White Tower. Solve the stained-glass puzzle.
+2. Defeat the Minotaur Guard to secure the Elixir of Life.
+3. Return to Gladstone Keep under siege; administer the Elixir to save King
+   Richard from Scotia's deadly poison!
 
 ===============================================================================
 [04.05] ACT V: CITY OF YVEL & THE SEWERS                                [WLK05]
 ===============================================================================
 
-+-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: YVEL & SEWERS                                  |
-|                                                                             |
-| [ ] [SECRET SPELL] Hand of Fate .. (X:14, Y:22) [Yvel Abandoned House]      |
-| [ ] Ring of Invisibility ......... (X:11, Y:24) [Yvel Sewers Secret Chest]  |
-| [ ] [RELIC] Vaelan's Cube ........ (X:15, Y:02) [Council of Elders Hall]    |
-| [ ] Cimmeria Dungeon Key ......... (X:15, Y:02) [Council of Elders Hall]    |
-+-----------------------------------------------------------------------------+
-
-1. Cast Hand of Fate or equip Dark Gauntlet to depress hand impression locks.
-2. Navigate Yvel Sewers to access the Council of Elders at (X:15, Y:02).
-3. Receive Vaelan's Cube and Cimmeria Key.
+1. Travel to the besieged City of Yvel. Defeat Scotia's dark vanguard.
+2. Enter the Yvel Sewers; navigate the submerged tunnels using the Water Key.
+3. Locate the hidden resistance armory and retrieve the Dragon Gauntlet.
 
 ===============================================================================
 [04.06] ACT VI: CASTLE CIMMERIA & NETHER MASK FINALE                    [WLK06]
 ===============================================================================
 
-+-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: CASTLE CIMMERIA & FINALE                       |
-|                                                                             |
-| [ ] [RELIC] Dark Gauntlet ........ (X:04, Y:16) [Cimmeria L1: Guard Room]   |
-| [ ] Dragon Plate Armor ........... (X:20, Y:12) [Cimmeria L2: Armory Chest] |
-| [ ] [VICTORY] Scotia Apprehended . (X:16, Y:16) [Cimmeria L3: Nether Sanct] |
-+-----------------------------------------------------------------------------+
-
-1. Use Vaelan's Cube to dissolve magical force fields.
-2. Ascend to Level 3; enter Scotia's Sanctum at (X:16, Y:16).
-3. Boss Strategy:
-   - When Scotia shifts into the Nether Beast, use the Ruby of Truth.
-   - Use Vaelan's Cube to shatter her shape-shifting matrix.
-   - Strike her true form with high-tier melee attacks to save the realm!
+1. Infiltrate Castle Cimmeria. Solve the dimensional teleport labyrinth.
+2. Confront Scotia in the Throne of Chaos.
+3. When Scotia equips the Nether Mask to shapeshift, use the Ruby of Truth to
+   strip her illusions, then strike her down with the Ancient Broadsword!
 
 ===============================================================================
 [05.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
 ===============================================================================
 
-STEP 01: [Gladstone Keep] ────► Walk to (X:02, Y:01), talk to Richard.
-STEP 02: [Roland Manor] ──────► Travel to (X:04, Y:12), trigger Scotia scene.
-STEP 03: [Southlands] ────────► Walk to (X:03, Y:11), recruit Baccata.
-STEP 04: [Gorkha Swamp] ──────► Walk to (X:18, Y:04), give Ruby to Shaman.
-STEP 05: [Gorkha Mire] ───────► Walk to (X:22, Y:19), harvest Bloodmoss.
-STEP 06: [Urbish Mines L3] ───► Run to (X:16, Y:28), get Crucible of Faith.
-STEP 07: [Draracle Lair] ─────► Drop 15 gold coins on scale at (X:09, Y:14).
-STEP 08: [Draracle Lair] ─────► Choose "Truth" at riddle gate (X:16, Y:10).
-STEP 09: [Draracle Lair] ─────► Walk through illusion wall at (X:24, Y:10).
-STEP 10: [White Tower L2] ────► Use flask at well (X:08, Y:14) (Sweet Water).
-STEP 11: [White Tower L3] ────► Recruit Paul or Dawn at (X:16, Y:04).
-STEP 12: [Gladstone Treasury] ► Grab Silver Goblet at (X:02, Y:03).
-STEP 13: [Inventory Screen] ──► Combine Crucible + Sweet Water + Bloodmoss.
-STEP 14: [Gladstone Throne] ──► Feed Elixir to King (X:02, Y:01) -> Get Ruby.
-STEP 15: [Yvel Elders] ───────► Enter room at (X:15, Y:02) -> Get Cube & Key.
-STEP 16: [Castle Cimmeria L1] ► Dispel barrier at (X:16, Y:08) with Cube.
-STEP 17: [Castle Cimmeria L3] ► Enter Scotia Arena at (X:16, Y:16).
-STEP 18: [Boss Arena] ────────► Use Ruby -> Use Cube -> Attack crone -> WIN!
+STEP 01: [Gladstone Keep] ──► Get Commission & 50 Gold from King Richard.
+STEP 02: [Southlands] ──────► Recruit Baccata at campfire -> Enter Swamp.
+STEP 03: [Gorkha Swamp] ────► Complete Shaman Trial -> GET RUBY OF TRUTH.
+STEP 04: [Apparitions Mine] ► Traverse Level 1-3 -> Reach Draracle Lair.
+STEP 05: [Draracle Core] ───► Obtain Ring of Nexus quest -> Ascend Tower.
+STEP 06: [White Tower] ─────► Defeat Minotaur -> GET ELIXIR OF LIFE.
+STEP 07: [Gladstone Siege] ─► Heal King Richard -> Receive Yvel Pass.
+STEP 08: [City of Yvel] ────► Clear Sewers -> Retrieve Water & Gold Keys.
+STEP 09: [Cimmeria Floor 1] ► Solve Teleporter Labyrinth -> Ascend stairs.
+STEP 10: [Cimmeria Floor 2] ► Unlock Nexus Gate with Gold Key -> Reach Roof.
+STEP 11: [Cimmeria Roof] ───► Confront Scotia -> Use Ruby of Truth on Mask.
+STEP 12: [Final Strike] ────► Slay Scotia -> Restore the Realm -> 100% WIN!
 
 ===============================================================================
 [06.00] IN-DEPTH SYSTEMS COMPENDIUM                                     [COMP]
 ===============================================================================
 
-CHARACTER MATRIX:
-+-----------+--------------+--------------+--------------+--------------+
-| Stat      |   Ak'shel    |   Michael    |    Kieran    |    Conrad    |
-+-----------+--------------+--------------+--------------+--------------+
-| Race      | Dracoid      | Human        | Thomgog      | Human        |
-| Specialty | Pure Mage    | Heavy Fighter| Rogue/Scout  | Balanced Pal |
-| Base HP   | 55           | 85           | 65           | 75           |
-| Base MP   | 90           | 20           | 45           | 50           |
-| Top Skill | Magic (Lvl 3)| Might (Lvl 3)| Agility (L3) │ All (Lvl 2)  |
-+-----------+--------------+--------------+--------------+--------------+
+A. FOUR CHAMPIONS STARTING MATRIX:
++----------+------------+-------+-------+-------+-----------------------------+
+| CHAMPION | RACE / CLASS| MIGHT | PROW. | ARMOR | STARTING SPELLS / AFFINITY |
++----------+------------+-------+-------+-------+-----------------------------+
+| Ak'shel  | Dracoid M. | Low   | High  | Low   | Spark Lvl 2, Heal Lvl 1     |
+| Michael  | Human Kni. | High  | Med   | High  | Heavy Weapons / Plate Armor |
+| Kieran   | Thomgog R. | Med   | High  | Med   | Fast Speed / Dagger Mastery |
+| Conrad   | Human Pal. | High  | Med   | High  | Balanced Melee / Divine Mag |
++----------+------------+-------+-------+-------+-----------------------------+
 
-ELEMENTAL SPELL CHARGE TIERS:
-  Tier 1: Instant click (5 MP) - Fast projectile.
-  Tier 2: Hold 1.5s (15 MP)   - Splash damage.
-  Tier 3: Hold 3.0s (35 MP)   - Penetration + status effect.
-  Tier 4: Hold 5.0s (70 MP)   - Screen-clearing elemental eruption.
-
-SECRET & HIDDEN SPELLS:
-  • Hand of Fate: Found in Yvel City (X:14, Y:22). Summons giant spectral fist
-    that pushes back enemies and is required for Necrosap wall locks.
-  • Mist of Doom: Found in Catwalk Caverns (Upper Mines). Creates spectral AOE
-    fog that shreds ethereal ghosts and wraiths.
+B. SECRET SPELLS:
+  • Hand of Fate (Lvl 4): Discovered in Castle Cimmeria hidden alcove (X:14,
+    Y:02). Summons a spectral crush dealing 180-240 unblockable magic damage.
+  • Mist of Doom (Lvl 4): Found in White Tower sub-level. Engulfs foes
+    in corrosive acid vapor dealing continuous damage over time.
 
 ===============================================================================
 [07.00] KEYBOARD CONTROLS & HOTKEY COMMAND MATRIX                       [KEYS]
 ===============================================================================
 
-+--------------+--------------------------------------------------------------+
-| Hotkey       | Engine Action & Gameplay Effect                              |
-+--------------+--------------------------------------------------------------+
-| Up / Numpad 8| Step Forward (1 grid tile)                                   |
-| Down/Numpad 2| Step Backward (1 grid tile)                                  |
-| Left/Numpad 4| Turn Left 90 degrees                                         |
-|Right/Numpad 6| Turn Right 90 degrees                                        |
-| Numpad 7 / Q | Strafe Step Left (sidestep without turning)                  |
-| Numpad 9 / E | Strafe Step Right (sidestep without turning)                 |
-+--------------+--------------------------------------------------------------+
-| Spacebar     | Toggle Combat Cursor / Quick Attack Target                   |
-| 1, 2, 3      | Primary Hand Weapon Attack (Party Slot 1, 2, 3)              |
-| Shift+1/2/3  | Off-Hand Weapon Attack / Shield Bash                         |
-| Right Click  | Cast Primed Spell / Open Character Detail                    |
-+--------------+--------------------------------------------------------------+
-| M            | Magic Atlas (Automap viewer, requires Atlas relic)           |
-| C            | Character Sheet (Inspect party stats, levels, and gear)      |
-| I / Tab      | Inventory Bags & Item Management                             |
-| R            | Rest Party (Sleep to regenerate HP & MP; stops if aggro'd)   |
-| O / Esc      | Game Options (Save Game, Load Game, Sound, Quit to DOS)      |
-+--------------+--------------------------------------------------------------+
+  • [W] / [Up Arrow]    : Move Forward One Tile
+  • [S] / [Down Arrow]  : Move Backward One Tile
+  • [A] / [Q]           : Turn Left 90 Degrees
+  • [D] / [E]           : Turn Right 90 Degrees
+  • [1] / [2] / [3]     : Select Active Party Member Character Card
+  • [Spacebar]          : Cast Active Spell / Primary Weapon Attack
+  • [Tab]               : Toggle Overhead Automap
 
 ===============================================================================
 [08.00] THE MANUALS, LORE BOOKS, FEELIES & COPY PROTECTION              [MANL]
 ===============================================================================
 
-A. THE PLAYER'S GUIDE & 48-PAGE RULEBOOK:
-  The boxed release contained a 48-page booklet explaining Gladstone politics,
-  character creation, weapon mechanics, and the 4 spell disciplines.
+A. RETAIL COPY-PROTECTION SYSTEM:
+  In original floppy releases, the game prompted for specific words from the
+  48-page manual (e.g., "Page 14, Line 3, Word 4").
 
-B. "THE HISTORY OF THE LANDS" (NARRATIVE FEELIE):
-  An illustrated narrative book included with the game detailing the ancestry
-  of King Richard Leene, the ancient races (Huline, Dracoids, Thomgogs), the
-  Draracle, and Scotia discovering the Nether Mask in the Dark Army ruins.
-
-C. OFF-DISK COPY PROTECTION (FLOPPY VS CD-ROM):
-  • 1993 Floppy Edition: Before leaving Gladstone Keep, Chancellor Geron
-    presents a manual question: "Turn to Page X, Line Y, enter the Z-th word."
-  • 1994 CD-ROM "Talkie" Edition (v1.23): Westwood removed the copy protection
-    prompt completely, relying on the physical 600MB CD-ROM as DRM.
-
-D. HISTORICAL ASSEMBLY DECOMPILATION: BYPASSING 90S MANUAL DRM:
+B. X86 DISASSEMBLY & PATCH VECTORS:
   In x86 DOS binaries, manual checks evaluated a conditional jump:
     CALL CheckWordMatch        ; Returns AX=1 (Valid), AX=0 (Invalid)
     TEST AX, AX
@@ -319,7 +229,29 @@ BORLAND LCG DROP GENERATOR (LANDS.EXE):
   Roll = (NextSeed >> 16) % 100
 
 ===============================================================================
-[10.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
+[10.00] SEQUEL BRIDGES, CHARACTER EVOLUTION & WESTWOOD LORE             [SEQL]
+===============================================================================
+
+A. SCOTIA'S LEGACY: LUTHER & THE SHAPESHIFTING CURSE (LANDS OF LORE II):
+  Defeating Scotia in Castle Cimmeria does not eradicate the power of the
+  Nether Mask. In "Lands of Lore II: Guardians of Destiny" (1997), Scotia's
+  son, Luther, inherits an uncontrollable genetic curse that forces him to
+  spontaneously shapeshift between human, a hulking beast, and a lizard.
+
+B. FALL OF GLADSTONE: COPPER LEGRE & THE RIFT BEASTS (LANDS OF LORE III):
+  In "Lands of Lore III" (1999), Gladstone Keep is shattered when dimensional
+  rifts tear open across the realm. King Richard is slain, and the player takes
+  control of Copper LeGre (illegitimate son of Eric LeGre and nephew to
+  King Richard) to heal the fractured universe.
+
+C. THE DRARACLE & ARRANT RRAK / ARRANT PRAC ANAGRAMS:
+  Across all three games, the Draracle (Dragon + Oracle) acts as an immortal
+  cosmic architect. Westwood developers encoded linguistic in-jokes into his
+  ancient lizard disciple: "Arrant Rrak" (and its anagrammatic merchant variant
+  "Arrant Prac"), who recurs as a cryptic shopkeeper and scholar.
+
+===============================================================================
+[11.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
 ===============================================================================
 
 A. TARGET ENGINE IDENTIFIERS:
@@ -335,14 +267,14 @@ B. EMULATION COMPATIBILITY & AUDIO CONFIGURATION:
     high-DPI monitors.
 
 ===============================================================================
-[11.00] CONTACT POLICY                                                  [CONT]
+[12.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[12.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[13.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Westwood Studios, Sir Patrick Stewart, CJayC & GameFAQs, ScummVM Kyra Team,

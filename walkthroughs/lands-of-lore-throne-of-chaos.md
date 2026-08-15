@@ -419,7 +419,20 @@ $$\text{Roll} = (\text{NextSeed} \gg 16) \pmod{100}$$
 * **The ScummVM Kyra Team**: For preserving retro engine architecture.
 * **YOU, the reader**: For taking the time to read this research guide!---
 
-# 10. SCUMMVM & MODERN EMULATION TARGET PROFILE [SCUM]
+---
+
+# 10. SEQUEL BRIDGES, CHARACTER EVOLUTION & WESTWOOD LORE [SEQL]
+
+### A. Scotia's Legacy: Luther & The Shapeshifting Curse (Lands of Lore II)
+Defeating Scotia in Castle Cimmeria does not eradicate the dark power of the Nether Mask. In *Lands of Lore II: Guardians of Destiny* (1997), Scotia's son, **Luther**, inherits an uncontrollable genetic curse that forces him to spontaneously shapeshift between human, a hulking beast, and a lizard.
+
+### B. Fall of Gladstone: Copper LeGre & The Rift Beasts (Lands of Lore III)
+In *Lands of Lore III* (1999), Gladstone Keep is shattered when dimensional rifts tear open across the realm. King Richard is slain, and the player takes control of **Copper LeGre** (the illegitimate son of Eric LeGre and nephew to King Richard) to heal the fractured universe.
+
+### C. The Draracle & Arrant Rrak / Arrant Prac Anagrams
+Across all three games, the **Draracle** (Dragon + Oracle) acts as an immortal cosmic architect. Westwood developers encoded linguistic in-jokes into his ancient lizard disciple: **Arrant Rrak** (and its anagrammatic merchant variant **Arrant Prac**), who recurs as a cryptic shopkeeper and scholar.
+
+# 11. SCUMMVM & MODERN EMULATION TARGET PROFILE [SCUM]
 
 * **Target Engine ID**: `kyra` (Sub-engine: `lol`).
 * **Platform Target**: PC / DOS CD-ROM Talkie Edition (1994).

@@ -27,10 +27,13 @@ TABLE OF CONTENTS ..................................................... [00.00]
           - Decompiled Cauldron Bitmask Accumulator
   [08.00] HISTORICAL COPY-PROTECTION & X86 BINARY CRACKING ............. [CRCK]
           - Darm's Spellbook DRM Lookup Mechanics & x86 Patch
-  [09.00] VERSION HISTORY & BUILD PROVENANCE ........................... [VERS]
-  [10.00] SCUMMVM & MODERN EMULATION TARGET PROFILE .................... [SCUM]
-  [11.00] CONTACT POLICY ............................................... [CONT]
-  [12.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
+  [09.00] SEQUEL BRIDGES, CHARACTER EVOLUTION & MALCOLM'S REVENGE ...... [SEQL]
+          - Zanthia's Arc & The Hand of Fate Mystery
+          - Marko & The Trial of Malcolm (Book 3 Continuity)
+  [10.00] VERSION HISTORY & BUILD PROVENANCE ........................... [VERS]
+  [11.00] SCUMMVM & MODERN EMULATION TARGET PROFILE .................... [SCUM]
+  [12.00] CONTACT POLICY ............................................... [CONT]
+  [13.00] CREDITS & SPECIAL THANKS ..................................... [CRED]
 
 ===============================================================================
 [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
@@ -93,73 +96,59 @@ As of this version, the authorized host repositories are:
 [04.01] ACT I: SWAMP HUT & POTION OF SKEPTICISM                         [WLK01]
 ===============================================================================
 
-+-----------------------------------------------------------------------------+
-| AREA ITEM CHECKLIST: ACT I                                                  |
-|                                                                             |
-| [ ] Empty Flasks (x2) ............ [Zanthia's Hut: Floor]                   |
-| [ ] Recipe Book .................. [Zanthia's Hut: Stand]                   |
-| [ ] Swamp Water Flask ............ [Swamp Water Pool]                       |
-| [ ] Swamp Onion .................. [Vegetable Patch]                        |
-| [ ] Sour Swamp Berries ........... [Thorn Bush]                             |
-| [ ] Brewed Vinegar ............... [Distilled in Hut Still]                 |
-| [ ] [POTION] Potion of Skepticism  [Cauldron: Water + Onion + Vinegar]      |
-| [ ] Gold Coin .................... [Ferry Terminal Ticket Booth]            |
-+-----------------------------------------------------------------------------+
-
-1. Hut: Take the Empty Flasks and Recipe Book from the stand. Fill one flask
-   with swamp water outside.
+1. Hut: Take Empty Flasks and Recipe Book from the stand. Fill one flask with
+   swamp water outside.
 2. Garden: Harvest an Onion from the vegetable patch and Sour Berries from the
    thorn bush.
-3. Still: Place berries in the copper still to distill pure Vinegar.
-4. Cauldron: Add Swamp Water + Onion + Vinegar into the cauldron. Dip empty
-   flask to obtain the Potion of Skepticism.
-5. Ferry: Drink Skepticism potion to see through the illusion. Pay Gold Coin
-   and board the ferry!
+3. Still: Place berries in copper still to distill pure Vinegar.
+4. Cauldron: Add Water + Onion + Vinegar into cauldron. Dip empty flask to
+   obtain the Potion of Skepticism.
+5. Ferry: Drink Skepticism potion to dispel illusion. Pay Gold Coin to board.
 
 ===============================================================================
 [04.02] ACT II: MORNING MIST VALLEY & DRAGON FLIGHT                     [WLK02]
 ===============================================================================
 
-1. Valley: Harvest ripe Wheat from the field. Grind at the windmill for Dough.
+1. Valley: Harvest ripe Wheat from field. Grind at windmill for Dough.
 2. Dairy Cellar: Collect aged Cheese and spicy Mustard seeds.
 3. Cauldron: Brew Sandwich Potion (Dough + Mustard + Cheese).
 4. Dragon Pen: Feed sandwich to hungry dragon guard. Equip Dragon Saddle and
-   take flight to the volcanic mountains!
+   take flight to volcanic mountains!
 
 ===============================================================================
 [04.03] ACT III: VOLCANIC CORE & LAVA CAVERNS                           [WLK03]
 ===============================================================================
 
-1. Lava Core: Collect Sulphur Stone from the vent and Hot Pepper from the bush.
+1. Lava Core: Collect Sulphur Stone from vent and Hot Pepper from bush.
 2. Cauldron: Brew Dragon Breath Potion (Sulphur + Pepper + Water).
-3. Sealed Tunnel: Drink potion to breathe fire and blast the rock wall. Power
-   the ore tram with Gold Ingot and ride into the highlands.
+3. Sealed Tunnel: Drink potion to breathe fire and blast rock wall. Power ore
+   tram with Gold Ingot and ride into highlands.
 
 ===============================================================================
 [04.04] ACT IV: CLOUD HEIGHTS & SNOWMAN POTION                          [WLK04]
 ===============================================================================
 
-1. Snow Peak: Gather Charcoal and Dry Twigs first. Pick the Snowball last!
+1. Snow Peak: Gather Charcoal and Dry Twigs first. Pick Snowball last!
 2. Cauldron: Rapidly brew Snowman Potion (Snowball + Twigs + Charcoal) before
    the snowball melts.
-3. Drink potion for thermal immunity and slip past the storm guard into the
-   Cloud Heights.
+3. Drink potion for thermal immunity and slip past storm guard into Cloud
+   Heights.
 
 ===============================================================================
 [04.05] ACT V: THE WORLD MACHINE & GEAR CORE                            [WLK05]
 ===============================================================================
 
 1. Cloud Funnel: Brew Pegasus Flight Potion (Feather + Starfish + Water).
-2. Glide down the funnel into the ancient World Machine sanctum.
-3. Align the elemental cogs and insert the Gear Key into the central shaft.
+2. Glide down funnel into ancient World Machine sanctum.
+3. Align elemental cogs and insert Gear Key into central shaft.
 
 ===============================================================================
 [04.06] ACT VI: CENTER OF THE WORLD & FINAL SHOWDOWN                    [WLK06]
 ===============================================================================
 
-1. Arena: Drop the Rainbow Prism on the center tile to lure the Giant Hand.
-2. When the Hand lunges for the prism, pull the heavy brake lever!
-3. The gears crush the Hand, restoring the Anchor Stone and saving Kyrandia!
+1. Arena: Drop Rainbow Prism on center tile to lure the Giant Hand.
+2. When the Hand lunges for the prism, pull heavy brake lever!
+3. The gears crush the Hand, restoring Anchor Stone and saving Kyrandia!
 
 ===============================================================================
 [05.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
@@ -200,8 +189,8 @@ A. COMPLETE 8-POTION RECIPE MATRIX:
 +----+-----------------------+-------------------------+----------------------+
 
 B. MELTING TIMER MECHANICS (120-SECOND VOLATILITY):
-  Snowballs melt after 1,200 engine ticks (~120 seconds). Always stage the dry
-  ingredients next to the cauldron before harvesting the snowball!
+  Snowballs melt after 1,200 engine ticks (~120 seconds). Always stage dry
+  ingredients next to cauldron before harvesting snowball!
 
 ===============================================================================
 [07.00] ENGINE FORENSICS: THE CAULDRON STATE-MACHINE                    [ENGN]
@@ -218,29 +207,45 @@ ingredient accumulator inside ALCHEMY.PAK:
 ===============================================================================
 
 A. RETAIL COPY-PROTECTION MECHANISM:
-  At Darm's house, the game prompted the player for specific ingredient words
-  or page numbers from the retail manual (e.g., "DARM", "BRANDY", "FEATHER").
+  At Darm's house, the game prompted player for specific ingredient words or
+  page numbers from the retail manual (e.g., "DARM", "BRANDY", "FEATHER").
 
 B. X86 DISASSEMBLY & PATCH VECTORS:
-  In KYRA2.EXE / MAIN.EXE, the protection check executed via:
+  In KYRA2.EXE / MAIN.EXE, protection check executed via:
     CALL check_spellbook_protection
     TEST AX, AX
     JZ   fail_protection_trap    ; Opcode: 74 1A
   Historical crackers bypassed this check using two methods:
-  1. Forcing the Jump: Changing JZ (0x74 0x1A) to NOPs (0x90 0x90) so execution
-     always falls through to the success branch.
+  1. Forcing Jump: Changing JZ (0x74 0x1A) to NOPs (0x90 0x90) so execution
+     always falls through to success branch.
   2. Subroutine Bypass: Overwrite CALL check with MOV AX, 0001h (0xB8 0x01)
      followed by RET (0xC3).
 
 ===============================================================================
-[09.00] VERSION HISTORY & BUILD PROVENANCE                              [VERS]
+[09.00] SEQUEL BRIDGES, CHARACTER EVOLUTION & MALCOLM'S REVENGE         [SEQL]
+===============================================================================
+
+A. ZANTHIA'S CHARACTER ARC & THE DISAPPEARING REALM:
+  "Hand of Fate" elevates Zanthia from supporting mystic into the quick-witted,
+  pragmatic lead of the trilogy. Her quest reveals that the disappearing land
+  was orchestrated by the Giant Hand (Marko's rogue glove animated by cosmic
+  magic), setting up the physical restoration of Kyrandia.
+
+B. MARKO & THE CONTINUITY TO MALCOLM'S REVENGE (BOOK 3):
+  The bungling magician Marko, who assists Zanthia in Book 2, returns in "The
+  Legend of Kyrandia: Book 3 - Malcolm's Revenge" (1994). The political fallout
+  from Book 2's near-catastrophe leads directly to the royal court's suspicion
+  and the high-stakes trial of Malcolm.
+
+===============================================================================
+[10.00] VERSION HISTORY & BUILD PROVENANCE                              [VERS]
 ===============================================================================
 
 Target Build: The Legend of Kyrandia: Book 2 - Hand of Fate (CD Talkie DOS)
 Build SHA-256: 073a5d5bc574426bfade0411426707623f44da13ece5c337fc89023c4c509f18
 
 ===============================================================================
-[10.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
+[11.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
 ===============================================================================
 
 A. TARGET ENGINE IDENTIFIERS:
@@ -255,14 +260,14 @@ B. EMULATION COMPATIBILITY & ENGINE FIXES:
   • Cross-Platform Saves: Uses unified .s00-.s99 savegame slots.
 
 ===============================================================================
-[11.00] CONTACT POLICY                                                  [CONT]
+[12.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[12.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[13.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Westwood Studios, Allyson Cadden, ScummVM Kyra Team, CJayC & GameFAQs,
