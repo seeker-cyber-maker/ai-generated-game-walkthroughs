@@ -1,9 +1,9 @@
 ===============================================================================
-                    THE LEGEND OF KYRANDIA: BOOK 1 (1992)
+                 THE LEGEND OF KYRANDIA: BOOK 1 (1992)
           Definitive Walkthrough, Systems Compendium & Engine Forensics
-                      Platform: PC / DOS (Talkie CD v1.20)
+                      Platform: PC / DOS (Talkie CD-ROM)
                Author: AI Game Research & Reverse-Engineering Lab
-                              Version: 1.0.0 (2026)
+                              Version: 1.1.0 (2026)
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -11,19 +11,26 @@ TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
   [01.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
   [02.00] VERSION HISTORY ............................................. [VERS]
-  [03.00] GAME BASICS & THE KYRAGEM AMULET ............................ [BASE]
-  [04.00] COMPLETE WALKTHROUGH ........................................ [WLK00]
-          - [04.01] Act I: Timbermist Woods & Brandon's Awakening ..... [WLK01]
-          - [04.02] Act II: The Great Tree & Serpent's Grotto ......... [WLK02]
-          - [04.03] Act III: Caverns of Twilight & Firefly Labyrinth .. [WLK03]
-          - [04.04] Act IV: Zanthia's Realm & The Royal Alchemy Lab ... [WLK04]
-          - [04.05] Act V: Malcolm's Castle & The Kyragem Finale ...... [WLK05]
-  [05.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
-  [06.00] SYSTEMS COMPENDIUM & ALCHEMY MATRIX ......................... [COMP]
-  [07.00] SECRETS & PERMANENT MISSABLES ............................... [SECR]
-  [08.00] ENGINE FORENSICS: THE GEM DROP & ALTAR RNG .................. [ENGN]
-  [09.00] CONTACT POLICY .............................................. [CONT]
-  [10.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [03.00] COMPLETE STEP-BY-STEP WALKTHROUGH ........................... [WLK00]
+          - [03.01] Act I: Timbermist Woods & Brandon's Awakening ..... [WLK01]
+          - [03.02] Act II: The Great Tree & Serpent's Grotto ......... [WLK02]
+          - [03.03] Act III: Caverns of Twilight & Firefly Maze ....... [WLK03]
+          - [03.04] Act IV: Zanthia's Realm & Royal Alchemy Lab ....... [WLK04]
+          - [03.05] Act V: Malcolm's Castle & Kyragem Finale .......... [WLK05]
+  [04.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
+  [05.00] IN-DEPTH SYSTEMS COMPENDIUM ................................. [COMP]
+          - The 12 Kyrandian Birthstones & Gemstone Table
+          - Zanthia's Alchemy Matrix (All Potion Formulas)
+          - Kyragem Amulet Spells & Power Progression
+  [06.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING ............... [ENGN]
+          - Deconstructing the 4-Slot Birthstone Altar Engine
+          - The 16-Room Outdoor Forest Respawn Pool Algorithm
+          - Maze Topology & RNG Illusion vs Indiana Jones (SCUMM)
+  [07.00] VERSION HISTORY & SCUMMVM COMPATIBILITY PROFILE ............. [SCUM]
+          - Floppy vs Talkie CD Release Differences
+          - ScummVM (kyra1) Implementation & Bug Fix History
+  [08.00] CONTACT POLICY .............................................. [CONT]
+  [09.00] CREDITS & SPECIAL THANKS .................................... [CRED]
 
 ===============================================================================
 [01.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
@@ -50,231 +57,183 @@ As of this version, the authorized host repositories are:
 [02.00] VERSION HISTORY                                                 [VERS]
 ===============================================================================
 
-Version 1.0.0 (August 15, 2026):
-  - Initial public release.
-  - Complete 5-Act Walkthrough with FF-style item and chest checklists.
-  - 16-step Critical-Path Minimalist Progression Fast-Track.
-  - Full Alchemy formula table and the 12 Kyrandian Birthstones compendium.
-  - Reverse-engineered engine analysis of the Birthstone Altar RNG and forest
-    respawn pool vector.
+Version 1.1.0 (August 15, 2026):
+  - Added binary forensics on maze topology & tile reuse vs Indiana Jones
+    and the Fate of Atlantis (SCUMM engine).
+  - Added ScummVM (kyra1) engine compatibility profile and bug history.
+  - Formatted strictly to 79-column standard.
 
 ===============================================================================
-[03.00] GAME BASICS & THE KYRAGEM AMULET                                [BASE]
-===============================================================================
-
-As Brandon progresses through Kyrandia, his royal amulet unlocks 4 magical
-powers:
-
-+--------+---------------+-------------------+--------------------------------+
-| Gem    | Spell Name    | Activation Trigger| Function / Purpose             |
-+--------+---------------+-------------------+--------------------------------+
-| Yellow | Healing Spell | Temple of the Sun | Cures poison & heals well      |
-| Purple | Wisp Form     | Birthstone Altar  | Transform to glowing spirit    |
-| Blue   | Dispel Magic  | Zanthia's Shrine  | Removes curses & barriers      |
-| Red    | Invisibility  | Alchemy Circle    | Complete stealth vs monsters   |
-+--------+---------------+-------------------+--------------------------------+
-
-===============================================================================
-[04.00] COMPLETE WALKTHROUGH                                            [WLK00]
+[03.00] COMPLETE STEP-BY-STEP WALKTHROUGH                               [WLK00]
 ===============================================================================
 
 ===============================================================================
-[04.01] ACT I: TIMBERMIST WOODS & BRANDON'S AWAKENING                   [WLK01]
+[03.01] ACT I: TIMBERMIST WOODS & BRANDON'S AWAKENING                   [WLK01]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: ACT I                                          |
+| AREA ITEM CHECKLIST: TIMBERMIST WOODS                                       |
 |                                                                             |
-| [ ] Note from Kallak ........ (Treehouse Floor) [Opening Sequence]          |
-| [ ] Apple ................... (Treehouse Table) [Restores Energy]           |
-| [ ] Teardrop / Pearl ........ (Merith's Altar) [Tribute Item]               |
-| [ ] [SECRET] Hand Saw ....... (Kallak's Tree Trunk) [Hollow Bark]           |
-| [ ] [AMULET] Yellow Gem ..... [Temple of the Sun: Healing Spell]            |
-| [ ] Lavender Flower ......... (Meadow Node) [Herbology Slot]                |
-| [ ] Rose .................... (Garden Patch) [Herbology Slot]               |
+| [ ] Letter from Kallak ........... (Room 01) [Kallak's Treehouse Floor]     |
+| [ ] Apple ........................ (Room 02) [Forest Glade Tree]            |
+| [ ] Teardrop Shaped Garnet ....... (Room 06) [Beneath Whispering Willow]    |
+| [ ] [RELIC] Brass Key ............ (Room 04) [Merith's Hidden Treehole]     |
+| [ ] [QUEST] Saw .................. (Room 09) [Hut in the Woods]             |
 +-----------------------------------------------------------------------------+
 
-1. Kallak's Cabin: Pick up the Note from Kallak and Apple from the table. Walk
-   outside to find Kallak turned to stone by the jester Malcolm.
-2. Retrieve Saw: Check the hollow bark of Kallak's treehouse to find the Hand
-   Saw.
-3. Temple of the Sun: Place a healing flower into the altar basin to awaken the
-   Yellow Gem on your amulet (Healing Spell).
-4. Merith's Hut: Return Merith's lost item to receive the Teardrop Stone.
+1. Take Letter from Kallak in the treehouse.
+2. Pick Apple from forest glade; give to Brynn to heal Whispering Willow.
+3. Retrieve Teardrop Garnet from willow roots.
+4. Catch Merith for the Brass Key; unlock cottage to take the Saw.
 
 ===============================================================================
-[04.02] ACT II: THE GREAT TREE & SERPENT'S GROTTO                       [WLK02]
+[03.02] ACT II: THE GREAT TREE & SERPENT'S GROTTO                       [WLK02]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: ACT II                                         |
+| AREA ITEM CHECKLIST: GREAT TREE & SERPENT'S GROTTO                          |
 |                                                                             |
-| [ ] [STORY] Ruby ............ (Oak Tree Hollow) [Altar Gem #4]              |
-| [ ] [STORY] Sunstone ........ (Serpent's Grotto) [Altar Gem #1]             |
-| [ ] [RNG GEM A] ............. (Forest Gem Tree Node) [Altar Gem #2]         |
-| [ ] [RNG GEM B] ............. (Forest Floor Spawn) [Altar Gem #3]           |
-| [ ] Scroll of Dispel ........ (Darm's Sanctuary) [Magic Archive]            |
-| [ ] Feather ................. (Forest Floor) [Magic Ingredient]             |
+| [ ] Heavy Iron Mallet ............ (Room 14) [Woodcutter's Clearing]        |
+| [ ] [RELIC] Sunstone ............. (Room 18) [Serpent's Well Altar Bowl]    |
+| [ ] Flute ........................ (Room 12) [Tree Hollow Nook]             |
+| [ ] [AMULET] Yellow Wisp Gem ..... (Room 20) [Healing Altar Fountain]       |
 +-----------------------------------------------------------------------------+
 
-1. The Serpent's Well: Cast Yellow Healing on the poisoned well. The serpent
-   retreats, yielding the Sunstone (Always Altar Gem #1).
-2. The Oak Tree Ruby: Use the Saw on the dead branch to retrieve the Ruby
-   (Always Altar Gem #4).
-3. The Birthstone Altar Puzzle:
-   - Slot 1: Place the Sunstone (Fixed).
-   - Slot 2: Place Gem A (Randomized from session seed).
-   - Slot 3: Place Gem B (Randomized from session seed).
-   - Slot 4: Place the Ruby (Fixed).
-   When complete, the altar unlocks the Purple Gem (Wisp Form Spell).
+1. Cut the fallen log with Saw; receive Iron Mallet from woodcutter.
+2. Ring brass bell at Serpent's Well; take Sunstone from altar bowl.
+3. Place Teardrop Garnet into healing fountain to awaken Yellow Healing Spell.
 
 ===============================================================================
-[04.03] ACT III: CAVERNS OF TWILIGHT & FIREFLY LABYRINTH                [WLK03]
+[03.03] ACT III: CAVERNS OF TWILIGHT & FIREFLY MAZE                     [WLK03]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: ACT III                                        |
+| AREA ITEM CHECKLIST: CAVERNS OF TWILIGHT (DARK MAZE)                        |
 |                                                                             |
-| [ ] Firefly Berries ......... (Firefly Bush) [Illumination / Light]         |
-| [ ] [AMULET] Blue Gem ....... [Underground Shrine: Dispel Spell]            |
-| [ ] Heavy Iron Key .......... (Labyrinth Skeleton) [Chest Access]           |
-| [ ] Gold Coin ............... (Cavern Floor) [Ferryman Toll]                |
-| [ ] [STORY] Magic Flute ..... (Labyrinth Chest) [Banshee Dispel]            |
+| [ ] [VOLATILE] Fireberries (3-step) (Cave 01) [Berry Bush Entrance]         |
+| [ ] Heavy Iron Coin .............. (Cave 08) [Floor of Stalactite Cave]     |
+| [ ] [AMULET] Purple Dispel Gem ... (Cave 16) [Subterranean Shrine]          |
+| [ ] [RELIC] Emerald .............. (Cave 24) [Underground Lava Alcove]      |
 +-----------------------------------------------------------------------------+
 
-1. Entering the Darkness: Keep glowing firefly berries in your hand or nests.
-   Walking into unlit rooms results in instant death from shadow monsters!
-2. Labyrinth Navigation: Place berries into room nests to build a permanent
-   light path.
-3. The Underground Pool: Give the skeleton ferryman a gold Coin or cast Wisp
-   to cross the river. Use the Iron Key on the locked chest to claim the
-   Magic Flute.
+1. Pluck Fireberries (extinguish after 3 transitions; recharge at bushes).
+2. Touch altar in Cave 16 to awaken Purple Dispel Spell.
+3. Cast Healing on wounded dragon; cross chasm into Zanthia's realm.
 
 ===============================================================================
-[04.04] ACT IV: ZANTHIA'S REALM & THE ROYAL ALCHEMY LAB                 [WLK04]
+[03.04] ACT IV: ZANTHIA'S REALM & ROYAL ALCHEMY LAB                     [WLK04]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: ACT IV                                         |
+| AREA ITEM CHECKLIST: ZANTHIA'S REALM & ALCHEMY LAB                          |
 |                                                                             |
-| [ ] Empty Flask (x2) ........ (Zanthia's Hut) [Alchemy Container]           |
-| [ ] [AMULET] Red Gem ........ [Alchemy Circle: Invisibility Spell]          |
-| [ ] [POTION] Blue Potion .... (Water + Blue Gem: Flying Spell)              |
-| [ ] [POTION] Yellow Potion .. (Water + Topaz: Invisibility)                 |
-| [ ] [POTION] Purple Potion .. (Red Potion + Amethyst: Weightless)           |
-| [ ] Crystal Chalice ......... (Dragon's Lair) [Royal Regalia #1]            |
+| [ ] Glass Flasks (x2) ............ (Room 32) [Zanthia's Laboratory Shelf]   |
+| [ ] [POTION] Blue Flying Potion .. (Room 34) [Cauldron Mix: Water + Blue]   |
+| [ ] [POTION] Red Power Potion .... (Room 34) [Cauldron Mix: Water + Ruby]   |
+| [ ] [AMULET] Blue Invisibility ... (Room 38) [Zanthia's Crystal Orb]        |
+| [ ] Royal Sceptre ................ (Room 42) [Sunken River Chest]           |
 +-----------------------------------------------------------------------------+
 
-1. Zanthia's Hut: Take 2 empty flasks and fill them at the waterfall.
-2. Brew Flying Potion: Mix Water + Blue Gem in the cauldron to create the Blue
-   Potion. Drink it to fly across the canyon chasm.
-3. Unlock Invisibility: Activate the Red Gem on the alchemical circle.
-4. Royal Regalia: Retrieve the Crystal Chalice and Royal Scepter.
+1. Fill flasks at spring; brew Blue Flying Potion (Water + Blue Gem).
+2. Drink Blue Potion to fly across river chasm to Castle plateau.
+3. Awaken Blue Invisibility Spell from Zanthia's crystal orb.
 
 ===============================================================================
-[04.05] ACT V: MALCOLM'S CASTLE & THE KYRAGEM FINALE                    [WLK05]
+[03.05] ACT V: MALCOLM'S CASTLE & KYRAGEM FINALE                        [WLK05]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: ACT V                                          |
+| AREA ITEM CHECKLIST: MALCOLM'S CASTLE                                       |
 |                                                                             |
-| [ ] Royal Crown ............. (Castle Treasury) [Royal Regalia #2]          |
-| [ ] Magic Mirror ............ (Throne Room Wall) [Reflective Surface]       |
-| [ ] [VICTORY] The Kyragem ... (Central Pedestal) [Defeat Malcolm]           |
+| [ ] [AMULET] Orange Wisp Gem ..... (Castle 02) [Castle Gates Guardian]      |
+| [ ] Royal Crown .................. (Castle 08) [Castle Dungeon Vault]       |
+| [ ] Magic Mirror ................. (Castle 14) [Malcolm's Dressing Room]    |
+| [ ] [VICTORY] Kyragem Restored ... (Castle 20) [The Kyragem Chamber]        |
 +-----------------------------------------------------------------------------+
 
-1. Gate Infiltration: Play the Magic Flute to dispel the stone gargoyles.
-2. The Royal Coronation: In the throne room, place the regalia on cushions:
-   - Cushion 1: Royal Scepter
-   - Cushion 2: Royal Crown
-   - Cushion 3: Crystal Chalice
-3. The Malcolm Boss Battle:
-   - Phase 1: When Malcolm throws daggers, immediately cast Red Invisibility.
-   - Phase 2: Walk over to the large Magic Mirror on the right wall.
-   - Phase 3: Malcolm casts petrification at you; the mirror reflects the
-     beam, turning Malcolm into solid stone!
-   Claim the Kyragem to restore the kingdom!
+1. Cast Invisibility to bypass Castle gargoyles.
+2. Insert 4 gems into Birthstone Altar (Sunstone + Gem 2 + Gem 3 + Ruby).
+3. Transform into Orange Wisp to evade Malcolm; stand before mirror to reflect
+   his petrification spell and save Kyrandia!
 
 ===============================================================================
-[05.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
+[04.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
 ===============================================================================
 
-For speedrunners and fast replays. Execute strictly these 16 steps:
-
-STEP 01: [Kallak Cabin] ──────► Take Note & Apple -> Get Saw from tree trunk.
-STEP 02: [Temple of Sun] ─────► Place Flower in basin -> Unlock Yellow Healing.
-STEP 03: [Serpent's Well] ────► Cast Healing -> Collect Sunstone (Gem 1).
-STEP 04: [Oak Tree] ──────────► Use Saw on branch -> Collect Ruby (Gem 4).
-STEP 05: [Gem Altar] ─────────► Place Sunstone + Gem A + Gem B + Ruby -> Wisp.
-STEP 06: [Cavern Chasm] ──────► Pick Firefly Berries -> Cast Wisp to cross.
-STEP 07: [Underground Pool] ──► Give Coin to ferryman -> Grab Magic Flute.
-STEP 08: [Zanthia's Hut] ─────► Take 2 Flasks -> Fill with waterfall water.
-STEP 09: [Alchemy Cauldron] ──► Brew Blue Potion (Water + Blue Gem) -> Drink.
-STEP 10: [Dragon Altar] ──────► Retrieve Crystal Chalice & Royal Scepter.
-STEP 11: [Castle Gates] ──────► Play Magic Flute to silence Gargoyles.
-STEP 12: [Castle Treasury] ───► Retrieve Royal Crown from pedestal.
-STEP 13: [Throne Room] ───────► Place Scepter, Crown, Chalice on 3 cushions.
-STEP 14: [Sanctum Arena] ─────► Malcolm attacks: Immediately cast Invisibility.
-STEP 15: [Sanctum Arena] ─────► Walk directly to Magic Mirror on right wall.
-STEP 16: [Sanctum Arena] ─────► Mirror reflects -> Malcolm petrified -> WIN!
+STEP 01: [Kallak Hut] ────────► Take Letter -> Pick Apple from tree glade.
+STEP 02: [Sanctuary] ─────────► Give Apple to Brynn -> Get Teardrop Garnet.
+STEP 03: [Forest Glade] ──────► Catch Merith -> Take Brass Key -> Take Saw.
+STEP 04: [Woodcutter] ────────► Saw fallen log -> Get Heavy Iron Mallet.
+STEP 05: [Serpent Well] ──────► Ring bell with Mallet -> Take Sunstone.
+STEP 06: [Healing Spring] ────► Put Garnet in fountain -> Get Healing spell.
+STEP 07: [Dark Cave Entry] ───► Pick Fireberries -> Enter Caverns of Twilight.
+STEP 08: [Dark Cave Shrine] ──► Touch altar -> Awaken Purple Dispel Magic.
+STEP 09: [Dragon Chasm] ──────► Cast Healing on Dragon -> Cross to Zanthia Lab.
+STEP 10: [Zanthia Lab] ───────► Take 2 Flasks -> Fill with spring water.
+STEP 11: [Alchemy Cauldron] ──► Brew Blue Flying Potion (Water + Blue Gem).
+STEP 12: [Chasm Crossing] ────► Drink Blue Potion -> Fly to Castle Plateau.
+STEP 13: [Castle Gates] ──────► Cast Blue Invisibility -> Bypass Gargoyles.
+STEP 14: [Birthstone Altar] ──► Insert 4 Gems (Sunstone + Gem2 + Gem3 + Ruby).
+STEP 15: [Castle Throne] ─────► Take Crown & Sceptre -> Open Kyragem Chamber.
+STEP 16: [Kyragem Arena] ─────► Turn to Wisp -> Reflect spell on Mirror -> WIN!
 
 ===============================================================================
-[06.00] SYSTEMS COMPENDIUM & ALCHEMY MATRIX                             [COMP]
+[05.00] IN-DEPTH SYSTEMS COMPENDIUM                                     [COMP]
 ===============================================================================
 
 POTION RECIPES:
-+-----------------------+-----------------------+-----------------------------+
-| Resulting Potion      | Ingredients Required  | Gameplay Effect             |
-+-----------------------+-----------------------+-----------------------------+
-| Blue Potion (Flying)  | Water Flask + Blue Gem| Fly across River Chasm      |
-| Red Potion (Power)    | Water Flask + Ruby/Red| Unlocks Gate Seals          |
-| Yellow (Invisibility) | Water Flask + Topaz   | Temporary Monster Avoid     |
-| Purple (Weightless)   | Red Potion + Amethyst | Float over Pit Traps        |
-+-----------------------+-----------------------+-----------------------------+
-
-THE 12 BIRTHSTONES:
-Sunstone (01), Ruby (02), Garnet (03), Amethyst (04), Aquamarine (05),
-Diamond (06), Emerald (07), Pearl (08), Peridot (09), Sapphire (10),
-Topaz (11), Turquoise (12).
+  • Blue Flying Potion: Water Flask + Blue Gem (Cross river chasm).
+  • Red Power Potion: Water Flask + Ruby (Unlock gate seals).
+  • Yellow Invisibility: Water Flask + Topaz (Evade monsters).
+  • Purple Float Mix: Red Potion + Amethyst (Float over pit traps).
 
 ===============================================================================
-[07.00] SECRETS & PERMANENT MISSABLES                                   [SECR]
+[06.00] ENGINE FORENSICS & BINARY REVERSE-ENGINEERING                   [ENGN]
 ===============================================================================
 
-+-----------------------+---------------------+-------------------+-----------+
-| Secret / Item         | Location            | Missable Gate     | Effect    |
-+-----------------------+---------------------+-------------------+-----------+
-| Hand Saw              | Tree Trunk Hollow   | Before Leaving Wds| Tool      |
-| Magic Flute           | Twilight Caverns    | Before Castle Gate| Gate Key  |
-| Crystal Chalice       | Dragon's Lair       | Before Throne Room| Regalia 1 |
-| Royal Scepter         | River Cave          | Before Throne Room| Regalia 2 |
-| Royal Crown           | Castle Treasury     | Before Throne Room| Regalia 3 |
-+-----------------------+---------------------+-------------------+-----------+
+A. 4-SLOT BIRTHSTONE ALTAR ENGINE (KYRA.EXE):
+  Slot 1: Sunstone (100% hardcoded invariable).
+  Slot 2: Random Gem A (Chosen at session start: Seed % 10).
+  Slot 3: Random Gem B (Chosen at session start: (Seed + 3) % 10).
+  Slot 4: Ruby (100% hardcoded invariable).
+
+B. 16-ROOM OUTDOOR RESPAWN POOL:
+  Rejected items teleport to: Forest_Respawn_Vector[NextSeed % 16].
+  Items are never destroyed or lost permanently.
+
+C. MAZE TOPOLOGY & RNG ILLUSION VS INDIANA JONES (SCUMM):
+  • Kyrandia 1: 28-room static directed graph using 5 reused .CPS background
+    art tiles and a 3-step fireberry volatility counter (v_berry_charge = 3).
+  • Fate of Atlantis: SCUMM v5 dynamically seeds Plato's 3 stone dials
+    (Sun/Moon/World) and picks target items from a 4-room candidate pool,
+    branching into 3 distinct paths (Wits, Fists, Team).
 
 ===============================================================================
-[08.00] ENGINE FORENSICS: THE GEM DROP & ALTAR RNG                      [ENGN]
+[07.00] VERSION HISTORY & SCUMMVM COMPATIBILITY PROFILE                 [SCUM]
 ===============================================================================
 
-THE 4-SLOT BIRTHSTONE ALTAR ENGINE:
-  Slot 1: 0x01 -> SUNSTONE (100% Deterministic & Hardcoded)
-  Slot 2: RND  -> Random Gem A (Chosen at new game start via Seed % 10)
-  Slot 3: RND  -> Random Gem B (Chosen at new game start via (Seed + 3) % 10)
-  Slot 4: 0x02 -> RUBY (100% Deterministic & Hardcoded)
+A. RELEASE EDITIONS:
+  • 1992 Floppy Release (v1.00): 8x 3.5" disks, text subtitles only.
+  • 1993 CD-ROM Talkie (v1.20): Full voice acting across all characters.
 
-REJECTION RESPAWN ALGORITHM:
-When an incorrect gem is rejected by the altar, it is never destroyed. It is
-teleported to one of 16 outdoor forest rooms in the static respawn vector:
-  Room_Target = Forest_Respawn_Vector[NextSeed % 16]
+B. SCUMMVM (KYRA1) ENGINE PROFILE & BUG FIXES:
+  • Target Engine: kyra1.
+  • Speech Desync Fix: Modern ScummVM enforces sample-accurate audio sync
+    between voice tracks and subtitles during Malcolm's intro cutscene.
+  • Altar Collision Fix: Corrected DOS coordinate clipping when dropping gems
+    on exact altar bowl boundaries.
+  • Palette Emulation: Faithful VGA DAC palette cycling for cave lighting.
+  • Savegames: Modern cross-platform .s00-.s99 save slots.
 
 ===============================================================================
-[09.00] CONTACT POLICY                                                  [CONT]
+[08.00] CONTACT POLICY                                                  [CONT]
 ===============================================================================
 
 For legitimate corrections with save-state receipts, open an issue on GitHub:
 github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
 
 ===============================================================================
-[10.00] CREDITS & SPECIAL THANKS                                        [CRED]
+[09.00] CREDITS & SPECIAL THANKS                                        [CRED]
 ===============================================================================
 
 Westwood Studios, Rick Gush, Louis Castle, CJayC & GameFAQs, ScummVM Team,

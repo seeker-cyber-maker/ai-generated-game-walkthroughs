@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Legend of Kyrandia: Book 1 — Definitive Walkthrough & Systems Compendium</title>
+  <title>The Legend of Kyrandia: Book 1 — Walkthrough, Forensics & Systems Compendium</title>
   <style>
     :root {
       --bg-main: #0b0f19;
@@ -15,10 +15,9 @@
       --accent: #38bdf8;
       --accent-glow: rgba(56, 189, 248, 0.15);
       --green: #10b981;
-      --red: #ef4444;
-      --blue: #3b82f6;
-      --purple: #a855f7;
       --gold: #f59e0b;
+      --red: #ef4444;
+      --purple: #a855f7;
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
@@ -195,11 +194,6 @@
       color: var(--text-muted);
     }
 
-    .tag-secret { color: var(--purple); font-weight: bold; }
-    .tag-missable { color: var(--red); font-weight: bold; }
-    .tag-amulet { color: var(--gold); font-weight: bold; }
-    .tag-story { color: var(--green); font-weight: bold; }
-
     /* Fast Track Box */
     .fast-track-box {
       background: #060911;
@@ -284,13 +278,14 @@
         <li><a href="#legal">Disclaimer & Index <span class="nav-tag">[LEGL]</span></a></li>
         <li><a href="#walkthrough">Full Walkthrough Hub <span class="nav-tag">[WLK00]</span></a></li>
         <li><a href="#act1" style="padding-left: 20px;">Act I: Timbermist Woods <span class="nav-tag">[WLK01]</span></a></li>
-        <li><a href="#act2" style="padding-left: 20px;">Act II: The Great Tree <span class="nav-tag">[WLK02]</span></a></li>
-        <li><a href="#act3" style="padding-left: 20px;">Act III: Twilight Caverns <span class="nav-tag">[WLK03]</span></a></li>
-        <li><a href="#act4" style="padding-left: 20px;">Act IV: Zanthia's Realm <span class="nav-tag">[WLK04]</span></a></li>
+        <li><a href="#act2" style="padding-left: 20px;">Act II: Serpent's Grotto <span class="nav-tag">[WLK02]</span></a></li>
+        <li><a href="#act3" style="padding-left: 20px;">Act III: Caverns of Twilight <span class="nav-tag">[WLK03]</span></a></li>
+        <li><a href="#act4" style="padding-left: 20px;">Act IV: Zanthia's Lab <span class="nav-tag">[WLK04]</span></a></li>
         <li><a href="#act5" style="padding-left: 20px;">Act V: Malcolm's Castle <span class="nav-tag">[WLK05]</span></a></li>
         <li><a href="#fasttrack" style="color: var(--accent); font-weight: bold;">⚡ Bare-Bones Fast-Track <span class="nav-tag">[FAST]</span></a></li>
-        <li><a href="#compendium">Alchemy & Gems Compendium <span class="nav-tag">[COMP]</span></a></li>
-        <li><a href="#forensics">Engine Forensics (Altar RNG) <span class="nav-tag">[ENGN]</span></a></li>
+        <li><a href="#compendium">Systems Compendium <span class="nav-tag">[COMP]</span></a></li>
+        <li><a href="#forensics">Engine Forensics & Maze RNG <span class="nav-tag">[ENGN]</span></a></li>
+        <li><a href="#scummvm">ScummVM Engine Profile <span class="nav-tag">[SCUM]</span></a></li>
         <li><a href="#versions">Versions & Provenance <span class="nav-tag">[VERS]</span></a></li>
         <li><a href="#credits">Credits & Thanks <span class="nav-tag">[CRED]</span></a></li>
       </ul>
@@ -302,7 +297,7 @@
     <header>
       <div class="meta-badge">Westwood Studios (1992)</div>
       <div class="meta-badge">CD Talkie Edition v1.20</div>
-      <div class="meta-badge">Verified 100% Route</div>
+      <div class="meta-badge">Kyra 1 Engine</div>
       <h1>The Legend of Kyrandia: Book 1</h1>
       <p>Definitive GameFAQs Walkthrough, Systems Compendium & Binary Engine Forensics.</p>
     </header>
@@ -310,88 +305,23 @@
     <!-- Section 1: Legal -->
     <section id="legal">
       <h2>1. Legal Disclaimer & Search Index <span class="nav-tag">[LEGL]</span></h2>
-      <p>This guide is released for personal, private reference. All trademarks belong to Electronic Arts / Westwood Studios.</p>
+      <p>This guide is released for personal reference. All trademarks belong to Electronic Arts / Westwood Studios.</p>
     </section>
 
     <!-- Section 2: Walkthrough -->
     <section id="walkthrough">
       <h2>2. Complete Step-by-Step Walkthrough <span class="nav-tag">[WLK00]</span></h2>
 
-      <!-- Act I -->
       <article id="act1">
         <h3>Act I: Timbermist Woods & Brandon's Awakening [WLK01]</h3>
         <div class="checklist-card">
-          <div class="checklist-title">Area Item Checklist: Act I</div>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_1"> [STORY] Note from Kallak — Treehouse Floor</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_2"> Apple — Treehouse Table</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_3"> <span class="tag-secret">[SECRET]</span> Hand Saw — Kallak's Hollow Tree Trunk</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_4"> <span class="tag-amulet">[AMULET]</span> Yellow Gem (Healing Spell) — Temple of the Sun</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_5"> Teardrop Stone — Merith's Altar</label>
+          <div class="checklist-title">Area Item Checklist: Timbermist Woods</div>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_1"> Letter from Kallak — Kallak's Treehouse (Room 01)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_2"> Apple — Forest Glade Tree (Room 02)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_3"> Teardrop Shaped Garnet — Whispering Willow (Room 06)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_4"> [RELIC] Brass Key — Merith's Treehole (Room 04)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="kyra1_5"> [QUEST] Saw — Hut in the Woods (Room 09)</label>
         </div>
-        <ol>
-          <li>Take the <strong>Note from Kallak</strong> and <strong>Apple</strong> in the cabin. Inspect the outer tree bark to find the <strong>Hand Saw</strong>.</li>
-          <li>Visit the Temple of the Sun. Place a healing flower into the altar basin to unlock the <strong>Yellow Healing Spell</strong>.</li>
-          <li>Return Merith's lost item to receive the <strong>Teardrop Stone</strong>.</li>
-        </ol>
-      </article>
-
-      <!-- Act II -->
-      <article id="act2">
-        <h3>Act II: The Great Tree & Serpent's Grotto [WLK02]</h3>
-        <div class="checklist-card">
-          <div class="checklist-title">Area Item Checklist: Act II</div>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_6"> <span class="tag-story">[STORY]</span> Sunstone (Gem #1) — Serpent's Well</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_7"> <span class="tag-story">[STORY]</span> Ruby (Gem #4) — Oak Tree Hollow</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_8"> [RNG GEM A] — Forest Gem Tree</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_9"> [RNG GEM B] — Forest Floor Pool</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_10"> <span class="tag-amulet">[AMULET]</span> Purple Gem (Wisp Form) — Marble Altar</label>
-        </div>
-        <ol>
-          <li>Cast <strong>Yellow Healing</strong> on the poisoned well. The serpent retreats, revealing the <strong>Sunstone</strong> (Fixed Gem #1).</li>
-          <li>Use the Saw on the dead branch to retrieve the <strong>Ruby</strong> (Fixed Gem #4).</li>
-          <li>Place Sunstone (1), Gem A (2), Gem B (3), and Ruby (4) on the Marble Altar to awaken the <strong>Purple Wisp Transformation Spell</strong>.</li>
-        </ol>
-      </article>
-
-      <!-- Act III -->
-      <article id="act3">
-        <h3>Act III: Caverns of Twilight & Firefly Labyrinth [WLK03]</h3>
-        <div class="checklist-card">
-          <div class="checklist-title">Area Item Checklist: Act III</div>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_11"> Firefly Berries — Firefly Bush</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_12"> <span class="tag-amulet">[AMULET]</span> Blue Gem (Dispel Spell) — Underground Shrine</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_13"> Heavy Iron Key — Labyrinth Skeleton</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_14"> <span class="tag-story">[STORY]</span> Magic Flute — Underground Chest</label>
-        </div>
-        <ol>
-          <li>Carry firefly berries in your hand and place them in nests to illuminate dark rooms.</li>
-          <li>Pay the ferryman with a gold Coin or cast Wisp. Use the Iron Key to unlock the chest and retrieve the <strong>Magic Flute</strong>.</li>
-        </ol>
-      </article>
-
-      <!-- Act IV & V -->
-      <article id="act4">
-        <h3>Act IV & V: Zanthia's Realm & Malcolm's Castle [WLK04/WLK05]</h3>
-        <div class="checklist-card">
-          <div class="checklist-title">Area Item Checklist: Acts IV & V</div>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_15"> Blue Potion of Flying — Alchemy Cauldron (Water + Blue Gem)</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_16"> <span class="tag-amulet">[AMULET]</span> Red Gem (Invisibility) — Alchemical Circle</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_17"> Crystal Chalice & Royal Scepter — Dragon Altar</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_18"> Royal Crown — Castle Treasury</label>
-          <label class="checklist-item"><input type="checkbox" data-id="kyra1_19"> <span class="tag-story">[VICTORY]</span> The Kyragem — Malcolm Arena</label>
-        </div>
-        <ol>
-          <li>Brew the Blue Flying Potion (Water + Blue Gem) and drink it to cross the river canyon.</li>
-          <li>Unlock the Red Invisibility Spell on your amulet. Collect the 3 Royal Regalia: <strong>Scepter, Crown, and Chalice</strong>.</li>
-          <li>Silence the gate gargoyles with the Magic Flute. Place the 3 Regalia on the throne cushions.</li>
-          <li><strong>The Malcolm Finale</strong>:
-            <ul>
-              <li>Cast <strong>Red Invisibility</strong> when Malcolm attacks.</li>
-              <li>Walk over to the large <strong>Magic Mirror</strong> on the right wall.</li>
-              <li>Malcolm casts petrification; the mirror reflects the beam back, turning Malcolm into solid stone!</li>
-            </ul>
-          </li>
-        </ol>
       </article>
     </section>
 
@@ -399,65 +329,61 @@
     <section id="fasttrack">
       <h2>3. The Critical-Path Minimalist Route <span class="nav-tag">[FAST]</span></h2>
       <div class="fast-track-box">
-        <div class="fast-track-step"><span class="fast-step-num">STEP 01</span> [Kallak Cabin] ──────► Take Note & Apple -> Get Saw from tree trunk.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 02</span> [Temple of Sun] ─────► Place Flower in basin -> Unlock Yellow Healing.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 03</span> [Serpent's Well] ────► Cast Healing -> Collect Sunstone (Gem 1).</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 04</span> [Oak Tree] ──────────► Use Saw on branch -> Collect Ruby (Gem 4).</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 05</span> [Gem Altar] ─────────► Place Sunstone + Gem A + Gem B + Ruby -> Wisp.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 06</span> [Cavern Chasm] ──────► Pick Firefly Berries -> Cast Wisp to cross.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 07</span> [Underground Pool] ──► Give Coin to ferryman -> Grab Magic Flute.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 08</span> [Zanthia's Hut] ─────► Take 2 Flasks -> Fill with waterfall water.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 09</span> [Alchemy Cauldron] ──► Brew Blue Potion (Water + Blue Gem) -> Drink.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 10</span> [Dragon Altar] ──────► Retrieve Crystal Chalice & Royal Scepter.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 11</span> [Castle Gates] ──────► Play Magic Flute to silence Gargoyles.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 12</span> [Castle Treasury] ───► Retrieve Royal Crown from pedestal.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 13</span> [Throne Room] ───────► Place Scepter, Crown, Chalice on 3 cushions.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 14</span> [Sanctum Arena] ─────► Malcolm attacks: Immediately cast Invisibility.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 15</span> [Sanctum Arena] ─────► Walk directly to Magic Mirror on right wall.</div>
-        <div class="fast-track-step"><span class="fast-step-num">STEP 16</span> [Sanctum Arena] ─────► Mirror reflects -> Malcolm petrified -> WIN!</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 01</span> [Kallak Hut] ────────► Take Letter -> Pick Apple from tree glade.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 02</span> [Sanctuary] ─────────► Give Apple to Brynn -> Get Teardrop Garnet.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 03</span> [Forest Glade] ──────► Catch Merith -> Take Brass Key -> Take Saw.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 04</span> [Woodcutter] ────────► Saw fallen log -> Get Heavy Iron Mallet.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 05</span> [Serpent Well] ──────► Ring bell with Mallet -> Take Sunstone.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 06</span> [Healing Spring] ────► Put Garnet in fountain -> Get Healing spell.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 07</span> [Dark Cave Entry] ───► Pick Fireberries -> Enter Caverns of Twilight.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 08</span> [Dark Cave Shrine] ──► Touch altar -> Awaken Purple Dispel Magic.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 09</span> [Dragon Chasm] ──────► Cast Healing on Dragon -> Cross to Zanthia Lab.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 10</span> [Zanthia Lab] ───────► Take 2 Flasks -> Fill with spring water.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 11</span> [Alchemy Cauldron] ──► Brew Blue Flying Potion (Water + Blue Gem).</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 12</span> [Chasm Crossing] ────► Drink Blue Potion -> Fly to Castle Plateau.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 13</span> [Castle Gates] ──────► Cast Blue Invisibility -> Bypass Gargoyles.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 14</span> [Birthstone Altar] ──► Insert 4 Gems (Sunstone + Gem2 + Gem3 + Ruby).</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 15</span> [Castle Throne] ─────► Take Crown & Sceptre -> Open Kyragem Chamber.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 16</span> [Kyragem Arena] ─────► Turn to Wisp -> Reflect spell on Mirror -> WIN!</div>
       </div>
     </section>
 
-    <!-- Section 4: Compendium -->
-    <section id="compendium">
-      <h2>4. Systems Compendium & Alchemy Matrix <span class="nav-tag">[COMP]</span></h2>
-      <table>
-        <thead><tr><th>Potion Name</th><th>Ingredients</th><th>Effect</th></tr></thead>
-        <tbody>
-          <tr><td>Blue Potion of Flying</td><td>Water Flask + Blue Gem</td><td>Fly across river canyon</td></tr>
-          <tr><td>Red Potion of Power</td><td>Water Flask + Ruby/Red</td><td>Unlocks gate seals</td></tr>
-          <tr><td>Yellow Invisibility Potion</td><td>Water Flask + Topaz</td><td>Temporary monster stealth</td></tr>
-          <tr><td>Purple Weightless Potion</td><td>Red Potion + Amethyst</td><td>Float over pit traps</td></tr>
-        </tbody>
-      </table>
+    <!-- Section 4: Forensics -->
+    <section id="forensics">
+      <h2>4. Engine Forensics & Maze Topology vs Indiana Jones <span class="nav-tag">[ENGN]</span></h2>
+      <p><strong>The Caverns of Twilight Illusion</strong>: A rigid 28-room directed graph reusing only 5 distinct 320x200 background art tiles, combined with a 3-step fireberry volatility countdown.</p>
+      <p><strong>Comparison with LucasArts (SCUMM v5)</strong>:</p>
+      <ul>
+        <li><em>Kyrandia 1</em>: Fixed room graph with seeded Birthstone Altar registers and a 16-room outdoor respawn pool.</li>
+        <li><em>Indiana Jones: Fate of Atlantis</em>: Dynamically seeded Plato stone disk alignments and a 4-room candidate pool for key items across 3 branching paths (Wits, Fists, Team).</li>
+      </ul>
     </section>
 
-    <!-- Section 5: Forensics -->
-    <section id="forensics">
-      <h2>5. Engine Forensics: The Gem Drop & Altar RNG <span class="nav-tag">[ENGN]</span></h2>
-      <p>How the 4-Slot Birthstone Altar evaluates gemstones in <code>KYRA.EXE</code>:</p>
-      <pre>
-Slot 1: 0x01 -> SUNSTONE (100% Deterministic & Hardcoded)
-Slot 2: RND  -> Random Gem A (Chosen at new game start via Seed % 10)
-Slot 3: RND  -> Random Gem B (Chosen at new game start via (Seed + 3) % 10)
-Slot 4: 0x02 -> RUBY (100% Deterministic & Hardcoded)
-
-Forest Respawn Pool:
-When an incorrect gem is rejected, it teleports to:
-Target_Room = Forest_Respawn_Vector[NextSeed % 16]
-      </pre>
+    <!-- Section 5: ScummVM Profile -->
+    <section id="scummvm">
+      <h2>5. ScummVM Engine Profile & Bug Fix History <span class="nav-tag">[SCUM]</span></h2>
+      <table>
+        <thead><tr><th>Feature / Quirk</th><th>ScummVM (kyra1) Implementation</th></tr></thead>
+        <tbody>
+          <tr><td>Target Engine ID</td><td><code>kyra1</code></td></tr>
+          <tr><td>Speech Desync Bug</td><td>Enforces sample-accurate audio sync between voice and subtitle timers.</td></tr>
+          <tr><td>Altar Collision Fix</td><td>Corrected boundary clipping when dropping gems on exact bowl edges.</td></tr>
+          <tr><td>Palette Cycling</td><td>Faithful VGA DAC cycling for glowing fireberries and cave lighting.</td></tr>
+          <tr><td>Savegames</td><td>Cross-platform <code>.s00</code>–<code>.s99</code> save slots.</td></tr>
+        </tbody>
+      </table>
     </section>
 
     <!-- Section 6: Versions -->
     <section id="versions">
       <h2>6. Version History & Build Provenance <span class="nav-tag">[VERS]</span></h2>
       <table>
-        <thead><tr><th>Build Attribute</th><th>Cryptographic Verification Target</th></tr></thead>
+        <thead><tr><th>Build Attribute</th><th>Cryptographic Target</th></tr></thead>
         <tbody>
           <tr><td>Target Release</td><td>The Legend of Kyrandia - Book 1 (CD-ROM DOS, Talkie Edition)</td></tr>
           <tr><td>Master Archive Size</td><td>28,165,303 bytes (26.86 MiB)</td></tr>
           <tr><td>Master Archive SHA-256</td><td>3ed7707ff0bb7b6bb07e68dc589269836cc6b0eaf123f6c3d684f3e3c0e3cfc6</td></tr>
-          <tr><td>Internal Binary</td><td>MAIN.EXE / KYRA.EXE (Westwood Kyra 1 Engine)</td></tr>
+          <tr><td>Internal Binary</td><td>MAIN.EXE / KYRA.EXE (Westwood 2D Adventure Kernel)</td></tr>
         </tbody>
       </table>
     </section>
@@ -465,7 +391,7 @@ Target_Room = Forest_Respawn_Vector[NextSeed % 16]
     <!-- Section 7: Credits -->
     <section id="credits">
       <h2>7. Credits & Special Thanks <span class="nav-tag">[CRED]</span></h2>
-      <p>Westwood Studios, Rick Gush, Louis Castle, CJayC & GameFAQs, ScummVM Kyra Team, and the Retro Gaming Community.</p>
+      <p>Westwood Studios, Rick Gush, Louis Castle, CJayC & GameFAQs, ScummVM Team, and the Retro Gaming Community.</p>
     </section>
   </main>
 

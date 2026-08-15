@@ -1,6 +1,6 @@
 # GameFAQs Formatted Text Guide Specification & Style Standard
 
-**Standard Version**: 1.0.0 (CJayC / SBAllen Contributor Compliance)  
+**Standard Version**: 1.2.0 (CJayC / SBAllen Contributor Compliance & Modern Emulation Addendum)  
 **Target Platform**: GameFAQs / GameSpot Plain Text Submission Queue  
 **File Extension**: `.txt` (ASCII / UTF-8 Plain Text)
 
@@ -47,8 +47,9 @@ TABLE OF CONTENTS ..................................................... [00.00]
   [06.00] WEAPONS, ARMOR & SPELLS COMPENDIUM .......................... [COMP]
   [07.00] SECRETS & PERMANENT MISSABLES ............................... [SECR]
   [08.00] ENGINE FORENSICS & REVERSE-ENGINEERING ...................... [ENGN]
-  [09.00] CONTACT POLICY .............................................. [CONT]
-  [10.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+  [09.00] SCUMMVM & MODERN EMULATION TARGET PROFILE .................. [SCUM]
+  [10.00] CONTACT POLICY .............................................. [CONT]
+  [11.00] CREDITS & SPECIAL THANKS .................................... [CRED]
 ```
 
 ---
@@ -69,55 +70,73 @@ Gladstone Dungeons & Northlands Secret
 
 ---
 
-## 📦 4. Checklist & Callout Boxes (Final Fantasy Style)
+## 📦 4. Final Fantasy Style Item & Chest Checklist Boxes
 
-Item checklists and danger warnings must use ASCII box borders (`+`, `-`, `|`) with a total width of **exactly 79 characters**:
+Every distinct region or act must open with a 79-column ASCII checklist box:
 
 ```text
 +-----------------------------------------------------------------------------+
 | AREA ITEM & CHEST CHECKLIST: GLADSTONE & FORESTS                            |
 |                                                                             |
-| [ ] Gladstone Signet Ring ... (X:02, Y:01) [NPC: King Richard]             |
-| [ ] Timothy (Companion) ..... (X:15, Y:01) [NPC: Hallway Soldier]          |
-| [ ] [SECRET] Fine Broadsword  (X:08, Y:02) [Hidden Alcove: Torch Switch]    |
-| [ ] [SECRET] Leather Cuirass. (X:08, Y:02) [Hidden Alcove: Torch Switch]    |
-| [ ] Aloe Leaf (x3) .......... (X:08, Y:02) [Hidden Alcove: Torch Switch]    |
-| [ ] [MISSABLE] Elven Longbow. (X:14, Y:08) [Northlands: 3-Click Oak Knot]  |
-| [ ] Lightning Quiver (x20) .. (X:14, Y:08) [Northlands: 3-Click Oak Knot]  |
-| [ ] [PERMANENT BUFF] Blue Well(X:04, Y:12) [Roland Manor: +5 Max Mana]      |
+| [ ] King's Royal Commission Letter (X:02, Y:01) [Gladstone Keep: Throne]    |
+| [ ] 50 Gold Sovereigns ........... (X:02, Y:01) [Gladstone Keep: Treasury]  |
+| [ ] Iron Broadsword .............. (X:05, Y:12) [North Forest: Stump Chest] |
+| [ ] [SECRET] Elven Bow ........... (X:14, Y:03) [South Forest: Hidden Nook] |
+| [ ] [RELIC] Compass .............. (X:04, Y:12) [Roland Manor Floor]        |
+| [ ] [PARTY] Recruit Baccata ...... (X:03, Y:11) [Southlands Campfire]       |
 +-----------------------------------------------------------------------------+
 ```
 
 ---
 
-## 🤖 5. Automated Python Verification Snippet
+## 🔬 5. Maze Topology & Procedural Randomness Documentation
 
-Run this script to verify that your plain text guide passes all GameFAQs submission rules:
+When documenting mazes, labyrinths, or random encounters (e.g. *Kyrandia 1* Caverns of Twilight or *Fate of Atlantis* Knossos Labyrinth):
+1. **Deconstruct the Topology**: Clarify whether the maze is a true procedural generator or a static directed graph utilizing modular art tile reuse.
+2. **State Variable Tracking**: Document all runtime RNG registers (e.g. `v_berry_charge`, `v_sun_alignment`, `gem_req_slot2`).
+3. **Failure Bounds**: Explicitly warn the reader of step-counter expiration, trap triggers, or soft locks.
+
+---
+
+## 🕹️ 6. ScummVM & Modern Emulation Profile (`[SCUM]`)
+
+Every retro guide must treat modern open-source engines (e.g., **ScummVM**, **DOSBox-Staging**, **PCem**) as first-class version targets:
+1. **Target Engine ID**: Document the specific ScummVM engine kernel (e.g. `kyra1`, `kyra2`, `sci`, `agi`, `scumm`).
+2. **Emulation Quirks & Bug Fixes**:
+   - Document any audio/speech desynchronization fixes (speech vs subtitle timing).
+   - Document collision detection or bounding-box clipping differences between pure DOS and modern interpreters.
+   - Document palette cycling behavior (VGA DAC register cycling in dark rooms).
+3. **Savegame Compatibility**: Document cross-platform save paths (`.s00`–`.s99`) versus native DOS binary snapshots.
+
+---
+
+## 🤖 7. Automated Python Verification Script
+
+Run this script to certify that any `.txt` file complies 100% with the standard before submission:
 
 ```python
 import sys
 
-def validate_gamefaqs_txt(file_path):
-    with open(file_path, "r", encoding="utf-8") as f:
+def verify_gamefaqs_txt(filepath):
+    with open(filepath, "r", encoding="utf-8") as f:
         lines = f.readlines()
     
     errors = []
     for i, line in enumerate(lines, 1):
-        clean_line = line.rstrip("\r\n")
-        if "\t" in clean_line:
-            errors.append(f"Line {i}: Contains TAB character (use spaces only).")
-        if len(clean_line) > 79:
-            errors.append(f"Line {i}: Exceeds 79 characters ({len(clean_line)} chars): '{clean_line[:40]}...'")
+        clean = line.rstrip("\r\n")
+        if "\t" in clean:
+            errors.append(f"Line {i}: Contains TAB character.")
+        if len(clean) > 79:
+            errors.append(f"Line {i}: Exceeds 79 cols ({len(clean)} chars): \"{clean[:40]}...\"")
             
     if errors:
         print(f"FAILED: Found {len(errors)} formatting violations:")
         for err in errors[:10]:
             print("  ", err)
         return False
-    else:
-        print(f"PASSED: {file_path} is 100% compliant with GameFAQs 79-column standards ({len(lines)} lines).")
-        return True
+    print(f"PASSED: {filepath} is 100% GameFAQs compliant! Total lines: {len(lines)}")
+    return True
 
 if __name__ == "__main__":
-    validate_gamefaqs_txt(sys.argv[1])
+    verify_gamefaqs_txt(sys.argv[1])
 ```

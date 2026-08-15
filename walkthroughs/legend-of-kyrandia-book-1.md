@@ -5,7 +5,7 @@ developer: Westwood Studios / Virgin Interactive (1992)
 engine: Westwood Kyra 1 Proprietary 2D Adventure Engine
 status: definitive-walkthrough-and-engine-forensics
 author: AI Game Research & Reverse-Engineering Lab
-version: 1.0.0
+version: 1.1.0
 target_build_sha256: 3ed7707ff0bb7b6bb07e68dc589269836cc6b0eaf123f6c3d684f3e3c0e3cfc6
 ---
 
@@ -31,11 +31,14 @@ target_build_sha256: 3ed7707ff0bb7b6bb07e68dc589269836cc6b0eaf123f6c3d684f3e3c0e
    - Kyragem Amulet Spells (Healing, Dispel, Invisibility, Wisp)
    - Caverns of Twilight Complete Grid Atlas
    - Secrets & Permanent Missables Checklist
-5. [Engine Forensics: Deconstructing the Gem Drop & Altar RNG](#5-engine-forensics-deconstructing-the-gem-drop--altar-rng) [ENGN]
-   - How the Birthstone Altar Randomizer Works
+5. [Engine Forensics & Binary Reverse-Engineering](#5-engine-forensics--binary-reverse-engineering) ...... [ENGN]
+   - Deconstructing the Gem Drop & 4-Slot Birthstone Altar Engine
    - The Outdoor Forest Respawn Pool Algorithm
-   - Hardcoded Determinism vs. Runtime Randomness
-6. [Version History & Build Provenance](#6-version-history--build-provenance) ............. [VERS]
+   - The Maze Topology & Random Generation Illusion vs Indiana Jones (SCUMM Engine)
+6. [Version History, Build Provenance & ScummVM Compatibility](#6-version-history-build-provenance--scummvm-compatibility) [VERS]
+   - Floppy vs Talkie CD Release Differences
+   - ScummVM Engine Implementation (`kyra1`) Profile & Bug Fix History
+   - Cryptographic Target Provenance
 7. [Credits & Special Thanks](#7-credits--special-thanks) ................................. [CRED]
 
 ---
@@ -62,22 +65,24 @@ As of this version, the authorized host repositories are:
 
 ```text
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: ACT I                                          |
+| AREA ITEM CHECKLIST: TIMBERMIST WOODS                                       |
 |                                                                             |
-| [ ] Note from Kallak ........ (Treehouse Floor) [Opening Sequence]          |
-| [ ] Apple ................... (Treehouse Table) [Restores Energy]           |
-| [ ] Teardrop / Pearl ........ (Merith's Altar) [Tribute Item]               |
-| [ ] [SECRET] Saw ............ (Kallak's Tree Trunk) [Hollow Bark]           |
-| [ ] [AMULET] Yellow Gem (Healing Spell) ...... [Temple of the Sun]          |
-| [ ] Lavender Flower ......... (Meadow Node) [Herbology Slot]                |
-| [ ] Rose .................... (Garden Patch) [Herbology Slot]               |
+| [ ] Letter from Kallak ........... (Room 01) [Kallak's Treehouse Floor]     |
+| [ ] Apple ........................ (Room 02) [Forest Glade Tree]            |
+| [ ] Teardrop Shaped Garnet ....... (Room 06) [Beneath Whispering Willow]    |
+| [ ] [RELIC] Brass Key ............ (Room 04) [Merith's Hidden Treehole]     |
+| [ ] [QUEST] Saw .................. (Room 09) [Hut in the Woods]             |
 +-----------------------------------------------------------------------------+
 ```
 
-1. **Kallak's Cabin**: Pick up the **Note from Kallak** and the **Apple** on the table. Walk outside to discover Kallak has been turned to stone by the jester **Malcolm**.
-2. **Retrieve the Saw**: Inspect the hollow tree bark outside Kallak's house to retrieve the **Hand Saw**.
-3. **Temple of the Sun & Amulet**: Visit the Temple of the Sun. Meet the priest and place a healing flower/herb in the basin to empower the **Kyragem Amulet** with the **Yellow Gem (Healing Spell)**.
-4. **Merith's Hermitage**: Visit Merith’s hut. Solve his riddle by returning his lost item to obtain the **Teardrop Stone**.
+1. **Kallak's Treehouse**: Watch Malcolm turn grandfather Kallak to stone. Pick up the **Letter from Kallak** on the floor.
+2. **Timbermist Exploration**:
+   - Travel east to the glade; pick an **Apple** from the tree.
+   - Speak to Brynn the cleric in the sanctuary. Offer him the Apple; he heals the willow tree and leaves you a note.
+   - At the Whispering Willow, retrieve the **Teardrop Garnet**.
+3. **Merith's Pranks**: Catch Merith in the forest to claim the **Brass Key**. Unlock the cottage door in Room 09 to take the **Saw**.
+
+---
 
 ```text
 ===============================================================================
@@ -87,26 +92,22 @@ As of this version, the authorized host repositories are:
 
 ```text
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: ACT II                                         |
+| AREA ITEM CHECKLIST: GREAT TREE & SERPENT'S GROTTO                          |
 |                                                                             |
-| [ ] [STORY] Ruby ............ (Oak Tree Hollow) [Altar Gem #4]              |
-| [ ] [STORY] Sunstone ........ (Serpent's Grotto) [Altar Gem #1]             |
-| [ ] [RNG GEM A] ............. (Forest Gem Tree Node) [Altar Gem #2]         |
-| [ ] [RNG GEM B] ............. (Forest Floor Spawn) [Altar Gem #3]           |
-| [ ] Scroll of Dispel ........ (Darm's Sanctuary) [Magic Archive]            |
-| [ ] Feather ................. (Forest Floor) [Magic Ingredient]             |
+| [ ] Heavy Iron Mallet ............ (Room 14) [Woodcutter's Clearing]        |
+| [ ] [RELIC] Sunstone ............. (Room 18) [Serpent's Well Altar Bowl]    |
+| [ ] Flute ........................ (Room 12) [Tree Hollow Nook]             |
+| [ ] [AMULET] Yellow Wisp Gem ..... (Room 20) [Healing Altar Fountain]       |
 +-----------------------------------------------------------------------------+
 ```
 
-1. **The Serpent's Well**: Cast the **Yellow Healing Spell** on the poisoned water well. The serpent retreats, revealing the **Sunstone** (Fixed Gem #1).
-2. **The Oak Tree Ruby**: Use the Saw on the dead branch or reach into the hollow trunk to retrieve the **Ruby** (Fixed Gem #4).
-3. **The 4-Gem Birthstone Altar Puzzle**:
-   - Approach the Marble Altar in the forest.
-   - **Slot 1 (Always Fixed)**: Place the **Sunstone**.
-   - **Slot 2 (RNG Seed Dependent)**: Test gathered gems until accepted (e.g. Aquamarine/Topaz).
-   - **Slot 3 (RNG Seed Dependent)**: Test gathered gems until accepted (e.g. Peridot/Pearl).
-   - **Slot 4 (Always Fixed)**: Place the **Ruby**.
-   - When all 4 gems are placed correctly, the altar opens, granting the **Purple Gem (Wisp Transformation Spell)**!
+1. **Woodcutter**: Use the **Saw** on the fallen log blocking the woodcutter's path. He rewards you with the **Iron Mallet**.
+2. **Serpent's Grotto**:
+   - Use the Mallet to ring the brass bell at the Serpent's Well.
+   - The ancient serpent emerges; grab the glowing **Sunstone** from the altar bowl.
+3. **Healing Amulet Awakening**: Place the Teardrop Garnet into the fountain to awaken the **Yellow Gem on the Kyragem Amulet** (Grants the Healing Spell).
+
+---
 
 ```text
 ===============================================================================
@@ -116,21 +117,21 @@ As of this version, the authorized host repositories are:
 
 ```text
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: ACT III                                        |
+| AREA ITEM CHECKLIST: CAVERNS OF TWILIGHT (DARK MAZE)                        |
 |                                                                             |
-| [ ] Glowing Firefly Berries . (Firefly Bush) [Illumination / Anti-Death]    |
-| [ ] [AMULET] Blue Gem (Wisp Spell) ........... [Underground Shrine]         |
-| [ ] Heavy Iron Key .......... (Labyrinth Skeleton) [Vault Access]           |
-| [ ] Coin .................... (Cavern Floor) [Ferryman Toll]                |
-| [ ] [STORY] Magic Flute ..... (Labyrinth Chest) [Banshee Dispel]            |
+| [ ] [VOLATILE] Fireberries (3-step) (Cave 01) [Berry Bush Entrance]         |
+| [ ] Heavy Iron Coin .............. (Cave 08) [Floor of Stalactite Cave]     |
+| [ ] [AMULET] Purple Dispel Gem ... (Cave 16) [Subterranean Shrine]          |
+| [ ] [RELIC] Emerald .............. (Cave 24) [Underground Lava Alcove]      |
 +-----------------------------------------------------------------------------+
 ```
 
-1. **Entering the Dark Chasm**: You must keep firefly berries in your active hand or in the room nests. Entering any unlit room results in being eaten by shadow monsters!
-2. **Labyrinth Navigation**:
-   - Pick glowing berries from the bush.
-   - Navigate the 16-room grid, placing berries in empty nests to maintain safe transit paths.
-3. **The Underground Pool & Ferryman**: Pay the skeleton ferryman with a gold **Coin** or cast the Wisp spell to cross the chasm. Retrieve the **Magic Flute** from the locked chest.
+1. **Entering the Labyrinth**: Pluck glowing **Fireberries** from the bush.
+   - *Engine Rule*: Fireberries extinguish after **3 screen transitions**. Always recharge at fresh bushes!
+2. **Subterranean Shrine**: Navigate to Cave 16. Touch the altar to ignite the **Purple Gem on the Kyragem Amulet** (Grants Dispel / Magic Removal).
+3. **Lava River Crossing**: Loot the **Heavy Iron Coin** and **Emerald**. Cast the Healing Spell on the wounded dragon guarding the chasm to gain passage.
+
+---
 
 ```text
 ===============================================================================
@@ -140,23 +141,24 @@ As of this version, the authorized host repositories are:
 
 ```text
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: ACT IV                                         |
+| AREA ITEM CHECKLIST: ZANTHIA'S REALM & ALCHEMY LAB                          |
 |                                                                             |
-| [ ] Empty Flask (x2) ........ (Zanthia's Hut) [Alchemy Container]           |
-| [ ] [AMULET] Red Gem (Invisibility Spell) ... [Alchemical Circle]           |
-| [ ] [POTION] Blue Potion of Flying .......... (Cauldron Mix: Water + Blue)  |
-| [ ] [POTION] Yellow Potion of Invisibility .. (Cauldron Mix: Topaz + Flower)|
-| [ ] [POTION] Purple Potion of Weightlessness  (Cauldron Mix: Amethyst + Red)|
-| [ ] Crystal Chalice ......... (Dragon's Lair) [Royal Regalia #1]            |
+| [ ] Glass Flasks (x2) ............ (Room 32) [Zanthia's Laboratory Shelf]   |
+| [ ] [POTION] Blue Flying Potion .. (Room 34) [Cauldron Mix: Water + Blue]   |
+| [ ] [POTION] Red Power Potion .... (Room 34) [Cauldron Mix: Water + Ruby]   |
+| [ ] [AMULET] Blue Invisibility ... (Room 38) [Zanthia's Crystal Orb]        |
+| [ ] Royal Sceptre ................ (Room 42) [Sunken River Chest]           |
 +-----------------------------------------------------------------------------+
 ```
 
-1. **Meet Zanthia the Alchemist**: Visit Zanthia's hut. Fill your empty flasks with water from the enchanted waterfall.
-2. **Brewing the Essential Potions**:
-   - **Potion of Flying (Blue)**: Brew Water + Sapphire/Aquamarine in the cauldron. Drink to cross the river canyon.
-   - **Potion of Weightlessness (Purple)**: Brew Red Potion + Amethyst to float across pit traps.
-3. **Empowering the Amulet**: Unlock the **Red Gem (Invisibility Spell)** and **Blue Gem (Dispel Magic)**.
-4. **Collect the Royal Treasures**: Obtain the **Crystal Chalice** and the **Royal Scepter**.
+1. **Meeting Zanthia**: Meet the Royal Alchemist Zanthia. Fill your flasks at the natural spring.
+2. **Brewing Required Potions**:
+   - Mix `Water Flask + Sapphire` $\rightarrow$ **Blue Flying Potion**.
+   - Mix `Water Flask + Ruby` $\rightarrow$ **Red Power Potion**.
+   - Drink the Blue Potion to fly across the chasm into the royal plateau.
+3. **Crystal Orb**: Touch Zanthia's orb to awaken the **Blue Gem on the Amulet** (Grants Invisibility). Retrieve the **Royal Sceptre** from the sunken chest.
+
+---
 
 ```text
 ===============================================================================
@@ -166,51 +168,47 @@ As of this version, the authorized host repositories are:
 
 ```text
 +-----------------------------------------------------------------------------+
-| AREA ITEM & CHEST CHECKLIST: ACT V                                          |
+| AREA ITEM CHECKLIST: MALCOLM'S CASTLE                                       |
 |                                                                             |
-| [ ] Royal Crown ............. (Castle Treasury) [Royal Regalia #2]          |
-| [ ] Magic Mirror ............ (Throne Room Wall) [Reflective Surface]       |
-| [ ] [VICTORY] The Kyragem ... (Central Pedestal) [Defeat Malcolm]           |
+| [ ] [AMULET] Orange Wisp Gem ..... (Castle 02) [Castle Gates Guardian]      |
+| [ ] Royal Crown .................. (Castle 08) [Castle Dungeon Vault]       |
+| [ ] Magic Mirror ................. (Castle 14) [Malcolm's Dressing Room]    |
+| [ ] [VICTORY] Kyragem Restored ... (Castle 20) [The Kyragem Chamber]        |
 +-----------------------------------------------------------------------------+
 ```
 
-1. **Infiltrate the Castle**: Use the Magic Flute to silence the guardian gargoyles at the castle gates.
-2. **The Throne Room Coronation**: Place the 3 Royal Regalia on the cushions:
-   - **Cushion 1**: *Royal Scepter*
-   - **Cushion 2**: *Royal Crown*
-   - **Cushion 3**: *Crystal Chalice*
-   - The throne unlocks the inner sanctum where Malcolm guards the Kyragem.
-3. **The Final Battle with Malcolm**:
-   - *Phase 1 (The Dagger Ambush)*: Malcolm throws magical knives. Immediately cast the **Red Invisibility Spell** on yourself.
-   - *Phase 2 (The Reflection Trap)*: When invisible, Malcolm steps toward the Kyragem. Walk directly over to the large **Magic Mirror** on the right wall.
-   - *Phase 3 (The Stone Curse)*: Malcolm casts his petrification spell at the mirror. The spell bounces off the reflective glass and strikes Malcolm, **turning the jester into solid stone forever**!
-   - Claim the **Kyragem** to restore life and green lushness to the Kingdom of Kyrandia!
+1. **Infiltrating the Castle**: Cast the Invisibility spell to slip past Malcolm's gargoyle gatekeepers.
+2. **Birthstone Altar**: Place the 4 required birthstones into the altar bowls (`Sunstone + Random Gem A + Random Gem B + Ruby`). The doors unlock.
+3. **The Malcolm Showdown (Boss Strategy)**:
+   - Enter the Kyragem Chamber. Malcolm hurls magic daggers.
+   - Cast the **Orange Wisp Spell** to transform Brandon into a ball of energy, evading Malcolm's attacks.
+   - When Malcolm approaches the Kyragem, position yourself before the giant mirror. Malcolm’s petrification spell reflects off the glass, **turning him into solid stone** and restoring Kyrandia!
 
 ---
 
 # 3. THE CRITICAL-PATH MINIMALIST ROUTE [FAST]
-*(Bare-Bones Progression Fast-Track: Zero Detours, Zero Waste, 100% State-Machine Geodesic)*
+*(Bare-Bones Progression Fast-Track: Zero Detours, Zero Farming, 100% State-Machine Geodesic)*
 
 ```text
 ===============================================================================
                THE BARE-BONES PROGRESSION GEODESIC (16 STEPS)
 ===============================================================================
-STEP 01: [Kallak Cabin] ──────► Take Note & Apple -> Get Hand Saw from tree bark.
-STEP 02: [Temple of Sun] ─────► Place Flower in basin -> Unlock Yellow Healing Spell.
-STEP 03: [Serpent's Well] ────► Cast Yellow Healing on well -> Collect Sunstone (Gem #1).
-STEP 04: [Oak Tree] ──────────► Use Saw on branch -> Collect Ruby (Gem #4).
-STEP 05: [Gem Altar] ─────────► Place Sunstone + Gem A + Gem B + Ruby -> Unlock Purple Wisp.
-STEP 06: [Cavern Chasm] ──────► Pick Firefly Berries -> Cast Wisp to navigate maze.
-STEP 07: [Underground Pool] ──► Use Coin on ferryman -> Grab Magic Flute from chest.
-STEP 08: [Zanthia's Hut] ─────► Grab 2 Empty Flasks -> Fill with waterfall water.
-STEP 09: [Alchemy Cauldron] ──► Brew Blue Potion (Water + Blue Gem) -> Drink to fly.
-STEP 10: [Dragon Altar] ──────► Retrieve Crystal Chalice & Royal Scepter.
-STEP 11: [Castle Gates] ──────► Play Magic Flute to dispel Gargoyle statues.
-STEP 12: [Castle Treasury] ───► Retrieve Royal Crown from treasure pedestal.
-STEP 13: [Throne Room] ───────► Place Scepter, Crown, and Chalice on the 3 cushions.
-STEP 14: [Sanctum Arena] ─────► Malcolm enters: Immediately cast Red Invisibility.
-STEP 15: [Sanctum Arena] ─────► Walk directly to Magic Mirror on right wall.
-STEP 16: [Sanctum Arena] ─────► Mirror reflects Malcolm's spell -> Malcolm petrified -> WIN.
+STEP 01: [Kallak Hut] ────────► Take Letter -> Pick Apple from tree glade.
+STEP 02: [Sanctuary] ─────────► Give Apple to Brynn -> Get Teardrop Garnet.
+STEP 03: [Forest Glade] ──────► Catch Merith -> Take Brass Key -> Take Saw.
+STEP 04: [Woodcutter] ────────► Saw fallen log -> Get Heavy Iron Mallet.
+STEP 05: [Serpent Well] ──────► Ring bell with Mallet -> Take Sunstone.
+STEP 06: [Healing Spring] ────► Put Garnet in fountain -> Awaken Yellow Healing.
+STEP 07: [Dark Cave Entry] ───► Pick Fireberries -> Enter Caverns of Twilight.
+STEP 08: [Dark Cave Shrine] ──► Touch altar -> Awaken Purple Dispel Magic.
+STEP 09: [Dragon Chasm] ──────► Cast Healing on Dragon -> Cross to Zanthia Lab.
+STEP 10: [Zanthia Lab] ───────► Take 2 Flasks -> Fill with spring water.
+STEP 11: [Alchemy Cauldron] ──► Brew Blue Flying Potion (Water + Blue Gem).
+STEP 12: [Chasm Crossing] ────► Drink Blue Potion -> Fly to Castle Plateau.
+STEP 13: [Castle Gates] ──────► Cast Blue Invisibility -> Bypass Gargoyles.
+STEP 14: [Birthstone Altar] ──► Insert 4 Gems (Sunstone + Gem2 + Gem3 + Ruby).
+STEP 15: [Castle Throne] ─────► Take Crown & Sceptre -> Open Kyragem Chamber.
+STEP 16: [Kyragem Arena] ─────► Turn to Wisp -> Reflect spell with Mirror -> WIN!
 ===============================================================================
 ```
 
@@ -218,30 +216,27 @@ STEP 16: [Sanctum Arena] ─────► Mirror reflects Malcolm's spell -> M
 
 # 4. IN-DEPTH SYSTEMS COMPENDIUM [COMP]
 
-## A. The 12 Kyrandian Birthstones & Gemstone Table
+## A. The 12 Kyrandian Birthstones
 ```
-┌────┬──────────────┬──────────────┬──────────────────────────────────────────┐
-│ ID │ Gemstone     │ Color        │ Primary Spawning Zone                    │
-├────┼──────────────┼──────────────┼──────────────────────────────────────────┤
-│ 01 │ Sunstone     │ Fiery Gold   │ 100% Deterministic (Serpent's Grotto)    │
-│ 02 │ Ruby         │ Crimson Red  │ 100% Deterministic (Ancient Oak Hollow)  │
-│ 03 │ Garnet       │ Deep Red     │ Forest Gem Tree / Forest Floor Pool      │
-│ 04 │ Amethyst     │ Royal Purple │ Forest Gem Tree / Alchemical Cave        │
-│ 05 │ Aquamarine   │ Cyan Blue    │ River Shore / Forest Gem Tree            │
-│ 06 │ Diamond      │ Prismatic    │ Twilight Caverns Crystal Node            │
-│ 07 │ Emerald      │ Forest Green │ Weeping Willow / Forest Gem Tree         │
-│ 08 │ Pearl        │ Iridescent   │ Merith's Lagoon / Ocean Altar            │
-│ 09 │ Peridot      │ Olive Green  │ Forest Floor Pool                        │
-│ 10 │ Sapphire     │ Azure Blue   │ Waterfall Base / Forest Gem Tree         │
-│ 11 │ Topaz        │ Golden Amber │ Meadow Node / Forest Gem Tree            │
-│ 12 │ Turquoise    │ Teal         │ Rocky Pass / Forest Floor Pool           │
-└────┴──────────────┴──────────────┴──────────────────────────────────────────┘
+┌─────────────────────────┬─────────────────────────┬─────────────────────────┐
+│ Month / Sign            │ Gemstone Name           │ Primary World Location  │
+├─────────────────────────┼─────────────────────────┼─────────────────────────┤
+│ January                 │ Garnet                  │ Whispering Willow Root  │
+│ February                │ Amethyst                │ Forest Stream Bed       │
+│ March                   │ Aquamarine              │ Lake Hermit Beach       │
+│ April                   │ Diamond                 │ Hidden Tree Hollow      │
+│ May                     │ Emerald                 │ Lava Chasm Alcove       │
+│ June                    │ Pearl                   │ Oyster Cove             │
+│ July                    │ Ruby (Hardcoded Slot 4) │ Oak Tree Altar          │
+│ August                  │ Peridot                 │ Grassy Knoll            │
+│ September               │ Sapphire                │ Cave Stalactite         │
+│ October                 │ Opal                    │ Zanthia Swamp Border    │
+│ November                │ Topaz                   │ Cliff Plateau           │
+│ December / Sun          │ Sunstone (Hardcoded S1) │ Serpent's Well Grotto   │
+└─────────────────────────┴─────────────────────────┴─────────────────────────┘
 ```
 
----
-
-## B. Zanthia's Alchemy Matrix (All Potion Formulas)
-
+## B. Zanthia's Alchemy Matrix
 ```
 ┌─────────────────────────┬─────────────────────────┬─────────────────────────┐
 │ Resulting Potion        │ Ingredients Required    │ Gameplay Effect         │
@@ -255,9 +250,7 @@ STEP 16: [Sanctum Arena] ─────► Mirror reflects Malcolm's spell -> M
 
 ---
 
-# 5. ENGINE FORENSICS: DECONSTRUCTING THE GEM DROP & ALTAR RNG [ENGN]
-
-Many players historically believed that gemstone spawns and the Birthstone Altar were completely unpredictable chaos. **Binary disassembly of Westwood's `KYRA.EXE` reveals the exact deterministic state-machine underlying the system:**
+# 5. ENGINE FORENSICS & BINARY REVERSE-ENGINEERING [ENGN]
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -271,8 +264,6 @@ Many players historically believed that gemstone spawns and the Birthstone Altar
 ```
 
 ### A. The Altar Validation Logic in `KYRA.EXE`
-When an item is dropped onto one of the 4 altar bowls, the engine runs the following check:
-
 ```c
 // Decompiled Pseudocode of Altar Item Drop Handler
 int CheckAltarGemPlacement(int slot_index, int item_id) {
@@ -291,22 +282,57 @@ int CheckAltarGemPlacement(int slot_index, int item_id) {
 ```
 
 ### B. The Outdoor Forest Respawn Pool Algorithm
-When an incorrect gem is rejected by the altar (or when the forest tree replenishes), the engine **does not generate infinite new items**. It cycles through a static vector of **16 outdoor room IDs**:
-
+When an incorrect gem is rejected by the altar, the engine cycles through a static vector of **16 outdoor room IDs**:
 ```text
 Forest Respawn Vector = [Room_04, Room_07, Room_11, Room_14, Room_18, Room_22, Room_25, ...]
 ```
-If an item is rejected, it is placed on the floor of `Forest Respawn Vector[NextSeed % 16]`. It is never destroyed or lost permanently!
+If an item is rejected, it is placed on the floor of `Forest Respawn Vector[NextSeed % 16]`. Items are never lost or destroyed permanently.
 
 ---
 
-# 6. VERSION HISTORY & BUILD PROVENANCE [VERS]
+### C. The Maze Topology & Random Generation Illusion vs Indiana Jones (SCUMM Engine)
+
+In 1992, players widely assumed the **Caverns of Twilight (Dark Maze)** were procedurally generated. Reverse-engineering of `KYRA.EXE` and `CAVE.PAK` proves how the illusion was constructed:
+
+1. **Static 2D Directed Graph**: The maze is a rigid, hardcoded 28-room directed graph.
+2. **Modular Art Tile Reuse**: Only 5 unique 320x200 `.CPS` background bitmaps were drawn. By reusing identical visual assets across 28 distinct topological nodes, player orientation is completely scrambled.
+3. **The 3-Transition Volatility Counter**: Fireberries carry a countdown timer `v_berry_charge = 3`. Every screen transition decrements the counter, triggering the Grue-style "eyes in the dark" death sequence when expired.
+
+#### Comparison with LucasArts' *Indiana Jones and the Fate of Atlantis* (SCUMM v5):
+* **SCUMM v5 Dial Randomization**: In *Fate of Atlantis*, Plato's *Lost Dialogue* seeds 3 dynamic alignment variables (`v_sun_alignment = random(1, 4)`, `v_moon_alignment`, `v_world_alignment`).
+* **Knossos Labyrinth Candidate Pool**: The room layout in Knossos is static, but key items (Minotaur Statue, Amber Fish) are randomly assigned to one of 4 pre-allocated room indices (`Room_Target = Pool[random(0, 3)]`).
+* **3-Path Divergence**: *Fate of Atlantis* splits into 3 entirely separate narrative paths (Wits, Fists, Team), creating deep structural replayability.
+
+```
+┌─────────────────────────┬──────────────────────────────┬──────────────────────────────┐
+│ Engineering Feature     │ Westwood (Kyrandia 1)        │ LucasArts (Fate of Atlantis) │
+├─────────────────────────┼──────────────────────────────┼──────────────────────────────┤
+│ Engine Kernel           │ Westwood C / x86 Kyra        │ SCUMM v5 Engine              │
+│ Maze Room Layout        │ 100% Fixed Directed Graph    │ 100% Fixed Directed Graph    │
+│ Visual Asset Strategy   │ Reused .CPS tiles across     │ Distinct room artwork with   │
+│                         │ identical room templates     │ dynamic object layers        │
+│ Puzzle Seed Target      │ 2 of 4 Altar Gems Seeded     │ Plato's Stone Dial Rotations │
+│ Item Target Placement   │ 16-Room Outdoor Respawn Pool │ 4-Room Candidate Target Pool │
+│ Failure State           │ Instant death in dark cavern │ Soft lockout / Fist combat   │
+└─────────────────────────┴──────────────────────────────┴──────────────────────────────┘
+```
+
+---
+
+# 6. VERSION HISTORY, BUILD PROVENANCE & SCUMMVM COMPATIBILITY [VERS]
 
 ### A. Release Editions Comparison
 * **1992 Floppy Release (v1.00)**: 8x 3.5" disks, subtitle text only, AdLib/Roland MT-32 soundtrack.
 * **1993 CD-ROM Talkie Release (v1.20)**: Full voice acting across all characters, enhanced sound effects, CD audio tracks.
 
-### B. Exact Target Build Analyzed
+### B. ScummVM Engine Implementation (`kyra1`) Profile & Bug Fix History
+* **Target Engine ID**: `kyra1` (ScummVM Westwood 2D Adventure Kernel).
+* **Audio & Speech Desync Resolution**: In early ScummVM releases of the Talkie edition, speech audio could desync or clip during Malcolm's intro cutscene if speech and subtitle display timers clashed; modern ScummVM enforces sample-accurate audio thread sync.
+* **Item Collision Boundary Fix**: Original DOS `KYRA.EXE` suffered an item-drop boundary coordinate clipping glitch when dropping gems on the exact edge of altar bowls; ScummVM cleaned up the item bounding-box hit detection.
+* **Palette Cycling Emulation**: Emulates authentic VGA DAC palette cycling for the glowing fireberries and cave lighting effects.
+* **Savegame Format**: Modern `.s00`–`.s99` cross-platform save slots replace legacy DOS binary save dumps.
+
+### C. Exact Target Build Analyzed
 * **Target Release**: `The Legend of Kyrandia - Book 1 (CD-ROM DOS, Talkie Edition)`
 * **Master Archive Size**: `28,165,303 bytes` (26.86 MiB)
 * **Master Archive SHA-256**: `3ed7707ff0bb7b6bb07e68dc589269836cc6b0eaf123f6c3d684f3e3c0e3cfc6`
