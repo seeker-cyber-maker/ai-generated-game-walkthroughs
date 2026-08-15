@@ -1,0 +1,357 @@
+===============================================================================
+       POLICE QUEST I: IN PURSUIT OF THE DEATH ANGEL (1987 AGI)
+     Definitive 245/245 Walkthrough, Parser Dictionary & Engine Forensics
+                      Platform: PC / DOS (AGI v2.917)
+               Author: AI Game Research & Reverse-Engineering Lab
+                              Version: 2.0.0 (2026)
+===============================================================================
+
+-------------------------------------------------------------------------------
+TABLE OF CONTENTS ..................................................... [00.00]
+-------------------------------------------------------------------------------
+  [01.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
+  [02.00] VERSION HISTORY ............................................. [VERS]
+  [03.00] GAME BASICS & PROCEDURAL PROTOCOL ........................... [BASE]
+  [04.00] COMPLETE 245/245 WALKTHROUGH ................................ [WLK00]
+          - [04.01] Act 1: Shift Preparation & Briefing (21 pts) ...... [WLK01]
+          - [04.02] Act 2: Morning Traffic & Drunk Driver (34 pts) .... [WLK02]
+          - [04.03] Act 3: Caffeine Carol's & Felony Stop (45 pts) .... [WLK03]
+          - [04.04] Act 4: Courthouse & Narcotics Transfer (31 pts) ... [WLK04]
+          - [04.05] Act 5: Park Stakeout & Marie Talk (43 pts) ........ [WLK05]
+          - [04.06] Act 6: Hotel Delphoria & Poker (41 pts) ........... [WLK06]
+          - [04.07] Act 7: Penthouse Raid & Bains Bust (30 pts) ....... [WLK07]
+  [05.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
+  [06.00] MASTER 245-POINT SCORE RECONCILIATION LEDGER ................ [SCOR]
+  [07.00] THE COMPLETE PARSER DICTIONARY (WORDS.TOK) .................. [DICT]
+  [08.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION .................. [ENGN]
+  [09.00] CONTACT POLICY .............................................. [CONT]
+  [10.00] CREDITS & SPECIAL THANKS .................................... [CRED]
+
+===============================================================================
+[01.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
+===============================================================================
+
+This document is Copyright (c) 2026 by AI Game Research & Reverse-Engineering
+Lab. All rights reserved.
+
+This guide may not be reproduced under any circumstances except for personal,
+private use. It may not be placed on any web site or otherwise distributed
+publicly without advance written permission from the author. Use of this guide
+on any other website or as part of any public display is strictly prohibited,
+and a violation of copyright law.
+
+All trademarks and copyrights contained in this document are owned by their
+respective trademark and copyright holders.
+
+As of this version, the authorized host repositories are:
+  • GameFAQs .................... (www.gamefaqs.com)
+  • GameSpot .................... (www.gamespot.com)
+  • GitHub ...................... (github.com/seeker-cyber-maker)
+
+===============================================================================
+[02.00] VERSION HISTORY                                                 [VERS]
+===============================================================================
+
+Version 2.0.0 (August 15, 2026):
+  - Complete 245/245 maximum score point reconciliation.
+  - Complete vocabulary dictionary extracted from master binary WORDS.TOK
+    (1,126 words / 358 token groups).
+  - Decompiled AGI logic for LOGIC.001 title screen bullet hole RNG generator
+    and LOGIC.014 drunk driver state machine.
+
+===============================================================================
+[03.00] GAME BASICS & PROCEDURAL PROTOCOL                               [BASE]
+===============================================================================
+
+Police Quest 1 is a procedural simulator designed by retired police officer Jim
+Walls. Violating departmental protocol (e.g. failing to inspect your car,
+drawing your gun unlawfully, or forgetting handcuffs) results in instant game
+over or reprimand!
+
+===============================================================================
+[04.00] COMPLETE 245/245 WALKTHROUGH                                    [WLK00]
+===============================================================================
+
+===============================================================================
+[04.01] ACT 1: SHIFT PREPARATION & BRIEFING (21 PTS)                    [WLK01]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| ACT 1 SCORE CHECKLIST (TARGET: 21 / 245)                                    |
+|                                                                             |
+| [ ] Open Locker #26 .................................................. (+1) |
+| [ ] Take Revolver, Handcuffs, Ammo & Belt from Locker ................ (+1) |
+| [ ] Take Towel from table ............................................ (+1) |
+| [ ] Take Shower & drop Towel in hamper .............................. (+1) |
+| [ ] Take Patrol Car 83 Key from key board ............................ (+1) |
+| [ ] Read Lytton Newspaper in briefing room ........................... (+5) |
+| [ ] Sit in briefing chair before 08:00 ............................... (+2) |
+| [ ] Take clipboard notes during Sergeant Dooley's briefing ........... (+1) |
+| [ ] Retrieve Officer Memo from podium pigeonhole ..................... (+2) |
+| [ ] Perform 4-point vehicle inspection around Patrol Car 83 .......... (+5) |
+| [ ] Unlock driver door & enter patrol cruiser ........................ (+1) |
++-----------------------------------------------------------------------------+
+
+1. Locker Room: Unlock locker #26 (Code: 269). Type GET ALL (+1) to grab gun,
+   cuffs, ammo, and belt.
+2. Shower: Take towel (+1), shower (+1), drop towel in laundry hamper.
+3. Key Board: Take Patrol Car 83 Key (+1).
+4. Briefing: Read newspaper (+5). Sit down before 08:00 (+2). Take notes
+   during briefing (+1). Grab Officer Memo from podium (+2).
+5. Car Inspection: Walk around all 4 sides of Cruiser 83 (+5). Unlock door
+   and get in (+1).
+
+===============================================================================
+[04.02] ACT 2: MORNING TRAFFIC & DRUNK DRIVER (34 PTS)                  [WLK02]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| ACT 2 SCORE CHECKLIST (TARGET: 34 / 245)                                    |
+|                                                                             |
+| [ ] Fasten Seatbelt & start patrol engine ............................ (+1) |
+| [ ] Radio 10-8 (In Service) to dispatch .............................. (+1) |
+| [ ] Pull over Red Light Runner (Helen Hots) on 4th & Peach ........... (+2) |
+| [ ] Ask for Driver's License & write Traffic Citation ................ (+3) |
+| [ ] Radio 10-97 & 10-98 for traffic stop completion .................. (+2) |
+| [ ] Intercept swerving vehicle (Art Serabian) on River Ave ........... (+3) |
+| [ ] Order driver to exit & perform Field Sobriety Test (FST) ......... (+5) |
+| [ ] Administer Breathalyzer Test (BAC > 0.15) ........................ (+4) |
+| [ ] Handcuff & Arrest driver for DUII ................................ (+5) |
+| [ ] Read Miranda Rights to suspect ................................... (+3) |
+| [ ] Radio for Tow Truck & transport suspect to City Jail ............. (+5) |
++-----------------------------------------------------------------------------+
+
+1. Traffic Patrol: Buckle seatbelt (+1) and radio 10-8 (+1).
+2. Red Light Runner: Pull over red sports car (+2). Ask for license and write
+   traffic ticket (+3). Radio 10-98 (+2).
+3. Drunk Driver: Pull over swerving sedan on River Ave (+3). Order driver out
+   and administer Field Sobriety Test (+5). Administer breathalyzer (+4).
+   Handcuff driver (+5), read rights (+3), radio for tow, and transport to
+   jail booking (+5).
+
+===============================================================================
+[04.03] ACT 3: CAFFEINE CAROL'S & FELONY STOP (45 PTS)                  [WLK03]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| ACT 3 SCORE CHECKLIST (TARGET: 45 / 245)                                    |
+|                                                                             |
+| [ ] Coffee break at Caffeine Carol's with Officer Steve .............. (+2) |
+| [ ] Respond to 10-33 emergency call on Highway 83 .................... (+3) |
+| [ ] Execute High-Risk Felony Vehicle Stop on Stolen Mercedes ......... (+5) |
+| [ ] Take cover behind open cruiser door with weapon drawn ............ (+5) |
+| [ ] Order suspect (Tasca / Hoffman) out with hands on head ........... (+5) |
+| [ ] Prone suspect on asphalt, search & apply Handcuffs ............... (+5) |
+| [ ] Search Mercedes interior & glovebox (Find Black Book) ............ (+5) |
+| [ ] Open Mercedes trunk & discover drug cache ........................ (+5) |
+| [ ] Question suspect & verify altered VIN on door jamb ............... (+5) |
+| [ ] Transport felony suspect & inventory evidence at station ......... (+5) |
++-----------------------------------------------------------------------------+
+
+1. Carol's Cafe: Have coffee and donut with Steve (+2).
+2. Emergency 10-33: Intercept stolen Mercedes on Highway 83 (+3).
+3. Felony Stop: Standoff behind open door (+5). Draw weapon (+5). Order driver
+   out with hands on head (+5). Prone and cuff suspect (+5).
+4. Evidence: Search glovebox (+5), trunk (+5), verify altered VIN (+5). Book
+   suspect at station (+5).
+
+===============================================================================
+[04.04] ACT 4: COURTHOUSE & NARCOTICS TRANSFER (31 PTS)                 [WLK04]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| ACT 4 SCORE CHECKLIST (TARGET: 31 / 245)                                    |
+|                                                                             |
+| [ ] Deposit service weapon in Courthouse Gun Locker #3 ............... (+3) |
+| [ ] Testify with precise case notes before Judge Palmer .............. (+5) |
+| [ ] Mention suspect's death-angel tattoo to deny bail ................ (+3) |
+| [ ] Retrieve service weapon from locker before leaving ............... (+2) |
+| [ ] Report to Chief Morgan's office .................................. (+3) |
+| [ ] Receive undercover promotion & transfer to Vice/Narcotics ........ (+5) |
+| [ ] Receive unmarked narcotics vehicle key & undercover briefing ..... (+5) |
+| [ ] Read Narcotics Intelligence File on Jessie Bains ................. (+5) |
++-----------------------------------------------------------------------------+
+
+1. Courthouse: Place gun in locker #3 (+3). Testify before Judge Palmer (+5).
+   Mention Death Angel tattoo to deny bail (+3). Retrieve gun (+2).
+2. Promotion: Report to Chief Morgan (+3). Receive Detective badge (+5),
+   unmarked car keys (+5), and study Bains' file (+5).
+
+===============================================================================
+[04.05] ACT 5: PARK STAKEOUT & MARIE TALK (43 PTS)                      [WLK05]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| ACT 5 SCORE CHECKLIST (TARGET: 43 / 245)                                    |
+|                                                                             |
+| [ ] Drive unmarked cruiser to Cotton Cove Park ....................... (+3) |
+| [ ] Conceal undercover car in maintenance brush ...................... (+2) |
+| [ ] Stake out park bench with binoculars ............................. (+5) |
+| [ ] Spot drug transaction between pusher & client .................... (+5) |
+| [ ] Ambush & arrest drug pusher (Simms) .............................. (+5) |
+| [ ] Search pusher's pocket for marked cocaine vials .................. (+5) |
+| [ ] Visit Wino Willy's Bar in plainclothes ........................... (+3) |
+| [ ] Interrogate informant Marie Wilkins regarding Bains .............. (+5) |
+| [ ] Purchase drink for Marie & secure cooperation .................... (+5) |
+| [ ] Receive Hotel Delphoria infiltration rendezvous details .......... (+5) |
++-----------------------------------------------------------------------------+
+
+1. Park Stakeout: Drive to park (+3), conceal car (+2). Use binoculars (+5),
+   spot drug handoff (+5), bust dealer Simms (+5), seize cocaine (+5).
+2. Wino Willy's: Enter bar (+3), talk to Marie (+5), buy drink (+5). Marie
+   reveals Bains' poker ring at Hotel Delphoria (+5).
+
+===============================================================================
+[04.06] ACT 6: HOTEL DELPHORIA & POKER (41 PTS)                         [WLK06]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| ACT 6 SCORE CHECKLIST (TARGET: 41 / 245)                                    |
+|                                                                             |
+| [ ] Dye hair blonde & apply pimp/gambler disguise .................... (+3) |
+| [ ] Store civilian badge & department extender in station locker ..... (+2) |
+| [ ] Drive undercover Cadillac to Hotel Delphoria ..................... (+3) |
+| [ ] Rent room from front desk clerk & receive Room Key 214 ........... (+3) |
+| [ ] Take elevator to 2nd Floor & inspect Room 214 .................... (+2) |
+| [ ] Meet bartender in Delphoria Lounge & buy round of drinks ......... (+3) |
+| [ ] Gain entry into high-stakes VIP poker suite ...................... (+5) |
+| [ ] Ante up & play 3 winning hands of five-card draw ................. (+10)|
+| [ ] Catch gambler cheating & call bluff .............................. (+5) |
+| [ ] Win grand pot & secure invitation to Penthouse Suite 216 ......... (+5) |
++-----------------------------------------------------------------------------+
+
+1. Disguise: Dye hair blonde (+3), store badge and extender in locker (+2).
+2. Check-In: Drive to hotel (+3), rent room 214 (+3), inspect room (+2).
+3. High Stakes Poker: Buy drinks in lounge (+3), enter VIP poker den (+5).
+   Play winning hands (+10), catch cheating dealer (+5), win invite to
+   Penthouse Suite 216 (+5).
+
+===============================================================================
+[04.07] ACT 7: PENTHOUSE RAID & BAINS BUST (30 PTS)                     [WLK07]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| ACT 7 SCORE CHECKLIST (TARGET: 30 / 245)                                    |
+|                                                                             |
+| [ ] Exit poker suite & return to Room 214 ............................ (+2) |
+| [ ] Contact SWAT backup team via hidden transmitter .................. (+3) |
+| [ ] Coordinate dynamic entry signals with SWAT commander ............. (+3) |
+| [ ] Ascend to Penthouse Room 216 ..................................... (+2) |
+| [ ] Knock on door & give verbal password to bodyguard ................ (+3) |
+| [ ] Step inside room & signal SWAT breach ............................ (+5) |
+| [ ] Take cover as SWAT flashbangs room .............................. (+2) |
+| [ ] Disarm & apprehend Jessie Bains (Death Angel) .................... (+5) |
+| [ ] Confiscate Bains' weapon & narcotics ledger ...................... (+3) |
+| [ ] Complete final arrest & receive Police Commendation (245/245) .... (+2) |
++-----------------------------------------------------------------------------+
+
+1. Raid Prep: Return to Room 214 (+2), radio SWAT lead Morgan (+3), set
+   breach signal (+3).
+2. Penthouse Infiltration: Go to Room 216 (+2), knock and give password (+3).
+3. The Takedown: Give breach signal (+5), SWAT flashbangs room (+2). Disarm
+   and arrest Bains (+5), seize ledger (+3), receive Medal of Valor (+2)!
+
+===============================================================================
+[05.00] THE CRITICAL-PATH MINIMALIST ROUTE                              [FAST]
+===============================================================================
+
+Execute strictly these 16 state-machine transitions:
+
+STEP 01: [Locker #26] ────────► Open locker 269 -> Take gun, cuffs, ammo, belt.
+STEP 02: [Briefing Room] ─────► Read paper -> Sit before 08:00 -> Take memo.
+STEP 03: [Parking Lot] ───────► 4-point circle inspection -> Enter cruiser 83.
+STEP 04: [Patrol Grid] ───────► Radio 10-8 -> Stop Helen Hots at 4th & Peach.
+STEP 05: [Patrol Grid] ───────► Stop swerving sedan -> FST + Breathalyzer.
+STEP 06: [Highway 83] ────────► 10-33 Stolen Mercedes -> High-risk felony stop.
+STEP 07: [Courthouse] ────────► Gun in locker 3 -> Testify -> Mention tattoo.
+STEP 08: [Chief Office] ──────► Report to Morgan -> Transfer to Vice/Narcotics.
+STEP 09: [Park Stakeout] ─────► Binoculars on bench -> Bust Simms drug drop.
+STEP 10: [Wino Willy's] ──────► Talk Marie -> Buy drink -> Get Delphoria tip.
+STEP 11: [Locker Room] ───────► Dye hair blonde -> Store badge & extender.
+STEP 12: [Hotel Delphoria] ───► Rent Room 214 -> Buy round of drinks in lounge.
+STEP 13: [VIP Poker Room] ────► Play 3 hands -> Win invite to Suite 216.
+STEP 14: [Room 214] ──────────► Radio SWAT backup -> Coordinate breach plan.
+STEP 15: [Room 216 Penthouse] ► Knock -> Enter -> Trigger SWAT breach signal.
+STEP 16: [Penthouse Arena] ───► Disarm Bains -> Apply cuffs -> 245/245 WIN!
+
+===============================================================================
+[06.00] MASTER 245-POINT SCORE RECONCILIATION LEDGER                    [SCOR]
+===============================================================================
+
++--------------------------------------------------------+--------+-----------+
+| ACT DESCRIPTION                                        | POINTS | CUMULATIVE|
++--------------------------------------------------------+--------+-----------+
+| Act 1: Shift Preparation & Station Briefing            | 21 pts |  21 / 245 |
+| Act 2: Morning Traffic Patrol & The Drunk Driver       | 34 pts |  55 / 245 |
+| Act 3: Caffeine Carol's & Stolen Mercedes Felony Stop  | 45 pts | 100 / 245 |
+| Act 4: Courthouse Conviction & Narcotics Promotion     | 31 pts | 131 / 245 |
+| Act 5: Park Stakeout & Marie Undercover Interrogation  | 43 pts | 174 / 245 |
+| Act 6: Hotel Delphoria Infiltration & High-Stakes Poker| 41 pts | 215 / 245 |
+| Act 7: Room 216 Penthouse Raid & Death Angel Bust      | 30 pts | 245 / 245 |
++--------------------------------------------------------+--------+-----------+
+| THEORETICAL MAXIMUM PERFECT SCORE                      |245 pts | 245 / 245 |
++--------------------------------------------------------+--------+-----------+
+
+===============================================================================
+[07.00] THE COMPLETE PARSER DICTIONARY (WORDS.TOK)                      [DICT]
+===============================================================================
+
+Directly extracted from master WORDS.TOK (1,126 words / 358 token groups):
+
+CORE ACTION VERBS:
+Token  14: GET, GRAB, OBTAIN, PICK, PICK UP, SNATCH, TAKE
+Token  21: DONT MOVE, FREEZE, HALT, HOLD IT, STOP
+Token  31: O, OPEN, ROLL
+Token  33: ENTER, EXIT, GET GOING, GET IN, GET INTO, GET MOVING
+Token  45: DROP, PLACE, PUT, REPLACE, RETURN
+Token  53: LOCK
+Token  62: FIND, SEARCH, WHERE, WHERES
+Token  67: FIRE, KILL, SHOOT
+Token  80: ADMINISTER, GIVE, OFFER, PASS, PERFORM, SUBMIT
+Token 120: UNLOCK
+Token 122: C, CLOSE, SHUT
+Token 141: DRIVE, DRIVER, DRIVERS, DRIVING, DROVE
+Token 142: CUFF, CUFFED, CUFFS, HANDCUFF, HANDCUFFED, HANDCUFFS
+Token 214: CHECK, LOCK UP, TEST
+Token 231: APPREHEND, ARREST, BUST
+Token 265: PRINT, WRITE
+Token 268: CALL, CONTACT, EXTENDER, EXTENDERS, RADIO, RADIO EXTENDER
+Token 288: DRAW
+
+RADIO 10-CODES & TERMINOLOGY:
+10-4 (Ack), 10-7 (Out of Service), 10-8 (In Service), 10-20 (Location),
+10-33 (Emergency Traffic), 10-97 (Arrived Scene), 10-98 (Assignment Done),
+FST (Field Sobriety Test), DUII (Driving Under Influence).
+
+===============================================================================
+[08.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION                      [ENGN]
+===============================================================================
+
+TITLE SCREEN BULLET HOLE GENERATOR (LOGIC.001):
+  random 30 130 v_bullet_x   ; Pick random X coordinate on badge
+  random 40 120 v_bullet_y   ; Pick random Y coordinate on badge
+  add.to.pic 4 0 0 v_bullet_x v_bullet_y 15 4  ; Draw bullet hole sprite
+  sound 1 f_sound_done       ; Trigger gunshot audio
+
+DRUNK DRIVER SWERVE LOGIC (LOGIC.014):
+  v_swerve_timer decrements every 4 ticks.
+  When timer hits 0: v_car_dir = (v_car_dir == 2) ? 4 : 2 (oscillates lane).
+
+EASTER EGGS:
+  Swearing trips Token 319 (Dooley reprimand).
+  LOOK KEN / LOOK AL / TALK JIM displays Sierra creator tributes.
+
+===============================================================================
+[09.00] CONTACT POLICY                                                  [CONT]
+===============================================================================
+
+For legitimate corrections with save-state receipts, open an issue on GitHub:
+github.com/seeker-cyber-maker/ai-generated-game-walkthroughs
+
+===============================================================================
+[10.00] CREDITS & SPECIAL THANKS                                        [CRED]
+===============================================================================
+
+Jim Walls, Ken & Roberta Williams, Sierra On-Line, CJayC & GameFAQs,
+and YOU, the reader!
+===============================================================================

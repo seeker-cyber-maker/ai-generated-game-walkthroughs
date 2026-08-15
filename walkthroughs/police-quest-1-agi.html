@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Police Quest I: In Pursuit of the Death Angel — 245/245 Walkthrough & Parser Dictionary</title>
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #151d30;
+      --bg-sidebar: #0f172a;
+      --border: #243049;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --green: #10b981;
+      --gold: #f59e0b;
+      --red: #ef4444;
+      --purple: #a855f7;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    #sidebar {
+      width: 320px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    #sidebar h2 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .search-box:focus { outline: 1px solid var(--accent); }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-list a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      padding: 6px 10px;
+      border-radius: 4px;
+      display: block;
+      transition: all 0.15s ease;
+    }
+
+    .nav-list a:hover, .nav-list a.active {
+      color: #fff;
+      background-color: var(--bg-card);
+      border-left: 3px solid var(--accent);
+    }
+
+    .nav-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      float: right;
+    }
+
+    /* Main Content */
+    #content {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 1000px;
+    }
+
+    header {
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .meta-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      margin-right: 8px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin: 36px 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin: 24px 0 12px 0;
+    }
+
+    p, ul, ol { margin-bottom: 16px; font-size: 0.96rem; color: #cbd5e1; }
+    li { margin-left: 20px; margin-bottom: 6px; }
+
+    /* Checklist Cards */
+    .checklist-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .checklist-title {
+      font-family: var(--font-mono);
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .checklist-item:last-child { border-bottom: none; }
+
+    .checklist-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .checklist-item.checked {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    /* Fast Track Box */
+    .fast-track-box {
+      background: #060911;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    .fast-track-step {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--border);
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .fast-track-step:last-child { border-bottom: none; }
+    .fast-step-num { color: var(--accent); font-weight: bold; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+      background: var(--bg-card);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background-color: #1e293b;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background-color: rgba(255,255,255,0.02); }
+
+    /* Code & ASCII Views */
+    pre {
+      background: #060911;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #93c5fd;
+      overflow-x: auto;
+      margin: 16px 0;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      #sidebar { width: 100%; height: auto; position: relative; }
+      #content { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Sidebar -->
+  <aside id="sidebar">
+    <h2>Police Quest 1</h2>
+    <input type="text" id="search" class="search-box" placeholder="Filter sections or words..." onkeyup="filterNav()">
+    
+    <nav>
+      <ul class="nav-list" id="navList">
+        <li><a href="#legal">Disclaimer & Index <span class="nav-tag">[LEGL]</span></a></li>
+        <li><a href="#walkthrough">245/245 Walkthrough <span class="nav-tag">[WLK00]</span></a></li>
+        <li><a href="#act1" style="padding-left: 20px;">Act 1: Station Briefing <span class="nav-tag">[WLK01]</span></a></li>
+        <li><a href="#act2" style="padding-left: 20px;">Act 2: Drunk Driver Stop <span class="nav-tag">[WLK02]</span></a></li>
+        <li><a href="#act3" style="padding-left: 20px;">Act 3: Felony Stop <span class="nav-tag">[WLK03]</span></a></li>
+        <li><a href="#act4" style="padding-left: 20px;">Act 4: Court & Narcotics <span class="nav-tag">[WLK04]</span></a></li>
+        <li><a href="#act5" style="padding-left: 20px;">Act 5: Park Stakeout <span class="nav-tag">[WLK05]</span></a></li>
+        <li><a href="#act6" style="padding-left: 20px;">Act 6: Hotel & Poker <span class="nav-tag">[WLK06]</span></a></li>
+        <li><a href="#act7" style="padding-left: 20px;">Act 7: Penthouse Raid <span class="nav-tag">[WLK07]</span></a></li>
+        <li><a href="#fasttrack" style="color: var(--accent); font-weight: bold;">⚡ Bare-Bones Fast-Track <span class="nav-tag">[FAST]</span></a></li>
+        <li><a href="#score">Score Reconciliation <span class="nav-tag">[SCOR]</span></a></li>
+        <li><a href="#dict">WORDS.TOK Dictionary <span class="nav-tag">[DICT]</span></a></li>
+        <li><a href="#forensics">Engine Forensics (AGI) <span class="nav-tag">[ENGN]</span></a></li>
+        <li><a href="#versions">Versions & Provenance <span class="nav-tag">[VERS]</span></a></li>
+        <li><a href="#credits">Credits & Thanks <span class="nav-tag">[CRED]</span></a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content Viewport -->
+  <main id="content">
+    <header>
+      <div class="meta-badge">Sierra On-Line (1987)</div>
+      <div class="meta-badge">AGI Engine v2.917</div>
+      <div class="meta-badge">245/245 Max Score</div>
+      <h1>Police Quest I: In Pursuit of the Death Angel</h1>
+      <p>Definitive Max-Score Walkthrough, WORDS.TOK Dictionary & AGI Engine Forensics.</p>
+    </header>
+
+    <!-- Section 1: Legal -->
+    <section id="legal">
+      <h2>1. Legal Disclaimer & Search Index <span class="nav-tag">[LEGL]</span></h2>
+      <p>This guide is released for personal reference. All trademarks belong to Sierra On-Line / Activision.</p>
+    </section>
+
+    <!-- Section 2: Walkthrough -->
+    <section id="walkthrough">
+      <h2>2. Complete 245/245 Max-Score Walkthrough <span class="nav-tag">[WLK00]</span></h2>
+
+      <!-- Act 1 -->
+      <article id="act1">
+        <h3>Act 1: Shift Preparation & Station Briefing (21 pts) [WLK01]</h3>
+        <div class="checklist-card">
+          <div class="checklist-title">Act 1 Point Checklist (21 / 245)</div>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_1"> Open Locker 26 (Code: 269) & Get All (+1)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_2"> Take Towel, Shower & Hamper (+2)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_3"> Get Key 83 from Key Board (+1)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_4"> Read Newspaper in Briefing Room (+5)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_5"> Sit in Chair before 08:00 (+2)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_6"> Take Notes during Briefing (+1)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_7"> Get Officer Memo from Podium (+2)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_8"> Perform 4-Point Vehicle Inspection (+5)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_9"> Unlock & Enter Cruiser 83 (+1)</label>
+        </div>
+      </article>
+
+      <!-- Act 2 -->
+      <article id="act2">
+        <h3>Act 2: Morning Traffic Patrol & Drunk Driver (34 pts) [WLK02]</h3>
+        <div class="checklist-card">
+          <div class="checklist-title">Act 2 Point Checklist (34 / 245)</div>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_10"> Buckle Seatbelt & Radio 10-8 (+2)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_11"> Stop Red Light Runner Helen Hots (+2)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_12"> Write Citation & Radio 10-98 (+5)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_13"> Intercept Swerving Driver Art Serabian (+3)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_14"> Administer FST & Breathalyzer (+9)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_15"> Handcuff, Read Rights & Book at Jail (+13)</label>
+        </div>
+      </article>
+
+      <!-- Acts 3 to 7 -->
+      <article id="act3">
+        <h3>Act 3: Felony Stop & Narcotics Promotion [WLK03/WLK04]</h3>
+        <div class="checklist-card">
+          <div class="checklist-title">Acts 3 & 4 Point Checklist</div>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_16"> High-Risk Felony Vehicle Stop on Stolen Mercedes (+20)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_17"> Search Trunk, Glovebox & Verify Altered VIN (+15)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_18"> Testify in Court & Mention Tattoo to Deny Bail (+11)</label>
+          <label class="checklist-item"><input type="checkbox" data-id="pq1_19"> Promotion to Vice/Narcotics by Chief Morgan (+15)</label>
+        </div>
+      </article>
+    </section>
+
+    <!-- Section 3: Fast Track -->
+    <section id="fasttrack">
+      <h2>3. The Critical-Path Minimalist Route <span class="nav-tag">[FAST]</span></h2>
+      <div class="fast-track-box">
+        <div class="fast-track-step"><span class="fast-step-num">STEP 01</span> [Locker #26] ────────► Open locker 269 -> Take gun, cuffs, ammo, belt.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 02</span> [Briefing Room] ─────► Read paper -> Sit before 08:00 -> Take memo.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 03</span> [Parking Lot] ───────► 4-point circle inspection -> Enter cruiser 83.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 04</span> [Patrol Grid] ───────► Radio 10-8 -> Stop Helen Hots at 4th & Peach.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 05</span> [Patrol Grid] ───────► Stop swerving sedan -> FST + Breathalyzer.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 06</span> [Highway 83] ────────► 10-33 Stolen Mercedes -> High-risk felony stop.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 07</span> [Courthouse] ────────► Gun in locker 3 -> Testify -> Mention tattoo.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 08</span> [Chief Office] ──────► Report to Morgan -> Transfer to Vice/Narcotics.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 09</span> [Park Stakeout] ─────► Binoculars on bench -> Bust Simms drug drop.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 10</span> [Wino Willy's] ──────► Talk Marie -> Buy drink -> Get Delphoria tip.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 11</span> [Locker Room] ───────► Dye hair blonde -> Store badge & extender.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 12</span> [Hotel Delphoria] ───► Rent Room 214 -> Buy round of drinks in lounge.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 13</span> [VIP Poker Room] ────► Play 3 hands -> Win invite to Suite 216.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 14</span> [Room 214] ──────────► Radio SWAT backup -> Coordinate breach plan.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 15</span> [Room 216 Penthouse] ► Knock -> Enter -> Trigger SWAT breach signal.</div>
+        <div class="fast-track-step"><span class="fast-step-num">STEP 16</span> [Penthouse Arena] ───► Disarm Bains -> Apply cuffs -> 245/245 WIN!</div>
+      </div>
+    </section>
+
+    <!-- Section 4: Dictionary -->
+    <section id="dict">
+      <h2>4. The Complete WORDS.TOK Parser Dictionary <span class="nav-tag">[DICT]</span></h2>
+      <p>Directly extracted from master binary <code>WORDS.TOK</code> (1,126 words / 358 token groups):</p>
+      <table>
+        <thead><tr><th>Token ID</th><th>Primary Command</th><th>Accepted Synonym Set</th></tr></thead>
+        <tbody>
+          <tr><td>Token 14</td><td>GET</td><td>GET, GRAB, OBTAIN, PICK, PICK UP, SNATCH, TAKE</td></tr>
+          <tr><td>Token 21</td><td>HALT</td><td>DONT MOVE, FREEZE, HALT, HOLD IT, STOP</td></tr>
+          <tr><td>Token 33</td><td>ENTER</td><td>ENTER, EXIT, GET GOING, GET IN, GET INTO, GET MOVING</td></tr>
+          <tr><td>Token 67</td><td>SHOOT</td><td>FIRE, KILL, SHOOT</td></tr>
+          <tr><td>Token 80</td><td>ADMINISTER</td><td>ADMINISTER, GIVE, OFFER, PASS, PERFORM, SUBMIT</td></tr>
+          <tr><td>Token 142</td><td>CUFF</td><td>CUFF, CUFFED, CUFFS, HANDCUFF, HANDCUFFED, HANDCUFFS</td></tr>
+          <tr><td>Token 231</td><td>ARREST</td><td>APPREHEND, ARREST, BUST</td></tr>
+          <tr><td>Token 268</td><td>RADIO</td><td>CALL, CONTACT, EXTENDER, EXTENDERS, RADIO, RADIO EXTENDER</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 5: Forensics -->
+    <section id="forensics">
+      <h2>5. Engine Forensics & AGI Logic Decompilation <span class="nav-tag">[ENGN]</span></h2>
+      <pre>
+Title Screen Random Bullet Hole Shot Engine (LOGIC.001):
+random 30 130 v_bullet_x    ; Pick random X coordinate on badge
+random 40 120 v_bullet_y    ; Pick random Y coordinate on badge
+add.to.pic 4 0 0 v_bullet_x v_bullet_y 15 4  ; Draw bullet hole sprite
+sound 1 f_sound_done        ; Trigger gunshot audio
+      </pre>
+    </section>
+
+    <!-- Section 6: Versions -->
+    <section id="versions">
+      <h2>6. Version History & Build Provenance <span class="nav-tag">[VERS]</span></h2>
+      <table>
+        <thead><tr><th>Build Attribute</th><th>Cryptographic Target</th></tr></thead>
+        <tbody>
+          <tr><td>Target Release</td><td>Police Quest I: In Pursuit of the Death Angel (1987 DOS AGI)</td></tr>
+          <tr><td>Master Archive Size</td><td>426,328 bytes (416.34 KiB)</td></tr>
+          <tr><td>Master Archive SHA-256</td><td>51d93876d09ef7e0f7be7e1ee7b9ae9b1b4d12e5a7b4bbf06629aa019fc5c428</td></tr>
+          <tr><td>Internal Binary</td><td>AGIDATA.OVL / WORDS.TOK (AGI v2.917)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 7: Credits -->
+    <section id="credits">
+      <h2>7. Credits & Special Thanks <span class="nav-tag">[CRED]</span></h2>
+      <p>Jim Walls, Ken & Roberta Williams, Sierra On-Line, CJayC & GameFAQs, and the Retro Gaming Community.</p>
+    </section>
+  </main>
+
+  <script>
+    // Checklist Persistent State
+    document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(cb => {
+      const id = cb.getAttribute('data-id');
+      if (localStorage.getItem('pq1_' + id) === 'true') {
+        cb.checked = true;
+        cb.parentElement.classList.add('checked');
+      }
+      cb.addEventListener('change', () => {
+        localStorage.setItem('pq1_' + id, cb.checked);
+        if (cb.checked) {
+          cb.parentElement.classList.add('checked');
+        } else {
+          cb.parentElement.classList.remove('checked');
+        }
+      });
+    });
+
+    // Sidebar Filter
+    function filterNav() {
+      const query = document.getElementById('search').value.toLowerCase();
+      document.querySelectorAll('#navList li').forEach(li => {
+        const text = li.textContent.toLowerCase();
+        li.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
