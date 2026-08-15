@@ -14,14 +14,18 @@ v                                                                             v
 +-----------------------------------------------------------------------------+
 | 1. Hard Maximum Line Width : 79 Characters (Never 80+)                      |
 | 2. Tab Characters (\t)     : STRICTLY FORBIDDEN (Use 2 or 4 spaces only)    |
-| 3. Line Endings            : Unix (\n) or DOS (\r\n)                        |
-| 4. Encoding                : Plain ASCII or standard UTF-8                  |
-| 5. Trailing Whitespace     : Stripped                                       |
+| 3. Em-Dashes (— / \u2014)  : STRICTLY FORBIDDEN (Use colons, commas, parens)|
+| 4. Line Endings            : Unix (\n) or DOS (\r\n)                        |
+| 5. Encoding                : Plain ASCII or standard UTF-8                  |
+| 6. Trailing Whitespace     : Stripped                                       |
 +-----------------------------------------------------------------------------+
 ```
 
 ### Why 79 Columns Instead of 80?
 On classic 80-column monospaced CRT terminals, DOS editors, and the GameFAQs text viewer, writing exactly 80 characters followed by a newline (`\n`) triggers an automatic terminal line-wrap, creating an unwanted blank line after every sentence. A strict **79-column hard limit** guarantees pixel-perfect rendering across every screen and operating system.
+
+### Why No Em-Dashes (—) or AI Prose Tropes?
+Em-dashes are not native ASCII (0x2014) and frequently corrupt into Mojibake (`â€”` or `?`) in classic DOS viewers, terminal pagers, and GameFAQs submission parsers. Furthermore, overuse of em-dashes is an obvious AI prose trope. Standard hyphens (`-`), colons (`:`), commas (`,`), or parentheses `()` must be used instead.
 
 ---
 
@@ -37,12 +41,12 @@ TABLE OF CONTENTS ..................................................... [00.00]
   [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
   [03.00] VERSION HISTORY ............................................. [VERS]
   [04.00] GAME BASICS & COMBAT MECHANICS .............................. [BASE]
-  [04.00] COMPLETE WALKTHROUGH ........................................ [WLK00]
-          - [04.01] Act I: Gladstone Keep & The Great Forests ......... [WLK01]
-          - [04.02] Act II: Gorkha Swamp & Shaman's Trial ............. [WLK02]
-          - [04.03] Act III: Mines of Apparitions & Draracle .......... [WLK03]
-          - [04.04] Act IV: The White Tower & Gladstone Siege ......... [WLK04]
-          - [04.05] Act V: City of Yvel & The Sewers .................. [WLK05]
+  [05.00] COMPLETE WALKTHROUGH ........................................ [WLK00]
+          - [05.01] Act I: Gladstone Keep & The Great Forests ......... [WLK01]
+          - [05.02] Act II: Gorkha Swamp & Shaman's Trial ............. [WLK02]
+          - [05.03] Act III: Mines of Apparitions & Draracle .......... [WLK03]
+          - [05.04] Act IV: The White Tower & Gladstone Siege ......... [WLK04]
+          - [05.05] Act V: City of Yvel & The Sewers .................. [WLK05]
           - [04.06] Act VI: Castle Cimmeria & Nether Mask ............. [WLK06]
   [05.00] THE CRITICAL-PATH MINIMALIST ROUTE .......................... [FAST]
   [06.00] WEAPONS, ARMOR & SPELLS COMPENDIUM .......................... [COMP]
