@@ -104,10 +104,21 @@ Walkthroughs must decompile the game's actual internal binary architecture:
 * **Westwood Kyra / LoL**: Disassemble `.PAK` archives, item bitfield masks (`ALCHEMY.PAK`), and memory registers.
 * **Coktel Gob**: Unpack `.STK` archives via LZSS 4096-byte ring-buffers and map the full directed state machine (`EMAJ1000.TOT`–`EMAJ1038.TOT`).
 
-### Invariant 2: Historical Copy-Protection & Reverse-Engineered Cracks
-Document the original retail DRM (manual symbol lookups, dial wheels, spellbook prompts) and explain the low-level assembly disassembly and bypass:
-* Document the exact conditional jump opcodes (e.g. `JZ` `0x74` -> `JMP` `0xEB`, or NOPing `0x90 0x90`).
-* Preserve the historical computing context of how early crackers defeated manual lookups.
+### Invariant 2: Historical Copy-Protection, DRM & Build Provenance (`[PROT]` / `[VERS]`)
+Every guide must thoroughly document the contemporary copy-protection schemes and release provenance:
+* **Physical Box & Manual Artifacts**:
+  - *Code Wheels*: Dial-A-Pirate (*Monkey Island 1*), Voodoo Code Wheel (*Monkey Island 2*), Sector Navigators.
+  - *Cardboard & Lenses*: ScumSoft keycard decoding grid (*Space Quest III*), red cellophane decoder glasses, dark-printed manual tables.
+  - *Manual Lookups*: Page/line/word lookups (*Police Quest 2*, *King's Quest IV*), spellbook glyphs (*Kyrandia 2*), potion recipes (*Kyrandia 1*).
+* **Media-Level & Hardware Checks**:
+  - Floppy bad-track / non-standard sector interleave schemes (Keypunch, Copylock).
+  - CD-ROM optical subchannel Q-data verification and MSCDEX volume label matching (`INT 2Fh, AX=1500h`).
+* **Reverse-Engineered Assembly Cracks & Bypass Vectors**:
+  - Document the exact x86 / 68k disassembly offsets, conditional jump opcodes (e.g. `JZ` `0x74` -> `JMP` `0xEB` or NOPing `0x90 0x90`), and register overrides (`MOV AX, 0001h`).
+  - Preserve the historical computing context of how early crackers defeated manual lookups.
+* **Build Provenance & Binary Hashes**:
+  - Exhaustive release history: Floppy 3.5"/5.25" vs CD-ROM Talkie, EGA vs VGA, regional language editions.
+  - Master binary SHA-256 checksums and exact engine interpreter build numbers.
 
 ### Invariant 3: Hidden Spells, Secrets & Session PRNG Registers
 * Document all hidden spells (e.g. Hand of Fate Level 4), unlisted developer easter eggs, and secret debug shortcuts.
