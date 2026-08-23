@@ -345,4 +345,5 @@ char* World::GenerateIP() {
 
 * **Introversion Software**: Chris Delay, Mark Morris, John Austin, Thomas Arundel.
 * **Soundtrack**: Michiel van den Bos & Peter 'Skaven' Hajba.
+* **Special Dedication**: To the original 2002/2003 Uplink Developer CD backers—the true cyber-patrons whose £30 source code purchases saved Introversion from bankruptcy and kept the spirit of independent PC gaming alive.
 * **Dedication**: To all cyberpunk hackers and retro security researchers.
