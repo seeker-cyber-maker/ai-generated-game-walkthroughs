@@ -26,7 +26,7 @@ TABLE OF CONTENTS ..................................................... [00.00]
   [09.00] AI BLINDSPOTS, PATHFINDING GLITCHES & EXPLOITS .............. [EXPL]
   [10.00] COMPLETE 9-SCENARIO CAMPAIGN STRATEGY ....................... [WLK00]
   [11.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) ....... [FAST]
-  [12.00] SUPER DUNE II (1993): THE 3 HIDDEN PLAYABLE FACTIONS ........ [SUPR]
+  [12.00] SUPER DUNE II (1993): 3 NEW FACTIONS & THE OBLITERATOR ....... [SUPR]
   [13.00] HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM .............. [PROT]
   [14.00] ENGINE FORENSICS & BINARY BYTECODE MAPPING .................. [ENGN]
   [15.00] PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE ................. [SEQL]
@@ -383,24 +383,38 @@ void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
 +-----------------------------------------------------------------------------+
 
 ===============================================================================
-[12.00] SUPER DUNE II (1993): THE 3 HIDDEN PLAYABLE FACTIONS            [SUPR]
+[12.00] SUPER DUNE II (1993): 3 NEW FACTIONS & THE OBLITERATOR          [SUPR]
 ===============================================================================
 
-A. THE 3 NEW PLAYABLE FACTIONS:
-  In the 1992 release, House IDs 3, 4, and 5 were engine-only non-player
-  factions. Super Dune II (1993) unlocked them as fully playable campaigns:
+A. PROVENANCE & THE 27 CUSTOM SCENARIOS:
+  Created in 1993-1994 by Stefan Hendriks and Gerben van Kesteren, Super Dune
+  II was an unofficial community total conversion distributed via BBS networks
+  and shareware disks. It replaced the campaign with 27 brand-new, hardcore
+  missions across 3 previously engine-restricted playable factions:
 
-  1. House Fremen (Desert Indigenous Campaign):
+  1. House Fremen (Desert Indigenous Campaign - 9 Missions):
      • Natural desert camouflage infantry spawn without Palace prerequisite.
      • Sonic Tanks unlocked early at Tech Level 5.
-  2. The Mercenary Guild (Scavenger Campaign):
+  2. The Mercenary Guild (Scavenger Campaign - 9 Missions):
      • Hybrid unit roster: can produce Ordos Raider Trikes and Harkonnen
        Missile Tanks simultaneously at discounted credit costs.
-  3. The Imperial Sardaukar (Dreadnought Legion):
+  3. The Imperial Sardaukar (Dreadnought Legion - 9 Missions):
      • Standard infantry replaced by elite Heavy Rocket Sardaukar.
-     • Devastators and Death Hand missiles available in early scenarios.
+     • Devastators / Obliterators unlocked early in Scenarios 4-5.
 
-B. EXTREME DIFFICULTY AI TUNING:
+B. THE DEVASTATOR / "OBLITERATOR" / "ANNIHILATOR" SELF-DESTRUCT:
+  In European shareware and Russian/Ukrainian bootlegs, the Devastator was
+  frequently translated as the "Obliterator" or "Annihilator":
+
+  • Dedicated UI Button: Selecting the Obliterator reveals a manual
+    "Self-Destruct" command button on the interface (Hotkey: 'D').
+  • Last-Resort Kamikaze Blast: A 1.5-second siren triggers before the unit
+    detonates in a thermonuclear mushroom cloud, dealing 500 radial splash
+    damage across 3 tiles to obliterate surrounding enemy armor and bases.
+  • Tactical Role: Driving a damaged Obliterator into an enemy refinery
+    cluster or turret line and detonating it is the premier speedrun tactic.
+
+C. EXTREME DIFFICULTY AI TUNING:
   • AttackWaveRate doubled: AI wave delay timers slashed from 300 to 120 ticks.
   • AI starting credit reserves boosted to 9,999 credits.
   • Concurrent multi-factory build orders resulting in crushing armor rushes.

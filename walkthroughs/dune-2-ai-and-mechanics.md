@@ -643,32 +643,52 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 
 ---
 
-# 11. SUPER DUNE II (1993): THE 3 HIDDEN PLAYABLE FACTIONS [SUPR]
+# 11. SUPER DUNE II (1993): THE 3 HIDDEN PLAYABLE FACTIONS & THE OBLITERATOR [SUPR]
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                   SUPER DUNE II: COMMUNITY MASTER CONVERSION                │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│  Released in 1993, Super Dune II unlocked the 3 hardcoded non-playable      │
-│  factions in the Westwood engine: House Fremen, Mercenaries, and Sardaukar. │
-│  It introduced extreme difficulty AI routines and new tactical doctrines.  │
+│  Released in 1993–1994 by Stefan Hendriks & Gerben van Kesteren, Super     │
+│  Dune II was an unofficial total conversion distributed via BBS networks    │
+│  and shareware compilations. It introduced 27 brand-new custom missions,   │
+│  unlocked 3 engine-restricted factions, and revolutionized tactical use of  │
+│  the Devastator / "Obliterator" self-destruct mechanism.                    │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### A. The 3 New Playable Factions
-In the original 1992 release, `HouseID` values 3, 4, and 5 were reserved exclusively for engine scripts. *Super Dune II* rewrote the main campaign scenario indexes:
+### A. The 3 New Playable Factions & 27 Custom Scenarios
+In the original 1992 release, `HouseID` values 3, 4, and 5 were reserved exclusively for engine scripts. *Super Dune II* replaced the campaign selection system with **27 completely new, high-difficulty missions**:
 
-1. **House Fremen (Desert Indigenous Campaign)**:
+1. **House Fremen (Desert Indigenous Campaign — 9 Missions)**:
    - *Color Scheme*: Brown / Desert Ochre.
    - *Special Mechanics*: Native sand infantry squads spawn without Palace requirements. Sonic Tanks are unlocked by default at Tech Level 5.
-2. **The Mercenary Guild (Scavenger Campaign)**:
+2. **The Mercenary Guild (Scavenger Campaign — 9 Missions)**:
    - *Color Scheme*: Slate Grey.
    - *Special Mechanics*: Hybrid factory unit access (can manufacture Ordos Raider Trikes and Harkonnen Missile Tanks simultaneously at reduced credit cost).
-3. **The Imperial Sardaukar (Dreadnought Legion Campaign)**:
+3. **The Imperial Sardaukar (Dreadnought Legion Campaign — 9 Missions)**:
    - *Color Scheme*: Imperial Purple / Crimson.
-   - *Special Mechanics*: Elite Sardaukar Heavy Rocket Troopers replace standard infantry. Devastators and Death Hand missiles are available earlier in the campaign.
+   - *Special Mechanics*: Elite Sardaukar Heavy Rocket Troopers replace standard infantry. Devastators / Obliterators and Death Hand missiles are unlocked early in the campaign (Scenarios 4–5).
 
-### B. Extreme AI Tuning & Reverse-Engineered Mod Flags
+### B. The Devastator / "Obliterator" / "Annihilator" Self-Destruct Feature
+In European shareware releases, Russian localizations (*Опустошитель* / *Аннигилятор*), and mod derivatives like *Dune II: eXtended*, the Harkonnen/Sardaukar super-tank was often translated or dubbed the **Obliterator** or **Annihilator**:
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                 THE DEVASTATOR / OBLITERATOR COMMAND PANEL                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  [ MOVE ]      [ ATTACK ]                                                   │
+│  [ RETREAT ]   [ GUARD ]                                                    │
+│  [ SELF-DESTRUCT ] ──► "WARNING: Thermonuclear core overload initiated!"   │
+│                        Deals 500 radial blast damage to all adjacent tiles. │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+* **The Dedicated UI Command**: Unlike standard combat vehicles, selecting the Devastator / Obliterator exposes a manual **"Self-Destruct"** button in the command panel (Hotkey: `D`).
+* **The Countdown & Detonation**: When clicked, an internal siren sounds for 1.5 seconds before the unit undergoes a thermonuclear meltdown, dealing **500 radial splash damage** across 3 tiles.
+* **Tactical Sacrificial Role in Super Dune II**: Due to the mod's extreme AI wave rushes, driving a damaged Obliterator into an enemy spice refinery cluster or rocket turret line and manually triggering the self-destruct explosion became the premier speedrun tactic for breaking through fortified bases.
+
+### C. Extreme AI Tuning & Reverse-Engineered Mod Flags
 *Super Dune II* modified `SCENARIO.PAK` triggers to dramatically increase AI brutality:
 * `AttackWaveRate` doubled (`DelayTimer` reduced from 300 to 120 ticks).
 * Starting credit reserves for AI bases set to maximum (`Credits = 9999`).
