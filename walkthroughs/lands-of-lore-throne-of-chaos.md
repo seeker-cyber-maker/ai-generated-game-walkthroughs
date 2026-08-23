@@ -432,6 +432,17 @@ In *Lands of Lore III* (1999), Gladstone Keep is shattered when dimensional rift
 ### C. The Draracle & Arrant Rrak / Arrant Prac Anagrams
 Across all three games, the **Draracle** (Dragon + Oracle) acts as an immortal cosmic architect. Westwood developers encoded linguistic in-jokes into his ancient lizard disciple: **Arrant Rrak** (and its anagrammatic merchant variant **Arrant Prac**), who recurs as a cryptic shopkeeper and scholar.
 
+### D. Westwood RPG Prequel-to-Sequel Evolution Matrix
+The structural progression from Westwood's TSR D&D era to the 3D cinematic era:
+
+| Feature / Subsystem | Eye of the Beholder II (1991) | Lands of Lore: Throne of Chaos (1993) | Lands of Lore II: Guardians of Destiny (1997) |
+| :--- | :--- | :--- | :--- |
+| **Engine Architecture** | Step-turn D&D 2nd Ed grid | 2.5D Raycaster + classless skills | Full 3D directional engine + VQA FMV |
+| **Protagonist Dynamic** | 4-6 Custom D&D party | 1 Chosen Hero (4 options) + 2 companions | Luther (Scotia's cursed son) solo |
+| **Core Transformation** | Static spell buffs | Magic Ring / Ruby of Truth / Nether Mask | Spontaneous Morphing (Human/Lizard/Beast)|
+| **Combat & UI System** | 2-Hand weapon click grid | Real-time weapon cooldowns + spellbook | Real-time directional swordplay + magic |
+| **Dialogue & Media** | Text box prompts | Patrick Stewart voiceover + Talkie CD | Full-motion live-action video on 4 CDs |
+
 # 11. SCUMMVM & MODERN EMULATION TARGET PROFILE [SCUM]
 
 * **Target Engine ID**: `kyra` (Sub-engine: `lol`).

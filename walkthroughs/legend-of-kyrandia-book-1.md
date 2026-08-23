@@ -360,6 +360,18 @@ In Book 1, Malcolm appears as a purely sadistic jester who petrifies Kallak. How
 ### C. Zanthia: From Supporting Alchemist to Solo Heroine in Book 2
 Zanthia transitions from Brandon's potion mentor in Book 1 into the spunky, witty protagonist of *The Legend of Kyrandia: Hand of Fate* (1993), venturing to the center of the world to save the realm from disappearing.
 
+### D. Prequel-to-Sequel Engine & Interface Evolution Matrix
+The technical and philosophical progression across the Kyrandia trilogy:
+
+| Feature / Subsystem | Book 1: Legend of Kyrandia (1992) | Book 2: Hand of Fate (1993) | Book 3: Malcolm's Revenge (1994) |
+| :--- | :--- | :--- | :--- |
+| **Protagonist & Role** | Brandon (Naive prince / chosen one) | Zanthia (Sarcastic pragmatic alchemist)| Malcolm (Exiled misunderstood jester) |
+| **Core Magic Mechanic** | 4-Slot Kyragem Amulet (Fixed spells) | 16-Recipe Alchemical Cauldron (Items)| 3-State Mood Meter (Lie/Norm/Truth) |
+| **Inventory System** | Simple single-item cursor, tight limits| Expanded Haversack & Alchemical Pouch| Dynamic Jester Bag & Multi-use Props |
+| **Death & Failure Design**| Lethal soft-locks, maze death traps | Death-free comedy puzzle philosophy | Multi-path non-linear escape routes |
+| **Visual & Engine Tech**| 2D Hand-drawn VGA tiles (320x200) | 2D VGA + animated palette cycling | 3D Pre-rendered Silicon Graphics sprites|
+| **Audio & Speech** | Floppy AdLib/MIDI, late CD talkie | Native Talkie CD with full voiceover | Multi-track dynamic CD audio score |
+
 ---
 
 # 9. CONTACT POLICY [CONT]

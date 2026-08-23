@@ -94,6 +94,7 @@ Every guide produced in this repository must meet the rigorous technical and for
 | 5. Dual Walkthrough Architecture (Granular Checklist + [FAST] Geodesic)     |
 | 6. Historical Lineage, Design Philosophy & Cultural Retrospective ([HIST]) |
 | 7. Modern Emulation Engine & ScummVM Profile ([SCUM])                       |
+| 8. Prequel-to-Sequel Evolutionary Forensics & Historical Format Deltas [SEQL]|
 +-----------------------------------------------------------------------------+
 ```
 
@@ -133,6 +134,14 @@ Every guide must trace the narrative lineage, character evolution, and thematic 
 
 ### Invariant 7: Modern Emulation & ScummVM Profile (`[SCUM]`)
 Document the specific ScummVM engine kernel ID, CPU-speed timer normalization, speech/subtitle desync fixes, palette cycling emulation, and cross-platform save formats.
+
+### Invariant 8: Prequel-to-Sequel Evolutionary Forensics & Format Deltas (`[SEQL]` / `[EVOL]`)
+For every title in a franchise or engine family, the guide must explicitly document the technical and design delta between the prequel and the current installment:
+* **Engine Architecture Shift**: e.g., AGI (interpreted vector/polling) -> SCI0 (OOP script state machine) -> SCI1/SCI32 (VGA/32-bit streaming); SCUMM v1–v3 (15-verb grid) -> v4/v5 (9-verb/iMUSE) -> v6/v7 (contextual cursor); Kyra 1 (simple point & click) -> Kyra 2 (alchemical cauldron) -> Kyra 3 (mood meter & 3D pre-rendered sprites).
+* **User Interface & Interaction Overhaul**: How item handling, inventory limits, action hotkeys, and dialogue systems were upgraded or streamlined.
+* **Audio Subsystem Progression**: Evolution from PC Speaker / 3-Voice Tandy -> AdLib / Sound Blaster FM synthesis -> Roland MT-32 multi-timbral MIDI -> Redbook CD-DA / digitized Talkie speech.
+* **Copy-Protection Metamorphosis**: Evolution from printed manual symbol lookups -> code wheels (Dial-A-Pirate) -> in-game trivia prompts -> optical disc physical checks.
+* **Puzzle & Death Mechanics Philosophy**: Shifts from unforgiving Sierra-style instant death and dead-ends -> fair-play LucasArts/Westwood design where items cannot be permanently missed or wasted.
 
 ---
 

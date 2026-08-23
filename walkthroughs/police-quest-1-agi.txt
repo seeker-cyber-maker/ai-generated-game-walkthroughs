@@ -383,6 +383,17 @@ B. CHARACTER CONTINUITY IN SEQUELS & BLUE FORCE:
        cop Jake Ryan and veteran mentor Lyle Jameson (successors to Bonds and
        Dooley/Cobb), retaining all authentic 10-codes and weapon safety checks.
 
+C. SIERRA POLICE QUEST PREQUEL-TO-SEQUEL EVOLUTION MATRIX:
+  +--------------------+---------------------+--------------------+-----------+
+  | Subsystem / Metric | Police Quest 1 AGI  | PQ2: The Vengeance | PQ1 VGA   |
+  +--------------------+---------------------+--------------------+-----------+
+  | Engine Kernel      | Sierra AGI v2.917   | Sierra SCI0 (OOP)  | SCI1.1    |
+  | Input Interface    | Keyboard Text Parser| Parser + Mouse Nav | Icon Bar  |
+  | Firearm Mechanics  | Text DRAW/SHOOT     | Gun Range Target   | Crosshair |
+  | Audio Architecture | PC Speaker / Tandy  | Roland MT-32 MIDI  | 16-bit SB |
+  | Driving Simulation | Top-down vector car | Streamlined Travel | Map Travel|
+  +--------------------+---------------------+--------------------+-----------+
+
 ===============================================================================
 [10.00] ENGINE FORENSICS & AGI LOGIC DECOMPILATION                      [ENGN]
 ===============================================================================

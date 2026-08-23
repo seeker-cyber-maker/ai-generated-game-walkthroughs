@@ -459,6 +459,17 @@ Token 288: DRAW
    - After departing Sierra following creative differences during PQ3/PQ4, Jim Walls created **Blue Force** at Tsunami Media.
    - *Blue Force* carried on the exact procedural DNA: protagonist **Jake Ryan** investigates his parents' murder in Jackson Harbor, using authentic radio 10-codes, weapon locker safety procedures, and vehicle maintenance checks with mentor **Lyle Jameson** (the spiritual successor to Dooley and Cobb).
 
+### C. Sierra Police Quest Prequel-to-Sequel Evolution Matrix
+The procedural and technological evolution across the Sierra police simulation lineage:
+
+| Feature / Subsystem | Police Quest 1 (1987 AGI) | Police Quest 2: The Vengeance (1988 SCI0) | Police Quest 1 VGA (1992 SCI1.1) |
+| :--- | :--- | :--- | :--- |
+| **Engine Architecture** | Sierra AGI v2.917 (Vector line/fill) | Sierra SCI0 (Object-oriented PMachine) | Sierra SCI1.1 (256-color VGA raster) |
+| **Input & Parser** | Pure keyboard text parser (160x200) | Parser + mouse cursor navigation | Icon verb bar (Walk/Look/Do/Talk/Item)|
+| **Firearm Mechanics** | Text `DRAW GUN` / `SHOOT BAINS` | Gun calibration target range minigame | Crosshair point-and-click shooting |
+| **Audio Subsystem** | PC Speaker / Tandy 3-Voice beeps | Roland MT-32 multi-timbral MIDI | Sound Blaster / Pro Audio 16-bit |
+| **Driving Simulation** | Top-down vector car navigator | Streamlined map navigation / auto-drive | Point-and-click city map travel |
+
 ---
 
 # 7. ENGINE FORENSICS & AGI LOGIC DECOMPILATION [ENGN]

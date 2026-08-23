@@ -250,6 +250,17 @@ C. THE DRARACLE & ARRANT RRAK / ARRANT PRAC ANAGRAMS:
   ancient lizard disciple: "Arrant Rrak" (and its anagrammatic merchant variant
   "Arrant Prac"), who recurs as a cryptic shopkeeper and scholar.
 
+D. WESTWOOD RPG PREQUEL-TO-SEQUEL EVOLUTION MATRIX:
+  +--------------------+---------------------+--------------------+-----------+
+  | Subsystem / Metric | Eye of the Beholder | Lands of Lore I    | LoL II    |
+  +--------------------+---------------------+--------------------+-----------+
+  | Engine Paradigm    | Step-turn D&D Grid  | 2.5D Raycaster     | 3D Voxel  |
+  | Protagonist Model  | 4-6 D&D Custom Party| 1 Hero + Companions| Luther    |
+  | Transformation     | Static spell buffs  | Magic Ring/Nether  | Morphing  |
+  | Combat Subsystem   | 2-Hand Weapon Click | Real-time Cooldown | 3D Sword  |
+  | Voiceover Media    | Text Prompts Only   | Patrick Stewart CD | 4-CD FMV  |
+  +--------------------+---------------------+--------------------+-----------+
+
 ===============================================================================
 [11.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
 ===============================================================================

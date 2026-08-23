@@ -400,6 +400,17 @@ C. SPECIAL EFFECT (FX) SUBROUTINE TABLE:
 3. 1992 Sierra Lineup: Sierra focused their marketing budget on King's Quest VI
    and Space Quest V, leaving Ween as a hidden European cult classic.
 
+4. COKTEL VISION GOB ENGINE PREQUEL-TO-SEQUEL EVOLUTION MATRIX:
+  +--------------------+---------------------+--------------------+-----------+
+  | Subsystem / Metric | Gobliiins 1 (1991)  | Ween (1992)        | Gobliins 2|
+  +--------------------+---------------------+--------------------+-----------+
+  | Protagonist Cast   | 3 Goblins (H/D/B)   | Ween + 3 Spirits   | 2 Goblins |
+  | Puzzle Topology    | 22 Discrete Rooms   | 39 Screen Paths    | Scrolling |
+  | Failure State      | Global Health Bar   | 30-Day Hourglass   | Infinite  |
+  | Inventory System   | Single Item/Goblin  | 4-Tier Haversack   | Dual-Use  |
+  | Art & Graphics     | 16/256 EGA/VGA      | Digitized VGA DAC  | Cartoon   |
+  +--------------------+---------------------+--------------------+-----------+
+
 ===============================================================================
 [11.00] DEVELOPER CRYPTOGRAMS, ANAGRAMS & DEEP LORE FORENSICS          [LORE]
 ===============================================================================

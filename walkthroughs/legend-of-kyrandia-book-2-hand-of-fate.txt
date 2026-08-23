@@ -237,6 +237,18 @@ B. MARKO & THE CONTINUITY TO MALCOLM'S REVENGE (BOOK 3):
   from Book 2's near-catastrophe leads directly to the royal court's suspicion
   and the high-stakes trial of Malcolm.
 
+C. PREQUEL-TO-SEQUEL ENGINE & INTERFACE EVOLUTION MATRIX:
+  +--------------------+---------------------+--------------------+-----------+
+  | Subsystem / Metric | Book 1: Brandon     | Book 2: Zanthia    | Book 3    |
+  +--------------------+---------------------+--------------------+-----------+
+  | Protagonist Role   | Naive Prince/Heir   | Sarcastic Mystic   | Jester    |
+  | Primary Magic Core | 4-Slot Amulet Gems  | 16-Potion Cauldron | Mood Bar  |
+  | Inventory Limits   | Single-item cursor  | Haversack/Pouch    | Prop Bag  |
+  | Puzzle Philosophy  | Fatal death traps   | Fair-play comedy   | 3 Routes  |
+  | Engine Visuals     | 2D Hand-drawn VGA   | 2D Animated DAC    | 3D SGI    |
+  | Audio Architecture | Floppy MIDI/AdLib   | Native CD Talkie   | Multi-CD  |
+  +--------------------+---------------------+--------------------+-----------+
+
 ===============================================================================
 [10.00] VERSION HISTORY & BUILD PROVENANCE                              [VERS]
 ===============================================================================

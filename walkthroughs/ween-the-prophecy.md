@@ -456,6 +456,17 @@ EMAJ1END (Credits Epilogue)   ──► Victory Sequence
 3. **Sierra's Marketing in 1992**:
    Sierra prioritized their home-grown franchises (*King's Quest VI*, *Space Quest V*), leaving *Ween* to become a treasured European cult classic.
 
+### 4. Coktel Vision Gob Engine Prequel-to-Sequel Evolution Matrix
+The structural progression across the Coktel Vision adventure library:
+
+| Feature / Subsystem | Gobliiins 1 (1991) | Ween: The Prophecy (1992) | Gobliins 2 (1992) | Woodruff (1994) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Cast & Dynamics** | 3 Goblins (Hooter/Dwayne/BoBo) | Ween + 3 Summoned Spirits | 2 Goblins (Fingus & Winkle) | Woodruff + Azimuth |
+| **Puzzle Topology** | 22 Single-screen rooms | 39 Screens across 4 paths | Multi-room scrolling worlds | Massive open metropolis |
+| **Failure State** | Global health/energy bar | 30-Day hourglass timer | Infinite comedy retries | Deathless adventure |
+| **Inventory System** | Single item per goblin | 4-Phase Haversack synthesis | Dual cooperative item use | 50+ item inventory |
+| **Graphics & Tech** | 16/256-color EGA/VGA | Digitized art + VGA palette | Slapstick cartoon 256 VGA | SVGA 640x480 hand-drawn |
+
 ---
 
 # 11. DEVELOPER CRYPTOGRAMS, ANAGRAMS & DEEP LORE FORENSICS [LORE]

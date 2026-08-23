@@ -195,6 +195,18 @@ C. ZANTHIA: FROM SUPPORTING ALCHEMIST TO SOLO HEROINE IN BOOK 2:
   witty protagonist of "The Legend of Kyrandia: Hand of Fate" (1993), venturing
   to the center of the world to save the realm from disappearing.
 
+D. PREQUEL-TO-SEQUEL ENGINE & INTERFACE EVOLUTION MATRIX:
+  +--------------------+---------------------+--------------------+-----------+
+  | Subsystem / Metric | Book 1: Brandon     | Book 2: Zanthia    | Book 3    |
+  +--------------------+---------------------+--------------------+-----------+
+  | Protagonist Role   | Naive Prince/Heir   | Sarcastic Mystic   | Jester    |
+  | Primary Magic Core | 4-Slot Amulet Gems  | 16-Potion Cauldron | Mood Bar  |
+  | Inventory Limits   | Single-item cursor  | Haversack/Pouch    | Prop Bag  |
+  | Puzzle Philosophy  | Fatal death traps   | Fair-play comedy   | 3 Routes  |
+  | Engine Visuals     | 2D Hand-drawn VGA   | 2D Animated DAC    | 3D SGI    |
+  | Audio Architecture | Floppy MIDI/AdLib   | Native CD Talkie   | Multi-CD  |
+  +--------------------+---------------------+--------------------+-----------+
+
 ===============================================================================
 [09.00] SCUMMVM & MODERN EMULATION TARGET PROFILE                       [SCUM]
 ===============================================================================
