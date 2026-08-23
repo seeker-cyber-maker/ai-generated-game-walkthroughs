@@ -36,6 +36,7 @@
 | **The Legend of Kyrandia: Book 3 - Malcolm's Revenge** | 1994 | Westwood Kyra 3 DOS (Talkie CD) | [Markdown](walkthroughs/legend-of-kyrandia-book-3-malcolms-revenge.md) • [79-Col Text](walkthroughs/legend-of-kyrandia-book-3-malcolms-revenge.txt) • [HTML App](walkthroughs/legend-of-kyrandia-book-3-malcolms-revenge.html) |
 | **Space Quest III: The Pirates of Pestulon** | 1989 | Sierra SCI0 (DOS EGA) | [Markdown](walkthroughs/space-quest-3-sci0.md) • [79-Col Text](walkthroughs/space-quest-3-sci0.txt) • [HTML App](walkthroughs/space-quest-3-sci0.html) |
 | **The Secret of Monkey Island** | 1990 | LucasArts SCUMM v4/v5 | [Markdown](walkthroughs/secret-of-monkey-island.md) • [79-Col Text](walkthroughs/secret-of-monkey-island.txt) • [HTML App](walkthroughs/secret-of-monkey-island.html) |
+| **Gobliiins** | 1991 | Coktel Vision Gob Engine DOS | [Markdown](walkthroughs/gobliiins-1.md) • [79-Col Text](walkthroughs/gobliiins-1.txt) • [HTML App](walkthroughs/gobliiins-1.html) |
 | **Ween: The Prophecy** | 1992 | Coktel Vision Gob Engine DOS | [Markdown](walkthroughs/ween-the-prophecy.md) • [79-Col Text](walkthroughs/ween-the-prophecy.txt) • [HTML App](walkthroughs/ween-the-prophecy.html) |
 
 ---

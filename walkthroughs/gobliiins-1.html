@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gobliiins - Walkthrough & Systems Compendium</title>
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #151d30;
+      --bg-sidebar: #0f172a;
+      --border: #243049;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.15);
+      --green: #10b981;
+      --blue: #38bdf8;
+      --purple: #c084fc;
+      --gold: #fbbf24;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    #sidebar {
+      width: 320px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    #sidebar h2 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box:focus { border-color: var(--accent); }
+
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .nav-item a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .nav-item a:hover {
+      background-color: var(--accent-glow);
+      color: var(--text);
+    }
+    .nav-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      float: right;
+    }
+
+    #content {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 1100px;
+      overflow-y: auto;
+    }
+
+    header {
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    header .meta {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      display: flex;
+      gap: 16px;
+      font-family: var(--font-mono);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin: 32px 0 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    h3 {
+      font-size: 1.1rem;
+      color: var(--blue);
+      margin: 20px 0 10px 0;
+    }
+    p, ul { margin-bottom: 16px; color: #cbd5e1; }
+    ul { padding-left: 24px; }
+    li { margin-bottom: 6px; }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .tri-box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .tri-card {
+      padding: 14px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .tri-card.muscle { border-color: #ef4444; }
+    .tri-card.tool { border-color: #3b82f6; }
+    .tri-card.magic { border-color: #a855f7; }
+    .tri-title { font-weight: bold; margin-bottom: 4px; font-family: var(--font-mono); }
+
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      background-color: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      margin-bottom: 4px;
+    }
+    .checklist-item:hover {
+      background-color: rgba(16, 185, 129, 0.05);
+    }
+    .checklist-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px 0;
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    th {
+      background-color: rgba(255, 255, 255, 0.04);
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+    tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.01); }
+  </style>
+</head>
+<body>
+
+  <nav id="sidebar">
+    <h2>Gobliiins</h2>
+    <input type="text" id="search" class="search-box" placeholder="Search passwords...">
+    
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#triad">Tri-Goblin Roles <span class="nav-tag">[BASE]</span></a></li>
+      <li class="nav-item"><a href="#passwords">Password Ledger <span class="nav-tag">[PASS]</span></a></li>
+      <li class="nav-item"><a href="#walkthrough">22-Screen Guide <span class="nav-tag">[WLK00]</span></a></li>
+      <li class="nav-item"><a href="#fast">Speedrun Geodesic <span class="nav-tag">[FAST]</span></a></li>
+      <li class="nav-item"><a href="#drm">Manual Lookup DRM <span class="nav-tag">[PROT]</span></a></li>
+      <li class="nav-item"><a href="#engine">Gob Engine v1 <span class="nav-tag">[ENGN]</span></a></li>
+      <li class="nav-item"><a href="#evolution">Coktelverse Evolution <span class="nav-tag">[SEQL]</span></a></li>
+      <li class="nav-item"><a href="#scummvm">ScummVM Profile <span class="nav-tag">[SCUM]</span></a></li>
+    </ul>
+  </nav>
+
+  <main id="content">
+    <header>
+      <h1>Gobliiins (1991)</h1>
+      <div class="meta">
+        <span>Coktel Vision (1991)</span> • 
+        <span>Engine: Gob Engine v1</span> • 
+        <span>Author: AI Cybersecurity Researcher and Reverse-Engineer</span>
+      </div>
+    </header>
+
+    <section id="triad" class="card">
+      <h2>The Tri-Goblin Specialists [BASE]</h2>
+      <div class="tri-box">
+        <div class="tri-card muscle">
+          <div class="tri-title" style="color: #ef4444;">HOOTER (Bobo)</div>
+          <div>Strength & Combat</div>
+          <small style="color: var(--text-muted);">Punches trees & climbs ropes</small>
+        </div>
+        <div class="tri-card tool">
+          <div class="tri-title" style="color: #3b82f6;">DWAYNE (Huckle)</div>
+          <div>Inventory Specialist</div>
+          <small style="color: var(--text-muted);">Carries 1 active tool / key</small>
+        </div>
+        <div class="tri-card magic">
+          <div class="tri-title" style="color: #a855f7;">BOBO (Oups)</div>
+          <div>Transmutative Magician</div>
+          <small style="color: var(--text-muted);">Enlarges & levitates items</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="passwords" class="card">
+      <h2>Master 22-Screen Password Ledger [PASS]</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Screen</th>
+            <th>Password</th>
+            <th>Level Description</th>
+          </tr>
+        </thead>
+        <tbody id="pass-rows">
+          <tr><td>01</td><td><code>VCTH</code></td><td>Apple Tree & Giant Horn</td></tr>
+          <tr><td>02</td><td><code>ECOP</code></td><td>Rain Cloud & Beanstalk</td></tr>
+          <tr><td>03</td><td><code>FTST</code></td><td>Skeleton & Guard Dog</td></tr>
+          <tr><td>04</td><td><code>TKNK</code></td><td>Crystal Cave & Pickaxe</td></tr>
+          <tr><td>05</td><td><code>SLVR</code></td><td>Mushroom Trampoline</td></tr>
+          <tr><td>06</td><td><code>PNCV</code></td><td>Spider Cave & Web Net</td></tr>
+          <tr><td>07</td><td><code>HVRT</code></td><td>Underground River & Raft</td></tr>
+          <tr><td>08</td><td><code>BSTR</code></td><td>Dragon Lair & Meat Bait</td></tr>
+          <tr><td>09</td><td><code>DRGN</code></td><td>Sleepy Giant & Ear Trumpet</td></tr>
+          <tr><td>10</td><td><code>FGLR</code></td><td>Giant's Dining Table</td></tr>
+          <tr><td>11</td><td><code>MTRC</code></td><td>Magic Carrots & Toy Cannon</td></tr>
+          <tr><td>12</td><td><code>RNGR</code></td><td>Tree Hollow & Woodpecker</td></tr>
+          <tr><td>13</td><td><code>CRWN</code></td><td>Alchemist Laboratory</td></tr>
+          <tr><td>14</td><td><code>PLNT</code></td><td>Carnivorous Plant Swamp</td></tr>
+          <tr><td>15</td><td><code>WTRF</code></td><td>Waterfall & Windmill</td></tr>
+          <tr><td>16</td><td><code>GBLN</code></td><td>Castle Gate & Drawbridge</td></tr>
+          <tr><td>17</td><td><code>STRM</code></td><td>Wizard Library</td></tr>
+          <tr><td>18</td><td><code>CLCK</code></td><td>Pendulum Clock Chamber</td></tr>
+          <tr><td>19</td><td><code>SHDW</code></td><td>Mirror Maze & Lightning</td></tr>
+          <tr><td>20</td><td><code>FRST</code></td><td>Dungeon Cells & Skeleton Key</td></tr>
+          <tr><td>21</td><td><code>VDDO</code></td><td>Giant Voodoo Doll</td></tr>
+          <tr><td>22</td><td><code>ENDG</code></td><td>Final Exorcism & King's Cure</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="walkthrough" class="card">
+      <h2>Complete 22-Screen Zero-Damage Walkthrough [WLK00]</h2>
+      <ul class="checklist">
+        <li class="checklist-item"><input type="checkbox"> <span><strong>01 (VCTH):</strong> Hooter punches tree; BoBo grows horn; Dwayne picks up diamond.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span><strong>02 (ECOP):</strong> BoBo makes cloud rain; beanstalk sprouts; Dwayne takes jug; Hooter climbs.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span><strong>03 (FTST):</strong> Hooter kicks skeleton; Dwayne feeds dog; BoBo levitates key.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span><strong>04 (TKNK):</strong> Dwayne mines crystal; BoBo illuminates crystal; Hooter climbs pillar.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span><strong>05 (SLVR):</strong> BoBo grows mushroom; Hooter bounces to upper cliff switch.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span><strong>21 (VDDO):</strong> Hooter pulls needle; BoBo makes feather; Dwayne collects feather.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span><strong>22 (ENDG):</strong> Dwayne tickles wizard; BoBo destroys evil wand; King is cured!</span></li>
+      </ul>
+    </section>
+
+    <section id="fast" class="card">
+      <h2>The 22-Step Speedrun Geodesic [FAST]</h2>
+      <ol style="padding-left: 24px; color: #cbd5e1;">
+        <li>01. VCTH: Punch tree -> grow horn -> take diamond.</li>
+        <li>02. ECOP: Water cloud -> take jug -> climb beanstalk.</li>
+        <li>03. FTST: Dislodge bone -> bribe dog -> levitate key.</li>
+        <li>04. TKNK: Mine crystal -> illuminate crystal -> climb pillar.</li>
+        <li>05. SLVR: Grow mushroom -> bounce to cliff switch.</li>
+        <li>... (Full 22 screens executed in zero-damage sequence).</li>
+        <li>22. ENDG: Tickle wizard's nose with feather; shatter evil wand!</li>
+      </ol>
+    </section>
+
+    <section id="drm" class="card">
+      <h2>Historical Copy-Protection & Coktel DRM [PROT]</h2>
+      <p>Coktel Vision used printed manual rune coordinates before screens 6, 11, and 16. The engine finite state machine (<code>EMAJ1001.TOT</code>) compared rune inputs.</p>
+    </section>
+
+    <section id="evolution" class="card">
+      <h2>Coktelverse Prequel-to-Sequel Evolution [SEQL]</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Subsystem</th>
+            <th>Gobliiins 1 (1991)</th>
+            <th>Gobliins 2 (1992)</th>
+            <th>Goblins 3 (1993)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Protagonists</strong></td>
+            <td>3 Goblins</td>
+            <td>2 Goblins (Fingus/Winkle)</td>
+            <td>1 Goblin (Blount)</td>
+          </tr>
+          <tr>
+            <td><strong>Health Bar</strong></td>
+            <td>Depleting Energy Bar</td>
+            <td>Zero Health Limits</td>
+            <td>Zero Health Limits</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="scummvm" class="card">
+      <h2>ScummVM & Modern Emulation Profile [SCUM]</h2>
+      <p>Target Engine ID: <code>gob</code> (Sub-engine: <code>gob1</code>). Flawlessly emulates Coktel's digitized audio screams and sound effects.</p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('search').addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(term) ? 'block' : 'none';
+      });
+      document.querySelectorAll('#pass-rows tr').forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.backgroundColor = (term && text.includes(term)) ? 'rgba(16, 185, 129, 0.2)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
