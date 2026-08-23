@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lands of Lore II: Guardians of Destiny - Walkthrough & Systems Compendium</title>
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #151d30;
+      --bg-sidebar: #0f172a;
+      --border: #243049;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #ec4899;
+      --accent-glow: rgba(236, 72, 153, 0.15);
+      --green: #10b981;
+      --blue: #38bdf8;
+      --purple: #c084fc;
+      --gold: #fbbf24;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    #sidebar {
+      width: 320px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    #sidebar h2 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box:focus { border-color: var(--accent); }
+
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .nav-item a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .nav-item a:hover {
+      background-color: var(--accent-glow);
+      color: var(--text);
+    }
+    .nav-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      float: right;
+    }
+
+    #content {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 1100px;
+      overflow-y: auto;
+    }
+
+    header {
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    header .meta {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      display: flex;
+      gap: 16px;
+      font-family: var(--font-mono);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin: 32px 0 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    h3 {
+      font-size: 1.1rem;
+      color: var(--blue);
+      margin: 20px 0 10px 0;
+    }
+    p, ul { margin-bottom: 16px; color: #cbd5e1; }
+    ul { padding-left: 24px; }
+    li { margin-bottom: 6px; }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .morph-box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .morph-card {
+      padding: 14px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .morph-card.human { border-color: var(--blue); }
+    .morph-card.lizard { border-color: var(--green); }
+    .morph-card.beast { border-color: #ef4444; }
+    .morph-title { font-weight: bold; margin-bottom: 4px; font-family: var(--font-mono); }
+
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      background-color: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      margin-bottom: 4px;
+    }
+    .checklist-item:hover {
+      background-color: rgba(236, 72, 153, 0.05);
+    }
+    .checklist-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px 0;
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    th {
+      background-color: rgba(255, 255, 255, 0.04);
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+    tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.01); }
+  </style>
+</head>
+<body>
+
+  <nav id="sidebar">
+    <h2>Lands of Lore II</h2>
+    <input type="text" id="search" class="search-box" placeholder="Search guide...">
+    
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#morphs">3 Morph Forms <span class="nav-tag">[BASE]</span></a></li>
+      <li class="nav-item"><a href="#magic">Magic System <span class="nav-tag">[MAGC]</span></a></li>
+      <li class="nav-item"><a href="#disc1">Disc 1: Draracle Caves <span class="nav-tag">[WLK01]</span></a></li>
+      <li class="nav-item"><a href="#disc2">Disc 2: Huline Jungle <span class="nav-tag">[WLK02]</span></a></li>
+      <li class="nav-item"><a href="#disc3">Disc 3: Claw Mountains <span class="nav-tag">[WLK03]</span></a></li>
+      <li class="nav-item"><a href="#disc4">Disc 4: Ancient City & Belial <span class="nav-tag">[WLK04]</span></a></li>
+      <li class="nav-item"><a href="#museum">The Great Museum <span class="nav-tag">[MUSM]</span></a></li>
+      <li class="nav-item"><a href="#fast">Speedrun Geodesic <span class="nav-tag">[FAST]</span></a></li>
+      <li class="nav-item"><a href="#protection">4-CD Swapping DRM <span class="nav-tag">[PROT]</span></a></li>
+      <li class="nav-item"><a href="#engine">3D Sector Engine <span class="nav-tag">[ENGN]</span></a></li>
+      <li class="nav-item"><a href="#evolution">Trilogy Evolution <span class="nav-tag">[SEQL]</span></a></li>
+      <li class="nav-item"><a href="#scummvm">ScummVM Profile <span class="nav-tag">[SCUM]</span></a></li>
+    </ul>
+  </nav>
+
+  <main id="content">
+    <header>
+      <h1>Lands of Lore: Guardians of Destiny</h1>
+      <div class="meta">
+        <span>Westwood Studios (1997)</span> • 
+        <span>Engine: 3D Sector SVGA</span> • 
+        <span>Author: AI Cybersecurity Researcher and Reverse-Engineer</span>
+      </div>
+    </header>
+
+    <section id="morphs" class="card">
+      <h2>The 3 Morphological Forms [BASE]</h2>
+      <div class="morph-box">
+        <div class="morph-card human">
+          <div class="morph-title" style="color: var(--blue);">HUMAN FORM</div>
+          <div>Balanced Combat</div>
+          <small style="color: var(--text-muted);">Casts all 7 magic spheres & wields weapons</small>
+        </div>
+        <div class="morph-card lizard">
+          <div class="morph-title" style="color: var(--green);">LIZARD FORM (SMALL)</div>
+          <div>Agility & Squeeze</div>
+          <small style="color: var(--text-muted);">Crawls through grates; immune to fall damage</small>
+        </div>
+        <div class="morph-card beast">
+          <div class="morph-title" style="color: #ef4444;">GIANT BEAST (LARGE)</div>
+          <div>Brute Demolition</div>
+          <small style="color: var(--text-muted);">Smashes stone walls & portcullises</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="disc1" class="card">
+      <h2>Disc 1: Gladstone Escape & Belial's Caverns [WLK01]</h2>
+      <ul class="checklist">
+        <li class="checklist-item"><input type="checkbox"> <span>Morph to Lizard to escape prison bars; grab Dagger and Spark scroll.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span>Defeat guards; navigate Draracle Caves; receive Pass Crystal from the Draracle.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span>Morph to Giant Beast to smash boulder barricade in Belial Caverns; slay Cavern Wyrm.</span></li>
+      </ul>
+    </section>
+
+    <section id="disc2" class="card">
+      <h2>Disc 2: Huline Jungle & Temple of the Moon [WLK02]</h2>
+      <ul class="checklist">
+        <li class="checklist-item"><input type="checkbox"> <span>Present Peace Token at Huline Village; enter sunken Temple of the Moon.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span>Morph to Lizard to crawl through drainage pipes; solve Moon phase tile puzzle.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span>Visit Dreamland; defeat Scotia spirit to master the <strong>Control Morph Spell</strong>!</span></li>
+      </ul>
+    </section>
+
+    <section id="disc3" class="card">
+      <h2>Disc 3: Claw Mountains & Rulmoi Monastery [WLK03]</h2>
+      <ul class="checklist">
+        <li class="checklist-item"><input type="checkbox"> <span>Climb Claw Mountains with Crampons; freeze Drakoids with Ice Level 3.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span>Repair monastery water mill with Cogwheel; defeat Shadow Master in crypts.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span>Claim Ancient City Entry Crest; unlock bronze portal to buried metropolis.</span></li>
+      </ul>
+    </section>
+
+    <section id="disc4" class="card">
+      <h2>Disc 4: The Ancient City & Belial [WLK04]</h2>
+      <ul class="checklist">
+        <li class="checklist-item"><input type="checkbox"> <span>Explore Ancient City; infiltrate Great Museum (See Museum section below).</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span>Charge Power Cell; claim Prismatic Gauntlet & Lab Keycard.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span>Disable Belial bio-lab vats; climb Citadel pinnacle.</span></li>
+        <li class="checklist-item"><input type="checkbox"> <span>Fight Dark God Belial: Lightning Level 5 -> Beast smash -> Severing Blade!</span></li>
+      </ul>
+    </section>
+
+    <section id="museum" class="card">
+      <h2>The Great Museum of the Ancients [MUSM]</h2>
+      <p>The iconic multi-floor museum in Disc 4 contains ancient lore and vital puzzle devices:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Exhibit Gallery</th>
+            <th>Features & Puzzles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Gallery 1: Prehistoric Hall</strong></td>
+            <td>Fossilized titan skeletons; align dynamo coils to charge the Power Cell.</td>
+          </tr>
+          <tr>
+            <td><strong>Gallery 2: Hall of Relics</strong></td>
+            <td>Wax likenesses of Scotia, Richard, and Nether Mask; place 4 stones to claim Prismatic Gauntlet.</td>
+          </tr>
+          <tr>
+            <td><strong>Gallery 3: Westwood Developer Room</strong></td>
+            <td>Secret wall at <code>X:14, Y:09</code> reveals digitized portraits of Westwood developers and sound test terminals!</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="fast" class="card">
+      <h2>The 18-Step Speedrun Geodesic [FAST]</h2>
+      <ol style="padding-left: 24px; color: #cbd5e1;">
+        <li>Morph to Lizard to escape prison cell; grab Dagger & Spark.</li>
+        <li>Navigate Draracle Caves; defeat Mud Beasts; receive Pass Crystal.</li>
+        <li>Enter Belial Caverns; morph to Giant Beast to smash boulder barricade.</li>
+        <li>Defeat Cavern Wyrm; swap to Disc 2.</li>
+        <li>Enter Huline Jungle; present Peace Token at Huline Village.</li>
+        <li>Infiltrate Temple of the Moon; morph to Lizard for drainage pipes.</li>
+        <li>Solve Moon Tile puzzle; claim Moon Tears & Ice Scroll.</li>
+        <li>Visit Dreamland; defeat Scotia spirit; master Control Morph Spell.</li>
+        <li>Climb Claw Mountains (Disc 3); freeze fire drakes with Ice Level 3.</li>
+        <li>Infiltrate Rulmoi Monastery; repair water mill with Cogwheel.</li>
+        <li>Defeat Shadow Master; claim Ancient City Crest from crypts.</li>
+        <li>Enter Ancient City (Disc 4); infiltrate Great Museum.</li>
+        <li>Charge Power Cell at Museum dynamo; solve elemental pedestal puzzle.</li>
+        <li>Claim Prismatic Gauntlet & Belial Lab Keycard.</li>
+        <li>Infiltrate Citadel of Rulmoi; disable bio-genetic breeding vats.</li>
+        <li>Ascend to Citadel Pinnacle; fight Belial with Lightning Level 5.</li>
+        <li>Morph to Giant Beast; smash Belial's crystal anchors.</li>
+        <li>Strike Belial with Severing Blade to achieve Canonical Good Ending!</li>
+      </ol>
+    </section>
+
+    <section id="scummvm" class="card">
+      <h2>ScummVM & Modern Emulation Profile [SCUM]</h2>
+      <p>Target Engine ID: <code>kyra</code> (Sub-engine: <code>lol2</code>). Seamlessly integrates all 4 CD directory structures, eliminating disc-swapping prompts.</p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('search').addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(term) ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
