@@ -213,7 +213,144 @@ While 98.24% of Blue Options are strictly beneficial or neutral, there are **4 s
 
 ---
 
-# 4. MASTER BLUEPRINT CATALOG: SHIPS, WEAPONS & DRONES [BLUE]
+# 4. MASTER SHIP UNLOCK FORENSICS & THE SECRET CRYSTAL QUEST [CRYS]
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    THE 10 FEDERATION CRUISERS & UNLOCK IDs                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  ID 0: The Kestrel (Starting Cruiser)                                       │
+│  ID 1: Stealth Cruiser (The Nesasio)       ──► Engi Homeworlds Stolen Tech  │
+│  ID 2: Mantis Cruiser (The Gila Monster)   ──► Warlord KazaaakplethKILIK    │
+│  ID 3: Engi Cruiser (The Torus)            ──► Reach Sector 5               │
+│  ID 4: Federation Cruiser (The Osprey)     ──► Rebel Stronghold Shipyard    │
+│  ID 5: Slug Cruiser (The Man of War)       ──► Slug Homeworlds Prototype    │
+│  ID 6: Rock Cruiser (The Bulwark)          ──► Rock Homeworlds Sun Trial    │
+│  ID 7: Zoltan Cruiser (The Adjudicator)    ──► Zoltan Peace Accord Quest    │
+│  ID 8: Crystal Cruiser (The Bravais)       ──► Ancient Monolith to Sector 8 │
+│  ID 9: Lanius Cruiser (The Kruos)          ──► Unlock 4 Cruisers (AE)       │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### A. The Legendary 3-Step Crystal Cruiser Questline [CRY01]
+
+The **Crystal Cruiser (The Bravais)** is the rarest and most intricate secret in FTL. It requires connecting three separate random events across multiple sectors in a single run:
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        THE 3-STEP CRYSTAL GEODESIC                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  STEP 1: Dense Asteroid Field (Engi/Pirate/Rock Sector) ──► Stasis Pod      │
+│  STEP 2: Zoltan/Engi Research Facility (Zoltan/Engi Sector) ──► Revive Ruwen│
+│  STEP 3: Rock Homeworlds (Red Sector 4-7) ──► Activate Ancient Monolith     │
+│  STEP 4: Sector 8 (Hidden Crystal Worlds) ──► Reach Crystal City Base!      │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Step 1: Recovering the Damaged Stasis Pod
+* **Location**: Pirate Sector, Engi Controlled, or Rock Controlled (Sectors 1–5).
+* **Encounter**: `ASTEROID_SPACE_DOCK` / `PIRATE_SALVAGE`.
+* **Action**: Choose the Blue Option `req="rock"` or `req="ROCK_ARMOR"` ("Investigate without lifeform scan") or search the dense asteroid debris.
+* **Reward**: Grants the `STASIS_POD` augment (*Damaged Stasis Pod*).
+
+#### Step 2: Reviving Ruwen at the Zoltan Research Lab
+* **Location**: Zoltan Homeworlds, Zoltan Controlled, Engi Homeworlds, or Engi Controlled (Sectors 2–6).
+* **Encounter**: `ZOLTAN_RESEARCH_LAB` / `ZOLTAN_SCIENCE_DOCK`.
+* **Action**: Choose the Blue Option `req="STASIS_POD"`:
+  ```text
+  "Ask if they can open the stasis pod."
+  ```
+* **Reward**: The pod opens, reviving **Ruwen**, an ancient Crystal crew member who possesses **Level 2 in Shields, Engines, and Weapons**!
+
+#### Step 3: Activating the Ancient Monolith Gateway
+* **Location**: **Rock Homeworlds** (Red Sector, Sectors 4–7).
+* **Forensic Mechanism**: Having **Ruwen** on your crew forces a **guaranteed green Quest Marker** to appear on the sector beacon map!
+* **Source XML**: `events_rock.xml` (`ROCK_CRYSTAL_BEACON`):
+  ```xml
+  <event name="ROCK_CRYSTAL_BEACON">
+    <text id="event_ROCK_CRYSTAL_BEACON_text"/>
+    <choice hidden="true" req="crystal">
+      <text>Reactivate the ancient device.</text>
+      <event load="START_BEACON_CRYSTAL"/>
+    </choice>
+  </event>
+  ```
+* **Outcome**: Teleports your ship directly into the secret **Hidden Crystal Worlds**!
+
+#### Step 4: Claiming The Bravais at the Crystal City Base
+* **Location**: Hidden Crystal Worlds (Sector 8 Variant).
+* **Source XML**: `events_crystal.xml` (`CRYSTAL_UNLOCK`):
+  ```xml
+  <event name="CRYSTAL_UNLOCK">
+    <text id="event_CRYSTAL_UNLOCK_text"/>
+    <autoReward level="MED">fuel</autoReward>
+    <augment name="CRYSTAL_SHARDS"/>
+    <damage amount="-10"/>
+    <unlockShip id="8"/>
+  </event>
+  ```
+* **Reward**: 10 Hull Repairs, `CRYSTAL_SHARDS` augment, and `<unlockShip id="8"/>`!
+
+> **Advanced Edition Alternate Unlock**: Beat the Rebel Flagship with the Type A and Type B layouts of all 6 original non-Kestrel ships to unlock the Crystal Cruiser automatically without the quest!
+
+---
+
+### B. All Other 8 Cruiser Quests & Dialogue Trees [CRY02]
+
+#### 1. Stealth Cruiser (ID 1: The Nesasio)
+* **Location**: **Engi Homeworlds** (Green Sector).
+* **Source XML**: `events_engi.xml` (`ENGI_UNLOCK_1` -> `ENGI_UNLOCK_4`):
+* **Requirement**: `Engi Crew Member`.
+* **Action**: Speak with the Engi research outpost. They give you 2 simultaneous quest markers. One is a decoy; the other is the secret Rebel Stealth Shipyard.
+* **Reward**: Defeat the stealth prototype to receive `SYSTEM_CASING` augment and `<unlockShip id="1"/>`!
+
+#### 2. Mantis Cruiser (ID 2: The Gila Monster)
+* **Location**: **Mantis Homeworlds** (Red Sector).
+* **Source XML**: `events_mantis.xml` (`MANTIS_NAMED_THIEF_DEFEAT`):
+* **Requirement**: `Medbay Lvl 2` / `Clonebay Lvl 2` AND `Teleporter Lvl 2`.
+* **Action**: Intercept legendary warlord **KazaaakplethKILIK**. You must **kill all enemy crew without destroying their ship hull**!
+* **Blue Option**: Beam aboard with Level 2 Medbay/Teleporter to stabilize the dying warlord.
+* **Reward**: KazaaakplethKILIK joins your crew with max Level 2 in all 6 skills + `CREW_STIMS` augment + `<unlockShip id="2"/>`!
+
+#### 3. Federation Cruiser (ID 4: The Osprey)
+* **Location**: **Rebel Stronghold** (Red Sector).
+* **Source XML**: `events_rebel.xml` (`FLAGSHIP_CONSTRUCTION`):
+* **Action**: Scan the secret Rebel naval yard building a secondary Rebel Flagship. Engage and destroy the unfinished Flagship construction.
+* **Reward**: High scrap + `<unlockShip id="4"/>`! *(Also unlocks by beating the normal Flagship with any ship).*
+
+#### 4. Slug Cruiser (ID 5: The Man of War)
+* **Location**: **Slug Homeworlds** (Purple Nebula Sector).
+* **Source XML**: `events_slug.xml` (`SLUG_UNLOCK_1` / `JELLY_UNLOCK`):
+* **Requirement**: `Sensors Level 2` or `Slug Crew`.
+* **Action**: Fight the Slug warship until they offer surrender. Reject their weapon surrender and select:
+  ```text
+  "We don't want weapons, we want data/information!"
+  ```
+* **Outcome**: A quest marker appears inside an ion/oxygen-hazard nebula. Defeat the prototype cruiser to unlock `<unlockShip id="5"/>`!
+
+#### 5. Rock Cruiser (ID 6: The Bulwark)
+* **Location**: **Rock Homeworlds** (Red Sector).
+* **Source XML**: `events_rock.xml` (`ROCK_UNLOCK1` -> `ROCK_UNLOCK3`):
+* **Action**: When hailed by the Rock warship, do NOT pick the aggressive dialogue. Choose:
+  ```text
+  "We are going to save the galaxy, not squabble."
+  ```
+* **The Sun Trial**: Travel to the quest beacon bordering a solar flare. **Do NOT jump away early!** Endure the solar flare damage until the Rock warship retreats. Travel to the final quest beacon to earn their honor, the `ROCK_ARMOR` augment, and `<unlockShip id="6"/>`!
+
+#### 6. Zoltan Cruiser (ID 7: The Adjudicator)
+* **Location**: **Zoltan Homeworlds** (Green Sector).
+* **Source XML**: `events_zoltan.xml` (`ZOLTAN_PEACE_QUEST`):
+* **Dialogue Tree**:
+  1. Unarmed transport hails: Choose **Choice 2** ("Hear them out").
+  2. At the quest marker: Choose **Choice 2** ("Perhaps there is a way to resolve this without violence?").
+  3. Final response: Choose **Choice 1** ("True progress can only be achieved without bloodshed").
+* **Reward**: Master Zoltan **Envoy** (Max Level 2 in all skills), `ENERGY_SHIELD` augment, and `<unlockShip id="7"/>`!
+
+---
+
+# 5. MASTER BLUEPRINT CATALOG: WEAPONS & DRONES [BLUE]
 
 ### A. The S-Tier Weapon Hierarchy
 1. **Burst Laser II** *(Cost: 80 scrap, Power: 2, Cooldown: 12.0s)*: 3 laser shots for only 2 power. The gold standard for volley synchronization.

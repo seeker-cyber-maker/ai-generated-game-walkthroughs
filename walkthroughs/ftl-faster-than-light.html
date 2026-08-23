@@ -277,6 +277,49 @@
       </div>
     </section>
 
+    <section id="cruisers" class="card">
+      <h2>Master Ship Unlock Forensics & The Crystal Cruiser [CRYS]</h2>
+      <p>Every cruiser unlock requirement, dialogue tree, and XML trigger verified against game assemblies:</p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+        <div style="background: #030712; padding: 14px; border-radius: 6px; border: 1px solid var(--border);">
+          <strong style="color: var(--accent);">The Crystal Cruiser (The Bravais) - ID 8</strong>
+          <p style="font-size: 0.8rem; margin: 6px 0; color: #94a3b8;">
+            1. <strong>Stasis Pod</strong>: Salvage in Pirate/Engi/Rock sectors (<code>STASIS_POD</code>).<br>
+            2. <strong>Revive Ruwen</strong>: Open pod at Zoltan/Engi research lab.<br>
+            3. <strong>Rock Gateway</strong>: Ruwen triggers green beacon in Rock Homeworlds (<code>ROCK_CRYSTAL_BEACON</code>).<br>
+            4. <strong>Sector 8</strong>: Reach Crystal City base for <code>&lt;unlockShip id="8"/&gt;</code>!
+          </p>
+        </div>
+
+        <div style="background: #030712; padding: 14px; border-radius: 6px; border: 1px solid var(--border);">
+          <strong style="color: var(--accent);">Mantis Cruiser (The Gila Monster) - ID 2</strong>
+          <p style="font-size: 0.8rem; margin: 6px 0; color: #94a3b8;">
+            • <strong>Location</strong>: Mantis Homeworlds (<code>MANTIS_NAMED_THIEF</code>).<br>
+            • <strong>Condition</strong>: Kill all crew of warlord KazaaakplethKILIK <em>without destroying the hull</em>.<br>
+            • <strong>Blue Choice</strong>: Medbay L2 or Teleporter L2 to stabilize him -> Kazaaak joins with max skills!
+          </p>
+        </div>
+
+        <div style="background: #030712; padding: 14px; border-radius: 6px; border: 1px solid var(--border);">
+          <strong style="color: var(--accent);">Zoltan Cruiser (The Adjudicator) - ID 7</strong>
+          <p style="font-size: 0.8rem; margin: 6px 0; color: #94a3b8;">
+            • <strong>Location</strong>: Zoltan Homeworlds (<code>ZOLTAN_PEACE_QUEST</code>).<br>
+            • <strong>Dialogue Tree</strong>: Choice 2 ("Hear them out") -> Choice 2 ("Resolve without violence") -> Choice 1 ("Progress without blood").<br>
+            • <strong>Reward</strong>: Envoy master Zoltan + Zoltan Energy Shield.
+          </p>
+        </div>
+
+        <div style="background: #030712; padding: 14px; border-radius: 6px; border: 1px solid var(--border);">
+          <strong style="color: var(--accent);">Federation Cruiser (The Osprey) - ID 4</strong>
+          <p style="font-size: 0.8rem; margin: 6px 0; color: #94a3b8;">
+            • <strong>Location</strong>: Rebel Stronghold (<code>FLAGSHIP_CONSTRUCTION</code>).<br>
+            • <strong>Action</strong>: Destroy the unfinished Rebel Flagship in the hidden naval construction dock before it jumps away.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <section id="traps" class="card">
       <h2>The 4 Infamous Negative & High-Risk Traps [STA03]</h2>
       <p>While 98.24% of Blue Options are purely beneficial or safe, these 4 events inflict penalties or sacrifices:</p>

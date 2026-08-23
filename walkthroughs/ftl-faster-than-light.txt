@@ -16,15 +16,18 @@ TABLE OF CONTENTS ..................................................... [00.00]
           - [04.01] Macro Distribution: Positive vs Neutral ........... [STA01]
           - [04.02] Top 15 Blue Option Enablers ....................... [STA02]
           - [04.03] The 4 Negative & High-Risk Traps .................. [STA03]
-  [05.00] MASTER BLUEPRINT CATALOG: WEAPONS & CREW ..................... [BLUE]
-  [06.00] COMPLETE 8-SECTOR ROUTE OPTIMIZATION ......................... [SECT]
-  [07.00] THE REBEL FLAGSHIP: 3-PHASE DESTRUCTION GUIDE ................ [BOSS]
-          - [07.01] Phase 1: Cloaking & Weapon Isolation .............. [BOS01]
-          - [07.02] Phase 2: Defense Drone Bypass & Surge ............. [BOS02]
-          - [07.03] Phase 3: Zoltan Shield & 12-Laser Surge ........... [BOS03]
-  [08.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) ....... [FAST]
-  [09.00] VERSION HISTORY & BUILD PROVENANCE .......................... [VERS]
-  [10.00] CONTACT POLICY & CREDITS .................................... [CRED]
+  [05.00] MASTER SHIP UNLOCK FORENSICS & SECRET CRYSTAL QUEST .......... [CRYS]
+          - [05.01] The 3-Step Crystal Cruiser Geodesic ............... [CRY01]
+          - [05.02] All Other 8 Cruiser Quests & Dialogue Trees ....... [CRY02]
+  [06.00] MASTER BLUEPRINT CATALOG: WEAPONS & CREW ..................... [BLUE]
+  [07.00] COMPLETE 8-SECTOR ROUTE OPTIMIZATION ......................... [SECT]
+  [08.00] THE REBEL FLAGSHIP: 3-PHASE DESTRUCTION GUIDE ................ [BOSS]
+          - [08.01] Phase 1: Cloaking & Weapon Isolation .............. [BOS01]
+          - [08.02] Phase 2: Defense Drone Bypass & Surge ............. [BOS02]
+          - [08.03] Phase 3: Zoltan Shield & 12-Laser Surge ........... [BOS03]
+  [09.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) ....... [FAST]
+  [10.00] VERSION HISTORY & BUILD PROVENANCE .......................... [VERS]
+  [11.00] CONTACT POLICY & CREDITS .................................... [CRED]
 -------------------------------------------------------------------------------
 
 ===============================================================================
@@ -84,7 +87,7 @@ Evasion% = Engine_Base% + Pilot_Manning% + Engine_Manning%
 +--------------+-----------+--------------+--------------+--------------------+
 
 -------------------------------------------------------------------------------
-[03.02] SHIELD PENETRATION & BEAM VOLLEY MATH                           [MAT02]
+[03.02] SHIELD PENETRATION & BEAM VOLLEYS                               [MAT02]
 -------------------------------------------------------------------------------
 
 • LASER VOLLEYS: Every projectile strips exactly 1 shield bubble. To damage a
@@ -93,12 +96,20 @@ Evasion% = Engine_Base% + Pilot_Manning% + Engine_Manning%
 • ION STACKING: 1 Ion damage removes 1 power bar for 5 seconds. Successive ion
   hits reset the dissipation timer and stack linearly!
 
+-------------------------------------------------------------------------------
+[03.03] FIRE SPREAD & O2 DEPLETION FSM                                  [MAT03]
+-------------------------------------------------------------------------------
+
+Fire spread probability is 5% per second to adjacent rooms when oxygen is above
+10%. Depowering oxygen and venting rooms to space (0% O2) suffocates fires and
+hostile boarders in under 4 seconds!
+
 ===============================================================================
 [04.00] THE DEFINITIVE BLUE OPTION STATISTICAL ANALYSIS                 [STAT]
 ===============================================================================
 
 -------------------------------------------------------------------------------
-[04.01] MACRO DISTRIBUTION: POSITIVE VS NEUTRAL VS TRAP                 [STA01]
+[04.01] MACRO DISTRIBUTION: POSITIVE VS NEUTRAL                         [STA01]
 -------------------------------------------------------------------------------
 
 Total Blue Options Analyzed Across All XML Event Files: 227 Choices
@@ -133,7 +144,7 @@ Total Blue Options Analyzed Across All XML Event Files: 227 Choices
   15. Doors (Lvl 2/3) .......... 5 options  ( 2.20%) [Subsystem]
 
 -------------------------------------------------------------------------------
-[04.03] THE 4 INFAMOUS NEGATIVE & HIGH-RISK TRAPS                       [STA03]
+[04.03] THE 4 NEGATIVE & HIGH-RISK TRAPS                                [STA03]
 -------------------------------------------------------------------------------
 
 1. EVENT #66: BOARDERS_ASTEROID_GHOST (Engines Lvl 5)
@@ -154,7 +165,71 @@ Total Blue Options Analyzed Across All XML Event Files: 227 Choices
    Effect: Permanently deletes a Lanius crew member for a HIGH augment reward.
 
 ===============================================================================
-[05.00] MASTER BLUEPRINT CATALOG: WEAPONS & CREW                        [BLUE]
+[05.00] MASTER SHIP UNLOCK FORENSICS & SECRET CRYSTAL QUEST             [CRYS]
+===============================================================================
+
+-------------------------------------------------------------------------------
+[05.01] THE 3-STEP CRYSTAL CRUISER GEODESIC                             [CRY01]
+-------------------------------------------------------------------------------
+
+The Crystal Cruiser (The Bravais, unlockShip id="8") is unlocked via a 3-part
+quest chain spanning multiple sectors:
+
+STEP 1: RECOVER DAMAGED STASIS POD
+  • Location: Pirate, Engi, or Rock Controlled Sectors (Sectors 1-5).
+  • Event: ASTEROID_SPACE_DOCK / PIRATE_SALVAGE.
+  • Action: Blue Option req="rock" / req="ROCK_ARMOR" or search asteroid.
+  • Reward: STASIS_POD augment ("Damaged Stasis Pod").
+
+STEP 2: REVIVE RUWEN AT ZOLTAN/ENGI RESEARCH LAB
+  • Location: Zoltan or Engi Sectors (Sectors 2-6).
+  • Event: ZOLTAN_RESEARCH_LAB / ZOLTAN_SCIENCE_DOCK.
+  • Action: Blue Option req="STASIS_POD" ("Ask if they can open the pod").
+  • Reward: Revives Ruwen (Crystal crew member with Level 2 in 3 skills).
+
+STEP 3: ACTIVATE ANCIENT DEVICE IN ROCK HOMEWORLDS
+  • Location: Rock Homeworlds (Red Sector 4-7).
+  • Mechanism: Ruwen forces a guaranteed green Quest Beacon on the map!
+  • Event: ROCK_CRYSTAL_BEACON (req="crystal" -> "Reactivate ancient device").
+  • Outcome: Teleports your ship into Sector 8: Hidden Crystal Worlds.
+
+STEP 4: REACH CRYSTAL CITY BASE
+  • Event: CRYSTAL_UNLOCK.
+  • Reward: 10 Hull Repairs, CRYSTAL_SHARDS augment, and <unlockShip id="8"/>!
+
+-------------------------------------------------------------------------------
+[05.02] ALL OTHER 8 CRUISER QUESTS & DIALOGUE TREES                     [CRY02]
+-------------------------------------------------------------------------------
+
+1. STEALTH CRUISER (id="1", The Nesasio):
+   Engi Homeworlds -> ENGI_UNLOCK_1 with Engi crew -> track 2 quest beacons to
+   destroy secret Rebel Stealth Shipyard -> SYSTEM_CASING + unlockShip id="1".
+
+2. MANTIS CRUISER (id="2", The Gila Monster):
+   Mantis Homeworlds -> MANTIS_NAMED_THIEF (KazaaakplethKILIK) -> Kill crew
+   WITHOUT destroying hull -> Medbay/Teleporter Lvl 2 -> Kazaaak joins crew!
+
+3. FEDERATION CRUISER (id="4", The Osprey):
+   Rebel Stronghold -> FLAGSHIP_CONSTRUCTION -> Destroy unfinished Flagship.
+
+4. SLUG CRUISER (id="5", The Man of War):
+   Slug Homeworlds -> JELLY_UNLOCK with Sensors Lvl 2 or Slug crew -> Reject
+   weapon surrender ("We want data!") -> Defeat prototype in nebula.
+
+5. ROCK CRUISER (id="6", The Bulwark):
+   Rock Homeworlds -> ROCK_UNLOCK1 ("Save galaxy, not squabble") ->
+   Endure solar flare without jumping early -> ROCK_ARMOR + unlockShip id="6".
+
+6. ZOLTAN CRUISER (id="7", The Adjudicator):
+   Zoltan Homeworlds -> ZOLTAN_PEACE_QUEST -> Choice 2 ("Hear them out") ->
+   Choice 2 ("Resolve without violence") -> Choice 1 ("Progress without blood")
+   -> Master Zoltan Envoy + ENERGY_SHIELD + unlockShip id="7".
+
+7. ENGI CRUISER (The Torus): Reach Sector 5 with any ship.
+8. LANIUS CRUISER (The Kruos): Unlock 4 non-Kestrel cruisers (in AE).
+
+===============================================================================
+[06.00] MASTER BLUEPRINT CATALOG: WEAPONS & CREW                        [BLUE]
 ===============================================================================
 
 • BURST LASER II: 80 Scrap | 2 Power | 12.0s Cooldown | 3 Laser Shots (S-Tier)
@@ -163,7 +238,7 @@ Total Blue Options Analyzed Across All XML Event Files: 227 Choices
 • ION BLAST II:   70 Scrap | 3 Power | 4.0s  Cooldown | Continuous Ion Lock
 
 ===============================================================================
-[06.00] COMPLETE 8-SECTOR ROUTE OPTIMIZATION                            [SECT]
+[07.00] COMPLETE 8-SECTOR ROUTE OPTIMIZATION                            [SECT]
 ===============================================================================
 
 1. MAXIMIZE BEACONS: Always visit 100% of available beacons before fleet exit.
@@ -172,11 +247,11 @@ Total Blue Options Analyzed Across All XML Event Files: 227 Choices
 3. SECTOR 1 MILESTONE: Upgrade Shields to Level 2 (2 bubbles) with 50 scrap.
 
 ===============================================================================
-[07.00] THE REBEL FLAGSHIP: 3-PHASE DESTRUCTION GUIDE                   [BOSS]
+[08.00] THE REBEL FLAGSHIP: 3-PHASE DESTRUCTION GUIDE                   [BOSS]
 ===============================================================================
 
 -------------------------------------------------------------------------------
-[07.01] PHASE 1: CLOAKING & WEAPON POD ISOLATION                        [BOS01]
+[08.01] PHASE 1: CLOAKING & WEAPON ISOLATION                            [BOS01]
 -------------------------------------------------------------------------------
 
 1. Teleport into Room 3 (Triple Missile Artillery); eliminate operator.
@@ -185,14 +260,14 @@ Total Blue Options Analyzed Across All XML Event Files: 227 Choices
    Flagship automated AI from taking over!
 
 -------------------------------------------------------------------------------
-[07.02] PHASE 2: DEFENSE DRONE BYPASS & SURGE                           [BOS02]
+[08.02] PHASE 2: DEFENSE DRONE BYPASS & SURGE                           [BOS02]
 -------------------------------------------------------------------------------
 
 1. HACKING DRONE TRICK: Depower Hacking as Defense Drone fires, then repower.
 2. Time Level 1 Cloaking to activate when the Drone Power Surge alarm sounds.
 
 -------------------------------------------------------------------------------
-[07.03] PHASE 3: ZOLTAN SHIELD & 12-LASER SURGE                         [BOS03]
+[08.03] PHASE 3: ZOLTAN SHIELD & 12-LASER SURGE                         [BOS03]
 -------------------------------------------------------------------------------
 
 1. Strip 12 HP Zoltan Shield with rapid Flak and Laser fire.
@@ -200,7 +275,7 @@ Total Blue Options Analyzed Across All XML Event Files: 227 Choices
 3. Activate Level 1 Cloaking to dodge the 12-laser Power Surge volley!
 
 ===============================================================================
-[08.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC)          [FAST]
+[09.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC)          [FAST]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -225,14 +300,14 @@ Total Blue Options Analyzed Across All XML Event Files: 227 Choices
 +-----------------------------------------------------------------------------+
 
 ===============================================================================
-[09.00] VERSION HISTORY & BUILD PROVENANCE                              [VERS]
+[10.00] VERSION HISTORY & BUILD PROVENANCE                              [VERS]
 ===============================================================================
 
 Target Build: FTL: Faster Than Light - Advanced Edition (Steam v1.6.14)
 Build SHA-256: 7d60be992850937b420ee963d76e73ff6697818e698889a7be8e7be1ffec975f
 
 ===============================================================================
-[10.00] CONTACT POLICY & CREDITS                                        [CRED]
+[11.00] CONTACT POLICY & CREDITS                                        [CRED]
 ===============================================================================
 
 Justin Ma, Matthew Davis, Ben Prunty, CJayC & GameFAQs, and YOU, the Captain!
