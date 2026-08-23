@@ -30,6 +30,7 @@ target_build_sha256: 8e5d3c90711bf79a292850937b420ee963d76e73ff6697818e698889a7b
    - Decompiled Active Tracing Algorithm (`trace.cpp`) ...................... [NET03]
    - Decompiled Passive Tracing Algorithm (`police.cpp`) .................... [NET04]
    - The Hacker's Anti-Forensics & Trace Evasion Playbook ................... [NET05]
+   - Mission Engine & Target Payload Injection Lifecycle ................... [NET06]
 5. [Master Directory of Secret & Easter Egg IPs](#5-master-directory-of-secret--easter-egg-ips) ..... [SECR]
    - The Introversion Software LAN & Founder Vault .......................... [SEC01]
    - Protovision Game Server (WarGames 'Joshua' System) ..................... [SEC02]
@@ -242,7 +243,65 @@ To guarantee 100% immunity from both Active and Passive traces, adhere strictly 
 
 ---
 
-# 3. MASTER DIRECTORY OF SECRET & EASTER EGG IPS [SECR]
+### F. The Mission Engine & Target Payload Injection Lifecycle [NET06]
+
+A fundamental architectural question in Uplink's engine is: **When a mission is created vs. accepted, when does the target payload actually get generated?**
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         MISSION LIFECYCLE PIPELINE                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  1. BBS POSTING TICK: Engine picks Employer + Target Company.               │
+│  2. TARGET INJECTION: File/Record is CREATED & INJECTED onto Target Server. │
+│  3. BBS LISTING:      Contract appears on Bulletin Board for Player & NPCs. │
+│  4. ACCEPTANCE:       Contract is locked to Player or AI Agent.             │
+│  5. VERIFICATION:     Engine checks File/Log/Record state on Target Server. │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 1. Payload Creation at Mission Generation Time (`missiongenerator.cpp`)
+In Uplink's C++ source engine, target servers (mainframes, file servers, databases) exist continuously in memory from world startup. However, **specific mission payload files, encrypted databases, and altered records are generated and physically injected into the target server at the exact moment the mission is CREATED/POSTED to the BBS**, *not* when the player accepts it:
+
+```cpp
+// Decompiled from MissionGenerator::Generate_StealFile() in missiongenerator.cpp
+Mission* MissionGenerator::Generate_StealFile() {
+    Company* target_company = game->GetWorld()->GetRandomCompany();
+    Computer* target_comp = target_company->GetCentralFileServer();
+    
+    // 1. Create unique target file data
+    char* filename = NameGenerator::GenerateDataFilename(target_company->name);
+    Data* target_file = new Data();
+    target_file->SetTitle(filename);
+    target_file->SetSize(1 + (rand() % 8)); // 1 to 8 GigaCycles
+    target_file->SetEncrypted(1 + (rand() % 3)); // Level 1-3 encryption
+    
+    // 2. INJECT PAYLOAD IMMEDIATELY into the remote target server's databank
+    target_comp->databank.PutData(target_file);
+    
+    // 3. Construct and post mission to BBS
+    Mission* mission = new Mission();
+    mission->SetTYPE(MISSION_COPYDATA);
+    mission->SetTarget(target_comp->ip);
+    mission->SetTargetFilename(filename);
+    mission->SetPayment(1000 + (rand() % 4000));
+    return mission;
+}
+```
+
+#### 2. Architectural Reason: Living World & NPC AI Agents (`agent.cpp`)
+Why did Introversion inject payloads at BBS posting time rather than player acceptance?
+* **Simulated Hacker Competition**: In Uplink, you are not the only hacker. Dozens of simulated NPC AI agents (`Agent::Update()`) continually poll the BBS, accept missions, hack servers, and complete objectives.
+* If target payloads were only created when the player clicked "Accept", the living world simulation would break whenever an NPC hacker claimed a contract.
+
+#### 3. Strategic Exploit: The "Pre-Hack & Pre-Steal" Arbitrage
+Because the target file physically exists on the target server the moment it appears on the BBS:
+1. **Browse BBS without Accepting**: Inspect a high-value theft or destruction contract. Note the target IP and filename.
+2. **Execute Pre-Hack**: Connect to the target, bypass security, download/destroy the target file, and clean your InterNIC logs.
+3. **Instant Cash-In**: Return to the BBS, accept the contract, and immediately reply to the employer email. The engine executes `Mission::CheckCompletion()`, verifies the file is in your possession (or deleted from target), and awards 100% payout with zero countdown pressure!
+
+---
+
+# 4. MASTER DIRECTORY OF SECRET & EASTER EGG IPS [SECR]
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
