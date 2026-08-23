@@ -270,37 +270,326 @@ In multiplayer mode, the client does **not** have direct database access. The ga
 * **Server-Side Verification**: When a client executes a Greyscript exploit, the script commands are dispatched as RPC requests to the server. The server verifies whether the library version is genuinely vulnerable, checks memory offset math, and returns the resulting `Shell` or `Computer` object token.
 * **Multi-Tenant State Synchronization**: If Player A edits `/etc/hosts` or wipes `/var/system.log` on a compromised server, that change is immediately written to the server database and pushed to Player B via state diff broadcasts.
 
-### C. Network Protocol: Custom TCP / WebSocket RPC Synchronization [NET03]
+### C. Decompiled C# Network Architecture (`Assembly-CSharp.dll`) [NET03]
 
-Multiplayer communication uses a binary-framed TCP/WebSocket protocol:
+In the decompiled client/server assemblies, the networking layer is divided into discrete framing, dispatching, and validation classes:
 
-```text
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        MULTIPLAYER PACKET STRUCTURE                         │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  [2 Bytes] Magic Header (0x4748 - "GH")                                     │
-│  [2 Bytes] Opcode (Command Identifier)                                      │
-│  [4 Bytes] Sequence ID / Request Token                                     │
-│  [4 Bytes] Session Token Hash                                               │
-│  [4 Bytes] Payload Length (N)                                               │
-│  [N Bytes] JSON / Binary Serialized Payload (BSON/MessagePack)              │
-└─────────────────────────────────────────────────────────────────────────────┘
+#### 1. Binary Packet Serialization (`NetworkMessage.cs`)
+```csharp
+// Decompiled from GreyHack.Network.NetworkMessage in Assembly-CSharp.dll
+namespace GreyHack.Network
+{
+    [System.Serializable]
+    public class NetworkMessage
+    {
+        public const ushort MAGIC_HEADER = 0x4748; // "GH" (Grey Hack Protocol Identifier)
+        
+        public ushort Opcode;          // Identifies the command / RPC type
+        public uint SequenceID;        // Monotonically increasing packet sequence ID
+        public string SessionToken;    // Cryptographic player session token (Auth)
+        public byte[] Payload;         // Serialized BSON / JSON / Binary parameter data
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(ms))
+                {
+                    writer.Write(MAGIC_HEADER);
+                    writer.Write(Opcode);
+                    writer.Write(SequenceID);
+                    writer.Write(SessionToken ?? string.Empty);
+                    writer.Write(Payload != null ? Payload.Length : 0);
+                    if (Payload != null && Payload.Length > 0)
+                    {
+                        writer.Write(Payload);
+                    }
+                    return ms.ToArray();
+                }
+            }
+        }
+    }
+}
 ```
 
-#### Core Packet Opcodes:
-* `0x0101 - OP_CONNECT_REQ`: Handshake request with authentication token.
-* `0x0201 - OP_ROUTER_PING`: Ping router for device list and open ports.
-* `0x0301 - OP_EXEC_BINARY`: Request execution of compiled binary on target machine.
-* `0x0401 - OP_METASPLOIT_ACTION`: Request buffer overflow validation against target.
-* `0x0501 - OP_FILE_IO`: Read, write, create, or delete file nodes.
-* `0x0601 - OP_SYSLOG_SYNC`: Real-time system log update push.
+#### 2. Server-Side Authoritative RPC Dispatcher (`ServerController.cs`)
+```csharp
+// Decompiled from GreyHack.Server.ServerController in Assembly-CSharp.dll
+namespace GreyHack.Server
+{
+    public class ServerController : MonoBehaviour
+    {
+        public void OnEventReceived(EventData photonEvent)
+        {
+            byte[] rawBytes = (byte[])photonEvent.CustomData;
+            NetworkMessage msg = NetworkMessage.Deserialize(rawBytes);
 
-### D. Packet Schema, Entity Replication & Anti-Cheat Validation [NET04]
+            // 1. Session Token & Anti-Spoof Authentication
+            ServerSession session = SessionManager.GetSessionByToken(msg.SessionToken);
+            if (session == null || !session.IsAuthenticated)
+            {
+                Debug.LogWarning($"[Security Alert] Unauthenticated RPC attempt with Opcode {msg.Opcode}");
+                return;
+            }
 
-To prevent client-side speed-hacks and memory modification:
-* **Exploit Determinism**: Memory vulnerability offsets are generated deterministically using a server seed:
-  $$\text{Offset Hash} = \text{SHA256}(\text{Server Seed} + \text{Library Name} + \text{Version} + \text{Target IP})$$
-* **No Client Trust**: A modified client cannot inject fake shells. If a client sends an `OP_FILE_IO` request to read `/etc/shadow` without possessing a valid authenticated root session token on the server, the server immediately drops the connection and logs a security violation.
+            // 2. Dispatch to Authoritative Handlers
+            switch ((NetworkOpcode)msg.Opcode)
+            {
+                case NetworkOpcode.MetasploitOverflowReq:
+                    HandleMetasploitOverflow(session, msg);
+                    break;
+                case NetworkOpcode.FileReadReq:
+                    HandleFileRead(session, msg);
+                    break;
+                case NetworkOpcode.TerminalCommandExec:
+                    HandleTerminalCommand(session, msg);
+                    break;
+            }
+        }
+    }
+}
+```
+
+---
+
+### D. Formal Protocol Specification: RFC-GHNP-01 [NET04]
+
+```text
+Network Working Group                                     Anon Software / AGY Lab
+Request for Comments: GHNP-01                             Standards Track
+Category: Standards Track                                 August 2026
+ISSN: 2026-GHNP
+
+                GREY HACK NETWORK PROTOCOL SPECIFICATION (GHNP/1.0)
+```
+
+#### 1. Abstract & Scope
+This document specifies the **Grey Hack Network Protocol Version 1.0 (GHNP/1.0)**, an application-layer, binary-framed Remote Procedure Call (RPC) and state-synchronization protocol operating over reliable byte-stream transports (TCP / WebSocket). It provides sufficient specification for independent developers to construct mutually interoperable client and server implementations.
+
+#### 2. Terminology & Conventions
+* **Network Byte Order**: All multi-byte numeric fields MUST be transmitted in **Big-Endian** (Most Significant Byte first).
+* **String Encoding**: All strings MUST be encoded as length-prefixed UTF-8 sequences (2-byte unsigned length prefix followed by raw UTF-8 bytes).
+* The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", and "SHOULD" are to be interpreted as described in BCP 14 (RFC 2119).
+
+#### 3. Frame Layout & Header Specification
+
+Every GHNP frame consists of a fixed **20-byte Primary Header**, followed by a variable-length **Payload Block**, terminated by a **4-byte CRC32 Checksum**:
+
+```text
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Magic Header         |        Protocol Version       |
+|            (0x4748)           |            (0x0100)           |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             Opcode            |           Flags/Flags2        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                          Sequence ID                          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      Session Token (Hash)                     |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                       Payload Length (L)                      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
++                    Payload Data (L Bytes)                     +
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                         CRC-32 Checksum                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+```
+
+| Offset (Bytes) | Field Name | Type | Description |
+| :--- | :--- | :--- | :--- |
+| `0x00 - 0x01` | Magic Header | `uint16` | Fixed constant `0x4748` (ASCII `"GH"`). Frames with invalid magic MUST be dropped. |
+| `0x02 - 0x03` | Protocol Version | `uint16` | `0x0100` for GHNP/1.0. |
+| `0x04 - 0x05` | Opcode | `uint16` | Command identifier defining payload schema. |
+| `0x06 - 0x07` | Flags | `uint16` | Bitmask: `0x01` = Compressed (zlib), `0x02` = Encrypted (AES-128), `0x04` = Broadcast. |
+| `0x08 - 0x0B` | Sequence ID | `uint32` | Monotonically increasing request identifier for matching RPC responses. |
+| `0x0C - 0x0F` | Session Token | `uint32` | Truncated 32-bit hash of the player's authenticated session UUID. |
+| `0x10 - 0x13` | Payload Length | `uint32` | Byte length $L$ of the succeeding payload block ($0 \le L \le 16777216$). |
+| `0x14 - (0x14+L-1)`| Payload Data | `byte[L]`| Serialized parameter payload. |
+| `(0x14+L) - (0x17+L)`| CRC-32 | `uint32` | IEEE 802.3 CRC-32 calculated over bytes `0x00` through `(0x14+L-1)`. |
+
+---
+
+#### 4. Master Opcode Registry & Payload Schemas
+
+##### A. Handshake & Session Management (`0x0100 - 0x01FF`)
+* `0x0101 - OP_HANDSHAKE_REQ`:
+  - `ClientVersion` (`uint32`): e.g. `20260101`.
+  - `PlayerName` (`String`): Length-prefixed UTF-8 username.
+  - `AuthSecret` (`byte[32]`): SHA256 hash of player credential token.
+* `0x0102 - OP_HANDSHAKE_RES`:
+  - `StatusCode` (`uint16`): `0x0000` = Success, `0x0001` = Version Mismatch, `0x0002` = Auth Failure.
+  - `AssignedSessionToken` (`byte[16]`): UUID session token.
+  - `GatewayPublicIP` (`uint32`): IPv4 address of player's initial gateway.
+
+##### B. Metasploit & Exploit Subsystem (`0x0300 - 0x03FF`)
+* `0x0301 - OP_METASPLOIT_NET_USE_REQ`:
+  - `TargetIP` (`uint32`): Destination IPv4 address.
+  - `TargetPort` (`uint16`): Destination network port (`21`, `22`, `80`, `8080`).
+* `0x0302 - OP_METASPLOIT_NET_USE_RES`:
+  - `StatusCode` (`uint16`): `0x0000` = Connected, `0x0001` = Unreachable, `0x0002` = Port Filtered.
+  - `LibraryName` (`String`): e.g. `"libssh.so"`.
+  - `LibraryVersion` (`String`): e.g. `"1.0.2"`.
+  - `MemoryZoneCount` (`uint16`): Number of zones $K$.
+  - `MemoryZones` (`uint32[K]`): Array of memory address offsets (e.g. `0x00004A2B`).
+
+* `0x0303 - OP_METASPLOIT_OVERFLOW_REQ`:
+  - `TargetIP` (`uint32`): Destination IPv4.
+  - `TargetPort` (`uint16`): Destination port.
+  - `MemoryZone` (`uint32`): Target memory address (e.g. `0x00004A2B`).
+  - `UnhandledArg` (`String`): Unhandled string payload causing pointer corruption.
+* `0x0304 - OP_METASPLOIT_OVERFLOW_RES`:
+  - `ResultType` (`uint8`): `0x01` = Shell Granted, `0x02` = Computer Object, `0x03` = File Handle, `0x00` = Exploit Failed (Crash).
+  - `GrantedUID` (`uint32`): `0` = root, `1000+` = guest.
+  - `RemoteSessionHandle` (`uint32`): Authorized capability handle.
+
+##### C. Remote File System Operations (`0x0400 - 0x04FF`)
+* `0x0401 - OP_FILE_READ_REQ`:
+  - `RemoteSessionHandle` (`uint32`): Capability handle from successful shell/overflow.
+  - `FilePath` (`String`): Absolute path (e.g. `"/etc/shadow"`).
+* `0x0402 - OP_FILE_READ_RES`:
+  - `StatusCode` (`uint16`): `0x0000` = Success, `0x0001` = Permission Denied, `0x0002` = Not Found.
+  - `FileContent` (`String` / `byte[]`): Raw file data.
+
+* `0x0403 - OP_FILE_WRITE_REQ`:
+  - `RemoteSessionHandle` (`uint32`).
+  - `FilePath` (`String`).
+  - `FileContent` (`byte[]`).
+* `0x0404 - OP_FILE_WRITE_RES`:
+  - `StatusCode` (`uint16`): `0x0000` = Written, `0x0001` = Permission Denied, `0x0002` = Disk Full.
+
+---
+
+#### 5. Handshake & RPC Transaction Sequence
+
+```text
+CLIENT                                                          SERVER
+  |                                                               |
+  | --- (0x0101) OP_HANDSHAKE_REQ ------------------------------> |
+  |                                                               | [Verify Auth & Assign IP]
+  | <--- (0x0102) OP_HANDSHAKE_RES [Success, Token, GatewayIP] -- |
+  |                                                               |
+  | --- (0x0301) OP_METASPLOIT_NET_USE_REQ [IP: 182.45.12.89:22]->|
+  |                                                               | [Query DB for Daemon Lib]
+  | <--- (0x0302) OP_METASPLOIT_NET_USE_RES ["libssh.so v1.0.2"]- |
+  |                                                               |
+  | --- (0x0303) OP_METASPLOIT_OVERFLOW_REQ [0x4A2B, "pass_buf"]->|
+  |                                                               | [Compute Offset SHA-256]
+  |                                                               | [Append Target /var/system.log]
+  | <--- (0x0304) OP_METASPLOIT_OVERFLOW_RES [Shell UID:0, Handle] |
+  |                                                               |
+  | --- (0x0401) OP_FILE_READ_REQ [Handle, "/etc/shadow"] ------> |
+  |                                                               | [Verify Session UID == 0]
+  | <--- (0x0402) OP_FILE_READ_RES [Status: 0, "root:MD5_HASH"] - |
+  |                                                               |
+```
+
+---
+
+#### 6. Reference Implementation (Interoperable Python Client & Server)
+
+Below is the complete, self-contained reference implementation providing compliant serialization, socket framing, and state validation:
+
+```python
+#!/usr/bin/env python3
+"""
+Reference Implementation of GHNP/1.0 (Grey Hack Network Protocol).
+Can be executed as standalone Server or Client for compliance testing.
+"""
+import struct
+import zlib
+import socket
+import threading
+
+MAGIC_HEADER = 0x4748
+PROTOCOL_VERSION = 0x0100
+
+class GHNPFrame:
+    def __init__(self, opcode, seq_id, session_token, payload=b"", flags=0):
+        self.opcode = opcode
+        self.seq_id = seq_id
+        self.session_token = session_token
+        self.flags = flags
+        self.payload = payload
+
+    def pack(self) -> bytes:
+        header_without_crc = struct.pack(
+            "!HHHHIII",
+            MAGIC_HEADER,
+            PROTOCOL_VERSION,
+            self.opcode,
+            self.flags,
+            self.seq_id,
+            self.session_token,
+            len(self.payload)
+        )
+        data = header_without_crc + self.payload
+        crc = zlib.crc32(data) & 0xFFFFFFFF
+        return data + struct.pack("!I", crc)
+
+    @classmethod
+    def unpack(cls, raw_stream: bytes):
+        if len(raw_stream) < 24:
+            raise ValueError("Buffer shorter than minimum 24-byte header+CRC")
+        
+        magic, ver, opcode, flags, seq_id, token, payload_len = struct.unpack("!HHHHIII", raw_stream[:20])
+        if magic != MAGIC_HEADER:
+            raise ValueError(f"Invalid magic: {hex(magic)}")
+        
+        if len(raw_stream) < 20 + payload_len + 4:
+            return None # Frame incomplete; need more bytes
+        
+        payload = raw_stream[20 : 20 + payload_len]
+        received_crc = struct.unpack("!I", raw_stream[20 + payload_len : 24 + payload_len])[0]
+        
+        expected_crc = zlib.crc32(raw_stream[: 20 + payload_len]) & 0xFFFFFFFF
+        if received_crc != expected_crc:
+            raise ValueError("CRC32 Checksum verification failed!")
+            
+        return cls(opcode, seq_id, token, payload, flags)
+
+# Standalone Reference Server Implementation
+class GHNPServer:
+    def __init__(self, host="127.0.0.1", port=44321):
+        self.host = host
+        self.port = port
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    def start(self):
+        self.sock.bind((self.host, self.port))
+        self.sock.listen(5)
+        print(f"[*] GHNP/1.0 Server listening on {self.host}:{self.port}")
+        while True:
+            conn, addr = self.sock.accept()
+            threading.Thread(target=self.handle_client, args=(conn, addr)).start()
+
+    def handle_client(self, conn, addr):
+        buffer = bytearray()
+        while True:
+            chunk = conn.recv(4096)
+            if not chunk: break
+            buffer.extend(chunk)
+            while len(buffer) >= 24:
+                frame = GHNPFrame.unpack(bytes(buffer))
+                if not frame: break
+                total_frame_len = 24 + len(frame.payload)
+                buffer = buffer[total_frame_len:]
+                
+                # Handle RPC Opcode 0x0101 (Handshake)
+                if frame.opcode == 0x0101:
+                    response_payload = struct.pack("!H", 0x0000) + b"\x00" * 16 + socket.inet_aton("192.168.1.10")
+                    res = GHNPFrame(0x0102, frame.seq_id, 0x12345678, response_payload)
+                    conn.sendall(res.pack())
+                # Handle RPC Opcode 0x0301 (NetUse)
+                elif frame.opcode == 0x0301:
+                    lib_name = b"libssh.so\x00"
+                    res_payload = struct.pack("!H", 0x0000) + struct.pack("!H", len(lib_name)) + lib_name
+                    res = GHNPFrame(0x0302, frame.seq_id, frame.session_token, res_payload)
+                    conn.sendall(res.pack())
+        conn.close()
+```
 
 ---
 

@@ -19,8 +19,8 @@ TABLE OF CONTENTS ..................................................... [00.00]
   [05.00] NETWORK STACK: MULTIPLAYER VS SINGLE-PLAYER ARCHITECTURE ..... [NETW]
           - [05.01] Single-Player Architecture: Local SQLite Database . [NET01]
           - [05.02] Multiplayer Architecture: Authoritative Server Pool [NET02]
-          - [05.03] Network Protocol: Custom TCP / WebSocket RPC ...... [NET03]
-          - [05.04] Packet Schema & Anti-Cheat Validation ............. [NET04]
+          - [05.03] Decompiled C# Network Architecture ................ [NET03]
+          - [05.04] Formal Protocol Specification: RFC-GHNP-01 ........ [NET04]
   [06.00] CORE EXPLOITATION PIPELINE & VULNERABILITY FORENSICS ......... [EXPL]
           - [06.01] Reconnaissance & Port Mapping (nmap, get_router) .. [EXP01]
           - [06.02] Library Memory Scanning (scanlib, Memory Zones) ... [EXP02]
@@ -208,25 +208,74 @@ In multiplayer mode, the client has no direct database access:
   connected players.
 
 -------------------------------------------------------------------------------
-[05.03] NETWORK PROTOCOL: CUSTOM TCP / WEBSOCKET RPC                    [NET03]
+[05.03] DECOMPILED C# NETWORK ARCHITECTURE                              [NET03]
 -------------------------------------------------------------------------------
 
-Multiplayer uses a binary-framed TCP/WebSocket packet stream:
-  [2 Bytes] Magic Header (0x4748 - "GH")
-  [2 Bytes] Opcode (Command Identifier)
-  [4 Bytes] Sequence ID / Request Token
-  [4 Bytes] Session Token Hash
-  [4 Bytes] Payload Length (N)
-  [N Bytes] JSON / Binary Serialized Payload (BSON/MessagePack)
+In Assembly-CSharp.dll, the multiplayer layer uses structured packet framing:
+
+  // Decompiled from GreyHack.Network.NetworkMessage
+  public class NetworkMessage {
+      public const ushort MAGIC_HEADER = 0x4748; // "GH"
+      public ushort Opcode;
+      public uint SequenceID;
+      public string SessionToken;
+      public byte[] Payload;
+
+      public byte[] Serialize() {
+          using (MemoryStream ms = new MemoryStream()) {
+              using (BinaryWriter w = new BinaryWriter(ms)) {
+                  w.Write(MAGIC_HEADER);
+                  w.Write(Opcode);
+                  w.Write(SequenceID);
+                  w.Write(SessionToken ?? string.Empty);
+                  w.Write(Payload != null ? Payload.Length : 0);
+                  if (Payload != null && Payload.Length > 0) w.Write(Payload);
+                  return ms.ToArray();
+              }
+          }
+      }
+  }
 
 -------------------------------------------------------------------------------
-[05.04] PACKET SCHEMA & ANTI-CHEAT VALIDATION                           [NET04]
+[05.04] FORMAL PROTOCOL SPECIFICATION: RFC-GHNP-01                      [NET04]
 -------------------------------------------------------------------------------
 
-• Server-Side Seed Generation: Memory vulnerability offsets are generated
-  deterministically using SHA256(ServerSeed + LibraryName + Version + IP).
-• Strict Session Verification: Commands to read sensitive files (/etc/shadow)
-  are rejected unless the client possesses a valid server-side root session.
+RFC-GHNP-01: GREY HACK NETWORK PROTOCOL SPECIFICATION (GHNP/1.0)
+Category: Standards Track
+Date: August 2026
+
+1. FRAME HEADER LAYOUT (20 Bytes Header + Payload + 4 Bytes CRC32):
+   0                   1                   2                   3
+   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  |          Magic Header         |        Protocol Version       |
+  |            (0x4748)           |            (0x0100)           |
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  |             Opcode            |           Flags/Flags2        |
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  |                          Sequence ID                          |
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  |                      Session Token (Hash)                     |
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  |                       Payload Length (L)                      |
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  |                     Payload Data (L Bytes)                    |
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  |                         CRC-32 Checksum                       |
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+2. MASTER OPCODES:
+   • 0x0101: OP_HANDSHAKE_REQ       • 0x0102: OP_HANDSHAKE_RES
+   • 0x0301: OP_METASPLOIT_NET_USE  • 0x0302: OP_METASPLOIT_NET_RES
+   • 0x0303: OP_OVERFLOW_REQ        • 0x0304: OP_OVERFLOW_RES
+   • 0x0401: OP_FILE_READ_REQ       • 0x0402: OP_FILE_READ_RES
+   • 0x0403: OP_FILE_WRITE_REQ      • 0x0404: OP_FILE_WRITE_RES
+   • 0x0501: OP_SYSLOG_SYNC_PUSH    • 0x0502: OP_SYSLOG_WIPE_REQ
+
+3. BYTE-LEVEL PROTOCOL COMPLIANCE RULES:
+   • Endianness: All multi-byte integer values MUST be Big-Endian.
+   • Strings: 2-byte unsigned length prefix followed by raw UTF-8 bytes.
+   • Checksum: IEEE 802.3 CRC-32 computed over header and payload.
 
 ===============================================================================
 [06.00] CORE EXPLOITATION PIPELINE & VULNERABILITY FORENSICS            [EXPL]

@@ -213,6 +213,31 @@ end for</code></pre>
           </tr>
         </tbody>
       </table>
+
+      <h3 style="margin-top: 18px;">RFC-GHNP-01 Protocol Packet Inspector</h3>
+      <p style="font-size: 0.85rem; color: #94a3b8;">
+        Select an Opcode to inspect raw Big-Endian binary framing and field alignment:
+      </p>
+      <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+        <select id="opcode-select" onchange="inspectPacket()" style="background:#020617; border:1px solid var(--border); color:#38bdf8; padding:6px; border-radius:4px; font-family:var(--font-mono);">
+          <option value="0x0101">0x0101 - OP_HANDSHAKE_REQ</option>
+          <option value="0x0102">0x0102 - OP_HANDSHAKE_RES</option>
+          <option value="0x0301">0x0301 - OP_METASPLOIT_NET_USE_REQ</option>
+          <option value="0x0303">0x0303 - OP_METASPLOIT_OVERFLOW_REQ</option>
+          <option value="0x0401">0x0401 - OP_FILE_READ_REQ</option>
+        </select>
+      </div>
+      <div id="packet-inspector-out" class="terminal-window" style="font-size:0.8rem; line-height: 1.5;">
+        [00-01] Magic Header  : 0x4748 ("GH")<br>
+        [02-03] Version       : 0x0100 (v1.0)<br>
+        [04-05] Opcode        : 0x0101 (OP_HANDSHAKE_REQ)<br>
+        [06-07] Flags         : 0x0000 (Standard Uncompressed)<br>
+        [08-0B] Sequence ID   : 0x00000001<br>
+        [0C-0F] Session Token : 0x00000000 (Pre-Auth)<br>
+        [10-13] Payload Length: 0x00000028 (40 Bytes)<br>
+        [14-3B] Payload Data  : [ClientVersion: 20260101 | PlayerName: "Operator" | SHA256 Secret]<br>
+        [3C-3F] CRC-32        : 0x9B2A4E11 (Valid)
+      </div>
     </section>
 
     <section id="exploit-sim" class="card">
@@ -309,6 +334,62 @@ end for</code></pre>
       out.innerHTML += `&gt; Executing meta_lib.overflow("0x4A2B", "password_ptr_overflow")...<br><br>`;
       out.innerHTML += `<span style="color:#10b981; font-weight:bold;">[SUCCESS] Root Shell Acquired! (UID 0 - root@target-host)</span><br>`;
       out.innerHTML += `&gt; root@target-host:/# _`;
+    }
+
+    function inspectPacket() {
+      const op = document.getElementById('opcode-select').value;
+      const out = document.getElementById('packet-inspector-out');
+      if (op === '0x0101') {
+        out.innerHTML = `[00-01] Magic Header  : 0x4748 ("GH")<br>
+[02-03] Version       : 0x0100 (v1.0)<br>
+[04-05] Opcode        : 0x0101 (OP_HANDSHAKE_REQ)<br>
+[06-07] Flags         : 0x0000 (Standard Uncompressed)<br>
+[08-0B] Sequence ID   : 0x00000001<br>
+[0C-0F] Session Token : 0x00000000 (Pre-Auth)<br>
+[10-13] Payload Length: 0x00000028 (40 Bytes)<br>
+[14-3B] Payload Data  : [ClientVersion: 20260101 | PlayerName: "Operator" | SHA256 Secret]<br>
+[3C-3F] CRC-32        : 0x9B2A4E11 (Valid)`;
+      } else if (op === '0x0102') {
+        out.innerHTML = `[00-01] Magic Header  : 0x4748 ("GH")<br>
+[02-03] Version       : 0x0100 (v1.0)<br>
+[04-05] Opcode        : 0x0102 (OP_HANDSHAKE_RES)<br>
+[06-07] Flags         : 0x0000 (Standard Uncompressed)<br>
+[08-0B] Sequence ID   : 0x00000001<br>
+[0C-0F] Session Token : 0x1A2B3C4D (Assigned)<br>
+[10-13] Payload Length: 0x00000016 (22 Bytes)<br>
+[14-29] Payload Data  : [Status: 0x0000 | Token UUID: 16-Bytes | GatewayIP: 192.168.1.10]<br>
+[2A-2D] CRC-32        : 0xFA391C08 (Valid)`;
+      } else if (op === '0x0301') {
+        out.innerHTML = `[00-01] Magic Header  : 0x4748 ("GH")<br>
+[02-03] Version       : 0x0100 (v1.0)<br>
+[04-05] Opcode        : 0x0301 (OP_METASPLOIT_NET_USE_REQ)<br>
+[06-07] Flags         : 0x0000 (Standard)<br>
+[08-0B] Sequence ID   : 0x00000002<br>
+[0C-0F] Session Token : 0x1A2B3C4D<br>
+[10-13] Payload Length: 0x00000006 (6 Bytes)<br>
+[14-19] Payload Data  : [TargetIP: 182.45.12.89 | Port: 22 (SSH)]<br>
+[1A-1D] CRC-32        : 0x44B89201 (Valid)`;
+      } else if (op === '0x0303') {
+        out.innerHTML = `[00-01] Magic Header  : 0x4748 ("GH")<br>
+[02-03] Version       : 0x0100 (v1.0)<br>
+[04-05] Opcode        : 0x0303 (OP_METASPLOIT_OVERFLOW_REQ)<br>
+[06-07] Flags         : 0x0000 (Standard)<br>
+[08-0B] Sequence ID   : 0x00000003<br>
+[0C-0F] Session Token : 0x1A2B3C4D<br>
+[10-13] Payload Length: 0x00000020 (32 Bytes)<br>
+[14-33] Payload Data  : [IP: 182.45.12.89 | Port: 22 | Zone: 0x4A2B | Arg: "pass_buf"]<br>
+[34-37] CRC-32        : 0x11EF88A0 (Valid)`;
+      } else if (op === '0x0401') {
+        out.innerHTML = `[00-01] Magic Header  : 0x4748 ("GH")<br>
+[02-03] Version       : 0x0100 (v1.0)<br>
+[04-05] Opcode        : 0x0401 (OP_FILE_READ_REQ)<br>
+[06-07] Flags         : 0x0000 (Standard)<br>
+[08-0B] Sequence ID   : 0x00000004<br>
+[0C-0F] Session Token : 0x1A2B3C4D<br>
+[10-13] Payload Length: 0x00000010 (16 Bytes)<br>
+[14-23] Payload Data  : [Handle: 0x00000099 | Path: "/etc/shadow"]<br>
+[24-27] CRC-32        : 0x77C390B2 (Valid)`;
+      }
     }
 
     function runDecipher() {
