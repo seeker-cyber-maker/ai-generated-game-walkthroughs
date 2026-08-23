@@ -39,6 +39,7 @@
 | **The Secret of Monkey Island** | 1990 | LucasArts SCUMM v4/v5 | [Markdown](walkthroughs/secret-of-monkey-island.md) • [79-Col Text](walkthroughs/secret-of-monkey-island.txt) • [HTML App](walkthroughs/secret-of-monkey-island.html) |
 | **Gobliiins** | 1991 | Coktel Vision Gob Engine DOS | [Markdown](walkthroughs/gobliiins-1.md) • [79-Col Text](walkthroughs/gobliiins-1.txt) • [HTML App](walkthroughs/gobliiins-1.html) |
 | **Ween: The Prophecy** | 1992 | Coktel Vision Gob Engine DOS | [Markdown](walkthroughs/ween-the-prophecy.md) • [79-Col Text](walkthroughs/ween-the-prophecy.txt) • [HTML App](walkthroughs/ween-the-prophecy.html) |
+| **Dune II: The Building of a Dynasty** | 1992 | Westwood DOS RTS Engine | [Markdown](walkthroughs/dune-2-ai-and-mechanics.md) • [79-Col Text](walkthroughs/dune-2-ai-and-mechanics.txt) • [HTML App](walkthroughs/dune-2-ai-and-mechanics.html) |
 
 ---
 

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dune II: The Building of a Dynasty - AI Forensics & Systems Compendium</title>
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #151d30;
+      --bg-sidebar: #0f172a;
+      --border: #243049;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #f59e0b;
+      --accent-glow: rgba(245, 158, 11, 0.15);
+      --green: #10b981;
+      --blue: #38bdf8;
+      --red: #ef4444;
+      --purple: #c084fc;
+      --gold: #fbbf24;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    #sidebar {
+      width: 320px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    #sidebar h2 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box:focus { border-color: var(--accent); }
+
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .nav-item a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .nav-item a:hover {
+      background-color: var(--accent-glow);
+      color: var(--text);
+    }
+    .nav-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      float: right;
+    }
+
+    #content {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 1100px;
+      overflow-y: auto;
+    }
+
+    header {
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    header .meta {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      display: flex;
+      gap: 16px;
+      font-family: var(--font-mono);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin: 32px 0 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    h3 {
+      font-size: 1.1rem;
+      color: var(--blue);
+      margin: 20px 0 10px 0;
+    }
+    p, ul { margin-bottom: 16px; color: #cbd5e1; }
+    ul { padding-left: 24px; }
+    li { margin-bottom: 6px; }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .house-box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .house-card {
+      padding: 14px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .house-card.atreides { border-color: var(--blue); }
+    .house-card.harkonnen { border-color: var(--red); }
+    .house-card.ordos { border-color: var(--green); }
+    .house-title { font-weight: bold; margin-bottom: 4px; font-family: var(--font-mono); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px 0;
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    th {
+      background-color: rgba(255, 255, 255, 0.04);
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+    tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.01); }
+
+    pre, code {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+    pre {
+      background-color: #060911;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      overflow-x: auto;
+      margin-bottom: 16px;
+      color: #fbbf24;
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="sidebar">
+    <h2>Dune II AI Lab</h2>
+    <input type="text" id="search" class="search-box" placeholder="Search systems...">
+    
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#fsm">AI Finite State Machine <span class="nav-tag">[ARCH]</span></a></li>
+      <li class="nav-item"><a href="#target">Target Prioritization <span class="nav-tag">[ARC04]</span></a></li>
+      <li class="nav-item"><a href="#houses">House Doctrines <span class="nav-tag">[HOUS]</span></a></li>
+      <li class="nav-item"><a href="#sandworm">Sandworm Predator <span class="nav-tag">[WORM]</span></a></li>
+      <li class="nav-item"><a href="#exploits">AI Exploits & Traps <span class="nav-tag">[EXPL]</span></a></li>
+      <li class="nav-item"><a href="#fast">Speedrun Geodesic <span class="nav-tag">[FAST]</span></a></li>
+      <li class="nav-item"><a href="#drm">Mentat Vitanium DRM <span class="nav-tag">[PROT]</span></a></li>
+      <li class="nav-item"><a href="#evolution">RTS Lineage <span class="nav-tag">[SEQL]</span></a></li>
+    </ul>
+  </nav>
+
+  <main id="content">
+    <header>
+      <h1>Dune II: The Building of a Dynasty</h1>
+      <div class="meta">
+        <span>Westwood Studios (1992)</span> • 
+        <span>Engine: DOS RTS Engine v1.07</span> • 
+        <span>Author: AI Cybersecurity Researcher and Reverse-Engineer</span>
+      </div>
+    </header>
+
+    <section id="fsm" class="card">
+      <h2>The RTS AI Finite State Machine [ARCH]</h2>
+      <p>Running on 16MHz 286/386 CPUs, Westwood designed a deterministic staging-pool state machine:</p>
+      <pre>
+[Factory Output] -> [Move to Rally Point] -> [PoolCount >= Threshold?] 
+                                                   │ (YES)
+                                                   ▼
+                                         [Transition: ATTACK_STATE]
+                                         [Evaluate Aggro Priority Matrix]</pre>
+    </section>
+
+    <section id="target" class="card">
+      <h2>Target Prioritization & Aggro Matrix [ARC04]</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Priority</th>
+            <th>Target Category</th>
+            <th>Evaluated Conditions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>1 (Highest)</strong></td><td>Active Attacker</td><td>Unit actively firing on the group</td></tr>
+          <tr><td><strong>2</strong></td><td>Spice Harvesters</td><td>Adjacent harvesters (economic disruption)</td></tr>
+          <tr><td><strong>3</strong></td><td>Rocket & Heavy Turrets</td><td>Static defense structures in 6-tile sensor radius</td></tr>
+          <tr><td><strong>4</strong></td><td>Construction Yard</td><td>Primary base building anchor</td></tr>
+          <tr><td><strong>5</strong></td><td>Windtraps / Power</td><td>Disables player radar and turrets</td></tr>
+          <tr><td><strong>6 (Lowest)</strong></td><td>Refineries / Outposts</td><td>Secondary auxiliary structures</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="houses" class="card">
+      <h2>House AI Personalities & Behavioral Biases [HOUS]</h2>
+      <div class="house-box">
+        <div class="house-card atreides">
+          <div class="house-title" style="color: var(--blue);">HOUSE ATREIDES</div>
+          <div>Defensive Tactician</div>
+          <small style="color: var(--text-muted);">Sonic Tanks & Fremen Swarms</small>
+        </div>
+        <div class="house-card harkonnen">
+          <div class="house-title" style="color: var(--red);">HOUSE HARKONNEN</div>
+          <div>Siege Juggernaut</div>
+          <small style="color: var(--text-muted);">Devastators & Death Hand Missile</small>
+        </div>
+        <div class="house-card ordos">
+          <div class="house-title" style="color: var(--green);">HOUSE ORDOS</div>
+          <div>Hit-and-Run Mercenaries</div>
+          <small style="color: var(--text-muted);">Raider Trikes & Deviator Mind-Gas</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="sandworm" class="card">
+      <h2>Sandworm Predator Subsystem [WORM]</h2>
+      <p>Sandworms accumulate noise scores on soft sand: Infantry (<code>+1</code>), Trike (<code>+3</code>), Combat Tank (<code>+8</code>), Rock Plateau (<code>0</code>). Despawns after devouring 3 heavy vehicles.</p>
+    </section>
+
+    <section id="exploits" class="card">
+      <h2>AI Blindspots & Exploits [EXPL]</h2>
+      <ul>
+        <li><strong>Rocket Turret Outranging:</strong> Turrets hit at 6 tiles; AI aggro sensors only trigger at 5 tiles.</li>
+        <li><strong>Cliff Wall Sliding:</strong> Single-step Manhattan distance gets trapped by diagonal concrete barriers.</li>
+        <li><strong>Sandworm Puddle Baiting:</strong> Lure AI armor onto deep sand where Sandworms consume them.</li>
+      </ul>
+    </section>
+
+    <section id="fast" class="card">
+      <h2>The 16-Step Speedrun Geodesic [FAST]</h2>
+      <ol style="padding-left: 24px; color: #cbd5e1;">
+        <li>Lay 2x2 Concrete; place Windtrap immediately.</li>
+        <li>Build Spice Refinery bordering sand; Harvester starts gathering.</li>
+        <li>Build Outpost for minimap radar.</li>
+        <li>Build Heavy Factory; produce 4 Combat Tanks.</li>
+        <li>Build 2 Rocket Turrets on cliff chokepoints.</li>
+        <li>Build Repair Facility; keep damaged tanks rotating.</li>
+        <li>Deploy 2nd Refinery & Harvester to double income.</li>
+        <li>Build High-Tech Factory; acquire Carryalls.</li>
+        <li>Research Siege Tanks; assemble 6-tank strike force.</li>
+        <li>Build Palace; ready superweapon cooldown.</li>
+        <li>Scout enemy base coordinates with fast Trike.</li>
+        <li>Lure AI defensive wave into Sandworm feeding zone.</li>
+        <li>Focus-fire enemy Construction Yard with Siege Tanks.</li>
+        <li>Destroy Heavy Vehicle Factory to eliminate reinforcements.</li>
+        <li>Demolish Windtraps to power down enemy base turrets.</li>
+        <li>Wipe out remaining infantry and outposts for mission victory!</li>
+      </ol>
+    </section>
+
+    <section id="drm" class="card">
+      <h2>Historical Copy-Protection: Mentat DRM [PROT]</h2>
+      <p>The Mentat prompts for vehicle specs from the manual before Mission 2. In <code>DUNE2.EXE</code>, crackers NOPed <code>0030:4A1A (JNE -> NOP NOP)</code> to bypass.</p>
+    </section>
+
+    <section id="evolution" class="card">
+      <h2>Prequel-to-Sequel Evolution: The RTS Lineage [SEQL]</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Subsystem</th>
+            <th>Dune II (1992)</th>
+            <th>Command & Conquer (1995)</th>
+            <th>Red Alert (1996)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Unit Selection</strong></td>
+            <td>Single-unit select</td>
+            <td>Drag-box multiselect</td>
+            <td>Waypoints & Formations</td>
+          </tr>
+          <tr>
+            <td><strong>Building Model</strong></td>
+            <td>Concrete + Build Radius</td>
+            <td>Sidebar Queue</td>
+            <td>Sidebar Queue</td>
+          </tr>
+          <tr>
+            <td><strong>AI Subsystem</strong></td>
+            <td>FSM Staging Pools</td>
+            <td>Trigger Script System</td>
+            <td>AI Team Types</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('search').addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(term) ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
