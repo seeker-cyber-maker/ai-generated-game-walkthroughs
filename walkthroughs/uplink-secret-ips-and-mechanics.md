@@ -31,6 +31,18 @@ target_build_sha256: 8e5d3c90711bf79a292850937b420ee963d76e73ff6697818e698889a7b
    - Decompiled Passive Tracing Algorithm (`police.cpp`) .................... [NET04]
    - The Hacker's Anti-Forensics & Trace Evasion Playbook ................... [NET05]
    - Mission Engine & Target Payload Injection Lifecycle ................... [NET06]
+   - Minimum & Maximum Bounds of Logs to Delete & Suspicion Mechanics ...... [NET07]
+   - What Happens When a Computer is Destroyed / Revelation Infection ...... [NET08]
+   - Do the News Matter? Economic Arbitrage & Story Tracking ............... [NET09]
+   - Complete Trigger Conditions for Story Campaign Missions ............... [NET10]
+   - Complete Taxonomy of Mission Types .................................... [NET11]
+   - Uplink Rating vs. Neuromancer Karma (Light vs. Dark) .................. [NET12]
+   - The "Pay Me Half Now" & Infinite Mission Loophole ..................... [NET13]
+   - What is Traced During a Bank Theft? (The Bank Heist Forensics) ........ [NET14]
+   - Local Area Networks (LANs) & Special LAN Tools ........................ [NET15]
+   - Modular Plugin Architecture & Developer CD API ........................ [NET16]
+   - Removing Criminal Records (GCD) & The Uplink Leaderboard .............. [NET17]
+   - Hard Endings, Getting Caught & Gateway Self-Destruct Failsafe ......... [NET18]
 5. [Master Directory of Secret & Easter Egg IPs](#5-master-directory-of-secret--easter-egg-ips) ..... [SECR]
    - The Introversion Software LAN & Founder Vault .......................... [SEC01]
    - Protovision Game Server (WarGames 'Joshua' System) ..................... [SEC02]
@@ -372,6 +384,233 @@ Because the target file physically exists on the target server the moment it app
 1. **Browse BBS without Accepting**: Inspect a high-value theft or destruction contract. Note the target IP and filename.
 2. **Execute Pre-Hack**: Connect to the target, bypass security, download/destroy the target file, and clean your InterNIC logs.
 3. **Instant Cash-In**: Return to the BBS, accept the contract, and immediately reply to the employer email. The engine executes `Mission::CheckCompletion()`, verifies the file is in your possession (or deleted from target), and awards 100% payout with zero countdown pressure!
+
+---
+
+### G. Minimum & Maximum Bounds of Logs to Delete & Suspicion Mechanics (`logbank.cpp`) [NET07]
+
+When you perform actions on remote systems, the C++ engine generates three hierarchical log types in `LogBank`:
+* `LOG_TYPE_CONNECTION` (IP hop opened/closed)
+* `LOG_TYPE_USER` (User/Admin authenticated)
+* `LOG_TYPE_DATA` (File copied, deleted, or record modified)
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      LOG DELETION FORENSIC BOUNDS MATRIX                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  LOCATION      │ MINIMUM BOUND TO DELETE     │ MAXIMUM / SUSPICION BOUND    │
+├────────────────┼─────────────────────────────┼──────────────────────────────┤
+│  InterNIC      │ The single Connection Log   │ Zero all logs. No suspicion  │
+│  (First Hop)   │ pointing to your Gateway IP.│ code exists on InterNIC!     │
+├────────────────┼─────────────────────────────┼──────────────────────────────┤
+│  Target Server │ Connection Log + Admin Log  │ Deleting all logs triggers   │
+│                │ using Log Eraser v4.0.      │ daily sysadmin security audit│
+├────────────────┼─────────────────────────────┼──────────────────────────────┤
+│  Bank Server   │ Statement Transfer Log +    │ Delete statement + transfer  │
+│                │ Connection Log on both banks│ logs. Never format bank log! │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+1. **The Target Server Bound**:
+   * *Minimum*: You must delete the `LOG_TYPE_CONNECTION` log and your `LOG_TYPE_USER` / `LOG_TYPE_ADMIN` login log using **Log Eraser v4.0**.
+   * *The Suspicion Trap*: Using Log Eraser v1.0–v3.0 leaves a `LOG_TYPE_DELETED` tombstone. On target servers, the sysadmin's daily maintenance routine (`Computer::Update()`) scans for tombstones and files an automated police report!
+2. **The InterNIC Bound (The Sandbox)**:
+   * On InterNIC, **no automated audit routine exists in the source code**. You can delete only your personal connection log, or wipe all 50 logs in the bank—InterNIC never files police reports!
+
+---
+
+### H. What Happens When a Computer is Destroyed / Revelation Infection (`computer.cpp`) [NET08]
+
+When a system is completely formatted via console `delete *`, or infected by **Revelation v3.0**:
+
+1. **`Computer::Die()` State Machine**:
+   * The computer's `is_functional` boolean is set to `false`.
+   * The IP address becomes unresponsive (`Connection Refused / Host Down`).
+2. **Economic & News Repercussions**:
+   * The owning company's stock price crashes immediately by **50% to 80%**.
+   * An urgent news bulletin is dispatched to the Global News BBS (`news.cpp`).
+3. **Backup Restoration Cycle**:
+   * For non-story servers, sysadmins take **7 to 14 in-game days** to restore from backup tapes, after which the server re-appears online with a freshly generated password.
+4. **Revelation Viral Cascade**:
+   * If destroyed by Revelation, the infected server actively broadcasts viral payload packets to all adjacent nodes listed in its routing table, triggering an exponential internet shutdown!
+
+---
+
+### I. Do the News Matter? Economic Arbitrage & Story Tracking (`news.cpp`) [NET09]
+
+The Global News Network is not just flavor text; it directly drives in-game simulation mechanics:
+
+1. **Stock Market Arbitrage**: News stories reporting severe data destruction or server destruction cause immediate company stock drops, allowing massive insider trading profits.
+2. **Storyline Checkpoints**: News reports track the progression of the main storyline (e.g. the assassination of Deadalus, ARC's press releases, Arunmor's emergency defense announcements, and global infection percentages).
+3. **Rival Hacker Takedown Confirmation**: When you frame a rival hacker in the Global Criminal Database (GCD), a news bulletin confirms their arrest and federal sentencing, verifying their permanent removal from the Uplink leaderboard.
+
+---
+
+### J. Complete Trigger Conditions for Story Campaign Missions [NET10]
+
+The main storyline triggers on specific calendar dates in 2010 once you reach the **Skilled** Uplink rating:
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                       STORY CAMPAIGN TRIGGER TIMELINE                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  • MAY 14, 2010 : Deadalus Email received (Disavowed Uplink Agent).         │
+│  • MAY 21, 2010 : Deadalus found dead; ARC posts "Counter-Hack" contract.   │
+│  • JUNE 2010    : THE FORK: Choose ARC (Revelation) or Arunmor (Faith).    │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### ARC Path (The Digital Extinction Virus)
+1. **ARC Mission 1 (Infiltrate Arunmor)**: Steal Revelation v1.0 source files.
+2. **ARC Mission 2 (Darwin Research LAN)**: Raid Darwin Research to acquire prototype distributed engine tech.
+3. **ARC Mission 3 (Maiden Flight)**: Hack and infect international air traffic control systems.
+4. **ARC Mission 4 (Global Outbreak)**: Broadcast Revelation v3.0 across core internet mainframes to trigger total digital collapse.
+
+#### Arunmor Path (The Global Antivirus Defense)
+1. **Arunmor Mission 1 (Trace Infection)**: Investigate compromised servers and trace the viral payload back to ARC.
+2. **Arunmor Mission 2 (Defend Darwin Research)**: Counter-hack ARC agents attacking Darwin LAN.
+3. **Arunmor Mission 3 (Project S.T.E.A.L.T.H.)**: Infiltrate ARC headquarters to steal the master encryption keys.
+4. **Arunmor Mission 4 (Faith Deployment)**: Distribute Faith v3.0 across all infected world nodes to purge Revelation and save the internet.
+
+---
+
+### K. Complete Taxonomy of Mission Types (`mission.h`) [NET11]
+
+| Mission Type Constant | Objective & Target System | Difficulty | Typical Payout |
+| :--- | :--- | :--- | :--- |
+| `MISSION_COPYDATA` | Steal sensitive research file from Central File Server | Low–Med | 1,500 – 5,000c |
+| `MISSION_DELETEDATA` | Destroy specific target file or database record | Low–Med | 1,000 – 4,000c |
+| `MISSION_CHANGEDATA` | Modify medical records or academic degrees | Med | 2,500 – 6,000c |
+| `MISSION_FRAMEUSER` | Plant incriminating logs or GCD warrants on target | Med–High | 3,000 – 8,000c |
+| `MISSION_REMOVECOMPUTER`| Format and destroy target company central server | High | 5,000 – 15,000c |
+| `MISSION_STEALMONEY` | Hack bank accounts and transfer funds to offshore account| High | 10,000 – 50,000c |
+| `MISSION_SPECIAL` | Story campaign missions (ARC / Arunmor / Deadalus) | Extreme | 10,000 – 50,000c |
+
+---
+
+### L. Uplink Rating vs. Neuromancer Karma (Light vs. Dark) [NET12]
+
+Player progression is tracked across two distinct axes:
+
+1. **Uplink Hacker Rating (Rank 0 to 16)**:
+   * `Registered (0)` $\to$ `Novice` $\to$ `Intermediate` $\to$ `Skilled` $\to$ `Experienced` $\to$ `Uber-Skilled` $\to$ `Professional` $\to$ `Elite` $\to$ `MAGE (16)`.
+   * Directly determines which difficulty tiers of contracts appear on the BBS.
+2. **Neuromancer Rating (Karma: -1000 to +1000)**:
+   * **Malicious / Chaotic (Dark Karma)**: Earned by destroying medical databases, bankrupting companies, and framing innocent people. Unlocks criminal syndicate assassination contracts.
+   * **Beneficent / Lawful (Light Karma)**: Earned by recovering stolen research, saving servers from viruses, and catching rogue hackers. Unlocks government intelligence and cyber-defense contracts.
+
+---
+
+### M. The "Pay Me Half Now" & Infinite Mission Loophole (`mission.cpp`) [NET13]
+
+In vanilla Uplink's contract negotiation engine:
+
+```cpp
+// Decompiled from Mission::SetPayment() in mission.cpp
+if (contract_negotiate_advance) {
+    player_balance += (mission->payment / 2); // 50% upfront cash transfer!
+}
+```
+
+* **The Exploit**: Non-story procedural missions generated on the BBS have `deadline = -1` (no expiration timer).
+* **Execution**: You can negotiate "Pay 50% Upfront" on 50 missions simultaneously, instantly pocket tens of thousands of credits in advance cash, and **never complete the missions** with zero reputation penalty!
+
+---
+
+### N. What is Traced During a Bank Theft? (The Bank Heist Forensics) [NET14]
+
+When executing a financial transfer between bank accounts:
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          DUAL-BANK HEIST TRACE TRAIL                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  1. SOURCE BANK      : Logs "Transfer of $X from Acc A to Acc B at Bank 2"  │
+│  2. DESTINATION BANK : Logs "Deposit of $X into Acc B from Acc A at Bank 1" │
+│  3. POLICE REACTION  : Both banks file independent passive investigations!  │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### The Complete Heist Evading Playbook:
+1. Connect to **Source Bank** as Admin $\to$ Transfer funds to your offshore account $\to$ Open `LogBank` $\to$ Delete the Transfer Out log with Log Eraser v4.0.
+2. Immediately connect to **Destination Bank** as Admin $\to$ Open `LogBank` $\to$ Delete the Deposit In log with Log Eraser v4.0.
+3. Disconnect and immediately connect to **InterNIC** as Admin $\to$ Zero out the first-hop connection log.
+4. Result: Both bank transfer logs and gateway IP logs are erased, leaving **zero forensic trail** for police!
+
+---
+
+### O. Local Area Networks (LANs) & Special LAN Tools (`lancomputer.cpp`) [NET15]
+
+Local Area Networks represent complex multi-node systems protected by isolated hardware architecture:
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                             LAN TOPOLOGY NODES                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  • ROUTER: Entry point into LAN. Can be scanned and spoofed.                │
+│  • HUB / SWITCH: Distributes network traffic across subnet branches.        │
+│  • TERMINAL: User workstations; holds passwords and system keys.            │
+│  • AUTH SERVER: Central controller; unlocking grants access to main subnet. │
+│  • WIRELESS BRIDGE: Requires Radio Transmitter tool to bridge air-gapped LAN│
+│  • ISOLATION LOCK: Shuts down network segment if unauthorized access detected│
+│  • MAINFRAME CORE: Central high-value target containing classified files.   │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Special LAN Tools:
+* **LAN Probe**: Scans adjacent nodes connected to your current position.
+* **LAN Scan**: Maps out entire LAN topology from the primary router.
+* **LAN Spoof**: Spoofs system authentication tokens to bypass subnet locks.
+* **LAN Force**: Brute-forces locked hardware terminal switches.
+* **Radio Transmitter**: Connects to wireless access bridges within air-gapped subnets.
+
+---
+
+### P. Modular Plugin Architecture & Developer CD API (`uplink_plugin.h`) [NET16]
+
+With the release of the Developer CD in 2002/2003, Introversion designed a modular C++ plugin architecture:
+
+```cpp
+// Decompiled from uplink_plugin.h
+class UplinkPlugin {
+public:
+    virtual char* GetName() = 0;
+    virtual char* GetVersion() = 0;
+    virtual void Initialize(App* app) = 0;
+    virtual void HookWorldUpdate(World* world) = 0;
+};
+```
+
+* **Plugin Capabilities**: Allowed community modders to inject custom Gateways, new security daemons, procedural mission generators, custom graphical HUDs (*UplinkOS*), and entire multi-server storylines without recompiling the core executable.
+
+---
+
+### Q. Removing Criminal Records (GCD) & The Uplink Leaderboard [NET17]
+
+* **Global Criminal Database (GCD)**:
+  * Deleting criminal convictions removes police active arrest warrants, resetting your police heat to zero.
+* **Uplink Internal Services (Agent Database)**:
+  * Hacking into Uplink Corp Central lets you view rival agents' physical gateway IPs, active ratings, and bounty records.
+  * *The Rival Framing Exploit*: You can copy a rival agent's IP and create a fictitious *"Class A Cyber-Terrorism"* felony record under their name in the GCD. The police will immediately raid and arrest the rival hacker, eliminating competition and accelerating your climb to the #1 Mage ranking!
+
+---
+
+### R. Hard Endings, Getting Caught & The Gateway Self-Destruct Failsafe [NET18]
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      GAME ENDINGS & LOSING FAILSAFES                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  • ARC REVELATION WIN : Global Internet collapses; world plunged into dark. │
+│  • ARUNMOR FAITH WIN  : Internet saved; Player awarded Supreme Status & cash│
+│  • ARREST / SWAT RAID : Gateway seized; Life in prison; Save file deleted!  │
+│  • GATEWAY DESTRUCT   : Local hardware incinerated; Profile & cash preserved!│
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+* **What Decides If You Can Continue After Getting Caught?**:
+  * **No Self-Destruct**: If police complete a trace and raid your gateway, your hardware is seized as evidence, you are convicted in federal court, and your save file is **permanently deleted** (Hard Game Over).
+  * **With Gateway Motion Sensor + Self-Destruct Bomb**: When police approach your gateway, the motion sensor detects the breach and detonates the self-destruct bomb. Your hardware is incinerated down to ash, all forensic evidence is destroyed, and **you survive to purchase a new Gateway with your preserved offshore bank accounts**!
 
 ---
 
