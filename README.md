@@ -43,7 +43,7 @@
 | **Hacknet** | 2015 | Team Fractal Alligator (FNA/C#) | [Markdown](walkthroughs/hacknet-os.md) • [79-Col Text](walkthroughs/hacknet-os.txt) • [HTML App](walkthroughs/hacknet-os.html) |
 | **FTL: Faster Than Light** | 2012 | Subset Games (C++/FNA) | [Markdown](walkthroughs/ftl-faster-than-light.md) • [79-Col Text](walkthroughs/ftl-faster-than-light.txt) • [HTML App](walkthroughs/ftl-faster-than-light.html) |
 | **Uplink: Trust is a Hacker's Greatest Asset** | 2001 | Introversion Software (C++/SDL) | [Markdown](walkthroughs/uplink-secret-ips-and-mechanics.md) • [79-Col Text](walkthroughs/uplink-secret-ips-and-mechanics.txt) • [HTML App](walkthroughs/uplink-secret-ips-and-mechanics.html) |
-| **Grey Hack** | 2017–2026 | Anon Software (Unity/Mono C#) | [Markdown](walkthroughs/grey-hack-forensics-and-mechanics.md) • [79-Col Text](walkthroughs/grey-hack-forensics-and-mechanics.txt) • [HTML App](walkthroughs/grey-hack-forensics-and-mechanics.html) |
+| **Grey Hack** | 2017–2026 | Anon Software (Unity/Mono C#) | [Markdown](walkthroughs/grey-hack-forensics-and-mechanics.md) • [79-Col Text](walkthroughs/grey-hack-forensics-and-mechanics.txt) • [HTML App](walkthroughs/grey-hack-forensics-and-mechanics.html) • [RFC](walkthroughs/rfc-ghnp-01-grey-hack-protocol.md) • [RFC-Code](walkthroughs/rfc-ghnp-01-grey-hack-protocol-code.md) |
 
 ---
 
