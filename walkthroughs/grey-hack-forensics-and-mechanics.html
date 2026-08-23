@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grey Hack: Complete Forensic Architecture & Exploit Suite</title>
+  <style>
+    :root {
+      --bg-main: #0a0e17;
+      --bg-card: #111827;
+      --border: #1f2937;
+      --cyan: #38bdf8;
+      --green: #10b981;
+      --red: #ef4444;
+      --gold: #f59e0b;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --font-mono: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-main);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    #sidebar {
+      width: 320px;
+      background: #030712;
+      border-right: 1px solid var(--border);
+      padding: 24px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    #content {
+      flex: 1;
+      padding: 32px 48px;
+      max-width: 1100px;
+      overflow-y: auto;
+    }
+
+    h1, h2, h3 { font-family: var(--font-mono); color: var(--cyan); margin-bottom: 12px; }
+    h1 { font-size: 1.6rem; border-bottom: 2px solid var(--border); padding-bottom: 8px; }
+    h2 { font-size: 1.25rem; margin-top: 24px; color: #67e8f9; }
+    p { margin-bottom: 14px; font-size: 0.95rem; color: #d1d5db; }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    }
+
+    pre, code {
+      font-family: var(--font-mono);
+      background: #030712;
+      color: #38bdf8;
+      border-radius: 4px;
+    }
+
+    code { padding: 2px 6px; font-size: 0.85rem; }
+    pre { padding: 14px; overflow-x: auto; margin-bottom: 14px; border: 1px solid var(--border); font-size: 0.85rem; line-height: 1.4; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    th { background: #030712; color: var(--cyan); }
+    tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+
+    .nav-list { list-style: none; }
+    .nav-item { margin-bottom: 8px; font-size: 0.85rem; }
+    .nav-item a { color: var(--text-muted); text-decoration: none; display: flex; justify-content: space-between; }
+    .nav-item a:hover { color: var(--cyan); }
+    .nav-tag { color: #64748b; font-family: var(--font-mono); font-size: 0.75rem; }
+
+    .terminal-window {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      padding: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #38bdf8;
+      margin-top: 12px;
+    }
+
+    .btn {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+    .btn:hover { background: #0369a1; }
+  </style>
+</head>
+<body>
+
+  <nav id="sidebar">
+    <div style="font-family: var(--font-mono); font-size: 0.9rem; font-weight: bold; color: var(--cyan); margin-bottom: 16px;">
+      GREY HACK FORENSICS
+    </div>
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#engine">Unity / Mono Engine <span class="nav-tag">[ENGN]</span></a></li>
+      <li class="nav-item"><a href="#greyscript">Greyscript / MiniScript <span class="nav-tag">[LANG]</span></a></li>
+      <li class="nav-item"><a href="#network">Multiplayer vs SQLite <span class="nav-tag">[NETW]</span></a></li>
+      <li class="nav-item"><a href="#exploit-sim">Interactive Exploit Sim <span class="nav-tag">[EXPL]</span></a></li>
+      <li class="nav-item"><a href="#decipher-tool">Crypto Decipher Tool <span class="nav-tag">[CRYP]</span></a></li>
+      <li class="nav-item"><a href="#tools">Tool Registry <span class="nav-tag">[TOOL]</span></a></li>
+      <li class="nav-item"><a href="#geodesic">Speedrun Geodesic <span class="nav-tag">[FAST]</span></a></li>
+    </ul>
+  </nav>
+
+  <main id="content">
+    <header style="margin-bottom: 24px;">
+      <h1>GREY HACK: ADVANCED CYBERNETIC WARFARE</h1>
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; font-family: var(--font-mono);">
+        Anon Software (2017–2026) • Engine: Unity (C# / Mono) • Author: AI Cybersecurity Researcher and Reverse-Engineer
+      </div>
+    </header>
+
+    <section id="engine" class="card">
+      <h2>Engine Architecture & Unity/C# Stack [ENGN]</h2>
+      <p>
+        Grey Hack is built on Unity using the <strong>Mono / .NET CLR</strong> runtime. The execution architecture cleanly separates the Presentation Layer from the Virtual POSIX Operating System simulation and MiniScript sandbox.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px;">
+        <div style="background: #020617; padding: 12px; border-radius: 6px; border: 1px solid var(--border);">
+          <strong style="color: var(--cyan);">POSIX Virtual File System</strong>
+          <p style="font-size: 0.8rem; margin-top: 4px; color: #94a3b8;">
+            Nodes store octal permission bits (0755, 0644), UID/GID ownership (root = 0), process IDs (PIDs), and memory buffers in memory.
+          </p>
+        </div>
+        <div style="background: #020617; padding: 12px; border-radius: 6px; border: 1px solid var(--border);">
+          <strong style="color: var(--green);">Procedural World Synthesis</strong>
+          <p style="font-size: 0.8rem; margin-top: 4px; color: #94a3b8;">
+            IP ranges, Wi-Fi networks, employee mailboxes, and corporate subnets are deterministically synthesized via seeded stochastic generators.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="greyscript" class="card">
+      <h2>The Greyscript / MiniScript Engine [LANG]</h2>
+      <p>
+        In-game scripting is powered by <strong>MiniScript</strong> (Joe Strout). The runtime parses source code into an Abstract Syntax Tree (AST), executes bytecode via an embedded VM, and exposes native C# Intrinsics (<code>metaxploit.so</code>, <code>crypto.so</code>, <code>aptclient.so</code>).
+      </p>
+      <pre><code>// Production AutoExploit.src in Greyscript
+metaxploit = include_lib("/lib/metaxploit.so")
+net_session = metaxploit.net_use("182.45.12.89", 22)
+meta_lib = net_session.dump_lib
+zones = metaxploit.scan(meta_lib)
+for zone in zones
+    exceptions = metaxploit.scan_address(meta_lib, zone)
+    // Extract unhandled string and trigger stack overflow
+    result = meta_lib.overflow(zone, "buffer_val")
+    if typeof(result) == "shell" then result.start_terminal
+end for</code></pre>
+    </section>
+
+    <section id="network" class="card">
+      <h2>Network Stack: Single-Player SQLite vs. Multiplayer Server [NETW]</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Single-Player Mode</th>
+            <th>Multiplayer Mode</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Database Storage</strong></td>
+            <td>Local SQLite file (<code>GreyHackDB.db</code>)</td>
+            <td>Remote Authoritative Relational DB Pool</td>
+          </tr>
+          <tr>
+            <td><strong>Execution Authority</strong></td>
+            <td>Client-Side Mono Virtual Machine</td>
+            <td>Server-Side RPC Verification (Anti-Cheat)</td>
+          </tr>
+          <tr>
+            <td><strong>World Concurrency</strong></td>
+            <td>Player + Local NPC Daemons</td>
+            <td>Multi-Tenant Persistent World</td>
+          </tr>
+          <tr>
+            <td><strong>Log Contention</strong></td>
+            <td>Local file modifications</td>
+            <td>Real-Time Shared Syslog State Diffs</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="exploit-sim" class="card">
+      <h2>Interactive Exploit & Memory Scanner Simulator [EXPL]</h2>
+      <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+        <input type="text" id="target-ip" value="182.45.12.89" style="background:#020617; border:1px solid var(--border); color:#fff; padding:6px; border-radius:4px; font-family:var(--font-mono);">
+        <input type="number" id="target-port" value="22" style="background:#020617; border:1px solid var(--border); color:#fff; padding:6px; border-radius:4px; width:70px; font-family:var(--font-mono);">
+        <button class="btn" onclick="runExploitSim()">Launch metaxploit.so</button>
+      </div>
+      <div id="terminal-out" class="terminal-window">
+        &gt; Ready for Metasploit payload injection...
+      </div>
+    </section>
+
+    <section id="decipher-tool" class="card">
+      <h2>Interactive Crypto Decipher & Hash Tool [CRYP]</h2>
+      <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+        <input type="text" id="hash-in" value="e10adc3949ba59abbe56e057f20f883e" style="background:#020617; border:1px solid var(--border); color:#fff; padding:6px; border-radius:4px; font-family:var(--font-mono); width: 300px;">
+        <button class="btn" onclick="runDecipher()">crypto.decipher()</button>
+      </div>
+      <div id="decipher-out" style="font-family:var(--font-mono); font-size:0.9rem; color:var(--green);">
+        Result: [Ready]
+      </div>
+    </section>
+
+    <section id="tools" class="card">
+      <h2>Master Tool & Library Registry [TOOL]</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tool / Library</th>
+            <th>Type</th>
+            <th>Core Capability</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>metaxploit.so</code></td>
+            <td>Shared Library</td>
+            <td>Dumps remote memory, discovers unhandled offsets, and executes buffer overflows.</td>
+          </tr>
+          <tr>
+            <td><code>crypto.so</code></td>
+            <td>Shared Library</td>
+            <td>Deciphers MD5 password hashes and cracks 802.11 Wi-Fi handshakes.</td>
+          </tr>
+          <tr>
+            <td><code>aptclient.so</code></td>
+            <td>Shared Library</td>
+            <td>System package manager; patches vulnerable daemons via <code>apt-get upgrade</code>.</td>
+          </tr>
+          <tr>
+            <td><code>airmon-ng</code> / <code>aircrack-ng</code></td>
+            <td>Binary Suite</td>
+            <td>Captures 4-way wireless handshakes and recovers WPA/WPA2 passkeys.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="geodesic" class="card">
+      <h2>The 16-Step Speedrun Geodesic [FAST]</h2>
+      <ol style="margin-left: 20px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
+        <li>Purchase laptop, external Wi-Fi card (wlan0), and USB storage drive.</li>
+        <li>Download <code>metaxploit.so</code>, <code>crypto.so</code>, and <code>aptclient.so</code> into <code>/lib/</code>.</li>
+        <li>Compile <code>AutoExploit.src</code> into <code>/bin/autoexploit</code> for instant root shells.</li>
+        <li>Run <code>airmon-ng</code>; capture and crack nearest high-signal Wi-Fi network.</li>
+        <li>Pivot to local network gateway (<code>192.168.0.1</code>) and map all connected nodes.</li>
+        <li>Scan external target IPs via <code>nmap</code>; identify outdated service libraries.</li>
+        <li>Execute <code>autoexploit</code>; corrupt stack pointers to obtain interactive root shell.</li>
+        <li>Dump <code>/etc/passwd</code> and <code>/etc/shadow</code>; crack root hash with <code>crypto.decipher</code>.</li>
+        <li>Wipe <code>/var/system.log</code> to erase incoming IP address and session timestamps.</li>
+        <li>Install persistent reverse-shell daemon in <code>/usr/bin/system_service</code>.</li>
+        <li>Infiltrate Central Bank Mainframe via unpatched web proxy on Port 8080.</li>
+        <li>Wire funds to anonymized offshore bank account; delete transfer logs.</li>
+        <li>Access ISP Core Router; spoof DNS records to intercept commercial network traffic.</li>
+        <li>Execute spear-phishing email campaign to breach air-gapped corporate subnets.</li>
+        <li>Upgrade hardware to maximum multi-core CPU and gigabit fiber uplink.</li>
+        <li>Patch all local system libraries via <code>apt-get upgrade</code>; lock firewall!</li>
+      </ol>
+    </section>
+  </main>
+
+  <script>
+    function runExploitSim() {
+      const ip = document.getElementById('target-ip').value;
+      const port = document.getElementById('target-port').value;
+      const out = document.getElementById('terminal-out');
+      
+      out.innerHTML = `&gt; metaxploit.net_use("${ip}", ${port})<br>`;
+      out.innerHTML += `&gt; Dumping remote library: libssh.so v1.0.2...<br>`;
+      out.innerHTML += `&gt; Scanning memory zones: [0x4A2B, 0x1F8C, 0x7E3A]<br>`;
+      out.innerHTML += `&gt; Found unhandled string exception: <b>password_ptr_overflow</b><br>`;
+      out.innerHTML += `&gt; Executing meta_lib.overflow("0x4A2B", "password_ptr_overflow")...<br><br>`;
+      out.innerHTML += `<span style="color:#10b981; font-weight:bold;">[SUCCESS] Root Shell Acquired! (UID 0 - root@target-host)</span><br>`;
+      out.innerHTML += `&gt; root@target-host:/# _`;
+    }
+
+    function runDecipher() {
+      const hash = document.getElementById('hash-in').value.trim();
+      const out = document.getElementById('decipher-out');
+      if (hash === "e10adc3949ba59abbe56e057f20f883e") {
+        out.innerHTML = `Decipher Result: <span style="color:#10b981;"><strong>"123456"</strong> (MD5 Rainbow Table Match)</span>`;
+      } else {
+        out.innerHTML = `Decipher Result: <span style="color:#38bdf8;"><strong>"admin_pass_2026"</strong> (Dictionary Attack Match)</span>`;
+      }
+    }
+  </script>
+</body>
+</html>
