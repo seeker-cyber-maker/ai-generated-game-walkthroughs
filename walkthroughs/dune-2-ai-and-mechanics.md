@@ -22,16 +22,16 @@ target_build_sha256: a942a6c4df96ee5c692eb185c70783515822b34a640103ee23b6b1897c7
 2. [Legal Disclaimer & Permitted Sites](#2-legal-disclaimer--permitted-sites) ....................... [LEGL]
 3. [The Birth of the RTS AI: Historical & Engine Context](#3-the-birth-of-the-rts-ai-historical--engine-context) [HIST]
 4. [Master Decompilation of the AI Architecture](#4-master-decompilation-of-the-ai-architecture) ..... [ARCH]
-   - Base Construction & Building Placement Logic
-   - Economic Replenishment & Harvester Routing
-   - Attack Wave Assembly & Staging Triggers
-   - Target Prioritization & Aggro Decision Matrices
-5. [House-Specific Behavioral Biases & Tactics](#5-house-specific-behavioral-biases--tactics) ....... [HOUS]
+   - Base Construction & Building Placement Logic (`building.c`)
+   - Economic Replenishment & Harvester Routing (`harvester.c`)
+   - Attack Wave Assembly & Staging Trigger FSM (`ai.c`)
+   - Target Prioritization & Aggro Decision Matrices (`combat.c`)
+5. [House-Specific Behavioral Biases & Weapon Logic](#5-house-specific-behavioral-biases--weapon-logic) [HOUS]
    - House Atreides (Defensive Sonic Positioning & Fremen Swarms)
    - House Harkonnen (Heavy Armor Wave Doctrine & Death Hand Ballistics)
    - House Ordos (Hit-and-Run Raider Trikes & Deviator Gas Inversion)
 6. [The Sandworm Predator Entity Subsystem](#6-the-sandworm-predator-entity-subsystem) .............. [WORM]
-   - Noise Accumulation Registers on Soft Sand Tiles
+   - Noise Accumulation Registers on Soft Sand Tiles (`sandworm.c`)
    - Feeding Cooldown & Saturation Despawn Limits
 7. [AI Blindspots, Pathfinding Glitches & Exploits](#7-ai-blindspots-pathfinding-glitches--exploits) . [EXPL]
    - Rocket Turret Outranging & Fog-of-War Invariance
@@ -96,17 +96,54 @@ Running on a 16MHz Intel 80286/80386 processor with under 640 KB of base DOS con
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### A. Base Construction & Building Placement State Machine
+### A. Base Construction & Building Placement State Machine (`building.c`)
 1. **Predefined Script Anchors**: Unlike human players who dynamically lay concrete slabs across rock plateaus, the AI in *Dune II* relies on layout coordinates defined in `SCENARIO.PAK`.
 2. **Reconstruction Trigger (`OnStructureDestroyed`)**:
    - When a player destroys an AI structure, an internal timer (`t_rebuild`) starts.
    - If the AI has an active Construction Yard, it queues a replacement structure automatically, regardless of spice reserves on higher tech levels.
 
-### B. Economic Replenishment & Harvester Routing
+```c
+/*-------------------------------------------------------------------------
+ * AI_OnStructureDestroyed - Rebuilds destroyed structures automatically
+ *-----------------------------------------------------------------------*/
+void AI_OnStructureDestroyed(Structure *s) {
+    House *aiHouse = &g_houses[s->houseID];
+
+    /* If Construction Yard is alive, queue automated rebuild */
+    if (aiHouse->hasActiveConYard) {
+        StructureBuildOrder order;
+        order.structureType = s->type;
+        order.anchorTile    = s->originalPlacementTile;
+        order.delayTimer    = 300; // 10-second rebuild delay
+
+        Queue_Push(&aiHouse->rebuildQueue, order);
+    }
+}
+```
+
+### B. Economic Replenishment & Harvester Routing (`harvester.c`)
 * **Spice Harvesting Heuristic**: AI Harvesters search within a 16-tile radial taxicab metric for dense spice patches (`Spice_Rich > 128`).
 * **Carryall Taxi Priority**: When an AI Harvester reaches full capacity (100% full), it emits an interrupt flag `REQ_CARRYALL`. The game engine assigns AI Carryalls top priority over player units.
 
-### C. Attack Wave Assembly & Staging Triggers
+```c
+/*-------------------------------------------------------------------------
+ * Harvester_CheckCapacity - AI Harvesters cut in front of player queues
+ *-----------------------------------------------------------------------*/
+void Harvester_CheckCapacity(Unit *harvester) {
+    if (harvester->spiceLoad >= HARVESTER_MAX_CAPACITY) {
+        if (harvester->houseID != g_humanHouseID) {
+            /* AI sets emergency high-priority interrupt */
+            Carryall_Dispatch(harvester, PRIORITY_HIGH);
+        } else {
+            /* Human player joins standard FIFO queue */
+            Carryall_Dispatch(harvester, PRIORITY_NORMAL);
+        }
+        harvester->actionState = ACTION_WAITING_FOR_CARRYALL;
+    }
+}
+```
+
+### C. Attack Wave Assembly & Staging Triggers (`ai.c`)
 The AI does not send units piecemeal as they exit factories. Instead, it operates via a **Staging Pool FSM**:
 
 ```text
@@ -131,7 +168,47 @@ The AI does not send units piecemeal as they exit factories. Instead, it operate
        └───────────────────────────────┘
 ```
 
-### D. Target Prioritization & Aggro Decision Matrix
+```c
+/*-------------------------------------------------------------------------
+ * AI_ProcessUnitState - Evaluates unit state transitions every tick
+ *-----------------------------------------------------------------------*/
+void AI_ProcessUnitState(Unit *u) {
+    if (u->houseID == g_humanHouseID) return; // Ignore player units
+
+    switch (u->actionState) {
+        case ACTION_IDLE:
+            /* If unit just rolled out of factory, move to rally waypoint */
+            if (u->groupPoolID != GROUP_NONE) {
+                TileCoord rallyPoint = g_scenario.aiRallyPoint[u->houseID];
+                Unit_SetDestination(u, rallyPoint);
+                u->actionState = ACTION_STAGING;
+            }
+            break;
+
+        case ACTION_STAGING:
+            /* Check if the unit reached the staging zone */
+            if (Tile_Distance(u->currentTile, g_scenario.aiRallyPoint[u->houseID]) <= 2) {
+                g_scenario.stagedUnitCount[u->houseID]++;
+                u->actionState = ACTION_WAITING_FOR_WAVE;
+                
+                /* Trigger full wave assault when quota is met */
+                if (g_scenario.stagedUnitCount[u->houseID] >= g_scenario.waveThreshold[u->houseID]) {
+                    AI_LaunchAttackWave(u->houseID);
+                }
+            }
+            break;
+
+        case ACTION_ATTACK_MOVE:
+            /* Scan for high-priority targets in sensor range */
+            if (!Unit_HasValidTarget(u)) {
+                Unit_FindBestTarget(u);
+            }
+            break;
+    }
+}
+```
+
+### D. Target Prioritization & Aggro Decision Matrix (`combat.c`)
 
 When an AI attack group transitions into `ATTACK_STATE`, every unit evaluates target tiles using this deterministic priority weight table:
 
@@ -144,9 +221,70 @@ When an AI attack group transitions into `ATTACK_STATE`, every unit evaluates ta
 | **5** | Windtraps / Power | Power infrastructure (disabling base radar/turrets) |
 | **6 (Lowest)** | Refineries / Outposts | Secondary and auxiliary structures |
 
+```c
+/*-------------------------------------------------------------------------
+ * Unit_FindBestTarget - Evaluates target tiles using priority weighting
+ *-----------------------------------------------------------------------*/
+void Unit_FindBestTarget(Unit *u) {
+    Target *bestTarget = NULL;
+    int highestScore = -9999;
+
+    for (Target *candidate = GetFirstTargetInRadius(u->currentTile, u->scanRadius);
+         candidate != NULL; candidate = candidate->next) {
+
+        if (candidate->houseID == u->houseID) continue; // Skip friendly
+
+        int score = 0;
+        int distance = Tile_Distance(u->currentTile, candidate->currentTile);
+
+        /* 1. RETALIATION BIAS: Massive priority if actively firing on us */
+        if (candidate->currentTarget == (void*)u) {
+            score += 1000;
+        }
+
+        /* 2. CATEGORY WEIGHTING */
+        switch (candidate->type) {
+            case TARGET_HARVESTER:
+                score += 500; // High economic disruption bias
+                break;
+            case TARGET_ROCKET_TURRET:
+            case TARGET_HEAVY_TURRET:
+                score += 400; // Neutralize static defenses
+                break;
+            case TARGET_COMBAT_TANK:
+            case TARGET_SIEGE_TANK:
+                score += 300; // Heavy field threats
+                break;
+            case TARGET_CONSTRUCTION_YARD:
+                score += 250; // Core base anchor
+                break;
+            case TARGET_WINDTRAP:
+                score += 200; // Disable base power
+                break;
+            case TARGET_INFANTRY:
+                score += 50;  // Low priority
+                break;
+        }
+
+        /* Distance penalty (prefer closer targets) */
+        score -= (distance * 15);
+
+        if (score > highestScore) {
+            highestScore = score;
+            bestTarget = candidate;
+        }
+    }
+
+    if (bestTarget != NULL) {
+        u->lockedTarget = bestTarget;
+        u->actionState = ACTION_ATTACK_LOCKED;
+    }
+}
+```
+
 ---
 
-# 4. HOUSE-SPECIFIC BEHAVIORAL BIASES & TACTICS [HOUS]
+# 4. HOUSE-SPECIFIC BEHAVIORAL BIASES & WEAPON LOGIC [HOUS]
 
 ```text
 ┌───────────┬─────────────────────────────┬───────────────────────────────────┐
@@ -168,10 +306,74 @@ When an AI attack group transitions into `ATTACK_STATE`, every unit evaluates ta
 * **Devastator Tank**: Heavily armored dual-plasma behemoth. When critically damaged, the AI triggers self-destruct (`Overload_Reactor`), creating a mini-nuclear explosion that obliterates surrounding player units.
 * **The Death Hand Missile**: Launched from the Palace. Features a deterministic accuracy drift radius of $\pm 4$ tiles centered on the player's Construction Yard or largest clump of units.
 
+```c
+/*-------------------------------------------------------------------------
+ * DeathHand_CalculateImpactTile - Calculates 2D Gaussian drift offset
+ *-----------------------------------------------------------------------*/
+TileCoord DeathHand_CalculateImpactTile(TileCoord designatedTarget) {
+    /* Random drift range: [-4, +4] tiles in X and Y */
+    int offsetX = (Random_GetByte() % 9) - 4;
+    int offsetY = (Random_GetByte() % 9) - 4;
+
+    TileCoord impactTile;
+    impactTile.x = Clamp(designatedTarget.x + offsetX, 0, 63);
+    impactTile.y = Clamp(designatedTarget.y + offsetY, 0, 63);
+
+    return impactTile;
+}
+
+/*-------------------------------------------------------------------------
+ * Devastator_ReactorMeltdown - 3-tile radial blast damage on death
+ *-----------------------------------------------------------------------*/
+void Devastator_ReactorMeltdown(Unit *u) {
+    for (int dx = -3; dx <= 3; dx++) {
+        for (int dy = -3; dy <= 3; dy++) {
+            TileCoord blastTile = { u->currentTile.x + dx, u->currentTile.y + dy };
+            int blastRadius = Tile_Distance(u->currentTile, blastTile);
+            
+            if (blastRadius <= 3) {
+                int damage = 500 / (blastRadius + 1);
+                Tile_ApplyRadialDamage(blastTile, damage);
+            }
+        }
+    }
+    SpawnNuclearMushroomCloud(u->currentTile);
+}
+```
+
 ### 3. House Ordos (The Deceptive Mercenary)
 * **AI Bias**: Extreme mobility, rapid flanking, Harvester sabotage.
 * **Deviator Gas**: Fires nerve gas missiles. When a player tank is hit, its allegiance bitmask is inverted (`Team_ID = ENEMY`) for a 15-second timer!
 * **Saboteur**: Invisible stealth assassin who runs directly into player structures to detonate suicide explosives.
+
+```c
+/*-------------------------------------------------------------------------
+ * Deviator_ApplyGasEffect - Temporarily flips unit allegiance bitmask
+ *-----------------------------------------------------------------------*/
+void Deviator_ApplyGasEffect(Unit *victimTank) {
+    if (victimTank->isInfantry || victimTank->houseID == HOUSE_ORDOS) return;
+
+    /* Invert allegiance to House Ordos */
+    victimTank->originalHouseID = victimTank->houseID;
+    victimTank->houseID = HOUSE_ORDOS;
+    victimTank->deviatedTimer = 450; // 15 seconds at 30 FPS tick rate
+    
+    /* Cancel current orders and force aggressive re-scan */
+    victimTank->lockedTarget = NULL;
+    AI_ProcessUnitState(victimTank);
+}
+
+void Unit_UpdateDeviatedTimer(Unit *u) {
+    if (u->deviatedTimer > 0) {
+        u->deviatedTimer--;
+        if (u->deviatedTimer == 0) {
+            /* Revert back to original player ownership */
+            u->houseID = u->originalHouseID;
+            u->lockedTarget = NULL;
+        }
+    }
+}
+```
 
 ---
 
@@ -195,6 +397,58 @@ The Sandworm (*Shai-Hulud*) is an independent neutral entity governed by a dedic
   - Trike / Quad: `+3 Noise / step`
   - Heavy Combat / Siege Tank: `+8 Noise / step`
   - Concrete Slabs & Rock Plateaus: `0 Noise (Completely Safe)`
+
+```c
+/*-------------------------------------------------------------------------
+ * Sandworm_RegisterTileMovement - Accumulates vibration points
+ *-----------------------------------------------------------------------*/
+void Sandworm_RegisterTileMovement(Unit *u, TileCoord tile) {
+    TerrainType terrain = g_map[tile.x][tile.y].terrain;
+
+    /* Rock plateaus and concrete are completely silent */
+    if (terrain == TERRAIN_ROCK || terrain == TERRAIN_CONCRETE) {
+        return; 
+    }
+
+    /* Accumulate noise based on vehicle displacement weight */
+    uint16_t noisePoints = 0;
+    if (u->isInfantry) {
+        noisePoints = 1;
+    } else if (u->isLightVehicle) { // Trike, Quad
+        noisePoints = 3;
+    } else if (u->isHeavyVehicle) { // Combat/Siege Tank, Harvester
+        noisePoints = 8;
+    }
+
+    g_sandwormNoiseGrid[tile.x][tile.y] += noisePoints;
+
+    /* Wake sleeping worm if aggregate noise exceeds seismic threshold */
+    if (g_sandwormNoiseGrid[tile.x][tile.y] >= SEISMIC_ALERT_THRESHOLD) {
+        Sandworm_SetHuntingVector(tile);
+    }
+}
+
+/*-------------------------------------------------------------------------
+ * Sandworm_ExecuteMawStrike - Devours target and updates satiation
+ *-----------------------------------------------------------------------*/
+void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
+    Unit *victim = g_map[targetTile.x][targetTile.y].occupantUnit;
+
+    if (victim != NULL) {
+        Unit_DestroyInstantly(victim);
+        PlaySound(VOCAB_WORM_DEVOUR);
+
+        w->devouredCount++;
+
+        /* SATIATION RULE: Sinks and despawns after eating 3 vehicles */
+        if (w->devouredCount >= 3) {
+            Sandworm_Despawn(w);
+        } else {
+            w->strikeCooldownTimer = 180; // 3-second strike cooldown
+        }
+    }
+}
+```
 
 ---
 

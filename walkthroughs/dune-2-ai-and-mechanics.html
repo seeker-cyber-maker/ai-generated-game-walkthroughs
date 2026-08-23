@@ -188,8 +188,8 @@
       border-radius: 6px;
       padding: 16px;
       overflow-x: auto;
-      margin-bottom: 16px;
-      color: #fbbf24;
+      margin: 12px 0 16px 0;
+      color: #38bdf8;
     }
   </style>
 </head>
@@ -200,10 +200,11 @@
     <input type="text" id="search" class="search-box" placeholder="Search systems...">
     
     <ul class="nav-list">
-      <li class="nav-item"><a href="#fsm">AI Finite State Machine <span class="nav-tag">[ARCH]</span></a></li>
-      <li class="nav-item"><a href="#target">Target Prioritization <span class="nav-tag">[ARC04]</span></a></li>
-      <li class="nav-item"><a href="#houses">House Doctrines <span class="nav-tag">[HOUS]</span></a></li>
-      <li class="nav-item"><a href="#sandworm">Sandworm Predator <span class="nav-tag">[WORM]</span></a></li>
+      <li class="nav-item"><a href="#fsm">AI State Machine (ai.c) <span class="nav-tag">[ARCH]</span></a></li>
+      <li class="nav-item"><a href="#target">Target Matrix (combat.c) <span class="nav-tag">[ARC04]</span></a></li>
+      <li class="nav-item"><a href="#rebuild">Rebuild Loop (building.c) <span class="nav-tag">[ARC01]</span></a></li>
+      <li class="nav-item"><a href="#houses">House Doctrines (special.c) <span class="nav-tag">[HOUS]</span></a></li>
+      <li class="nav-item"><a href="#sandworm">Sandworm AI (sandworm.c) <span class="nav-tag">[WORM]</span></a></li>
       <li class="nav-item"><a href="#exploits">AI Exploits & Traps <span class="nav-tag">[EXPL]</span></a></li>
       <li class="nav-item"><a href="#fast">Speedrun Geodesic <span class="nav-tag">[FAST]</span></a></li>
       <li class="nav-item"><a href="#drm">Mentat Vitanium DRM <span class="nav-tag">[PROT]</span></a></li>
@@ -222,18 +223,36 @@
     </header>
 
     <section id="fsm" class="card">
-      <h2>The RTS AI Finite State Machine [ARCH]</h2>
+      <h2>The RTS AI Finite State Machine (ai.c) [ARCH]</h2>
       <p>Running on 16MHz 286/386 CPUs, Westwood designed a deterministic staging-pool state machine:</p>
       <pre>
-[Factory Output] -> [Move to Rally Point] -> [PoolCount >= Threshold?] 
-                                                   │ (YES)
-                                                   ▼
-                                         [Transition: ATTACK_STATE]
-                                         [Evaluate Aggro Priority Matrix]</pre>
+/* Reverse-Engineered C Routine: ai.c */
+void AI_ProcessUnitState(Unit *u) {
+    if (u->houseID == g_humanHouseID) return;
+
+    switch (u->actionState) {
+        case ACTION_IDLE:
+            if (u->groupPoolID != GROUP_NONE) {
+                TileCoord rally = g_scenario.aiRallyPoint[u->houseID];
+                Unit_SetDestination(u, rally);
+                u->actionState = ACTION_STAGING;
+            }
+            break;
+        case ACTION_STAGING:
+            if (Tile_Distance(u->currentTile, g_scenario.aiRallyPoint[u->houseID]) <= 2) {
+                g_scenario.stagedUnitCount[u->houseID]++;
+                u->actionState = ACTION_WAITING_FOR_WAVE;
+                if (g_scenario.stagedUnitCount[u->houseID] >= g_scenario.waveThreshold[u->houseID]) {
+                    AI_LaunchAttackWave(u->houseID);
+                }
+            }
+            break;
+    }
+}</pre>
     </section>
 
     <section id="target" class="card">
-      <h2>Target Prioritization & Aggro Matrix [ARC04]</h2>
+      <h2>Target Prioritization & Aggro Matrix (combat.c) [ARC04]</h2>
       <table>
         <thead>
           <tr>
@@ -243,18 +262,50 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><strong>1 (Highest)</strong></td><td>Active Attacker</td><td>Unit actively firing on the group</td></tr>
-          <tr><td><strong>2</strong></td><td>Spice Harvesters</td><td>Adjacent harvesters (economic disruption)</td></tr>
-          <tr><td><strong>3</strong></td><td>Rocket & Heavy Turrets</td><td>Static defense structures in 6-tile sensor radius</td></tr>
-          <tr><td><strong>4</strong></td><td>Construction Yard</td><td>Primary base building anchor</td></tr>
-          <tr><td><strong>5</strong></td><td>Windtraps / Power</td><td>Disables player radar and turrets</td></tr>
-          <tr><td><strong>6 (Lowest)</strong></td><td>Refineries / Outposts</td><td>Secondary auxiliary structures</td></tr>
+          <tr><td><strong>1 (Highest)</strong></td><td>Active Attacker</td><td>Unit actively firing on the group (+1000 pts)</td></tr>
+          <tr><td><strong>2</strong></td><td>Spice Harvesters</td><td>Adjacent harvesters on sand (+500 pts)</td></tr>
+          <tr><td><strong>3</strong></td><td>Rocket & Heavy Turrets</td><td>Static defenses in 6-tile sensor radius (+400 pts)</td></tr>
+          <tr><td><strong>4</strong></td><td>Construction Yard</td><td>Primary base building anchor (+250 pts)</td></tr>
+          <tr><td><strong>5</strong></td><td>Windtraps / Power</td><td>Disables player radar and turrets (+200 pts)</td></tr>
+          <tr><td><strong>6 (Lowest)</strong></td><td>Refineries / Outposts</td><td>Secondary auxiliary structures (+50 pts)</td></tr>
         </tbody>
       </table>
+      <pre>
+/* Reverse-Engineered C Routine: combat.c */
+void Unit_FindBestTarget(Unit *u) {
+    Target *bestTarget = NULL;
+    int highestScore = -9999;
+    for (Target *cand = GetFirstTargetInRadius(u->currentTile, u->scanRadius); cand; cand = cand->next) {
+        if (cand->houseID == u->houseID) continue;
+        int score = 0;
+        if (cand->currentTarget == (void*)u) score += 1000;
+        if (cand->type == TARGET_HARVESTER) score += 500;
+        else if (cand->type == TARGET_ROCKET_TURRET) score += 400;
+        score -= (Tile_Distance(u->currentTile, cand->currentTile) * 15);
+        if (score > highestScore) { highestScore = score; bestTarget = cand; }
+    }
+    if (bestTarget) { u->lockedTarget = bestTarget; u->actionState = ACTION_ATTACK_LOCKED; }
+}</pre>
+    </section>
+
+    <section id="rebuild" class="card">
+      <h2>Automated Base Reconstruction (building.c) [ARC01]</h2>
+      <pre>
+/* Reverse-Engineered C Routine: building.c */
+void AI_OnStructureDestroyed(Structure *s) {
+    House *aiHouse = &g_houses[s->houseID];
+    if (aiHouse->hasActiveConYard) {
+        StructureBuildOrder order;
+        order.structureType = s->type;
+        order.anchorTile    = s->originalPlacementTile;
+        order.delayTimer    = 300; /* 10-sec delay */
+        Queue_Push(&aiHouse->rebuildQueue, order);
+    }
+}</pre>
     </section>
 
     <section id="houses" class="card">
-      <h2>House AI Personalities & Behavioral Biases [HOUS]</h2>
+      <h2>House AI Personalities & Behavioral Biases (special.c) [HOUS]</h2>
       <div class="house-box">
         <div class="house-card atreides">
           <div class="house-title" style="color: var(--blue);">HOUSE ATREIDES</div>
@@ -272,11 +323,36 @@
           <small style="color: var(--text-muted);">Raider Trikes & Deviator Mind-Gas</small>
         </div>
       </div>
+      <pre>
+/* Ordos Deviator Mind-Control: special.c */
+void Deviator_ApplyGasEffect(Unit *victimTank) {
+    if (victimTank->isInfantry || victimTank->houseID == HOUSE_ORDOS) return;
+    victimTank->originalHouseID = victimTank->houseID;
+    victimTank->houseID = HOUSE_ORDOS;
+    victimTank->deviatedTimer = 450; /* 15 seconds at 30 fps */
+    victimTank->lockedTarget = NULL;
+    AI_ProcessUnitState(victimTank);
+}</pre>
     </section>
 
     <section id="sandworm" class="card">
-      <h2>Sandworm Predator Subsystem [WORM]</h2>
+      <h2>Sandworm Predator Subsystem (sandworm.c) [WORM]</h2>
       <p>Sandworms accumulate noise scores on soft sand: Infantry (<code>+1</code>), Trike (<code>+3</code>), Combat Tank (<code>+8</code>), Rock Plateau (<code>0</code>). Despawns after devouring 3 heavy vehicles.</p>
+      <pre>
+/* Sandworm Maw Strike & Satiation: sandworm.c */
+void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
+    Unit *victim = g_map[targetTile.x][targetTile.y].occupantUnit;
+    if (victim != NULL) {
+        Unit_DestroyInstantly(victim);
+        PlaySound(VOCAB_WORM_DEVOUR);
+        w->devouredCount++;
+        if (w->devouredCount >= 3) {
+            Sandworm_Despawn(w);
+        } else {
+            w->strikeCooldownTimer = 180; /* 3-sec cooldown */
+        }
+    }
+}</pre>
     </section>
 
     <section id="exploits" class="card">

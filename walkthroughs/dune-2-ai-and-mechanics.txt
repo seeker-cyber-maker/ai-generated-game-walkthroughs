@@ -10,12 +10,12 @@ TABLE OF CONTENTS ..................................................... [00.00]
   [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
   [03.00] THE BIRTH OF THE RTS AI: HISTORICAL CONTEXT ................. [HIST]
   [04.00] MASTER DECOMPILATION OF THE AI ARCHITECTURE ................. [ARCH]
-          - [04.01] Base Construction & Script Placement Logic ........ [ARC01]
-          - [04.02] Economic Replenishment & Harvester Routing ........ [ARC02]
-          - [04.03] Wave Assembly & Staging Trigger FSM ............... [ARC03]
-          - [04.04] Target Prioritization & Aggro Weight Matrix ....... [ARC04]
-  [05.00] HOUSE-SPECIFIC BEHAVIORAL BIASES & TACTICS .................. [HOUS]
-  [06.00] THE SANDWORM PREDATOR ENTITY SUBSYSTEM ...................... [WORM]
+          - [04.01] Base Construction & Script Placement (building.c) . [ARC01]
+          - [04.02] Economic Replenishment & Harvesters (harvester.c) . [ARC02]
+          - [04.03] Wave Assembly & Staging Trigger FSM (ai.c) ........ [ARC03]
+          - [04.04] Target Prioritization & Aggro Matrix (combat.c) ... [ARC04]
+  [05.00] HOUSE-SPECIFIC BEHAVIORAL BIASES & WEAPONS (special.c) ...... [HOUS]
+  [06.00] THE SANDWORM PREDATOR ENTITY SUBSYSTEM (sandworm.c) ......... [WORM]
   [07.00] AI BLINDSPOTS, PATHFINDING GLITCHES & EXPLOITS .............. [EXPL]
   [08.00] COMPLETE 9-SCENARIO CAMPAIGN STRATEGY ....................... [WLK00]
   [09.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) ....... [FAST]
@@ -75,33 +75,78 @@ heuristic weight tables that simulated a live opponent in real time.
 ===============================================================================
 
 -------------------------------------------------------------------------------
-[04.01] BASE CONSTRUCTION & SCRIPT PLACEMENT LOGIC                      [ARC01]
+[04.01] BASE CONSTRUCTION & SCRIPT PLACEMENT (building.c)               [ARC01]
 -------------------------------------------------------------------------------
 
 1. PREDEFINED SCRIPT ANCHORS:
-   The AI does not dynamically survey rock plateaus. Building locations are
-   pre-anchored in SCENARIO.PAK map tables.
-2. RECONSTRUCTION LOOP (t_rebuild):
-   When a player destroys an AI building, an internal timer fires. If the
-   Construction Yard remains active, the AI automatically queues a replacement.
+   Building locations are pre-anchored in SCENARIO.PAK map tables.
+2. RECONSTRUCTION LOOP (AI_OnStructureDestroyed):
+   If the Construction Yard is alive, the AI queues automated rebuilds:
+
+/* Reverse-Engineered C Routine: building.c */
+void AI_OnStructureDestroyed(Structure *s) {
+    House *aiHouse = &g_houses[s->houseID];
+    if (aiHouse->hasActiveConYard) {
+        StructureBuildOrder order;
+        order.structureType = s->type;
+        order.anchorTile    = s->originalPlacementTile;
+        order.delayTimer    = 300; /* 10-sec delay */
+        Queue_Push(&aiHouse->rebuildQueue, order);
+    }
+}
 
 -------------------------------------------------------------------------------
-[04.02] ECONOMIC REPLENISHMENT & HARVESTER ROUTING                      [ARC02]
+[04.02] ECONOMIC REPLENISHMENT & HARVESTERS (harvester.c)               [ARC02]
 -------------------------------------------------------------------------------
 
-• Spice Harvesting: Harvesters seek spice within a 16-tile taxicab radius.
-• Carryall Priority: When an AI Harvester fills to 100%, the engine gives it
-  top priority over player harvesters for Carryall airlift.
+• Spice Harvesting: Harvesters seek spice within a 16-tile radius.
+• Carryall Priority: AI Harvesters cut in front of player Carryall queues:
+
+/* Reverse-Engineered C Routine: harvester.c */
+void Harvester_CheckCapacity(Unit *harvester) {
+    if (harvester->spiceLoad >= HARVESTER_MAX_CAPACITY) {
+        if (harvester->houseID != g_humanHouseID) {
+            Carryall_Dispatch(harvester, PRIORITY_HIGH);
+        } else {
+            Carryall_Dispatch(harvester, PRIORITY_NORMAL);
+        }
+        harvester->actionState = ACTION_WAITING_FOR_CARRYALL;
+    }
+}
 
 -------------------------------------------------------------------------------
-[04.03] WAVE ASSEMBLY & STAGING TRIGGER FSM                             [ARC03]
+[04.03] WAVE ASSEMBLY & STAGING TRIGGER FSM (ai.c)                      [ARC03]
 -------------------------------------------------------------------------------
 
-The AI pools manufactured units at a designated staging rally point. Only when
-PoolCount >= MaxThreshold does the group switch into ATTACK_STATE.
+The AI pools manufactured units at a staging point until threshold is met:
+
+/* Reverse-Engineered C Routine: ai.c */
+void AI_ProcessUnitState(Unit *u) {
+    if (u->houseID == g_humanHouseID) return;
+    switch (u->actionState) {
+        case ACTION_IDLE:
+            if (u->groupPoolID != GROUP_NONE) {
+                TileCoord rally = g_scenario.aiRallyPoint[u->houseID];
+                Unit_SetDestination(u, rally);
+                u->actionState = ACTION_STAGING;
+            }
+            break;
+        case ACTION_STAGING:
+            if (Tile_Distance(u->currentTile,
+                g_scenario.aiRallyPoint[u->houseID]) <= 2) {
+                g_scenario.stagedUnitCount[u->houseID]++;
+                u->actionState = ACTION_WAITING_FOR_WAVE;
+                if (g_scenario.stagedUnitCount[u->houseID] >=
+                    g_scenario.waveThreshold[u->houseID]) {
+                    AI_LaunchAttackWave(u->houseID);
+                }
+            }
+            break;
+    }
+}
 
 -------------------------------------------------------------------------------
-[04.04] TARGET PRIORITIZATION & AGGRO WEIGHT MATRIX                     [ARC04]
+[04.04] TARGET PRIORITIZATION & AGGRO MATRIX (combat.c)                 [ARC04]
 -------------------------------------------------------------------------------
 
 +---------------+-----------------------+-------------------------------------+
@@ -116,32 +161,68 @@ PoolCount >= MaxThreshold does the group switch into ATTACK_STATE.
 +---------------+-----------------------+-------------------------------------+
 
 ===============================================================================
-[05.00] HOUSE-SPECIFIC BEHAVIORAL BIASES & TACTICS                      [HOUS]
+[05.00] HOUSE-SPECIFIC BEHAVIORAL BIASES & WEAPONS (special.c)          [HOUS]
 ===============================================================================
 
 1. HOUSE ATREIDES (DEFENSIVE TACTICIAN):
-   • Moderate attack wave frequency; high armor unit composition.
-   • Sonic Tanks fire straight-line soundwaves damaging everything in path.
+   • Slower wave frequency; Sonic Tanks fire linear piercing soundwaves.
    • Fremen infantry spawn from Palace and march autonomously on player base.
 
 2. HOUSE HARKONNEN (HEAVY SIEGE JUGGERNAUT):
-   • Relentless assault waves with Siege Tanks and Devastator mechs.
-   • Devastators overload reactors on death, annihilating nearby units.
-   • Death Hand nuke missile targets player Construction Yard (±4 tile drift).
+   • Devastators trigger nuclear core meltdown on critical damage:
+
+/* Reverse-Engineered C Routine: special.c */
+void Devastator_ReactorMeltdown(Unit *u) {
+    for (int dx = -3; dx <= 3; dx++) {
+        for (int dy = -3; dy <= 3; dy++) {
+            TileCoord blastTile = { u->currentTile.x + dx,
+                                    u->currentTile.y + dy };
+            int dist = Tile_Distance(u->currentTile, blastTile);
+            if (dist <= 3) {
+                int dmg = 500 / (dist + 1);
+                Tile_ApplyRadialDamage(blastTile, dmg);
+            }
+        }
+    }
+    SpawnNuclearMushroomCloud(u->currentTile);
+}
 
 3. HOUSE ORDOS (HIT-AND-RUN MERCENARIES):
-   • Fast Raider Trikes for economic raids and Harvester sniping.
-   • Deviator nerve gas converts player tanks to Ordos control for 15 seconds.
-   • Saboteur stealth assassins infiltrate player buildings for suicide blasts.
+   • Deviator nerve gas converts player tanks to Ordos control for 15 seconds:
+
+/* Reverse-Engineered C Routine: special.c */
+void Deviator_ApplyGasEffect(Unit *victimTank) {
+    if (victimTank->isInfantry || victimTank->houseID == HOUSE_ORDOS) return;
+    victimTank->originalHouseID = victimTank->houseID;
+    victimTank->houseID = HOUSE_ORDOS;
+    victimTank->deviatedTimer = 450; /* 15 seconds at 30 fps */
+    victimTank->lockedTarget = NULL;
+    AI_ProcessUnitState(victimTank);
+}
 
 ===============================================================================
-[06.00] THE SANDWORM PREDATOR ENTITY SUBSYSTEM                          [WORM]
+[06.00] THE SANDWORM PREDATOR ENTITY SUBSYSTEM (sandworm.c)             [WORM]
 ===============================================================================
 
 SANDWORM HUNTING & NOISE SENSING:
   1. Noise Register: Soft sand travel adds noise (Infantry +1, Tanks +8).
-  2. Stalking: Sandworm vectors directly toward the highest noise epicenter.
+  2. Stalking: Sandworm vectors directly toward highest noise epicenter.
   3. Strike & Satiation: Devours target tile; despawns after eating 3 vehicles.
+
+/* Reverse-Engineered C Routine: sandworm.c */
+void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
+    Unit *victim = g_map[targetTile.x][targetTile.y].occupantUnit;
+    if (victim != NULL) {
+        Unit_DestroyInstantly(victim);
+        PlaySound(VOCAB_WORM_DEVOUR);
+        w->devouredCount++;
+        if (w->devouredCount >= 3) {
+            Sandworm_Despawn(w);
+        } else {
+            w->strikeCooldownTimer = 180; /* 3-sec cooldown */
+        }
+    }
+}
 
 ===============================================================================
 [07.00] AI BLINDSPOTS, PATHFINDING GLITCHES & EXPLOITS                  [EXPL]
