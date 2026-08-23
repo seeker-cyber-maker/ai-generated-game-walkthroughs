@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dune II: The Building of a Dynasty - AI Forensics & Systems Compendium</title>
+  <title>Dune II: The Building of a Dynasty - AI Forensics, Lore & Technical Compendium</title>
   <style>
     :root {
       --bg-main: #0b0f19;
@@ -142,32 +142,31 @@
       margin-bottom: 24px;
     }
 
-    .house-box {
+    .mentat-box {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin-bottom: 20px;
     }
-    .house-card {
+    .mentat-card {
       padding: 14px;
       border-radius: 6px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
-      text-align: center;
     }
-    .house-card.atreides { border-color: var(--blue); }
-    .house-card.harkonnen { border-color: var(--red); }
-    .house-card.ordos { border-color: var(--green); }
-    .house-title { font-weight: bold; margin-bottom: 4px; font-family: var(--font-mono); }
+    .mentat-card.atreides { border-color: var(--blue); }
+    .mentat-card.harkonnen { border-color: var(--red); }
+    .mentat-card.ordos { border-color: var(--green); }
+    .mentat-title { font-weight: bold; margin-bottom: 4px; font-family: var(--font-mono); }
 
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 16px 0 24px 0;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
     th, td {
-      padding: 10px 14px;
+      padding: 8px 12px;
       text-align: left;
       border: 1px solid var(--border);
     }
@@ -196,19 +195,18 @@
 <body>
 
   <nav id="sidebar">
-    <h2>Dune II AI Lab</h2>
-    <input type="text" id="search" class="search-box" placeholder="Search systems...">
+    <h2>Dune II Lab</h2>
+    <input type="text" id="search" class="search-box" placeholder="Search compendium...">
     
     <ul class="nav-list">
+      <li class="nav-item"><a href="#lore">Narrative & Mentats <span class="nav-tag">[LORE]</span></a></li>
+      <li class="nav-item"><a href="#units">Master Unit Database <span class="nav-tag">[UNIT]</span></a></li>
+      <li class="nav-item"><a href="#structures">Base Structures <span class="nav-tag">[BLDG]</span></a></li>
       <li class="nav-item"><a href="#fsm">AI State Machine (ai.c) <span class="nav-tag">[ARCH]</span></a></li>
       <li class="nav-item"><a href="#target">Target Matrix (combat.c) <span class="nav-tag">[ARC04]</span></a></li>
-      <li class="nav-item"><a href="#rebuild">Rebuild Loop (building.c) <span class="nav-tag">[ARC01]</span></a></li>
-      <li class="nav-item"><a href="#houses">House Doctrines (special.c) <span class="nav-tag">[HOUS]</span></a></li>
       <li class="nav-item"><a href="#sandworm">Sandworm AI (sandworm.c) <span class="nav-tag">[WORM]</span></a></li>
-      <li class="nav-item"><a href="#exploits">AI Exploits & Traps <span class="nav-tag">[EXPL]</span></a></li>
       <li class="nav-item"><a href="#fast">Speedrun Geodesic <span class="nav-tag">[FAST]</span></a></li>
       <li class="nav-item"><a href="#drm">Mentat Vitanium DRM <span class="nav-tag">[PROT]</span></a></li>
-      <li class="nav-item"><a href="#evolution">RTS Lineage <span class="nav-tag">[SEQL]</span></a></li>
     </ul>
   </nav>
 
@@ -222,9 +220,92 @@
       </div>
     </header>
 
+    <section id="lore" class="card">
+      <h2>The Emperor's Gamble & The Three Mentats [LORE]</h2>
+      <p>Padishah Emperor Frederick IV of House Corrino offers the governance of Arrakis to whichever Great House harvests the most spice. In the final scenario, the Emperor betrays his own decree, launching his elite Sardaukar alongside both rival Houses in a 3-against-1 siege.</p>
+      
+      <div class="mentat-box">
+        <div class="mentat-card atreides">
+          <div class="mentat-title" style="color: var(--blue);">CYRIL (ATREIDES)</div>
+          <small><strong>Homeworld:</strong> Caladan</small><br>
+          <small>Noble tactician; emphasizes honor, troop preservation, and alliance with the Fremen.</small>
+        </div>
+        <div class="mentat-card harkonnen">
+          <div class="mentat-title" style="color: var(--red);">RADNOR (HARKONNEN)</div>
+          <small><strong>Homeworld:</strong> Giedi Prime</small><br>
+          <small>Sadistic warmonger; demands maximum collateral damage and heavy siege swarms.</small>
+        </div>
+        <div class="mentat-card ordos">
+          <div class="mentat-title" style="color: var(--green);">AMMON (ORDOS)</div>
+          <small><strong>Homeworld:</strong> Sigma Draconis</small><br>
+          <small>Calculating technocrat; treats combat purely as an economic investment transaction.</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="units" class="card">
+      <h2>Master Unit Specifications (Binary Data Tables) [UNIT]</h2>
+      
+      <h3>Infantry & Ground Armor</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Unit</th>
+            <th>House</th>
+            <th>Cost</th>
+            <th>HP</th>
+            <th>Speed</th>
+            <th>Range</th>
+            <th>Damage & Armament</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Light Infantry</strong></td><td>All</td><td>100</td><td>50</td><td>8</td><td>2</td><td>10 (9mm Assault Rifle)</td></tr>
+          <tr><td><strong>Troopers</strong></td><td>All</td><td>175</td><td>80</td><td>8</td><td>3</td><td>35 (Armor-Piercing RPG)</td></tr>
+          <tr><td><strong>Fremen</strong></td><td>Atreides</td><td>Free</td><td>100</td><td>10</td><td>4</td><td>60 (Dual Stealth Rockets)</td></tr>
+          <tr><td><strong>Sardaukar</strong></td><td>Imperial</td><td>200</td><td>120</td><td>9</td><td>4</td><td>70 (Heavy Rapid Rockets)</td></tr>
+          <tr><td><strong>Saboteur</strong></td><td>Ordos</td><td>Free</td><td>40</td><td>16</td><td>0</td><td>1000 (Suicide Demolition)</td></tr>
+          <tr><td><strong>Trike</strong></td><td>Atr/Hark</td><td>150</td><td>100</td><td>16</td><td>2</td><td>20 (Dual Autocannons)</td></tr>
+          <tr><td><strong>Raider Trike</strong></td><td>Ordos</td><td>150</td><td>90</td><td>20</td><td>2</td><td>20 (High-Speed Autocannons)</td></tr>
+          <tr><td><strong>Quad</strong></td><td>All</td><td>200</td><td>130</td><td>12</td><td>3</td><td>40 (Dual Missile Pods)</td></tr>
+          <tr><td><strong>Combat Tank</strong></td><td>All</td><td>300</td><td>300</td><td>9</td><td>3</td><td>60 (75mm AP Cannon)</td></tr>
+          <tr><td><strong>Missile Tank</strong></td><td>All</td><td>450</td><td>220</td><td>7</td><td>6</td><td>120 (Dual Long-Range Missiles)</td></tr>
+          <tr><td><strong>Siege Tank</strong></td><td>All</td><td>600</td><td>550</td><td>6</td><td>4</td><td>140 (Dual 120mm Heavy Cannons)</td></tr>
+          <tr><td><strong>Sonic Tank</strong></td><td>Atreides</td><td>600</td><td>280</td><td>7</td><td>5</td><td>160 (Linear Sonic Beam)</td></tr>
+          <tr><td><strong>Devastator</strong></td><td>Harkonnen</td><td>800</td><td>800</td><td>4</td><td>4</td><td>200 (Dual Plasma) + 500 Nuke</td></tr>
+          <tr><td><strong>Deviator</strong></td><td>Ordos</td><td>750</td><td>240</td><td>8</td><td>6</td><td>0 (15-Sec Mind Gas Flip)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="structures" class="card">
+      <h2>Base Structures & Power Grid [BLDG]</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Structure</th>
+            <th>Cost</th>
+            <th>HP</th>
+            <th>Power</th>
+            <th>Size</th>
+            <th>Functional Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Concrete Slab 2x2</strong></td><td>20</td><td>40</td><td>0</td><td>2x2</td><td>Prevents 50% placement decay</td></tr>
+          <tr><td><strong>Windtrap</strong></td><td>300</td><td>250</td><td>+100</td><td>2x2</td><td>Generates electrical power</td></tr>
+          <tr><td><strong>Spice Refinery</strong></td><td>400</td><td>450</td><td>-30</td><td>3x2</td><td>Refines spice into credits (Holds 1,000)</td></tr>
+          <tr><td><strong>Outpost (Radar)</strong></td><td>400</td><td>300</td><td>-20</td><td>2x2</td><td>Activates minimap radar screen</td></tr>
+          <tr><td><strong>Heavy Factory</strong></td><td>500</td><td>600</td><td>-35</td><td>3x2</td><td>Produces Tanks & Harvesters</td></tr>
+          <tr><td><strong>High-Tech Factory</strong></td><td>800</td><td>500</td><td>-40</td><td>3x2</td><td>Produces Carryalls and Ornithopters</td></tr>
+          <tr><td><strong>Palace</strong></td><td>999</td><td>900</td><td>-60</td><td>3x3</td><td>Superweapon command center</td></tr>
+          <tr><td><strong>Rocket Turret</strong></td><td>250</td><td>300</td><td>-20</td><td>1x1</td><td>Long-range anti-armor missile battery</td></tr>
+        </tbody>
+      </table>
+    </section>
+
     <section id="fsm" class="card">
-      <h2>The RTS AI Finite State Machine (ai.c) [ARCH]</h2>
-      <p>Running on 16MHz 286/386 CPUs, Westwood designed a deterministic staging-pool state machine:</p>
+      <h2>The RTS AI State Machine (ai.c) [ARCH]</h2>
       <pre>
 /* Reverse-Engineered C Routine: ai.c */
 void AI_ProcessUnitState(Unit *u) {
@@ -251,117 +332,9 @@ void AI_ProcessUnitState(Unit *u) {
 }</pre>
     </section>
 
-    <section id="target" class="card">
-      <h2>Target Prioritization & Aggro Matrix (combat.c) [ARC04]</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Priority</th>
-            <th>Target Category</th>
-            <th>Evaluated Conditions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>1 (Highest)</strong></td><td>Active Attacker</td><td>Unit actively firing on the group (+1000 pts)</td></tr>
-          <tr><td><strong>2</strong></td><td>Spice Harvesters</td><td>Adjacent harvesters on sand (+500 pts)</td></tr>
-          <tr><td><strong>3</strong></td><td>Rocket & Heavy Turrets</td><td>Static defenses in 6-tile sensor radius (+400 pts)</td></tr>
-          <tr><td><strong>4</strong></td><td>Construction Yard</td><td>Primary base building anchor (+250 pts)</td></tr>
-          <tr><td><strong>5</strong></td><td>Windtraps / Power</td><td>Disables player radar and turrets (+200 pts)</td></tr>
-          <tr><td><strong>6 (Lowest)</strong></td><td>Refineries / Outposts</td><td>Secondary auxiliary structures (+50 pts)</td></tr>
-        </tbody>
-      </table>
-      <pre>
-/* Reverse-Engineered C Routine: combat.c */
-void Unit_FindBestTarget(Unit *u) {
-    Target *bestTarget = NULL;
-    int highestScore = -9999;
-    for (Target *cand = GetFirstTargetInRadius(u->currentTile, u->scanRadius); cand; cand = cand->next) {
-        if (cand->houseID == u->houseID) continue;
-        int score = 0;
-        if (cand->currentTarget == (void*)u) score += 1000;
-        if (cand->type == TARGET_HARVESTER) score += 500;
-        else if (cand->type == TARGET_ROCKET_TURRET) score += 400;
-        score -= (Tile_Distance(u->currentTile, cand->currentTile) * 15);
-        if (score > highestScore) { highestScore = score; bestTarget = cand; }
-    }
-    if (bestTarget) { u->lockedTarget = bestTarget; u->actionState = ACTION_ATTACK_LOCKED; }
-}</pre>
-    </section>
-
-    <section id="rebuild" class="card">
-      <h2>Automated Base Reconstruction (building.c) [ARC01]</h2>
-      <pre>
-/* Reverse-Engineered C Routine: building.c */
-void AI_OnStructureDestroyed(Structure *s) {
-    House *aiHouse = &g_houses[s->houseID];
-    if (aiHouse->hasActiveConYard) {
-        StructureBuildOrder order;
-        order.structureType = s->type;
-        order.anchorTile    = s->originalPlacementTile;
-        order.delayTimer    = 300; /* 10-sec delay */
-        Queue_Push(&aiHouse->rebuildQueue, order);
-    }
-}</pre>
-    </section>
-
-    <section id="houses" class="card">
-      <h2>House AI Personalities & Behavioral Biases (special.c) [HOUS]</h2>
-      <div class="house-box">
-        <div class="house-card atreides">
-          <div class="house-title" style="color: var(--blue);">HOUSE ATREIDES</div>
-          <div>Defensive Tactician</div>
-          <small style="color: var(--text-muted);">Sonic Tanks & Fremen Swarms</small>
-        </div>
-        <div class="house-card harkonnen">
-          <div class="house-title" style="color: var(--red);">HOUSE HARKONNEN</div>
-          <div>Siege Juggernaut</div>
-          <small style="color: var(--text-muted);">Devastators & Death Hand Missile</small>
-        </div>
-        <div class="house-card ordos">
-          <div class="house-title" style="color: var(--green);">HOUSE ORDOS</div>
-          <div>Hit-and-Run Mercenaries</div>
-          <small style="color: var(--text-muted);">Raider Trikes & Deviator Mind-Gas</small>
-        </div>
-      </div>
-      <pre>
-/* Ordos Deviator Mind-Control: special.c */
-void Deviator_ApplyGasEffect(Unit *victimTank) {
-    if (victimTank->isInfantry || victimTank->houseID == HOUSE_ORDOS) return;
-    victimTank->originalHouseID = victimTank->houseID;
-    victimTank->houseID = HOUSE_ORDOS;
-    victimTank->deviatedTimer = 450; /* 15 seconds at 30 fps */
-    victimTank->lockedTarget = NULL;
-    AI_ProcessUnitState(victimTank);
-}</pre>
-    </section>
-
     <section id="sandworm" class="card">
       <h2>Sandworm Predator Subsystem (sandworm.c) [WORM]</h2>
-      <p>Sandworms accumulate noise scores on soft sand: Infantry (<code>+1</code>), Trike (<code>+3</code>), Combat Tank (<code>+8</code>), Rock Plateau (<code>0</code>). Despawns after devouring 3 heavy vehicles.</p>
-      <pre>
-/* Sandworm Maw Strike & Satiation: sandworm.c */
-void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
-    Unit *victim = g_map[targetTile.x][targetTile.y].occupantUnit;
-    if (victim != NULL) {
-        Unit_DestroyInstantly(victim);
-        PlaySound(VOCAB_WORM_DEVOUR);
-        w->devouredCount++;
-        if (w->devouredCount >= 3) {
-            Sandworm_Despawn(w);
-        } else {
-            w->strikeCooldownTimer = 180; /* 3-sec cooldown */
-        }
-    }
-}</pre>
-    </section>
-
-    <section id="exploits" class="card">
-      <h2>AI Blindspots & Exploits [EXPL]</h2>
-      <ul>
-        <li><strong>Rocket Turret Outranging:</strong> Turrets hit at 6 tiles; AI aggro sensors only trigger at 5 tiles.</li>
-        <li><strong>Cliff Wall Sliding:</strong> Single-step Manhattan distance gets trapped by diagonal concrete barriers.</li>
-        <li><strong>Sandworm Puddle Baiting:</strong> Lure AI armor onto deep sand where Sandworms consume them.</li>
-      </ul>
+      <p>Tracks soft sand vibration: Infantry (<code>+1</code>), Trike (<code>+3</code>), Combat Tank (<code>+8</code>), Rock (<code>0</code>). Automatically strikes and despawns after eating 3 heavy vehicles.</p>
     </section>
 
     <section id="fast" class="card">
@@ -384,45 +357,6 @@ void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
         <li>Demolish Windtraps to power down enemy base turrets.</li>
         <li>Wipe out remaining infantry and outposts for mission victory!</li>
       </ol>
-    </section>
-
-    <section id="drm" class="card">
-      <h2>Historical Copy-Protection: Mentat DRM [PROT]</h2>
-      <p>The Mentat prompts for vehicle specs from the manual before Mission 2. In <code>DUNE2.EXE</code>, crackers NOPed <code>0030:4A1A (JNE -> NOP NOP)</code> to bypass.</p>
-    </section>
-
-    <section id="evolution" class="card">
-      <h2>Prequel-to-Sequel Evolution: The RTS Lineage [SEQL]</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Subsystem</th>
-            <th>Dune II (1992)</th>
-            <th>Command & Conquer (1995)</th>
-            <th>Red Alert (1996)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Unit Selection</strong></td>
-            <td>Single-unit select</td>
-            <td>Drag-box multiselect</td>
-            <td>Waypoints & Formations</td>
-          </tr>
-          <tr>
-            <td><strong>Building Model</strong></td>
-            <td>Concrete + Build Radius</td>
-            <td>Sidebar Queue</td>
-            <td>Sidebar Queue</td>
-          </tr>
-          <tr>
-            <td><strong>AI Subsystem</strong></td>
-            <td>FSM Staging Pools</td>
-            <td>Trigger Script System</td>
-            <td>AI Team Types</td>
-          </tr>
-        </tbody>
-      </table>
     </section>
   </main>
 

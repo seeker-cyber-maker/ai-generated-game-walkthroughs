@@ -8,23 +8,29 @@ TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
   [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
   [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
-  [03.00] THE BIRTH OF THE RTS AI: HISTORICAL CONTEXT ................. [HIST]
-  [04.00] MASTER DECOMPILATION OF THE AI ARCHITECTURE ................. [ARCH]
-          - [04.01] Base Construction & Script Placement (building.c) . [ARC01]
-          - [04.02] Economic Replenishment & Harvesters (harvester.c) . [ARC02]
-          - [04.03] Wave Assembly & Staging Trigger FSM (ai.c) ........ [ARC03]
-          - [04.04] Target Prioritization & Aggro Matrix (combat.c) ... [ARC04]
-  [05.00] HOUSE-SPECIFIC BEHAVIORAL BIASES & WEAPONS (special.c) ...... [HOUS]
-  [06.00] THE SANDWORM PREDATOR ENTITY SUBSYSTEM (sandworm.c) ......... [WORM]
-  [07.00] AI BLINDSPOTS, PATHFINDING GLITCHES & EXPLOITS .............. [EXPL]
-  [08.00] COMPLETE 9-SCENARIO CAMPAIGN STRATEGY ....................... [WLK00]
-  [09.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) ....... [FAST]
-  [10.00] HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM .............. [PROT]
-  [11.00] ENGINE FORENSICS & BINARY BYTECODE MAPPING .................. [ENGN]
-  [12.00] PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE ................. [SEQL]
-  [13.00] SCUMMVM / OPENDUNE EMULATION TARGET PROFILE ................. [SCUM]
-  [14.00] VERSION HISTORY & BUILD PROVENANCE .......................... [VERS]
-  [15.00] CONTACT POLICY & CREDITS .................................... [CRED]
+  [03.00] THE EMPEROR'S GAMBLE: NARRATIVE LORE & MENTATS .............. [LORE]
+  [04.00] THE BIRTH OF THE RTS AI: HISTORICAL CONTEXT ................. [HIST]
+  [05.00] MASTER DECOMPILATION OF THE AI ARCHITECTURE ................. [ARCH]
+          - [05.01] Base Construction & Script Placement (building.c) . [ARC01]
+          - [05.02] Economic Replenishment & Harvesters (harvester.c) . [ARC02]
+          - [05.03] Wave Assembly & Staging Trigger FSM (ai.c) ........ [ARC03]
+          - [05.04] Target Prioritization & Aggro Matrix (combat.c) ... [ARC04]
+  [06.00] HOUSE-SPECIFIC BEHAVIORAL BIASES & WEAPONS (special.c) ...... [HOUS]
+  [07.00] MASTER UNIT & STRUCTURE TECHNICAL SPECIFICATIONS ............ [UNIT]
+          - [07.01] Infantry & Specialist Unit Stats .................. [UNT01]
+          - [07.02] Wheeled & Light Vehicles .......................... [UNT02]
+          - [07.03] Tracked Armor & Super-Tanks ....................... [UNT03]
+          - [07.04] Air Units & Base Structure Catalog ................ [UNT04]
+  [08.00] THE SANDWORM PREDATOR ENTITY SUBSYSTEM (sandworm.c) ......... [WORM]
+  [09.00] AI BLINDSPOTS, PATHFINDING GLITCHES & EXPLOITS .............. [EXPL]
+  [10.00] COMPLETE 9-SCENARIO CAMPAIGN STRATEGY ....................... [WLK00]
+  [11.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) ....... [FAST]
+  [12.00] HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM .............. [PROT]
+  [13.00] ENGINE FORENSICS & BINARY BYTECODE MAPPING .................. [ENGN]
+  [14.00] PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE ................. [SEQL]
+  [15.00] SCUMMVM / OPENDUNE EMULATION TARGET PROFILE ................. [SCUM]
+  [16.00] VERSION HISTORY & BUILD PROVENANCE .......................... [VERS]
+  [17.00] CONTACT POLICY & CREDITS .................................... [CRED]
 -------------------------------------------------------------------------------
 
 ===============================================================================
@@ -61,7 +67,29 @@ Authorized hosting sites:
   • GameFAQs / GameSpot Plain Text Submission Archives
 
 ===============================================================================
-[03.00] THE BIRTH OF THE RTS AI: HISTORICAL CONTEXT                     [HIST]
+[03.00] THE EMPEROR'S GAMBLE: NARRATIVE LORE & MENTATS                  [LORE]
+===============================================================================
+
+A. THE IMPERIAL DECREE:
+  Padishah Emperor Frederick IV of House Corrino offers sole governance of
+  Arrakis (Dune) to whichever Great House harvests the most spice melange to
+  settle the imperial treasury debts. Total warfare is legalized under the
+  guise of economic competition.
+
+B. THE THREE MENTATS:
+  • Cyril (House Atreides): Caladan noble. Emphasizes honor, troop safety, and
+    peaceful alliance with native Fremen warriors.
+  • Radnor (House Harkonnen): Giedi Prime sadist. Demands total annihilation,
+    scorched-earth devastation, and heavy siege swarms.
+  • Ammon (House Ordos): Sigma Draconis technocrat. Cold and calculating;
+    views warfare as a mercenary balance sheet transaction.
+
+C. THE GRAND BETRAYAL:
+  In Scenario 9, Emperor Frederick IV betrays his decree, deploying his elite
+  Imperial Sardaukar legions alongside both rival Houses in a 3-against-1 war.
+
+===============================================================================
+[04.00] THE BIRTH OF THE RTS AI: HISTORICAL CONTEXT                     [HIST]
 ===============================================================================
 
 Released in 1992 by Westwood Studios, Dune II defined the modern Real-Time
@@ -71,11 +99,11 @@ Westwood built an ultra-efficient suite of Finite State Machines (FSMs) and
 heuristic weight tables that simulated a live opponent in real time.
 
 ===============================================================================
-[04.00] MASTER DECOMPILATION OF THE AI ARCHITECTURE                     [ARCH]
+[05.00] MASTER DECOMPILATION OF THE AI ARCHITECTURE                     [ARCH]
 ===============================================================================
 
 -------------------------------------------------------------------------------
-[04.01] BASE CONSTRUCTION & SCRIPT PLACEMENT (building.c)               [ARC01]
+[05.01] BASE CONSTRUCTION & SCRIPT PLACEMENT (building.c)               [ARC01]
 -------------------------------------------------------------------------------
 
 1. PREDEFINED SCRIPT ANCHORS:
@@ -96,7 +124,7 @@ void AI_OnStructureDestroyed(Structure *s) {
 }
 
 -------------------------------------------------------------------------------
-[04.02] ECONOMIC REPLENISHMENT & HARVESTERS (harvester.c)               [ARC02]
+[05.02] ECONOMIC REPLENISHMENT & HARVESTERS (harvester.c)               [ARC02]
 -------------------------------------------------------------------------------
 
 • Spice Harvesting: Harvesters seek spice within a 16-tile radius.
@@ -115,7 +143,7 @@ void Harvester_CheckCapacity(Unit *harvester) {
 }
 
 -------------------------------------------------------------------------------
-[04.03] WAVE ASSEMBLY & STAGING TRIGGER FSM (ai.c)                      [ARC03]
+[05.03] WAVE ASSEMBLY & STAGING TRIGGER FSM (ai.c)                      [ARC03]
 -------------------------------------------------------------------------------
 
 The AI pools manufactured units at a staging point until threshold is met:
@@ -146,7 +174,7 @@ void AI_ProcessUnitState(Unit *u) {
 }
 
 -------------------------------------------------------------------------------
-[04.04] TARGET PRIORITIZATION & AGGRO MATRIX (combat.c)                 [ARC04]
+[05.04] TARGET PRIORITIZATION & AGGRO MATRIX (combat.c)                 [ARC04]
 -------------------------------------------------------------------------------
 
 +---------------+-----------------------+-------------------------------------+
@@ -161,7 +189,7 @@ void AI_ProcessUnitState(Unit *u) {
 +---------------+-----------------------+-------------------------------------+
 
 ===============================================================================
-[05.00] HOUSE-SPECIFIC BEHAVIORAL BIASES & WEAPONS (special.c)          [HOUS]
+[06.00] HOUSE-SPECIFIC BEHAVIORAL BIASES & WEAPONS (special.c)          [HOUS]
 ===============================================================================
 
 1. HOUSE ATREIDES (DEFENSIVE TACTICIAN):
@@ -201,7 +229,79 @@ void Deviator_ApplyGasEffect(Unit *victimTank) {
 }
 
 ===============================================================================
-[06.00] THE SANDWORM PREDATOR ENTITY SUBSYSTEM (sandworm.c)             [WORM]
+[07.00] MASTER UNIT & STRUCTURE TECHNICAL SPECIFICATIONS                [UNIT]
+===============================================================================
+
+-------------------------------------------------------------------------------
+[07.01] INFANTRY & SPECIALIST UNIT STATS                                [UNT01]
+-------------------------------------------------------------------------------
+
++------------------+----------+------+-----+-------+-------+---------+--------+
+| Unit Name        | House    | Cost | HP  | Speed | Range | Damage  | Tech   |
++------------------+----------+------+-----+-------+-------+---------+--------+
+| Light Infantry   | All      | 100  | 50  | 8     | 2     | 10 (Gun)| Tech 1 |
+| Troopers         | All      | 175  | 80  | 8     | 3     | 35 (RPG)| Tech 2 |
+| Fremen (Stealth) | Atreides | Free | 100 | 10    | 4     | 60 (RPG)| Palace |
+| Sardaukar        | Imperial | 200  | 120 | 9     | 4     | 70 (RPG)| Tech 8 |
+| Saboteur (Stealt)| Ordos    | Free | 40  | 16    | 0     | 1000 Bomb| Palace|
++------------------+----------+------+-----+-------+-------+---------+--------+
+
+-------------------------------------------------------------------------------
+[07.02] WHEELED & LIGHT VEHICLES                                        [UNT02]
+-------------------------------------------------------------------------------
+
++------------------+----------+------+-----+-------+-------+---------+--------+
+| Vehicle Name     | House    | Cost | HP  | Speed | Range | Damage  | Tech   |
++------------------+----------+------+-----+-------+-------+---------+--------+
+| Trike            | Atr/Hark | 150  | 100 | 16    | 2     | 20 (Gun)| Tech 1 |
+| Raider Trike     | Ordos    | 150  | 90  | 20    | 2     | 20 (Gun)| Tech 1 |
+| Quad             | All      | 200  | 130 | 12    | 3     | 40 (RPG)| Tech 2 |
++------------------+----------+------+-----+-------+-------+---------+--------+
+
+-------------------------------------------------------------------------------
+[07.03] TRACKED ARMOR & SUPER-TANKS                                     [UNT03]
+-------------------------------------------------------------------------------
+
++------------------+----------+------+-----+-------+-------+---------+--------+
+| Vehicle Name     | House    | Cost | HP  | Speed | Range | Damage  | Tech   |
++------------------+----------+------+-----+-------+-------+---------+--------+
+| Harvester        | All      | 300  | 600 | 6     | 0     | 700 Cap | Tech 1 |
+| Combat Tank      | All      | 300  | 300 | 9     | 3     | 60 (AP) | Tech 3 |
+| Missile Tank     | All      | 450  | 220 | 7     | 6     | 120(Rkt)| Tech 4 |
+| Siege Tank       | All      | 600  | 550 | 6     | 4     | 140(Dbl)| Tech 5 |
+| Sonic Tank       | Atreides | 600  | 280 | 7     | 5     | 160 Beam| Tech 7 |
+| Devastator       | Hark     | 800  | 800 | 4     | 4     | 200 Plsm| Tech 7 |
+| Deviator         | Ordos    | 750  | 240 | 8     | 6     | Gas Flip| Tech 7 |
++------------------+----------+------+-----+-------+-------+---------+--------+
+
+-------------------------------------------------------------------------------
+[07.04] AIR UNITS & BASE STRUCTURE CATALOG                              [UNT04]
+-------------------------------------------------------------------------------
+
++--------------------+------+-----+-------+-------+---------------------------+
+| Air Unit Name      | House| Cost| HP    | Speed | Capability                |
++--------------------+------+-----+-------+-------+---------------------------+
+| Carryall           | All  | 800 | 150   | 24    | Vehicle/Harvester Airlift |
+| Ornithopter        | Atr/O| 600 | 90    | 22    | Strafing Air Rocket Attack|
++--------------------+------+-----+-------+-------+---------------------------+
+
++--------------------+------+-----+-------+-------+---------------------------+
+| Structure Name     | Cost | HP  | Power | Dim   | Function                  |
++--------------------+------+-----+-------+-------+---------------------------+
+| Concrete Slab 2x2  | 20   | 40  | 0     | 2x2   | Prevents 50% Decay Damage |
+| Windtrap           | 300  | 250 | +100  | 2x2   | Generates Base Power      |
+| Spice Refinery     | 400  | 450 | -30   | 3x2   | Converts Spice to Credits |
+| Outpost (Radar)    | 400  | 300 | -20   | 2x2   | Activates Minimap Radar   |
+| Heavy Factory      | 500  | 600 | -35   | 3x2   | Builds Tanks & Harvesters |
+| High-Tech Factory  | 800  | 500 | -40   | 3x2   | Builds Air Units/Thopters |
+| Repair Facility    | 700  | 350 | -30   | 3x2   | Repairs Damaged Armor     |
+| IX Research Lab    | 500  | 400 | -40   | 2x2   | Unlocks Super-Tech Units  |
+| Palace             | 999  | 900 | -60   | 3x3   | Superweapon Command Center|
+| Rocket Turret      | 250  | 300 | -20   | 1x1   | Long-Range Defensive Missl|
++--------------------+------+-----+-------+-------+---------------------------+
+
+===============================================================================
+[08.00] THE SANDWORM PREDATOR ENTITY SUBSYSTEM (sandworm.c)             [WORM]
 ===============================================================================
 
 SANDWORM HUNTING & NOISE SENSING:
@@ -225,7 +325,7 @@ void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
 }
 
 ===============================================================================
-[07.00] AI BLINDSPOTS, PATHFINDING GLITCHES & EXPLOITS                  [EXPL]
+[09.00] AI BLINDSPOTS, PATHFINDING GLITCHES & EXPLOITS                  [EXPL]
 ===============================================================================
 
 • Rocket Turret Outranging: Turrets hit at 6 tiles; AI aggro sensors only see
@@ -236,7 +336,7 @@ void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
   Sandworms consume them.
 
 ===============================================================================
-[08.00] COMPLETE 9-SCENARIO CAMPAIGN STRATEGY                           [WLK00]
+[10.00] COMPLETE 9-SCENARIO CAMPAIGN STRATEGY                           [WLK00]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -256,7 +356,7 @@ void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
    Yard first; defeat combined forces of all Houses and Imperial Sardaukar!
 
 ===============================================================================
-[09.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC)          [FAST]
+[11.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC)          [FAST]
 ===============================================================================
 
 +-----------------------------------------------------------------------------+
@@ -281,7 +381,7 @@ void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
 +-----------------------------------------------------------------------------+
 
 ===============================================================================
-[10.00] HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM                 [PROT]
+[12.00] HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM                 [PROT]
 ===============================================================================
 
 A. THE MENTAT MANUAL VERIFICATION PROMPT:
@@ -293,7 +393,7 @@ B. REVERSE-ENGINEERED ASSEMBLY PATCH:
     0030:4A1A  JNE Loc_CopyProtection_Fail  ->  Patched to NOP NOP to bypass.
 
 ===============================================================================
-[11.00] ENGINE FORENSICS & BINARY BYTECODE MAPPING                      [ENGN]
+[13.00] ENGINE FORENSICS & BINARY BYTECODE MAPPING                      [ENGN]
 ===============================================================================
 
 A. MASTER ASSET CONTAINERS:
@@ -305,7 +405,7 @@ B. 64x64 TILE MAP GRID:
   Every tile stores terrain flags, spice density, and occupancy pointers.
 
 ===============================================================================
-[12.00] PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE                    [SEQL]
+[14.00] PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE                    [SEQL]
 ===============================================================================
 
 +--------------------+---------------------+--------------------+-------------+
@@ -317,7 +417,7 @@ B. 64x64 TILE MAP GRID:
 +--------------------+---------------------+--------------------+-------------+
 
 ===============================================================================
-[13.00] SCUMMVM / OPENDUNE EMULATION TARGET PROFILE                     [SCUM]
+[15.00] SCUMMVM / OPENDUNE EMULATION TARGET PROFILE                     [SCUM]
 ===============================================================================
 
 A. TARGET ENGINE IDENTIFIERS:
@@ -326,14 +426,14 @@ A. TARGET ENGINE IDENTIFIERS:
     faithfully executing 100% of the 1992 AI state machine logic.
 
 ===============================================================================
-[14.00] VERSION HISTORY & BUILD PROVENANCE                              [VERS]
+[16.00] VERSION HISTORY & BUILD PROVENANCE                              [VERS]
 ===============================================================================
 
 Target Build: Dune II: The Building of a Dynasty (DOS v1.07 1993)
 Build SHA-256: a942a6c4df96ee5c692eb185c70783515822b34a640103ee23b6b1897c7c34ef
 
 ===============================================================================
-[15.00] CONTACT POLICY & CREDITS                                        [CRED]
+[17.00] CONTACT POLICY & CREDITS                                        [CRED]
 ===============================================================================
 
 Brett Sperry, Joseph Bostic, Aaron E. Powell, Frank Klepacki, OpenDUNE Team,

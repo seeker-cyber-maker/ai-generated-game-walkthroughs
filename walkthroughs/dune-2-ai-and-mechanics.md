@@ -20,39 +20,49 @@ target_build_sha256: a942a6c4df96ee5c692eb185c70783515822b34a640103ee23b6b1897c7
 ## 📜 Table of Contents
 1. [Author's Preface & Research Philosophy](#1-authors-preface--research-philosophy) ................... [PREF]
 2. [Legal Disclaimer & Permitted Sites](#2-legal-disclaimer--permitted-sites) ....................... [LEGL]
-3. [The Birth of the RTS AI: Historical & Engine Context](#3-the-birth-of-the-rts-ai-historical--engine-context) [HIST]
-4. [Master Decompilation of the AI Architecture](#4-master-decompilation-of-the-ai-architecture) ..... [ARCH]
+3. [The Emperor's Gamble: Narrative Lore & Mentats](#3-the-emperors-gamble-narrative-lore--mentats) ... [LORE]
+   - The Padishah Emperor's Challenge (House Corrino)
+   - The 3 Mentats: Cyril, Radnor & Ammon
+   - The Imperial Betrayal & The Sardaukar Alliance
+4. [The Birth of the RTS AI: Historical & Engine Context](#4-the-birth-of-the-rts-ai-historical--engine-context) [HIST]
+5. [Master Decompilation of the AI Architecture](#5-master-decompilation-of-the-ai-architecture) ..... [ARCH]
    - Base Construction & Building Placement Logic (`building.c`)
    - Economic Replenishment & Harvester Routing (`harvester.c`)
    - Attack Wave Assembly & Staging Trigger FSM (`ai.c`)
    - Target Prioritization & Aggro Decision Matrices (`combat.c`)
-5. [House-Specific Behavioral Biases & Weapon Logic](#5-house-specific-behavioral-biases--weapon-logic) [HOUS]
+6. [House-Specific Behavioral Biases & Weapon Logic](#6-house-specific-behavioral-biases--weapon-logic) [HOUS]
    - House Atreides (Defensive Sonic Positioning & Fremen Swarms)
    - House Harkonnen (Heavy Armor Wave Doctrine & Death Hand Ballistics)
    - House Ordos (Hit-and-Run Raider Trikes & Deviator Gas Inversion)
-6. [The Sandworm Predator Entity Subsystem](#6-the-sandworm-predator-entity-subsystem) .............. [WORM]
+7. [Master Unit & Structure Specifications (Binary Stats)](#7-master-unit--structure-specifications) . [UNIT]
+   - Infantry & Specialist Units Data Table
+   - Wheeled & Light Vehicle Data Table
+   - Heavy Tracked Armor & Super-Tanks Data Table
+   - Air Support Units & Carryall Data Table
+   - Complete Base Structure & Defensive Grid Catalog
+8. [The Sandworm Predator Entity Subsystem](#8-the-sandworm-predator-entity-subsystem) .............. [WORM]
    - Noise Accumulation Registers on Soft Sand Tiles (`sandworm.c`)
    - Feeding Cooldown & Saturation Despawn Limits
-7. [AI Blindspots, Pathfinding Glitches & Exploits](#7-ai-blindspots-pathfinding-glitches--exploits) . [EXPL]
+9. [AI Blindspots, Pathfinding Glitches & Exploits](#9-ai-blindspots-pathfinding-glitches--exploits) . [EXPL]
    - Rocket Turret Outranging & Fog-of-War Invariance
    - Cliff Wall Sliding & Tile-Step Pathfinding Recoil
    - Sand Trapping & Carryall Interception
-8. [Complete 9-Scenario Campaign Walkthrough](#8-complete-9-scenario-campaign-walkthrough) ........... [WLK00]
-   - Scenarios 1–3: Early Foothold & Harvester Escort ........................ [WLK01]
-   - Scenarios 4–6: Mid-Tier Armor & Heavy Turrets ........................... [WLK02]
-   - Scenarios 7–9: The Palace Powers & Final 3-House Confrontation .......... [WLK03]
-9. [The Critical-Path Minimalist Route (Speedrun Geodesic)](#9-the-critical-path-minimalist-route) .... [FAST]
-10. [Historical Copy-Protection: Mentat Vitanium DRM](#10-historical-copy-protection-mentat-vitanium-drm) [PROT]
+10. [Complete 9-Scenario Campaign Walkthrough](#10-complete-9-scenario-campaign-walkthrough) ......... [WLK00]
+    - Scenarios 1–3: Early Foothold & Harvester Escort ....................... [WLK01]
+    - Scenarios 4–6: Mid-Tier Armor & Heavy Turrets .......................... [WLK02]
+    - Scenarios 7–9: The Palace Powers & Final 3-House Confrontation ......... [WLK03]
+11. [The Critical-Path Minimalist Route (Speedrun Geodesic)](#11-the-critical-path-minimalist-route) ... [FAST]
+12. [Historical Copy-Protection: Mentat Vitanium DRM](#12-historical-copy-protection-mentat-vitanium-drm) [PROT]
     - The Mentat Unit & Building Manual Verification Prompt
     - Reverse-Engineered Assembly Crack & NOP Overrides
-11. [Engine Forensics & Binary Bytecode Mapping](#11-engine-forensics--binary-bytecode-mapping) ...... [ENGN]
+13. [Engine Forensics & Binary Bytecode Mapping](#13-engine-forensics--binary-bytecode-mapping) ..... [ENGN]
     - `SCENARIO.PAK` / `DUNE.DAT` Asset Architecture
     - Tile Coordinate 64x64 Grid & Unit Memory Records
-12. [Prequel-to-Sequel Evolution: The RTS Lineage](#12-prequel-to-sequel-evolution-the-rts-lineage) .. [SEQL]
+14. [Prequel-to-Sequel Evolution: The RTS Lineage](#14-prequel-to-sequel-evolution-the-rts-lineage) . [SEQL]
     - From Dune II to Command & Conquer, Red Alert, and Dune 2000
-13. [ScummVM / OpenDUNE Emulation Profile](#13-scummvm--opendune-emulation-profile) .................. [SCUM]
-14. [Version History & Build Provenance](#14-version-history--build-provenance) ...................... [VERS]
-15. [Contact Policy & Credits](#15-contact-policy--credits) .......................................... [CRED]
+15. [ScummVM / OpenDUNE Emulation Profile](#15-scummvm--opendune-emulation-profile) ................. [SCUM]
+16. [Version History & Build Provenance](#16-version-history--build-provenance) ..................... [VERS]
+17. [Contact Policy & Credits](#17-contact-policy--credits) ......................................... [CRED]
 
 ---
 
@@ -75,7 +85,41 @@ Authorized hosting repositories:
 
 ---
 
-# 2. THE BIRTH OF THE RTS AI: HISTORICAL CONTEXT [HIST]
+# 2. THE EMPEROR'S GAMBLE: NARRATIVE LORE & MENTATS [LORE]
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                       THE TRI-HOUSE STRUGGLE FOR ARRAKIS                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  "The building of a dynasty begins in the sands of Arrakis...               │
+│   The spice melange is the most precious substance in the universe.         │
+│   He who controls the spice controls the destiny of the cosmos."            │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### A. The Imperial Decree of Padishah Emperor Frederick IV
+Heavily indebted from imperial expansion, **Padishah Emperor Frederick IV** of House Corrino makes a desperate proclamation to the Landsraad:
+* The Emperor grants total territorial governance of the desert planet **Arrakis (Dune)** to whichever of the three Great Houses—**Noble Atreides**, **Brutal Harkonnen**, or **Insidious Ordos**—can harvest the most spice melange and fulfill the Imperial tax quota.
+* The decree carries a hidden clause: there are no rules of engagement. Total planetary warfare is legalized under the guise of an economic harvesting competition.
+
+### B. The Three Mentat Advisors
+Every House commander is advised by a specialized Mentat (human super-computer):
+1. **Cyril (House Atreides)**:
+   - *Homeworld*: Caladan (Water planet).
+   - *Philosophy*: Honor, defensive discipline, alliance with the native Fremen tribes. Cyril emphasizes humane tactics, fair treatment of soldiers, and sustainable harvesting.
+2. **Radnor (House Harkonnen)**:
+   - *Homeworld*: Giedi Prime (Industrial wasteland).
+   - *Philosophy*: Brutality, total terror, expendable cannon fodder. Radnor rejoices in civilian casualties and urges the commander to obliterate rival settlements with raw firepower.
+3. **Ammon (House Ordos)**:
+   - *Homeworld*: Sigma Draconis (Frozen ice world).
+   - *Philosophy*: Capitalism, deception, hired mercenaries. Ammon is calculating, cold, and views units purely as balance-sheet assets.
+
+### C. The Grand Imperial Betrayal & The Sardaukar
+As the player nears final victory on Arrakis, Emperor Frederick IV realizes that a single Great House is becoming too powerful to control. In the final confrontation (Scenario 9), the Emperor betrays his own proclamation, deploying his personal legions of elite **Imperial Sardaukar** alongside the allied forces of the two rival Houses in a massive 3-against-1 siege.
+
+---
+
+# 3. THE BIRTH OF THE RTS AI: HISTORICAL CONTEXT [HIST]
 
 Released in 1992 by Westwood Studios, *Dune II: The Building of a Dynasty* defined the modern Real-Time Strategy (RTS) genre: resource harvesting, base construction, tech trees, fog of war, and autonomous enemy commanders.
 
@@ -83,7 +127,7 @@ Running on a 16MHz Intel 80286/80386 processor with under 640 KB of base DOS con
 
 ---
 
-# 3. MASTER DECOMPILATION OF THE AI ARCHITECTURE [ARCH]
+# 4. MASTER DECOMPILATION OF THE AI ARCHITECTURE [ARCH]
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -284,7 +328,7 @@ void Unit_FindBestTarget(Unit *u) {
 
 ---
 
-# 4. HOUSE-SPECIFIC BEHAVIORAL BIASES & WEAPON LOGIC [HOUS]
+# 5. HOUSE-SPECIFIC BEHAVIORAL BIASES & WEAPON LOGIC [HOUS]
 
 ```text
 ┌───────────┬─────────────────────────────┬───────────────────────────────────┐
@@ -377,7 +421,69 @@ void Unit_UpdateDeviatedTimer(Unit *u) {
 
 ---
 
-# 5. THE SANDWORM PREDATOR ENTITY SUBSYSTEM [WORM]
+# 6. MASTER UNIT & STRUCTURE SPECIFICATIONS (BINARY STATS) [UNIT]
+
+Extracted directly from the compiled binary data tables (`DUNE.DAT` / `SCENARIO.PAK`):
+
+### A. Infantry & Specialist Units
+
+| Unit Name | House | Cost | HP | Speed | Range | Weapon Type | Base Damage | Tech Req |
+| :--- | :--- | :---: | :---: | :---: | :---: | :--- | :---: | :---: |
+| **Light Infantry** | All | 100 | 50 | 8 | 2 | 9mm Assault Rifle | 10 | Tech 1 |
+| **Troopers** | All | 175 | 80 | 8 | 3 | Armor-Piercing Rocket | 35 | Tech 2 |
+| **Fremen** | Atreides | Free | 100 | 10 | 4 | Dual RPG (Stealth) | 60 | Palace |
+| **Sardaukar** | Imperial | 200 | 120 | 9 | 4 | Heavy Rapid Rocket | 70 | Tech 8 |
+| **Saboteur** | Ordos | Free | 40 | 16 | 0 | Suicide Bomb (Stealth)| 1000 | Palace |
+
+### B. Wheeled & Light Vehicles
+
+| Vehicle Name | House | Cost | HP | Speed | Range | Primary Armament | Base Damage | Tech Req |
+| :--- | :--- | :---: | :---: | :---: | :---: | :--- | :---: | :---: |
+| **Trike** | Atreides/Hark | 150 | 100 | 16 | 2 | Dual 20mm Autocannons| 20 | Tech 1 |
+| **Raider Trike** | Ordos | 150 | 90 | 20 | 2 | Dual High-Speed Guns | 20 | Tech 1 |
+| **Quad** | All | 200 | 130 | 12 | 3 | Dual Anti-Armor Pods | 40 | Tech 2 |
+
+### C. Heavy Tracked Armor & Super-Tanks
+
+| Vehicle Name | House | Cost | HP | Speed | Range | Primary Armament | Base Damage | Tech Req |
+| :--- | :--- | :---: | :---: | :---: | :---: | :--- | :---: | :---: |
+| **Harvester** | All | 300 | 600 | 6 | 0 | None (Crushes Troops)| 700 Cap | Tech 1 |
+| **Combat Tank** | All | 300 | 300 | 9 | 3 | 75mm Cannon | 60 | Tech 3 |
+| **Missile Tank** | All | 450 | 220 | 7 | 6 | Dual Guided Missiles | 120 | Tech 4 |
+| **Siege Tank** | All | 600 | 550 | 6 | 4 | Dual 120mm Cannons | 140 | Tech 5 |
+| **Sonic Tank** | Atreides | 600 | 280 | 7 | 5 | Sonic Wave Generator | 160 (Line)| Tech 7 |
+| **Devastator** | Harkonnen | 800 | 800 | 4 | 4 | Dual Plasma Cannons | 200 (+Blast)| Tech 7 |
+| **Deviator** | Ordos | 750 | 240 | 8 | 6 | Neuro-Toxin Gas Warhead| 0 (Mind Flip)| Tech 7 |
+
+### D. Air Support Units
+
+| Unit Name | House | Cost | HP | Speed | Range | Functional Capability | Tech Req |
+| :--- | :--- | :---: | :---: | :---: | :---: | :--- | :---: |
+| **Carryall** | All | 800 | 150 | 24 | N/A | Automated Vehicle/Harvester Airlift | Tech 4 |
+| **Ornithopter** | Atreides/Ordos| 600 | 90 | 22 | 4 | Strafing Air-to-Ground Rocket Volleys| Tech 6 |
+
+### E. Base Structures & Defensive Grid
+
+| Structure Name | Cost | HP | Power Req | Dimension | Functional Role |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Concrete Slab 1x1**| 5 | 10 | 0 | 1x1 | Foundations preventing 50% placement decay |
+| **Concrete Slab 2x2**| 20 | 40 | 0 | 2x2 | Large foundations for major structures |
+| **Windtrap** | 300 | 250 | +100 Prod | 2x2 | Generates electrical power |
+| **Spice Refinery** | 400 | 450 | -30 Power | 3x2 | Processes spice into credits (Holds 1,000) |
+| **Spice Silo** | 150 | 150 | -5 Power | 2x2 | Stores additional 1,000 credits |
+| **Outpost (Radar)** | 400 | 300 | -20 Power | 2x2 | Activates minimap radar screen |
+| **Light Factory** | 300 | 350 | -20 Power | 2x2 | Manufactures Trikes, Raiders, Quads |
+| **Heavy Factory** | 500 | 600 | -35 Power | 3x2 | Manufactures Tanks, Harvesters, Super-Tanks |
+| **High-Tech Factory**| 800 | 500 | -40 Power | 3x2 | Produces Carryalls and Ornithopters |
+| **Repair Facility** | 700 | 350 | -30 Power | 3x2 | Repairs damaged armor for credits |
+| **IX Research Lab** | 500 | 400 | -40 Power | 2x2 | Unlocks advanced House super-technology |
+| **Palace** | 999 | 900 | -60 Power | 3x3 | Houses superweapons (Death Hand/Fremen/Saboteur)|
+| **Gun Turret** | 150 | 200 | -10 Power | 1x1 | Anti-vehicle / anti-infantry kinetic cannon |
+| **Rocket Turret** | 250 | 300 | -20 Power | 1x1 | Long-range anti-armor & anti-air missiles |
+
+---
+
+# 7. THE SANDWORM PREDATOR ENTITY SUBSYSTEM [WORM]
 
 The Sandworm (*Shai-Hulud*) is an independent neutral entity governed by a dedicated environmental state machine:
 
@@ -452,7 +558,7 @@ void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
 
 ---
 
-# 6. AI BLINDSPOTS, PATHFINDING GLITCHES & EXPLOITS [EXPL]
+# 8. AI BLINDSPOTS, PATHFINDING GLITCHES & EXPLOITS [EXPL]
 
 ### A. Rocket Turret Outranging (Fog-of-War Invariance)
 In *Dune II*, Rocket Turrets have a firing range of 6 tiles, whereas the AI's aggro sensor only reacts to incoming attacks within 5 tiles unless the attacking unit is spotted by a scout. Placing Rocket Turrets on the edge of a rock plateau allows players to destroy approaching AI waves before the AI registers a hostile engagement!
@@ -467,7 +573,7 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 
 ---
 
-# 7. COMPLETE 9-SCENARIO CAMPAIGN WALKTHROUGH [WLK00]
+# 9. COMPLETE 9-SCENARIO CAMPAIGN WALKTHROUGH [WLK00]
 
 ```text
 +-----------------------------------------------------------------------------+
@@ -481,7 +587,7 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 +-----------------------------------------------------------------------------+
 ```
 
-## [08.01] Scenarios 1–3: Early Foothold & Harvester Escort [WLK01]
+## [10.01] Scenarios 1–3: Early Foothold & Harvester Escort [WLK01]
 1. Build Concrete Slabs before placing structures to prevent 50% decay damage.
 2. Place Spice Refinery bordering the southern sand dunes to minimize Harvester transit time.
 3. Produce 3 Trikes to scout enemy outpost and eliminate infantry before they reach base rock.
@@ -489,7 +595,7 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 
 ---
 
-## [08.02] Scenarios 4–6: Mid-Tier Armor & Heavy Turrets [WLK02]
+## [10.02] Scenarios 4–6: Mid-Tier Armor & Heavy Turrets [WLK02]
 1. Construct Heavy Vehicle Factory; deploy Combat Tanks and Siege Tanks.
 2. Surround rock perimeter with **Rocket Turrets** to create an impenetrable defensive screen against Harkonnen Devastators.
 3. Build High-Tech Factory to deploy Carryalls for automatic Harvester transport.
@@ -497,7 +603,7 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 
 ---
 
-## [08.03] Scenarios 7–9: The Palace Powers & Final Confrontation [WLK03]
+## [10.03] Scenarios 7–9: The Palace Powers & Final Confrontation [WLK03]
 1. Construct the **Palace** to unlock superweapons (Death Hand / Fremen / Saboteur).
 2. Anticipate the enemy Harkonnen Death Hand missile: disperse clustered units away from the Construction Yard.
 3. Deploy Sonic Tanks (Atreides) or Devastators (Harkonnen) in a 6-unit battle line.
@@ -505,7 +611,7 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 
 ---
 
-# 8. THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) [FAST]
+# 10. THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) [FAST]
 
 ```text
 +-----------------------------------------------------------------------------+
@@ -525,14 +631,14 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 | 12. Lure AI defensive wave into Sandworm feeding zone.                      |
 | 13. Focus-fire enemy Construction Yard with Siege Tanks.                    |
 | 14. Destroy Heavy Vehicle Factory to eliminate reinforcements.              |
-| 15. Demolish remaining Windtraps to power down enemy turrets.                |
+| 15. Demolish Windtraps to power down enemy base turrets.                    |
 | 16. Wipe out remaining infantry and outposts for mission victory!           |
 +-----------------------------------------------------------------------------+
 ```
 
 ---
 
-# 9. HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM [PROT]
+# 11. HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM [PROT]
 
 ### A. The Mentat Manual Verification Prompt
 Before mission 2, the Mentat displays an image of a military unit or structure and asks:
@@ -554,14 +660,14 @@ In `DUNE2.EXE`, the Mentat verification routine queries `Verify_Manual_Entry`:
 
 ---
 
-# 10. ENGINE FORENSICS & BINARY BYTECODE MAPPING [ENGN]
+# 12. ENGINE FORENSICS & BINARY BYTECODE MAPPING [ENGN]
 
 * **Master Asset Containers**: `SCENARIO.PAK` (mission layouts, AI trigger scripts), `DUNE.DAT` (unit sprite sheets, palette tables), `VOCAB.PAK` (voice digitized sounds).
 * **64x64 Tile Map Grid**: Each tile stores terrain type (Rock, Sand, Spice, Thick Spice, Dunes, Mountain) and occupancy bitfield flags.
 
 ---
 
-# 11. PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE [SEQL]
+# 13. PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE [SEQL]
 
 ```text
 +--------------------+---------------------+--------------------+-------------+
@@ -576,14 +682,14 @@ In `DUNE2.EXE`, the Mentat verification routine queries `Verify_Manual_Entry`:
 
 ---
 
-# 12. SCUMMVM / OPENDUNE EMULATION TARGET PROFILE [SCUM]
+# 14. SCUMMVM / OPENDUNE EMULATION TARGET PROFILE [SCUM]
 
 * **Engine Core**: Native DOSBox / OpenDUNE / ScummVM.
 * **Modern Improvements**: OpenDUNE adds high-resolution multi-unit drag selection while preserving 100% of the original 1992 AI behavior and pathfinding algorithms.
 
 ---
 
-# 13. VERSION HISTORY & BUILD PROVENANCE [VERS]
+# 15. VERSION HISTORY & BUILD PROVENANCE [VERS]
 
 * **1992 DOS Floppy (v1.0)**: Original release with manual protection.
 * **1993 DOS v1.07 Update**: Enhanced pathfinding and sound card fixes.
@@ -591,7 +697,7 @@ In `DUNE2.EXE`, the Mentat verification routine queries `Verify_Manual_Entry`:
 
 ---
 
-# 14. CONTACT POLICY & CREDITS [CRED]
+# 16. CONTACT POLICY & CREDITS [CRED]
 
 * **Westwood Studios**: Brett Sperry, Joseph Bostic, Aaron E. Powell, Frank Klepacki.
 * **OpenDUNE Team**: For decades of reverse-engineering Arrakis!
