@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dune II: The Building of a Dynasty - AI Forensics, Lore & Technical Compendium</title>
+  <title>Dune II & Super Dune II - AI Forensics, Lore & Technical Compendium</title>
   <style>
     :root {
       --bg-main: #0b0f19;
@@ -142,22 +142,22 @@
       margin-bottom: 24px;
     }
 
-    .mentat-box {
+    .mentat-box, .super-box {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin-bottom: 20px;
     }
-    .mentat-card {
+    .mentat-card, .super-card {
       padding: 14px;
       border-radius: 6px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
     }
-    .mentat-card.atreides { border-color: var(--blue); }
-    .mentat-card.harkonnen { border-color: var(--red); }
-    .mentat-card.ordos { border-color: var(--green); }
-    .mentat-title { font-weight: bold; margin-bottom: 4px; font-family: var(--font-mono); }
+    .mentat-card.atreides, .super-card.fremen { border-color: var(--blue); }
+    .mentat-card.harkonnen, .super-card.sardaukar { border-color: var(--purple); }
+    .mentat-card.ordos, .super-card.mercenaries { border-color: #94a3b8; }
+    .mentat-title, .super-title { font-weight: bold; margin-bottom: 4px; font-family: var(--font-mono); }
 
     table {
       width: 100%;
@@ -200,6 +200,7 @@
     
     <ul class="nav-list">
       <li class="nav-item"><a href="#lore">Narrative & Mentats <span class="nav-tag">[LORE]</span></a></li>
+      <li class="nav-item"><a href="#super">Super Dune II (1993) <span class="nav-tag">[SUPR]</span></a></li>
       <li class="nav-item"><a href="#units">Master Unit Database <span class="nav-tag">[UNIT]</span></a></li>
       <li class="nav-item"><a href="#structures">Base Structures <span class="nav-tag">[BLDG]</span></a></li>
       <li class="nav-item"><a href="#fsm">AI State Machine (ai.c) <span class="nav-tag">[ARCH]</span></a></li>
@@ -212,9 +213,9 @@
 
   <main id="content">
     <header>
-      <h1>Dune II: The Building of a Dynasty</h1>
+      <h1>Dune II & Super Dune II</h1>
       <div class="meta">
-        <span>Westwood Studios (1992)</span> • 
+        <span>Westwood Studios (1992) / Mod Community (1993)</span> • 
         <span>Engine: DOS RTS Engine v1.07</span> • 
         <span>Author: AI Cybersecurity Researcher and Reverse-Engineer</span>
       </div>
@@ -243,10 +244,27 @@
       </div>
     </section>
 
+    <section id="super" class="card">
+      <h2>Super Dune II (1993): The 3 Hidden Playable Factions [SUPR]</h2>
+      <p>Super Dune II rewrote the <code>SCENARIO.PAK</code> indexes to unlock the 3 engine-restricted factions:</p>
+      <div class="super-box">
+        <div class="super-card fremen">
+          <div class="super-title" style="color: var(--blue);">HOUSE FREMEN</div>
+          <small>Native desert guerrilla warfare; free stealth infantry and early Sonic Tanks.</small>
+        </div>
+        <div class="super-card mercenaries">
+          <div class="super-title" style="color: #94a3b8;">MERCENARIES</div>
+          <small>Scavengers with hybrid technology from all 3 Houses at discounted credit costs.</small>
+        </div>
+        <div class="super-card sardaukar">
+          <div class="super-title" style="color: var(--purple);">IMPERIAL SARDAUKAR</div>
+          <small>Elite imperial dreadnoughts; heavy rocket infantry, Devastators, and brutal AI waves.</small>
+        </div>
+      </div>
+    </section>
+
     <section id="units" class="card">
       <h2>Master Unit Specifications (Binary Data Tables) [UNIT]</h2>
-      
-      <h3>Infantry & Ground Armor</h3>
       <table>
         <thead>
           <tr>
@@ -262,17 +280,17 @@
         <tbody>
           <tr><td><strong>Light Infantry</strong></td><td>All</td><td>100</td><td>50</td><td>8</td><td>2</td><td>10 (9mm Assault Rifle)</td></tr>
           <tr><td><strong>Troopers</strong></td><td>All</td><td>175</td><td>80</td><td>8</td><td>3</td><td>35 (Armor-Piercing RPG)</td></tr>
-          <tr><td><strong>Fremen</strong></td><td>Atreides</td><td>Free</td><td>100</td><td>10</td><td>4</td><td>60 (Dual Stealth Rockets)</td></tr>
+          <tr><td><strong>Fremen</strong></td><td>Atreides/Fremen</td><td>Free</td><td>100</td><td>10</td><td>4</td><td>60 (Dual Stealth Rockets)</td></tr>
           <tr><td><strong>Sardaukar</strong></td><td>Imperial</td><td>200</td><td>120</td><td>9</td><td>4</td><td>70 (Heavy Rapid Rockets)</td></tr>
           <tr><td><strong>Saboteur</strong></td><td>Ordos</td><td>Free</td><td>40</td><td>16</td><td>0</td><td>1000 (Suicide Demolition)</td></tr>
           <tr><td><strong>Trike</strong></td><td>Atr/Hark</td><td>150</td><td>100</td><td>16</td><td>2</td><td>20 (Dual Autocannons)</td></tr>
-          <tr><td><strong>Raider Trike</strong></td><td>Ordos</td><td>150</td><td>90</td><td>20</td><td>2</td><td>20 (High-Speed Autocannons)</td></tr>
+          <tr><td><strong>Raider Trike</strong></td><td>Ordos/Mercs</td><td>150</td><td>90</td><td>20</td><td>2</td><td>20 (High-Speed Autocannons)</td></tr>
           <tr><td><strong>Quad</strong></td><td>All</td><td>200</td><td>130</td><td>12</td><td>3</td><td>40 (Dual Missile Pods)</td></tr>
           <tr><td><strong>Combat Tank</strong></td><td>All</td><td>300</td><td>300</td><td>9</td><td>3</td><td>60 (75mm AP Cannon)</td></tr>
           <tr><td><strong>Missile Tank</strong></td><td>All</td><td>450</td><td>220</td><td>7</td><td>6</td><td>120 (Dual Long-Range Missiles)</td></tr>
           <tr><td><strong>Siege Tank</strong></td><td>All</td><td>600</td><td>550</td><td>6</td><td>4</td><td>140 (Dual 120mm Heavy Cannons)</td></tr>
-          <tr><td><strong>Sonic Tank</strong></td><td>Atreides</td><td>600</td><td>280</td><td>7</td><td>5</td><td>160 (Linear Sonic Beam)</td></tr>
-          <tr><td><strong>Devastator</strong></td><td>Harkonnen</td><td>800</td><td>800</td><td>4</td><td>4</td><td>200 (Dual Plasma) + 500 Nuke</td></tr>
+          <tr><td><strong>Sonic Tank</strong></td><td>Atreides/Fremen</td><td>600</td><td>280</td><td>7</td><td>5</td><td>160 (Linear Sonic Beam)</td></tr>
+          <tr><td><strong>Devastator</strong></td><td>Hark/Sardaukar</td><td>800</td><td>800</td><td>4</td><td>4</td><td>200 (Dual Plasma) + 500 Nuke</td></tr>
           <tr><td><strong>Deviator</strong></td><td>Ordos</td><td>750</td><td>240</td><td>8</td><td>6</td><td>0 (15-Sec Mind Gas Flip)</td></tr>
         </tbody>
       </table>

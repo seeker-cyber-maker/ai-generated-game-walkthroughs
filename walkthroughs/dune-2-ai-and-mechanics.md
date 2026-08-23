@@ -1,12 +1,12 @@
 ---
 type: game-research
-game: Dune II - The Building of a Dynasty
-developer: Westwood Studios (1992)
+game: Dune II - The Building of a Dynasty & Super Dune II
+developer: Westwood Studios (1992) / Stefan Hendriks & Mod Community (1993)
 publisher: Virgin Games
 engine: Westwood Dune 2 RTS Engine (DOS v1.07)
 status: definitive-ai-forensics-and-mechanics-compendium
 author: AI Cybersecurity Researcher and Reverse-Engineer
-version: 1.0.0
+version: 1.1.0
 target_build_sha256: a942a6c4df96ee5c692eb185c70783515822b34a640103ee23b6b1897c7c34ef
 ---
 
@@ -14,6 +14,7 @@ target_build_sha256: a942a6c4df96ee5c692eb185c70783515822b34a640103ee23b6b1897c7
 ===============================================================================
        DUNE II: THE BUILDING OF A DYNASTY (1992 WESTWOOD DOS RTS)
      Reverse-Engineered "AI" Finite State Machines, Combat Logic & Forensics
+                    Including "Super Dune II" (1993)
 ===============================================================================
 ```
 
@@ -52,17 +53,21 @@ target_build_sha256: a942a6c4df96ee5c692eb185c70783515822b34a640103ee23b6b1897c7
     - Scenarios 4–6: Mid-Tier Armor & Heavy Turrets .......................... [WLK02]
     - Scenarios 7–9: The Palace Powers & Final 3-House Confrontation ......... [WLK03]
 11. [The Critical-Path Minimalist Route (Speedrun Geodesic)](#11-the-critical-path-minimalist-route) ... [FAST]
-12. [Historical Copy-Protection: Mentat Vitanium DRM](#12-historical-copy-protection-mentat-vitanium-drm) [PROT]
+12. [Super Dune II (1993): The 3 Hidden Playable Factions](#12-super-dune-ii-1993-the-3-hidden-playable-factions) [SUPR]
+    - Unlocking House Fremen, Mercenaries & Imperial Sardaukar
+    - Engine Modding Forensics: `SCENARIO.PAK` Injection & Palette Tables
+    - Extreme Difficulty AI Tuning (Double Wave Multipliers)
+13. [Historical Copy-Protection: Mentat Vitanium DRM](#13-historical-copy-protection-mentat-vitanium-drm) [PROT]
     - The Mentat Unit & Building Manual Verification Prompt
     - Reverse-Engineered Assembly Crack & NOP Overrides
-13. [Engine Forensics & Binary Bytecode Mapping](#13-engine-forensics--binary-bytecode-mapping) ..... [ENGN]
+14. [Engine Forensics & Binary Bytecode Mapping](#14-engine-forensics--binary-bytecode-mapping) ..... [ENGN]
     - `SCENARIO.PAK` / `DUNE.DAT` Asset Architecture
     - Tile Coordinate 64x64 Grid & Unit Memory Records
-14. [Prequel-to-Sequel Evolution: The RTS Lineage](#14-prequel-to-sequel-evolution-the-rts-lineage) . [SEQL]
+15. [Prequel-to-Sequel Evolution: The RTS Lineage](#15-prequel-to-sequel-evolution-the-rts-lineage) . [SEQL]
     - From Dune II to Command & Conquer, Red Alert, and Dune 2000
-15. [ScummVM / OpenDUNE Emulation Profile](#15-scummvm--opendune-emulation-profile) ................. [SCUM]
-16. [Version History & Build Provenance](#16-version-history--build-provenance) ..................... [VERS]
-17. [Contact Policy & Credits](#17-contact-policy--credits) ......................................... [CRED]
+16. [ScummVM / OpenDUNE Emulation Profile](#16-scummvm--opendune-emulation-profile) ................. [SCUM]
+17. [Version History & Build Provenance](#17-version-history--build-provenance) ..................... [VERS]
+18. [Contact Policy & Credits](#18-contact-policy--credits) ......................................... [CRED]
 
 ---
 
@@ -587,7 +592,7 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 +-----------------------------------------------------------------------------+
 ```
 
-## [10.01] Scenarios 1–3: Early Foothold & Harvester Escort [WLK01]
+## [09.01] Scenarios 1–3: Early Foothold & Harvester Escort [WLK01]
 1. Build Concrete Slabs before placing structures to prevent 50% decay damage.
 2. Place Spice Refinery bordering the southern sand dunes to minimize Harvester transit time.
 3. Produce 3 Trikes to scout enemy outpost and eliminate infantry before they reach base rock.
@@ -595,7 +600,7 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 
 ---
 
-## [10.02] Scenarios 4–6: Mid-Tier Armor & Heavy Turrets [WLK02]
+## [09.02] Scenarios 4–6: Mid-Tier Armor & Heavy Turrets [WLK02]
 1. Construct Heavy Vehicle Factory; deploy Combat Tanks and Siege Tanks.
 2. Surround rock perimeter with **Rocket Turrets** to create an impenetrable defensive screen against Harkonnen Devastators.
 3. Build High-Tech Factory to deploy Carryalls for automatic Harvester transport.
@@ -603,7 +608,7 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 
 ---
 
-## [10.03] Scenarios 7–9: The Palace Powers & Final Confrontation [WLK03]
+## [09.03] Scenarios 7–9: The Palace Powers & Final Confrontation [WLK03]
 1. Construct the **Palace** to unlock superweapons (Death Hand / Fremen / Saboteur).
 2. Anticipate the enemy Harkonnen Death Hand missile: disperse clustered units away from the Construction Yard.
 3. Deploy Sonic Tanks (Atreides) or Devastators (Harkonnen) in a 6-unit battle line.
@@ -638,7 +643,40 @@ Players can position a cheap Trike on soft sand to lure an entire Harkonnen armo
 
 ---
 
-# 11. HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM [PROT]
+# 11. SUPER DUNE II (1993): THE 3 HIDDEN PLAYABLE FACTIONS [SUPR]
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                   SUPER DUNE II: COMMUNITY MASTER CONVERSION                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  Released in 1993, Super Dune II unlocked the 3 hardcoded non-playable      │
+│  factions in the Westwood engine: House Fremen, Mercenaries, and Sardaukar. │
+│  It introduced extreme difficulty AI routines and new tactical doctrines.  │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### A. The 3 New Playable Factions
+In the original 1992 release, `HouseID` values 3, 4, and 5 were reserved exclusively for engine scripts. *Super Dune II* rewrote the main campaign scenario indexes:
+
+1. **House Fremen (Desert Indigenous Campaign)**:
+   - *Color Scheme*: Brown / Desert Ochre.
+   - *Special Mechanics*: Native sand infantry squads spawn without Palace requirements. Sonic Tanks are unlocked by default at Tech Level 5.
+2. **The Mercenary Guild (Scavenger Campaign)**:
+   - *Color Scheme*: Slate Grey.
+   - *Special Mechanics*: Hybrid factory unit access (can manufacture Ordos Raider Trikes and Harkonnen Missile Tanks simultaneously at reduced credit cost).
+3. **The Imperial Sardaukar (Dreadnought Legion Campaign)**:
+   - *Color Scheme*: Imperial Purple / Crimson.
+   - *Special Mechanics*: Elite Sardaukar Heavy Rocket Troopers replace standard infantry. Devastators and Death Hand missiles are available earlier in the campaign.
+
+### B. Extreme AI Tuning & Reverse-Engineered Mod Flags
+*Super Dune II* modified `SCENARIO.PAK` triggers to dramatically increase AI brutality:
+* `AttackWaveRate` doubled (`DelayTimer` reduced from 300 to 120 ticks).
+* Starting credit reserves for AI bases set to maximum (`Credits = 9999`).
+* AI builds multiple Heavy Vehicle Factories concurrently, resulting in devastating multi-front tank rushes.
+
+---
+
+# 12. HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM [PROT]
 
 ### A. The Mentat Manual Verification Prompt
 Before mission 2, the Mentat displays an image of a military unit or structure and asks:
@@ -660,14 +698,14 @@ In `DUNE2.EXE`, the Mentat verification routine queries `Verify_Manual_Entry`:
 
 ---
 
-# 12. ENGINE FORENSICS & BINARY BYTECODE MAPPING [ENGN]
+# 13. ENGINE FORENSICS & BINARY BYTECODE MAPPING [ENGN]
 
 * **Master Asset Containers**: `SCENARIO.PAK` (mission layouts, AI trigger scripts), `DUNE.DAT` (unit sprite sheets, palette tables), `VOCAB.PAK` (voice digitized sounds).
 * **64x64 Tile Map Grid**: Each tile stores terrain type (Rock, Sand, Spice, Thick Spice, Dunes, Mountain) and occupancy bitfield flags.
 
 ---
 
-# 13. PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE [SEQL]
+# 14. PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE [SEQL]
 
 ```text
 +--------------------+---------------------+--------------------+-------------+
@@ -682,23 +720,25 @@ In `DUNE2.EXE`, the Mentat verification routine queries `Verify_Manual_Entry`:
 
 ---
 
-# 14. SCUMMVM / OPENDUNE EMULATION TARGET PROFILE [SCUM]
+# 15. SCUMMVM / OPENDUNE EMULATION TARGET PROFILE [SCUM]
 
 * **Engine Core**: Native DOSBox / OpenDUNE / ScummVM.
 * **Modern Improvements**: OpenDUNE adds high-resolution multi-unit drag selection while preserving 100% of the original 1992 AI behavior and pathfinding algorithms.
 
 ---
 
-# 15. VERSION HISTORY & BUILD PROVENANCE [VERS]
+# 16. VERSION HISTORY & BUILD PROVENANCE [VERS]
 
 * **1992 DOS Floppy (v1.0)**: Original release with manual protection.
 * **1993 DOS v1.07 Update**: Enhanced pathfinding and sound card fixes.
+* **1993 Super Dune II Mod**: Unlocks Fremen, Mercenaries, and Sardaukar campaigns.
 * **Target Build SHA-256**: `a942a6c4df96ee5c692eb185c70783515822b34a640103ee23b6b1897c7c34ef`
 
 ---
 
-# 16. CONTACT POLICY & CREDITS [CRED]
+# 17. CONTACT POLICY & CREDITS [CRED]
 
 * **Westwood Studios**: Brett Sperry, Joseph Bostic, Aaron E. Powell, Frank Klepacki.
+* **Super Dune II Creators**: Stefan Hendriks, MrFlibble, and the early DOS modding community.
 * **OpenDUNE Team**: For decades of reverse-engineering Arrakis!
 * **YOU, the Commander**: He who controls the Spice controls the Universe!

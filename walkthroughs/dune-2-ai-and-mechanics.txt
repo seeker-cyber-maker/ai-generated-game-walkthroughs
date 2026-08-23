@@ -1,6 +1,7 @@
 ===============================================================================
        DUNE II: THE BUILDING OF A DYNASTY (1992 WESTWOOD DOS RTS)
      Reverse-Engineered "AI" Finite State Machines, Combat Logic & Forensics
+                    Including "Super Dune II" (1993)
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -25,12 +26,13 @@ TABLE OF CONTENTS ..................................................... [00.00]
   [09.00] AI BLINDSPOTS, PATHFINDING GLITCHES & EXPLOITS .............. [EXPL]
   [10.00] COMPLETE 9-SCENARIO CAMPAIGN STRATEGY ....................... [WLK00]
   [11.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) ....... [FAST]
-  [12.00] HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM .............. [PROT]
-  [13.00] ENGINE FORENSICS & BINARY BYTECODE MAPPING .................. [ENGN]
-  [14.00] PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE ................. [SEQL]
-  [15.00] SCUMMVM / OPENDUNE EMULATION TARGET PROFILE ................. [SCUM]
-  [16.00] VERSION HISTORY & BUILD PROVENANCE .......................... [VERS]
-  [17.00] CONTACT POLICY & CREDITS .................................... [CRED]
+  [12.00] SUPER DUNE II (1993): THE 3 HIDDEN PLAYABLE FACTIONS ........ [SUPR]
+  [13.00] HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM .............. [PROT]
+  [14.00] ENGINE FORENSICS & BINARY BYTECODE MAPPING .................. [ENGN]
+  [15.00] PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE ................. [SEQL]
+  [16.00] SCUMMVM / OPENDUNE EMULATION TARGET PROFILE ................. [SCUM]
+  [17.00] VERSION HISTORY & BUILD PROVENANCE .......................... [VERS]
+  [18.00] CONTACT POLICY & CREDITS .................................... [CRED]
 -------------------------------------------------------------------------------
 
 ===============================================================================
@@ -381,7 +383,30 @@ void Sandworm_ExecuteMawStrike(Sandworm *w, TileCoord targetTile) {
 +-----------------------------------------------------------------------------+
 
 ===============================================================================
-[12.00] HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM                 [PROT]
+[12.00] SUPER DUNE II (1993): THE 3 HIDDEN PLAYABLE FACTIONS            [SUPR]
+===============================================================================
+
+A. THE 3 NEW PLAYABLE FACTIONS:
+  In the 1992 release, House IDs 3, 4, and 5 were engine-only non-player
+  factions. Super Dune II (1993) unlocked them as fully playable campaigns:
+
+  1. House Fremen (Desert Indigenous Campaign):
+     • Natural desert camouflage infantry spawn without Palace prerequisite.
+     • Sonic Tanks unlocked early at Tech Level 5.
+  2. The Mercenary Guild (Scavenger Campaign):
+     • Hybrid unit roster: can produce Ordos Raider Trikes and Harkonnen
+       Missile Tanks simultaneously at discounted credit costs.
+  3. The Imperial Sardaukar (Dreadnought Legion):
+     • Standard infantry replaced by elite Heavy Rocket Sardaukar.
+     • Devastators and Death Hand missiles available in early scenarios.
+
+B. EXTREME DIFFICULTY AI TUNING:
+  • AttackWaveRate doubled: AI wave delay timers slashed from 300 to 120 ticks.
+  • AI starting credit reserves boosted to 9,999 credits.
+  • Concurrent multi-factory build orders resulting in crushing armor rushes.
+
+===============================================================================
+[13.00] HISTORICAL COPY-PROTECTION: MENTAT VITANIUM DRM                 [PROT]
 ===============================================================================
 
 A. THE MENTAT MANUAL VERIFICATION PROMPT:
@@ -393,7 +418,7 @@ B. REVERSE-ENGINEERED ASSEMBLY PATCH:
     0030:4A1A  JNE Loc_CopyProtection_Fail  ->  Patched to NOP NOP to bypass.
 
 ===============================================================================
-[13.00] ENGINE FORENSICS & BINARY BYTECODE MAPPING                      [ENGN]
+[14.00] ENGINE FORENSICS & BINARY BYTECODE MAPPING                      [ENGN]
 ===============================================================================
 
 A. MASTER ASSET CONTAINERS:
@@ -405,7 +430,7 @@ B. 64x64 TILE MAP GRID:
   Every tile stores terrain flags, spice density, and occupancy pointers.
 
 ===============================================================================
-[14.00] PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE                    [SEQL]
+[15.00] PREQUEL-TO-SEQUEL EVOLUTION: THE RTS LINEAGE                    [SEQL]
 ===============================================================================
 
 +--------------------+---------------------+--------------------+-------------+
@@ -417,7 +442,7 @@ B. 64x64 TILE MAP GRID:
 +--------------------+---------------------+--------------------+-------------+
 
 ===============================================================================
-[15.00] SCUMMVM / OPENDUNE EMULATION TARGET PROFILE                     [SCUM]
+[16.00] SCUMMVM / OPENDUNE EMULATION TARGET PROFILE                     [SCUM]
 ===============================================================================
 
 A. TARGET ENGINE IDENTIFIERS:
@@ -426,16 +451,17 @@ A. TARGET ENGINE IDENTIFIERS:
     faithfully executing 100% of the 1992 AI state machine logic.
 
 ===============================================================================
-[16.00] VERSION HISTORY & BUILD PROVENANCE                              [VERS]
+[17.00] VERSION HISTORY & BUILD PROVENANCE                              [VERS]
 ===============================================================================
 
 Target Build: Dune II: The Building of a Dynasty (DOS v1.07 1993)
+Super Dune II: 1993 Community Expansion (Fremen, Mercenary, Sardaukar)
 Build SHA-256: a942a6c4df96ee5c692eb185c70783515822b34a640103ee23b6b1897c7c34ef
 
 ===============================================================================
-[17.00] CONTACT POLICY & CREDITS                                        [CRED]
+[18.00] CONTACT POLICY & CREDITS                                        [CRED]
 ===============================================================================
 
-Brett Sperry, Joseph Bostic, Aaron E. Powell, Frank Klepacki, OpenDUNE Team,
-CJayC & GameFAQs, and YOU, the Commander!
+Brett Sperry, Joseph Bostic, Aaron E. Powell, Frank Klepacki, Stefan Hendriks,
+The OpenDUNE Team, CJayC & GameFAQs, and YOU, the Commander!
 ===============================================================================
