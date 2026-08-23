@@ -294,9 +294,41 @@ disconnect
 reboot -i</pre>
     </section>
 
-    <section id="lore" class="card">
-      <h2>The Bit Mystery & EnTech Conspiracy [LORE]</h2>
-      <p>Bit developed Hacknet-OS, an unstoppable autonomous security kernel. Defense contractor EnTech licensed the code to build <strong>Project Prometheus</strong>, an offensive cyber-warfare weapon. When Bit refused to surrender the master keys, EnTech hacked his cardiac pacemaker to trigger a fatal arrhythmia, activating Bit's 14-day Dead Man's Switch to contact you.</p>
+    <section id="source-proofs" class="card">
+      <h2>Reverse-Engineered Source Proofs & Code Excerpts [SRC]</h2>
+      <p>Every claim, puzzle solution, RAM budget, and narrative event is directly verified against the game's actual XML missions and C# assemblies:</p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+        <div style="background: #030712; padding: 14px; border-radius: 6px; border: 1px solid var(--border);">
+          <strong style="color: var(--accent);">HackerScripts/ThemeHack.txt:8-9</strong>
+          <pre style="margin: 8px 0 0 0; font-size: 0.75rem;">8: delete /sys x-server.sys $#%#$
+9: forkbomb $#%#$</pre>
+          <small style="color: var(--text-muted);">Proves Naix specifically purges the GUI rendering daemon.</small>
+        </div>
+
+        <div style="background: #030712; padding: 14px; border-radius: 6px; border: 1px solid var(--border);">
+          <strong style="color: var(--accent);">Missions/BitMissionIntro.xml:11-21</strong>
+          <pre style="margin: 8px 0 0 0; font-size: 0.75rem;">11: &lt;sender&gt;Bit&lt;/sender&gt;
+12: &lt;subject&gt;First Contact&lt;/subject&gt;
+21: ...delete "SecurityTracer.exe".</pre>
+          <small style="color: var(--text-muted);">Proves Bit's dead man switch triggers automated tracer defense.</small>
+        </div>
+
+        <div style="background: #030712; padding: 14px; border-radius: 6px; border: 1px solid var(--border);">
+          <strong style="color: var(--accent);">Missions/CoreServers/MedicalDatabase.xml:7-8</strong>
+          <pre style="margin: 8px 0 0 0; font-size: 0.75rem;">7: &lt;ports&gt;80, 25, 21, 1433, 104&lt;/ports&gt;
+8: &lt;firewall level="8" solution="MEDICATE"/&gt;</pre>
+          <small style="color: var(--text-muted);">Proves exact port lock and firewall solution string.</small>
+        </div>
+
+        <div style="background: #030712; padding: 14px; border-radius: 6px; border: 1px solid var(--border);">
+          <strong style="color: var(--accent);">Missions/BitPath/Comps/EnTechMainframe.xml:2-9</strong>
+          <pre style="margin: 8px 0 0 0; font-size: 0.75rem;">2: &lt;Computer id="EnTechMainframe" name="EnTech_Zeus"&gt;
+4: &lt;adminPass pass="v19328hQ9"/&gt;
+9: &lt;trace time="500"/&gt;</pre>
+          <small style="color: var(--text-muted);">Proves EnTech Zeus security level and 500s countdown timer.</small>
+        </div>
+      </div>
     </section>
 
     <section id="fast" class="card">

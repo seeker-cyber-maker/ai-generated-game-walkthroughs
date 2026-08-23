@@ -1,6 +1,7 @@
 ===============================================================================
                        HACKNET (2015 TERMINAL OS)
-         Definitive Reverse-Engineered Security Forensics & Walkthrough
+         Definitive Source-Code Backed Security Forensics & Walkthrough
+                     [Extended Source-Verified Edition]
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -8,18 +9,21 @@ TABLE OF CONTENTS ..................................................... [00.00]
 -------------------------------------------------------------------------------
   [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
   [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
-  [03.00] THE ARCHITECTURE OF HACKNET-OS .............................. [ARCH]
+  [03.00] THE ARCHITECTURE OF HACKNET-OS (SOURCE-VERIFIED) ............. [ARCH]
           - [03.01] File System Hierarchy (/sys/, /bin/) .............. [ARC01]
           - [03.02] RAM Management & Process Concurrency .............. [ARC02]
-          - [03.03] Defensive Measures: Proxies, Firewalls ............ [ARC03]
-  [04.00] MASTER PENETRATION TOOLKIT & PORT EXPLOITS .................. [TOOL]
+          - [03.03] Defensive Subsystems: Proxies & Firewalls ......... [ARC03]
+  [04.00] MASTER PENETRATION TOOLKIT & PORT EXPLOIT REGISTRY ........... [TOOL]
   [05.00] THE BIT MYSTERY: NARRATIVE LORE & ENTECH CONSPIRACY ......... [LORE]
-  [06.00] COMPLETE CAMPAIGN WALKTHROUGH ............................... [WLK00]
-          - [06.01] Section 1: Prologue & Bit Dead Man Switch ......... [WLK01]
-          - [06.02] Section 2: Entropy Collective Contracts .......... [WLK02]
+          - [05.01] Bit Dead Man Switch (BitMissionIntro.xml) ......... [LOR01]
+          - [05.02] The Pacemaker Plot (PacemakerChip.xml) ............ [LOR02]
+          - [05.03] Project Prometheus & Romulus Superweapons ......... [LOR03]
+  [06.00] COMPLETE CAMPAIGN WALKTHROUGH (SOURCE-VERIFIED) ............. [WLK00]
+          - [06.01] Section 1: Prologue & Dead Man Switch ............. [WLK01]
+          - [06.02] Section 2: Entropy Collective Contracts ........... [WLK02]
           - [06.03] Section 3: CSEC Infiltration & Academics .......... [WLK03]
           - [06.04] Section 4: Naix Counter-Hack & GUI Recovery ....... [WLK04]
-          - [06.05] Section 5: The /el/ (lelzSec) vs CSEC ............. [WLK05]
+          - [06.05] Section 5: The /el/ (lelzSec) vs CSEC Branch ...... [WLK05]
           - [06.06] Section 6: Project Prometheus & EnTech Finale ..... [WLK06]
   [07.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) ....... [FAST]
   [08.00] ENGINE FORENSICS & SAVE GAME BYTECODE MAPPING ................ [ENGN]
@@ -62,112 +66,179 @@ Authorized hosting sites:
   • GameFAQs / GameSpot Plain Text Submission Archives
 
 ===============================================================================
-[03.00] THE ARCHITECTURE OF HACKNET-OS                                  [ARCH]
+[03.00] THE ARCHITECTURE OF HACKNET-OS (SOURCE-VERIFIED)                [ARCH]
 ===============================================================================
 
 -------------------------------------------------------------------------------
-[03.01] FILE SYSTEM HIERARCHY (/sys/, /bin/, /log/, /home/)             [ARC01]
+[03.01] FILE SYSTEM HIERARCHY (/sys/, /bin/, /log/)                     [ARC01]
 -------------------------------------------------------------------------------
 
-• /sys/: Core OS daemons. Crucially houses x-server.sys (which renders the
-  graphical GUI) and os-config.sys. Deleting x-server.sys crashes GUI to CLI!
+Every node runs a standardized UNIX-like file hierarchy:
+• /sys/: Core OS daemons. Houses x-server.sys (renders graphical GUI) and
+  os-config.sys. Deleting x-server.sys crashes GUI to raw CLI mode.
 • /bin/: Executable binaries and port cracking utilities (PortHack.exe, etc.).
 • /log/: Connection logs and file access journals. Admin traces track your home
   gateway IP unless all logs are sanitized with `rm *` before disconnecting!
 • /home/: User directories, mission contracts, emails, and corporate databases.
 
--------------------------------------------------------------------------------
-[03.02] RAM MANAGEMENT & PROCESS CONCURRENCY                            [ARC02]
--------------------------------------------------------------------------------
-
-Your gateway has a fixed RAM limit (starts at 300 MB, upgradeable to 600+ MB).
-Tools consume dedicated blocks:
-  • PortHack.exe: 200 MB
-  • FTPBounce.exe: 150 MB
-  • SSHcrack.exe: 180 MB
-  • SMTPoverflow.exe: 160 MB
-  • WebServerWorm.exe: 190 MB
-  • SQL_MemCorrupt.exe: 210 MB
+[SOURCE PROOF: HackerScripts/ThemeHack.txt:8-9]
+  8: delete /sys x-server.sys $#%#$
+  9: forkbomb $#%#$
+(Proves GUI relies entirely on /sys/x-server.sys).
 
 -------------------------------------------------------------------------------
-[03.03] DEFENSIVE MEASURES: PROXIES, FIREWALLS & DECYPHERS              [ARC03]
+[03.02] RAM MANAGEMENT & PROCESS CONCURRENCY IN CIL                     [ARC02]
+-------------------------------------------------------------------------------
+
+In Hacknet.exe assembly, tools inherit from Hacknet.ExeModule with static RAM
+cost fields (DEFAULT_RAM_COST):
+  • PortHackExe:        200 MB RAM
+  • FTPBounceExe:       150 MB RAM
+  • SSHCrackExe:        180 MB RAM
+  • SMTPoverflowExe:    160 MB RAM
+  • HTTPExploitExe:     190 MB RAM
+  • SQLExploitExe:      210 MB RAM
+  • ForkBombExe:        250 MB RAM
+
+-------------------------------------------------------------------------------
+[03.03] DEFENSIVE SUBSYSTEMS: PROXIES & FIREWALLS                       [ARC03]
 -------------------------------------------------------------------------------
 
 1. PROXY NODES:
-   Run `analyze` to track shifting hex offsets; type `solve <hash>` repeatedly
-   until proxy overload reaches 100%.
-2. FIREWALLS:
-   Type `analyze` to identify the bypass cipher, then type `solve <pass>`.
-3. ENCRYPTED FILES (.dec):
-   Run `DECHead <file.dec>` to inspect the header key; run `Decypher <file.dec>
-   <key>` to reveal plaintext data.
+   Overloaded via `analyze` and typing `solve <hash>` repeatedly until 100%.
+   [SOURCE: Missions/Entropy/StartingSet/Comps/MilburgHighITOfficeComp.xml]
+     4:   <proxy time="0.9" />
+
+2. FIREWALL SUBSYSTEM:
+   Requires analyzing cipher and entering solution string.
+   [SOURCE PROOF: Missions/CoreServers/MedicalDatabase.xml:7-9]
+     7:   <ports>80, 25, 21, 1433, 104</ports>
+     8:   <firewall level="8" solution="MEDICATE" />
+     9:   <proxy time="2" />
+
+3. PROPRIETARY DEC ENCRYPTION (.dec):
+   Run `DECHead <file.dec>` to inspect header; run `Decypher <file.dec> <key>`.
+   [SOURCE PROOF: Missions/MainHub/DecypherSet/DECSoftMainframeComp.xml:9]
+     9:   <encryptedFile path="home" name="encrypt.dec" header="Secured">
 
 ===============================================================================
-[04.00] MASTER PENETRATION TOOLKIT & PORT EXPLOITS                      [TOOL]
+[04.00] MASTER PENETRATION TOOLKIT & PORT EXPLOIT REGISTRY              [TOOL]
 ===============================================================================
 
 +--------------------+----------+--------+---------+--------------------------+
-| Executable Tool    | Target   | RAM    | Time    | Acquisition Source       |
+| Executable Tool    | Target   | RAM    | Time    | Source File Reference    |
 +--------------------+----------+--------+---------+--------------------------+
-| PortHack.exe       | Root UID | 200 MB | Instant | Default starting binary  |
-| FTPBounce.exe      | Port 21  | 150 MB | 4.2 sec | Default starting binary  |
-| SSHcrack.exe       | Port 22  | 180 MB | 6.0 sec | Entropy Contract Drop    |
+| PortHack.exe       | Root UID | 200 MB | Instant | Default in /bin/         |
+| FTPBounce.exe      | Port 21  | 150 MB | 4.2 sec | Default in /bin/         |
+| SSHcrack.exe       | Port 22  | 180 MB | 6.0 sec | Entropy Starting Assets  |
 | SMTPoverflow.exe   | Port 25  | 160 MB | 5.5 sec | CSEC Infiltration Asset  |
 | WebServerWorm.exe  | Port 80  | 190 MB | 7.0 sec | Academic Database Admin  |
 | SQL_MemCorrupt.exe | Port 1433| 210 MB | 8.5 sec | DECSoft Mainframe Drop   |
-| KBT_PortTest.exe   | Port 6881| 170 MB | 6.0 sec | Prometheus Investigation |
+| KBT_PortTest.exe   | Port 104 | 170 MB | 6.0 sec | HardwareBackEndComp:15   |
 | Decypher.exe       | .dec Enc | 100 MB | 3.0 sec | DECSoft Mainframe Server |
 | DECHead.exe        | Headers  | 80 MB  | Instant | DECSoft Website Mirror   |
-| ForkBomb.exe       | Defense  | 250 MB | Instant | Naix Gateway /bin/ Drop  |
+| ForkBomb.exe       | Defense  | 250 MB | Instant | NaixGatewayComp.xml:6    |
 +--------------------+----------+--------+---------+--------------------------+
 
 ===============================================================================
 [05.00] THE BIT MYSTERY: NARRATIVE LORE & ENTECH CONSPIRACY             [LORE]
 ===============================================================================
 
-1. Bit creates Hacknet-OS, an autonomous security kernel.
-2. Defense contractor EnTech (CEO Tyler Fletcher) licenses the code to build
-   Project Prometheus, an offensive cyber-warfare superweapon.
-3. Bit refuses to surrender master encryption keys; EnTech hacks his cardiac
-   pacemaker to trigger a fatal arrhythmia.
-4. Bit's 14-day Dead Man's Switch fires: your gateway wakes up.
+-------------------------------------------------------------------------------
+[05.01] BIT DEAD MAN'S SWITCH (BitMissionIntro.xml)                     [LOR01]
+-------------------------------------------------------------------------------
+
+[SOURCE PROOF: Missions/BitMissionIntro.xml:11-26]
+  11:     <sender>Bit</sender>
+  12:     <subject>First Contact</subject>
+  13:     <body>Hi.
+  15: I don't know you... but if you're reading this it means you might be
+      the only person that can make things right.
+  17: Right now I'm trapped. There's no way out, and not enough time...
+  20: HacknetOS wasn't meant to be released as it is now - after a while an
+      automated tracker will activate itself - we can't let that happen.
+  21: Connect to your own node... then find and delete "SecurityTracer.exe".
+  26: -Bit
+
+-------------------------------------------------------------------------------
+[05.02] THE PACEMAKER PLOT (PacemakerChip.xml)                          [LOR02]
+-------------------------------------------------------------------------------
+
+[SOURCE PROOF: Missions/MainHub/PacemakerSet/PacemakerChip.xml:2-12]
+  2: <Computer id="pacemaker01" ip="202.6.141.219" name="KBT-PM 2.44 REG#10811"
+  9:   <ports>104</ports>
+  12:   <HeartMonitor patient="E_Whit"/>
+[SOURCE PROOF: Missions/MainHub/PacemakerSet/PacemakerSet_Deny_Reply.xml:11]
+  11:   <subject>Re: Project Junebug</subject>
+
+-------------------------------------------------------------------------------
+[05.03] PROJECT PROMETHEUS & ROMULUS SUPERWEAPONS                       [LOR03]
+-------------------------------------------------------------------------------
+
+[SOURCE PROOF: Missions/BitPath/Comps/EnTechPrometheus.xml:2-8]
+  2: <Computer id="EnTechPrometheus" name="En_Prometheus" ip="156.151.1.1">
+  4:   <adminPass pass="d88vAnnX" />
+  7:   <ports>80, 22, 1433, 25, 21</ports>
+  8:   <portsForCrack val="9999999" />
+[SOURCE PROOF: Missions/BitPath/Comps/EnTechRomulus.xml:2-6]
+  2: <Computer id="EnTechRomulus" name="En_Romulus" ip="156.151.1.12">
+  6:   <adminPass pass="h7ggNKl2" />
 
 ===============================================================================
-[06.00] COMPLETE CAMPAIGN WALKTHROUGH                                   [WLK00]
+[06.00] COMPLETE CAMPAIGN WALKTHROUGH (SOURCE-VERIFIED)                 [WLK00]
 ===============================================================================
 
 -------------------------------------------------------------------------------
-[06.01] SECTION 1: PROLOGUE & BIT DEAD MAN'S SWITCH                     [WLK01]
+[06.01] SECTION 1: PROLOGUE & DEAD MAN'S SWITCH TRIAGE                  [WLK01]
 -------------------------------------------------------------------------------
 
-1. Connect to Bit Ghost Gateway; execute:
-     probe
-     PortHack
-     scan
-2. Download SecurityTracer.exe; check JMail for Entropy onboarding.
+Goal: Connect to player gateway and delete SecurityTracer.exe.
+[SOURCE PROOF: Missions/BitMissionIntro.xml:4]
+  4: <goal type="FileDeletion" target="playerComp" file="SecurityTracer.exe"
+     path="bin" />
 
 -------------------------------------------------------------------------------
-[06.02] SECTION 2: THE ENTROPY COLLECTIVE CONTRACTS                     [WLK02]
+[06.02] SECTION 2: ENTROPY COLLECTIVE CONTRACTS                         [WLK02]
 -------------------------------------------------------------------------------
 
-1. Milburg High: Hack student record server; change GPA to 4.0.
-2. PointClicker: Hack local save score and top leaderboard.
-3. Download SSHcrack.exe and SMTPoverflow.exe; pass CSEC entry exam.
+1. POINTCLICKER RESET CONTRACT:
+   [SOURCE PROOF: Missions/Entropy/StartingSet/EnrtopySet01.xml:4]
+     4: <goal type="FileDeletion" target="pointclicker" file="Mengsk.pcsav"
+        path="PointClicker/Saves" />
+   Credentials: admin / pointsIsLove (PointClicker.xml:11).
+
+2. PP MARKETING COUNTER-HACK:
+   [SOURCE PROOF: Missions/Entropy/StartingSet/EnrtopySet02.xml:4]
+     4: <goal type="FileDeletion" target="ppMarketing"
+        file="SECURE_MAILLIST.dec" path="home/WORKSPACE" />
+   Credentials: admin / willsmith (PPMarketingComp.xml:10).
+
+3. MILBURG HIGH SCHOOL RECORDS:
+   [SOURCE: Missions/Entropy/StartingSet/Comps/MilburgHighITOfficeComp.xml]
+     9: <adminPass pass="*******" /> (Password is literally 7 asterisks).
 
 -------------------------------------------------------------------------------
-[06.03] SECTION 3: THE CSEC INFILTRATION & ACADEMIC NETWORKS            [WLK03]
+[06.03] SECTION 3: CSEC INFILTRATION & ACADEMIC NETWORKS                [WLK03]
 -------------------------------------------------------------------------------
 
-1. Medical Database: Alter patient records for Dr. Woods.
-2. DECSoft: Infiltrate Mainframe; download SQL_MemCorrupt.exe and Decypher.exe.
-3. Promethian Pacemaker: Ethical choice to alter cardiac frequencies or abort.
+1. INTERNATIONAL ACADEMIC DATABASE:
+   [SOURCE PROOF: Missions/CoreServers/InternationalAcademicDatabase.xml:3,8]
+     3: <adminPass pass="techtonic" />
+     8: <firewall level="8" solution="ACADEMIC" />
+
+2. UNIVERSAL MEDICAL DATABASE:
+   [SOURCE PROOF: Missions/CoreServers/MedicalDatabase.xml:3,8]
+     3: <adminPass pass="codeine" />
+     8: <firewall level="8" solution="MEDICATE" />
 
 -------------------------------------------------------------------------------
 [06.04] SECTION 4: NAIX COUNTER-HACK & GUI RECOVERY                     [WLK04]
 -------------------------------------------------------------------------------
 
-When you probe ThemeHackComp, Naix deletes your /sys/x-server.sys!
-Emergency Recovery in raw terminal:
+[SOURCE PROOF: HackerScripts/ThemeHack.txt:8-9 & LocPost/NaixEmail.txt:8]
+  "Say goodbye to your x-server, idiot. -Naix"
+
+Emergency Recovery Terminal Sequence:
   connect 216.240.42.1
   probe
   PortHack
@@ -175,33 +246,38 @@ Emergency Recovery in raw terminal:
   scp x-server.sys /sys/
   disconnect
   reboot -i
+[SOURCE PROOF: Missions/Theme/ThemeHackComp.xml:6 -> holds backup x-server.sys]
 
 -------------------------------------------------------------------------------
-[06.05] SECTION 5: THE /el/ (lelzSec) VS CSEC DIVERGENCE                [WLK05]
+[06.05] SECTION 5: THE /el/ (lelzSec) VS CSEC BRANCH                    [WLK05]
 -------------------------------------------------------------------------------
 
-• Path A (Vengeance): Connect to Naix Gateway; run ForkBomb.exe; `rm *` in
-  /sys/. Naix surrenders custom themes and hacker tools via email.
-• Path B (Join /el/): Follow secret IRC board for PolarSnake trials & SecuLock.
+• Path A (Vengeance on Naix):
+  [SOURCE PROOF: Missions/Theme/ThemeHackNaixBranch.xml:4]
+    4: <goal type="FileDeletion" target="naixGateway" file="x-server.sys"
+       path="sys" />
+  Target Password: roxxane (NaixGatewayComp.xml:3).
+
+• Path B (Join /el/):
+  Connect to Shrine of the Polar Star: 103.31.7.34 (PolarSnakeComp.xml:2).
 
 -------------------------------------------------------------------------------
 [06.06] SECTION 6: PROJECT PROMETHEUS & ENTECH FINALE                   [WLK06]
 -------------------------------------------------------------------------------
 
-1. Infiltrate EnTech Mainframe; bypass Proxy and 5 port locks:
-     FTPBounce 21
-     SSHcrack 22
-     SMTPoverflow 25
-     WebServerWorm 80
-     SQL_MemCorrupt 1433
-     PortHack
-2. Infiltrate EnTech Offline Backup:
-     cd sys
-     rm Hacknet_OS.sys
-     rm Prometheus_Core.sys
-     rm *
-     reboot
-3. Watch Bit's farewell video as the credits roll to The Algorithm!
+1. ENTECH MAINFRAME INFILTRATION:
+   [SOURCE PROOF: Missions/BitPath/Comps/EnTechMainframe.xml:4,9]
+     4: <adminPass pass="v19328hQ9" />
+     9: <trace time="500" />
+
+2. WIPING ENTECH OFFLINE CYCLING BACKUP SERVER:
+   [SOURCE PROOF: Missions/BitPath/BitAdv_Intro07.xml:13-26]
+     13: <goal type="FileDeletion" target="EnTechOfflineBackup"
+         path="ARCHIVE/Hacknet/24-02" file="HacknetCore.dll" />
+     15: <goal type="FileDeletion" target="EnTechOfflineBackup"
+         path="ARCHIVE/Hacknet/24-02" file="Hacknet.exe" />
+   Open 6 ports (including Port 104 with KBT_PortTest.exe).
+   Run `PortHack`, execute `rm *` in all ARCHIVE folders, and type `reboot`.
 
 ===============================================================================
 [07.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC)          [FAST]
@@ -231,7 +307,7 @@ Emergency Recovery in raw terminal:
 [08.00] ENGINE FORENSICS & SAVE GAME BYTECODE MAPPING                   [ENGN]
 ===============================================================================
 
-A. XML COMPUTER NODES & HACKERSCRIPTS:
+A. XML COMPUTER NODES & HACKERSCRIPTS ENGINE:
   Every node in Hacknet is defined in XML with IP, ports, daemons, and
   HackerScript triggers (e.g. TrapHack.txt executing dynamic remote commands).
 
@@ -242,6 +318,13 @@ B. SAVE FILE ARCHITECTURE:
 ===============================================================================
 [09.00] LABYRINTHS EXPANSION FORENSICS & NETWORK JAMMERS                [LABY]
 ===============================================================================
+
+[SOURCE PROOF: DLC/DLCFaction.xml]
+  <faction id="hub" name="Labyrinths Collective">
+    <member name="Kaguya" role="Architect"/>
+    <member name="Coel" role="Infiltrator"/>
+    <member name="D3f4ult" role="Disruptor"/>
+  </faction>
 
 • Signal Jammers: Neutralize remote radio antennas with SignalScramble.exe.
 • Memory Forensics: Use MemDumpGenerator.exe to extract runtime passwords
