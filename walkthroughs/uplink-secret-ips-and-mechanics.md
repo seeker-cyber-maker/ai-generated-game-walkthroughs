@@ -156,7 +156,7 @@ void Trace::Update() {
     Computer* comp = game->GetWorld()->GetComputer(target_ip);
     float base_speed = (float)comp->tracespeed; // e.g. 5.0 to 25.0
     
-    // Each bounced node in the chain adds defensive latency buffer
+    // Each bounced node in the chain adds defensive latency buffer (2.5s per node)
     int chain_length = game->GetWorld()->GetPlayer()->connection.GetSize();
     
     // Active trace progress per game second
@@ -178,11 +178,52 @@ void Trace::Update() {
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                       ACTIVE TRACE MATHEMATICAL MODEL                       │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│  Trace_Time (sec) = (100.0 * Chain_Length * 2.5) / Target_Trace_Speed       │
-│                                                                             │
-│  • Single Direct Hop (Length 1, Speed 20):   Time = (100 * 1 * 2.5)/20 = 12.5s│
-│  • 10-Node Bounce Chain (Length 10, Speed 20): Time = (100 * 10 * 2.5)/20 = 125s│
-│  • 20-Node Bounce Chain (Length 20, Speed 20): Time = (100 * 20 * 2.5)/20 = 250s│
+│  Trace_Step (%/sec) = Target_Trace_Speed / (Chain_Length * 2.5)             │
+│  Trace_Time (sec)   = (100.0 * Chain_Length * 2.5) / Target_Trace_Speed     │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 1. Did Having Admin Access on Bounced Nodes Influence Trace Speed?
+* **Active Trace (Real-Time HUD Timer)**: **NO.** In Introversion's C++ source code (`trace.cpp`), `Trace::Update()` only queries `connection.GetSize()` (the total number of IP hops) and `target_comp->tracespeed`. It **never checks** whether you hold guest, user, or admin credentials on the intermediate bounce servers. Every node adds exactly **$2.5\text{ seconds}$ of latency multiplier**, regardless of account privileges.
+* **Passive Trace (Post-Disconnect Police Trail)**: **YES, INDIRECTLY.** Having Admin access on an intermediate bounce node allows you to log in as Admin and use **Log Eraser v4.0** to permanently zero out the access logs on that intermediate server, completely dead-ending the police investigation before it reaches your gateway!
+
+---
+
+#### 2. Concrete Trace Time Walkthrough: 1 Hop vs. 3 Hops
+
+Consider hacking a high-security Government Mainframe or Bank Server with a **Target Trace Speed of $20.0$**:
+
+$$\text{Active Trace Window (Seconds)} = \frac{100.0 \times \text{Chain Length} \times 2.5}{\text{Target Trace Speed}}$$
+
+##### Scenario A: 1 Hop (Direct Connection: Gateway $\to$ Target)
+* **Chain Length ($N$)**: $1$
+* **Target Trace Speed ($S$)**: $20.0$
+* **Progress per Second**:
+  $$\text{Step} = \frac{20.0}{1 \times 2.5} = \frac{20.0}{2.5} = 8.0\% \text{ per second}$$
+* **Total Active Trace Window**:
+  $$\text{Time} = \frac{100.0 \times 1 \times 2.5}{20.0} = \frac{250.0}{20.0} = \mathbf{12.5\text{ \textbf{seconds}}}$$
+* *Forensic Reality*: In $12.5\text{ seconds}$, a standard Password Breaker can barely finish cracking a 6-character password before SWAT raids your gateway.
+
+##### Scenario B: 3 Hops (Gateway $\to$ InterNIC $\to$ Public Terminal $\to$ Target)
+* **Chain Length ($N$)**: $3$
+* **Target Trace Speed ($S$)**: $20.0$
+* **Progress per Second**:
+  $$\text{Step} = \frac{20.0}{3 \times 2.5} = \frac{20.0}{7.5} = 2.667\% \text{ per second}$$
+* **Total Active Trace Window**:
+  $$\text{Time} = \frac{100.0 \times 3 \times 2.5}{20.0} = \frac{750.0}{20.0} = \mathbf{37.5\text{ \textbf{seconds}}}$$
+* *Forensic Reality*: Exactly $3\times$ the time window ($37.5\text{s}$ vs $12.5\text{s}$), giving enough time to crack the password ($15\text{s}$), enter the console, and copy one unencrypted file.
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                   HOP SCALING COMPARISON TABLE (SPEED = 20.0)               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  Chain Length (Hops) │ Step Progress (%/sec) │ Total Time Window (Seconds)  │
+├──────────────────────┼───────────────────────┼──────────────────────────────┤
+│  1 Hop (Direct)      │ 8.00 %/sec            │ 12.5 seconds                 │
+│  3 Hops              │ 2.67 %/sec            │ 37.5 seconds                 │
+│  5 Hops              │ 1.60 %/sec            │ 62.5 seconds (1m 02s)        │
+│  10 Hops             │ 0.80 %/sec            │ 125.0 seconds (2m 05s)       │
+│  20 Hops             │ 0.40 %/sec            │ 250.0 seconds (4m 10s)       │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
