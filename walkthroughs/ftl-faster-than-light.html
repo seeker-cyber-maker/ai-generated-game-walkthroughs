@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTL: Faster Than Light - Blue Option Statistical Forensics & Walkthrough</title>
+  <style>
+    :root {
+      --bg-main: #060913;
+      --bg-card: #0d1527;
+      --bg-sidebar: #090e1d;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --text-muted: #64748b;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --green: #22c55e;
+      --red: #ef4444;
+      --gold: #f59e0b;
+      --purple: #a855f7;
+      --font-mono: "Fira Code", "Courier New", Courier, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    #sidebar {
+      width: 310px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    #sidebar h2 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: var(--font-mono);
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.85rem;
+      outline: none;
+      font-family: var(--font-mono);
+    }
+    .search-box:focus { border-color: var(--accent); }
+
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .nav-item a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .nav-item a:hover {
+      background-color: var(--accent-glow);
+      color: var(--accent);
+    }
+    .nav-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      float: right;
+    }
+
+    #content {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 1100px;
+      overflow-y: auto;
+    }
+
+    header {
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      margin-bottom: 8px;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    }
+    header .meta {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      gap: 16px;
+      font-family: var(--font-mono);
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin: 32px 0 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      font-family: var(--font-mono);
+    }
+    h3 {
+      font-size: 1.05rem;
+      color: var(--gold);
+      margin: 20px 0 10px 0;
+    }
+    p, ul { margin-bottom: 16px; color: #cbd5e1; font-size: 0.95rem; }
+    ul { padding-left: 24px; }
+    li { margin-bottom: 6px; }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    /* Statistical Bar Charts */
+    .stat-bar-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stat-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+    }
+    .stat-bar-bg {
+      width: 100%;
+      height: 10px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.6s ease;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px 0;
+      font-size: 0.85rem;
+    }
+    th, td {
+      padding: 8px 12px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    th {
+      background-color: rgba(255, 255, 255, 0.04);
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+    tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.01); }
+
+    .badge-pos { color: var(--green); font-weight: bold; }
+    .badge-neu { color: var(--accent); font-weight: bold; }
+    .badge-neg { color: var(--red); font-weight: bold; }
+
+    pre, code {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+    pre {
+      background-color: #030712;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      overflow-x: auto;
+      margin: 12px 0 16px 0;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="sidebar">
+    <h2>FTL Command Hub</h2>
+    <input type="text" id="search" class="search-box" placeholder="Search mechanics & events...">
+    
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#stats">Blue Option Stats <span class="nav-tag">[STAT]</span></a></li>
+      <li class="nav-item"><a href="#traps">The 4 Negative Traps <span class="nav-tag">[STA03]</span></a></li>
+      <li class="nav-item"><a href="#combat">Combat & Evasion Math <span class="nav-tag">[MATH]</span></a></li>
+      <li class="nav-item"><a href="#enablers">Top 15 Enablers <span class="nav-tag">[STA02]</span></a></li>
+      <li class="nav-item"><a href="#flagship">Flagship 3-Phase Guide <span class="nav-tag">[BOSS]</span></a></li>
+      <li class="nav-item"><a href="#geodesic">Speedrun Geodesic <span class="nav-tag">[FAST]</span></a></li>
+    </ul>
+  </nav>
+
+  <main id="content">
+    <header>
+      <h1>FTL: FASTER THAN LIGHT</h1>
+      <div class="meta">
+        <span>Subset Games (2012/2014)</span> • 
+        <span>Engine: FNA/C++ Custom 2D Engine</span> • 
+        <span>Author: AI Cybersecurity Researcher and Reverse-Engineer</span>
+      </div>
+    </header>
+
+    <section id="stats" class="card">
+      <h2>The Definitive Blue Option Statistical Analysis [STAT]</h2>
+      <p>Reverse-engineered from <strong>227 total conditional choices</strong> (`req="..."`) across all core and DLC event XML definitions:</p>
+      
+      <div class="stat-bar-container">
+        <div class="stat-row">
+          <div class="stat-label-row">
+            <span><strong>POSITIVE (Reward / Free Crew / Safe Bypass)</strong></span>
+            <span class="badge-pos">143 choices (63.00%)</span>
+          </div>
+          <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 63%; background-color: var(--green);"></div></div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-label-row">
+            <span><strong>ABSTAIN / NEUTRAL (Decline / Passive Safe Pass)</strong></span>
+            <span class="badge-neu">80 choices (35.24%)</span>
+          </div>
+          <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 35.24%; background-color: var(--accent);"></div></div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-label-row">
+            <span><strong>NEGATIVE (Direct Hull Damage / Loss Trap)</strong></span>
+            <span class="badge-neg">3 choices (1.32%)</span>
+          </div>
+          <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 1.32%; background-color: var(--red);"></div></div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-label-row">
+            <span><strong>MIXED / RISKY (Resource Cost for High Reward)</strong></span>
+            <span style="color: var(--gold); font-weight: bold;">1 choice (0.44%)</span>
+          </div>
+          <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 0.44%; background-color: var(--gold);"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="traps" class="card">
+      <h2>The 4 Infamous Negative & High-Risk Traps [STA03]</h2>
+      <p>While 98.24% of Blue Options are purely beneficial or safe, these 4 events inflict penalties or sacrifices:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Event ID</th>
+            <th>Requirement</th>
+            <th>Source File</th>
+            <th>Outcome & Forensic Breakdown</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>#66: BOARDERS_ASTEROID</strong></td>
+            <td>Engines Lvl 5</td>
+            <td><code>events.xml</code></td>
+            <td><span class="badge-neg">3 Hull Damage + 1 System Damage</span> from asteroid collision.</td>
+          </tr>
+          <tr>
+            <td><strong>#107: ENGI_VIRUS</strong></td>
+            <td>Engi Crew</td>
+            <td><code>events_engi.xml</code></td>
+            <td><span class="badge-neg">Permanent Crew Loss</span> (Engi dies, then returns as max-skill <em>Virus</em> after boss win).</td>
+          </tr>
+          <tr>
+            <td><strong>#164: ROCK_MINE</strong></td>
+            <td>Missile Weapon</td>
+            <td><code>events_rock.xml</code></td>
+            <td><span style="color:var(--gold);">3 Hull Damage + 1 Missile Cost</span> for low scrap reward.</td>
+          </tr>
+          <tr>
+            <td><strong>#214: QUEST_YARD</strong></td>
+            <td>Lanius Crew</td>
+            <td><code>dlcEvents_anaerobic.xml</code></td>
+            <td><span class="badge-neg">Permanent Crew Sacrifice</span> (<clone>false</clone>) to build a high augment.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="combat" class="card">
+      <h2>Combat Engine & Evasion Math [MATH]</h2>
+      <p>Evasion determines the probability of taking 0 damage from incoming ballistic/laser volleys:</p>
+      <pre>Evasion% = Engine_Base% + Pilot_Manning% + Engine_Manning%</pre>
+      <table>
+        <thead>
+          <tr>
+            <th>Engine Level</th>
+            <th>Power</th>
+            <th>Base Evasion</th>
+            <th>Untrained Manning</th>
+            <th>Master Crew Manning</th>
+            <th>Cloaking L1 Surge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Level 1</td><td>1</td><td>5%</td><td>10%</td><td>15%</td><td>75%</td></tr>
+          <tr><td>Level 2</td><td>2</td><td>10%</td><td>15%</td><td>20%</td><td>80%</td></tr>
+          <tr><td>Level 3</td><td>3</td><td>15%</td><td>20%</td><td>25%</td><td>85%</td></tr>
+          <tr><td>Level 4</td><td>4</td><td>20%</td><td>25%</td><td>30%</td><td>90%</td></tr>
+          <tr><td>Level 5</td><td>5</td><td>25%</td><td>30%</td><td>35%</td><td><strong>95%</strong></td></tr>
+          <tr><td>Level 6</td><td>6</td><td>28%</td><td>33%</td><td>38%</td><td>98%</td></tr>
+          <tr><td>Level 7</td><td>7</td><td>31%</td><td>36%</td><td>41%</td><td><strong>100%</strong></td></tr>
+          <tr><td>Level 8</td><td>8</td><td>35%</td><td>40%</td><td>45%</td><td><strong>100% (Cap)</strong></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="enablers" class="card">
+      <h2>Top 15 Blue Option Enablers [STA02]</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Enabler</th>
+            <th>Type</th>
+            <th>Total Choices</th>
+            <th>% of Blue Options</th>
+            <th>Primary Tactical Utility</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Sensors (Lvl 2/3)</strong></td><td>Subsystem</td><td>24</td><td>10.57%</td><td>Reveals traps, scouts enemy bases</td></tr>
+          <tr><td><strong>Hacking System</strong></td><td>System</td><td>19</td><td>8.37%</td><td>Bypasses security, shuts down defense turrets</td></tr>
+          <tr><td><strong>Medbay (Lvl 2/3)</strong></td><td>System</td><td>13</td><td>5.73%</td><td>Cures alien plagues, gains free crew</td></tr>
+          <tr><td><strong>Lanius Crew</strong></td><td>Race</td><td>12</td><td>5.29%</td><td>Explores airless hulks safely</td></tr>
+          <tr><td><strong>Piloting (Lvl 2/3)</strong></td><td>Subsystem</td><td>11</td><td>4.85%</td><td>Dodges asteroid belts, out-maneuvers defenses</td></tr>
+          <tr><td><strong>Slug Crew</strong></td><td>Race</td><td>11</td><td>4.85%</td><td>Detects psychic illusions & slug swindles</td></tr>
+          <tr><td><strong>Teleporter (Lvl 2)</strong></td><td>System</td><td>11</td><td>4.85%</td><td>Raids derelicts, boards civilian vessels safely</td></tr>
+          <tr><td><strong>Cloaking (Lvl 2)</strong></td><td>System</td><td>11</td><td>4.85%</td><td>Avoids ambushes, bypasses storms</td></tr>
+          <tr><td><strong>Engi Crew</strong></td><td>Race</td><td>11</td><td>4.85%</td><td>Repairs ancient tech, upgrades satellites</td></tr>
+          <tr><td><strong>Engines (Lvl 4/5)</strong></td><td>System</td><td>9</td><td>3.96%</td><td>Escapes solar flares, outruns pursuers</td></tr>
+          <tr><td><strong>Mind Control</strong></td><td>System</td><td>8</td><td>3.52%</td><td>Pacifies madmen, counters alien traps</td></tr>
+          <tr><td><strong>Long-Ranged Scanners</strong></td><td>Augment</td><td>7</td><td>3.08%</td><td>Reveals ship encounters for max scrap</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="flagship" class="card">
+      <h2>The Rebel Flagship: 3-Phase Destruction Guide [BOSS]</h2>
+      <h3>Phase 1: Artillery Isolation</h3>
+      <p>Target the <strong>Triple Missile Artillery</strong> (3rd pod from left) first. <em>CRITICAL EXPLOIT:</em> Leave the operator of the Triple Laser pod (2nd room) alive to prevent the automated Flagship AI from activating!</p>
+      
+      <h3>Phase 2: Drone Surge Management</h3>
+      <p>Bypass the Defense Drone by depowering Hacking as the drone fires, then repower. Activate Level 1 Cloaking when the Drone Power Surge alarm sounds.</p>
+
+      <h3>Phase 3: Zoltan Shield & 12-Laser Surge</h3>
+      <p>Strip the 12 HP Zoltan Shield with Flak/Ion. Counter Mind Control with your own Mind Control or Slug crew. Cloak the 12-laser Power Surge.</p>
+    </section>
+
+    <section id="geodesic" class="card">
+      <h2>The 16-Step Speedrun Geodesic [FAST]</h2>
+      <ol style="padding-left: 24px; color: #cbd5e1;">
+        <li>Sector 1: Upgrade Shields to Level 2 (2 bubbles / 50 scrap) immediately.</li>
+        <li>Acquire Long-Ranged Scanners at first store to optimize scrap beacons.</li>
+        <li>Upgrade Engines to Level 4 (30% evasion) before entering Sector 3.</li>
+        <li>Seek Burst Laser II, Flak I, or Halberd Beam in Stores.</li>
+        <li>Acquire Hacking System (80 scrap) by Sector 4.</li>
+        <li>Purchase Level 1 Cloaking (150 scrap) before Sector 6.</li>
+        <li>Train Pilot and Engine crew to Golden Master (+10% passive dodge).</li>
+        <li>Upgrade Shields to Level 3 (3 bubbles) by Sector 5.</li>
+        <li>Upgrade Subsystems: Doors Level 2, Piloting Level 2 (anti-asteroid).</li>
+        <li>Reach Sector 8 with at least 3 Shield Bubbles, 40% Evasion, Cloaking.</li>
+        <li>Sector 8: Destroy Rebel repair stations for scrap and hull repairs.</li>
+        <li>Flagship Phase 1: Hack Shields; disable Missile Artillery; kill crew.</li>
+        <li>Flagship Phase 2: Cloak drone surge; destroy missile pod; break shields.</li>
+        <li>Flagship Phase 3: Counter Mind Control; cloak 12-laser surge.</li>
+        <li>Focus beam and laser fire on Flagship shield room.</li>
+        <li>Federation Victory achieved! The Rebellion is broken!</li>
+      </ol>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('search').addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(term) ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
