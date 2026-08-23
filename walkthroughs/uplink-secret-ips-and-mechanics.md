@@ -332,18 +332,61 @@ char* World::GenerateIP() {
 
 ---
 
-# 6. VERSION HISTORY & BUILD PROVENANCE [VERS]
+# 8. VERSION HISTORY, PHYSICAL EDITIONS & PORT PROVENANCE [VERS]
 
-* **2001 Initial CD-ROM Release (v1.0)**: Initial launch by Introversion Software.
-* **2002 Developer CD Release**: Full C++ source code made available to registered developers.
-* **2006+ Steam / Digital Edition (v1.55 / v1.6.0)**: Modern OS compatibility and high-resolution support.
-* **Target Build**: Uplink v1.60
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    CHRONOLOGY OF EDITIONS, PORTS & TINS                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  • 2001: Original UK First Edition (Kitchen-table hand-burned CD & black box│
+│  • 2002: The Developer CD (£30 raw C++ Source Code & dev asset package)    │
+│  • 2003: US Retail "Uplink: Hacker Elite" (Strategy First boxed release)   │
+│  • 2003: Mac OS 9 / OS X Port by Ambrosia Software (PowerPC native port)   │
+│  • 2003: Native Linux / FreeBSD Ports (Distributed by Tux Games & direct)  │
+│  • 2005: Limited Edition Embossed Metal Tins (With Green Sponge Darwinian!)│
+│  • 2006: Historic Steam Launch (One of the earliest indie games on Steam)   │
+│  • 2012: iOS (iPad) & Android Tablet Touch Overhaul                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### A. 2001 Original UK First Edition ("Kitchen Table Box")
+* **Format**: Black cardboard sleeve, hand-burned CD-R, paper envelope, inkjet address labels.
+* **Significance**: Self-published by the four founders from their parents' homes; sold through internet word-of-mouth.
+
+### B. 2002/2003 The Developer CD (£30 Source Code Edition)
+* **Format**: Jewel case CD with full un-redacted C++ source code, OpenGL/SDL build trees, sound effects, and prototype binaries (*SEEKER*, *DEFCON 1*).
+* **Significance**: Generated the direct revenue that cleared Introversion's debts and saved the company from closure.
+
+### C. 2003 North American Retail (*Uplink: Hacker Elite*)
+* **Format**: Standard US retail big box / DVD case published by Strategy First.
+* **Significance**: Shipped to CompUSA, Best Buy, Walmart, and GameStop; led to the publisher royalty dispute and bankruptcy crisis.
+
+### D. 2003 Mac OS 9 & OS X Port by Ambrosia Software
+* **Format**: Digital download & physical CD distributed by **Ambrosia Software** (the legendary Mac shareware masters behind *Escape Velocity* and *Maelstrom*).
+* **Significance**: Fully native PowerPC Carbon/Cocoa port for Classic Mac OS and Mac OS X, complete with Ambrosia's proprietary registration key system.
+
+### E. 2003 Linux & BSD Native Ports
+* **Format**: Tarball, RPM, DEB, and physical CD distributed through Tux Games.
+* **Significance**: Native Linux ELF binaries compiled directly with SDL and OSS/ALSA audio.
+
+### F. 2005 Limited Edition Embossed Metal Collector Tins
+* **Format**: Custom embossed metallic tin box sets released for *Darwinia* and the *Introversion Anthology* (*Uplink*, *Darwinia*, *DEFCON*).
+* **Artifacts Included**:
+  * Embossed brushed metal tin casing.
+  * Official game DVD / CD with soundtrack.
+  * Dr. Sepulveda's manual & art postcards.
+  * The iconic **die-cut green foam/sponge Darwinian figurine** (a physical 3D manifestation of the virtual polygon lifeforms living inside Dr. Sepulveda's simulated world).
+
+### G. 2006 Historic Steam Launch
+* **Format**: Digital release on Valve's Steam platform in July/August 2006.
+* **Significance**: *Uplink* and *Darwinia* were among the very first third-party independent titles ever approved by Gabe Newell to launch on Steam, proving the viability of digital indie distribution.
 
 ---
 
-# 7. CONTACT POLICY & CREDITS [CRED]
+# 9. CONTACT POLICY & CREDITS [CRED]
 
 * **Introversion Software**: Chris Delay, Mark Morris, John Austin, Thomas Arundel.
+* **Mac OS Port**: Ambrosia Software (Andrew Welch & team).
 * **Soundtrack**: Michiel van den Bos & Peter 'Skaven' Hajba.
-* **Special Dedication**: To the original 2002/2003 Uplink Developer CD backers—the true cyber-patrons whose £30 source code purchases saved Introversion from bankruptcy and kept the spirit of independent PC gaming alive.
+* **Special Dedication**: To the original 2002/2003 Uplink Developer CD backers—the true cyber-patrons whose £30 source code purchases saved Introversion from bankruptcy, preserved the metal tins and sponge Darwinians on our desks, and kept independent PC gaming alive.
 * **Dedication**: To all cyberpunk hackers and retro security researchers.
