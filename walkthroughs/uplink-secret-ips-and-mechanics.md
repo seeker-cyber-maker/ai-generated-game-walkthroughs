@@ -20,11 +20,15 @@ target_build_sha256: 8e5d3c90711bf79a292850937b420ee963d76e73ff6697818e698889a7b
 ## 📜 Table of Contents
 1. [Author's Preface & Research Philosophy](#1-authors-preface--research-philosophy) ................... [PREF]
 2. [Legal Disclaimer & Permitted Sites](#2-legal-disclaimer--permitted-sites) ....................... [LEGL]
-3. [Network Architecture & IP Generation Engine](#3-network-architecture--ip-generation-engine) ..... [NETW]
+3. [The Story of Introversion: Kitchen Tables & The Dev CD](#3-the-story-of-introversion-kitchen-tables--the-dev-cd) [HIST]
+   - The Four Students & The Kitchen Table Factory (2001) ................... [HIS01]
+   - The Strategy First Betrayal & Threat of Liquidation .................... [HIS02]
+   - Selling the C++ Source Code to Survive: The Developer CD ............... [HIS03]
+4. [Network Architecture & IP Generation Engine](#4-network-architecture--ip-generation-engine) ..... [NETW]
    - IPv4 Generation Algorithm (`World::GenerateIP`) ........................ [NET01]
    - InterNIC Indexing & Hidden Node Topologies ............................. [NET02]
    - Passive vs. Active Trace FSM Mechanics ................................. [NET03]
-4. [Master Directory of Secret & Easter Egg IPs](#4-master-directory-of-secret--easter-egg-ips) ..... [SECR]
+5. [Master Directory of Secret & Easter Egg IPs](#5-master-directory-of-secret--easter-egg-ips) ..... [SECR]
    - The Introversion Software LAN & Founder Vault .......................... [SEC01]
    - Protovision Game Server (WarGames 'Joshua' System) ..................... [SEC02]
    - The Steve Jackson Games (SJG) Warehouse & Illuminati BBS ............... [SEC03]
@@ -35,10 +39,10 @@ target_build_sha256: 8e5d3c90711bf79a292850937b420ee963d76e73ff6697818e698889a7b
    - Stock Exchanges & Unlimited Financial Arbitrage Mainframes ............. [SEC08]
    - ARC (Revelation Virus) vs. Arunmor (Faith Antivirus) Research Hubs ..... [SEC09]
    - The Federal Nuclear Missile Silo & Launch Substation ................... [SEC10]
-5. [Master Tool & Hardware Registry (Software v1.0 - v7.0)](#5-master-tool--hardware-registry) ...... [TOOL]
-6. [The 16-Step Speedrun Geodesic: Ultimate Hacker Rating](#6-the-16-step-speedrun-geodesic) ........ [FAST]
-7. [Version History & Build Provenance](#7-version-history--build-provenance) ....................... [VERS]
-8. [Contact Policy & Credits](#8-contact-policy--credits) ......................................... [CRED]
+6. [Master Tool & Hardware Registry (Software v1.0 - v7.0)](#6-master-tool--hardware-registry) ...... [TOOL]
+7. [The 16-Step Speedrun Geodesic: Ultimate Hacker Rating](#7-the-16-step-speedrun-geodesic) ........ [FAST]
+8. [Version History & Build Provenance](#8-version-history--build-provenance) ....................... [VERS]
+9. [Contact Policy & Credits](#9-contact-policy--credits) ......................................... [CRED]
 
 ---
 
@@ -61,7 +65,45 @@ Authorized hosting repositories:
 
 ---
 
-# 2. NETWORK ARCHITECTURE & IP GENERATION ENGINE [NETW]
+# 2. THE STORY OF INTROVERSION: KITCHEN TABLES & THE DEV CD [HIST]
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    THE "LAST OF THE BEDROOM PROGRAMMERS"                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  2001: 4 University Grads hand-pack CDs & boxes on their kitchen table.     │
+│  2003: US Publisher Strategy First ships thousands, goes bankrupt, and      │
+│        refuses to pay royalties, pushing Introversion to the brink of death.│
+│  2003: Introversion gambles by selling Uplink's raw C++ Source Code for £30.│
+│  RESULT: The Developer CD saves the studio, financing Darwinia & DEFCON!   │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### A. The Four Students & The Kitchen Table Factory (2001) [HIS01]
+In 2000, four recent graduates from Imperial College London—**Chris Delay**, **Mark Morris**, **John Austin**, and **Thomas Arundel**—decided to self-publish an uncommercial, text-heavy, high-tension cyberpunk hacking game named *Uplink*. With virtually zero budget, Chris programmed the engine on a lone PC in his spare bedroom.
+
+When *Uplink* released on **October 8, 2001**, it ignited an instant grassroots phenomenon across the internet. Having no distributor, the four founders turned their parents' kitchen table into a miniature fulfillment factory. They spent sixteen hours a day hand-burning CD-Rs, folding black cardboard jewel cases, printing sticky labels on inkjet printers, and hauling fifty-pound sacks of parcels to the local post office every afternoon. They proudly dubbed themselves *"The Last of the Bedroom Programmers."*
+
+### B. The Strategy First Betrayal & The Threat of Liquidation [HIS02]
+Seeking to bring *Uplink* to North American retail shelves, Introversion signed a distribution contract with Canadian publisher **Strategy First** to release *Uplink: Hacker Elite* across Best Buy, CompUSA, Walmart, and GameStop in 2003.
+
+Strategy First manufactured and sold tens of thousands of copies across the United States. However, shortly after taking delivery of the master gold masters and collecting retail revenue, **Strategy First filed for Canadian bankruptcy protection (CCAA) and refused to pay Introversion tens of thousands of pounds in accrued royalties**. 
+
+With their capital locked in international bankruptcy proceedings, Introversion was suddenly left with empty bank accounts, mounting rent debts, and an incomplete prototype of their next ambitious game (*Darwinia*). Liquidation and closure seemed inevitable.
+
+### C. Selling the C++ Source Code to Survive: The Developer CD [HIS03]
+Rather than capitulating or selling their company IP to a predatory publisher, Introversion conceived an unprecedented, radical gamble in late 2002 / 2003: **The Uplink Developer CD**.
+
+They decided to package the **entire, un-redacted, commercial C++ source code of Uplink**—alongside developer debug tools, sound libraries, graphics assets, and early prototype builds—and sell it directly to fans and modders for £30.
+
+The gamble succeeded beyond all expectations:
+1. **Financial Rescue**: Thousands of passionate fans purchased the Developer CD, injecting a vital stream of independent revenue that cleared the studio's debts and fully funded the development of *Darwinia* (2005) and *DEFCON* (2006).
+2. **The Modding Renaissance**: Opening the source code birthed one of the most dedicated modding communities in PC history, yielding legendary community overhauls like *UplinkOS*, *The FBI Mod*, and modern high-resolution cross-platform engine ports.
+3. **The Road to Triumph**: This fierce commitment to independence laid the groundwork for Introversion's eventual multi-million-copy masterpiece, *Prison Architect*.
+
+---
+
+# 3. NETWORK ARCHITECTURE & IP GENERATION ENGINE [NETW]
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
