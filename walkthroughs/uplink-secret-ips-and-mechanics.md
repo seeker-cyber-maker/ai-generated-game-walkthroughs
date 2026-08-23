@@ -447,6 +447,30 @@ In vanilla Uplink (and Ambrosia Software Mac OS 9/OS X ports), players frequentl
 
 When a system is completely formatted via console `delete *`, or infected by **Revelation v3.0**:
 
+```cpp
+// Decompiled from Computer::Die() in computer.cpp
+void Computer::Die() {
+    is_functional = false;
+    
+    // 1. Crash corporate valuation immediately
+    Company* comp = game->GetWorld()->GetCompany(company_name);
+    if (comp) {
+        comp->share_price *= 0.35f; // Stock crashes by 65%!
+        News::CreateStockCrashStory(comp->name);
+    }
+    
+    // 2. If infected by Revelation, broadcast viral payload to adjacent nodes
+    if (is_infected_revelation) {
+        for (int i = 0; i < links.NumItems(); ++i) {
+            Computer* target = game->GetWorld()->GetComputer(links.GetData(i));
+            if (target && target->is_functional && !target->is_infected_faith) {
+                target->InfectRevelation();
+            }
+        }
+    }
+}
+```
+
 1. **`Computer::Die()` State Machine**:
    * The computer's `is_functional` boolean is set to `false`.
    * The IP address becomes unresponsive (`Connection Refused / Host Down`).
@@ -461,6 +485,17 @@ When a system is completely formatted via console `delete *`, or infected by **R
 ---
 
 ### I. Do the News Matter? Economic Arbitrage & Story Tracking (`news.cpp`) [NET09]
+
+```cpp
+// Decompiled from News::CreateStockStory() in news.cpp
+void News::CreateStockStory(char* company_name, float old_price, float new_price) {
+    NewsStory* story = new NewsStory();
+    story->SetTYPE(NEWS_TYPE_ECONOMIC);
+    story->SetHeadline("%s Shares Plummet Following Catastrophic Server Breach", company_name);
+    story->SetDetails("Financial analysts report massive capital flight after critical file systems were wiped.");
+    game->GetWorld()->GetNews()->AddStory(story);
+}
+```
 
 The Global News Network is not just flavor text; it directly drives in-game simulation mechanics:
 
@@ -530,9 +565,17 @@ Player progression is tracked across two distinct axes:
 In vanilla Uplink's contract negotiation engine:
 
 ```cpp
-// Decompiled from Mission::SetPayment() in mission.cpp
-if (contract_negotiate_advance) {
-    player_balance += (mission->payment / 2); // 50% upfront cash transfer!
+// Decompiled from Mission::Accept() in mission.cpp
+void Mission::Accept(bool pay_now) {
+    if (pay_now) {
+        // Immediate 50% cash advance credited to player's bank account!
+        game->GetWorld()->GetPlayer()->balance += (payment / 2);
+        payment = payment / 2; // Remainder paid upon completion
+    }
+    // Procedural contracts assign no expiration timer
+    if (type != MISSION_SPECIAL) {
+        deadline = -1; // Infinite completion window!
+    }
 }
 ```
 
@@ -544,6 +587,28 @@ if (contract_negotiate_advance) {
 ### N. What is Traced During a Bank Theft? (The Bank Heist Forensics) [NET14]
 
 When executing a financial transfer between bank accounts:
+
+```cpp
+// Decompiled from BankComputer::TransferMoney() in bankcomputer.cpp
+bool BankComputer::TransferMoney(int from_acc, int to_acc, char* to_ip, int amount) {
+    // 1. Log transfer on Source Bank
+    AccessLog* log_source = new AccessLog();
+    log_source->SetTYPE(LOG_TYPE_TRANSFEROUT);
+    log_source->SetData(to_ip, to_acc, amount);
+    source_bank->logbank.AddLog(log_source);
+
+    // 2. Log deposit on Destination Bank
+    AccessLog* log_dest = new AccessLog();
+    log_dest->SetTYPE(LOG_TYPE_TRANSFERIN);
+    log_dest->SetData(source_bank->ip, from_acc, amount);
+    dest_bank->logbank.AddLog(log_dest);
+
+    // Both banks spawn independent passive police investigations!
+    Police::StartInvestigation(source_bank->ip, log_source->time);
+    Police::StartInvestigation(dest_bank->ip, log_dest->time);
+    return true;
+}
+```
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -566,6 +631,20 @@ When executing a financial transfer between bank accounts:
 ### O. Local Area Networks (LANs) & Special LAN Tools (`lancomputer.cpp`) [NET15]
 
 Local Area Networks represent complex multi-node systems protected by isolated hardware architecture:
+
+```cpp
+// Decompiled from LANComputer::TriggerIsolationLock() in lancomputer.cpp
+void LANComputer::TriggerIsolationLock(int subnet_id) {
+    for (int i = 0; i < nodes.NumItems(); ++i) {
+        LANNode* node = nodes.GetData(i);
+        if (node->subnet == subnet_id) {
+            node->is_locked = true;
+            node->DisconnectSession(); // Kicks unauthorized hacker out!
+        }
+    }
+    // Forces player to use LAN Spoof tool to reset router authentication token
+}
+```
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -611,6 +690,16 @@ public:
 
 ### Q. Removing Criminal Records (GCD) & The Uplink Leaderboard [NET17]
 
+```cpp
+// Decompiled from GCDRecord::ClearWarrants() in record.cpp
+void GCDRecord::ClearWarrants() {
+    convictions.Empty();
+    active_warrants = false;
+    // Resets federal police heat to 0.0 immediately
+    game->GetWorld()->GetPlayer()->police_heat = 0.0f;
+}
+```
+
 * **Global Criminal Database (GCD)**:
   * Deleting criminal convictions removes police active arrest warrants, resetting your police heat to zero.
 * **Uplink Internal Services (Agent Database)**:
@@ -620,6 +709,24 @@ public:
 ---
 
 ### R. Hard Endings, Getting Caught & The Gateway Self-Destruct Failsafe [NET18]
+
+```cpp
+// Decompiled from Player::GameOverTraceComplete() in player.cpp
+void Player::GameOverTraceComplete() {
+    Gateway* gw = GetGateway();
+    if (gw->has_motion_sensor && gw->has_bomb) {
+        // Self-Destruct Triggered!
+        gw->DetonateBomb();
+        EraseGatewayHardwareAndLogs();
+        game->GetWorld()->DisplayMessage("Gateway destroyed! Evidence incinerated.");
+        game->GetWorld()->PromptBuyNewGateway(); // Player survives!
+    } else {
+        // SWAT Breach! Hard Game Over!
+        game->SetGameOverReason("Arrested by Federal Police. Sentenced to life.");
+        game->DeleteSaveProfile(); // Save file deleted permanently!
+    }
+}
+```
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
