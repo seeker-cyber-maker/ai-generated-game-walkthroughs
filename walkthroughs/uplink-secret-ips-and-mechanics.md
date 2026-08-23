@@ -27,7 +27,9 @@ target_build_sha256: 8e5d3c90711bf79a292850937b420ee963d76e73ff6697818e698889a7b
 4. [Network Architecture & IP Generation Engine](#4-network-architecture--ip-generation-engine) ..... [NETW]
    - IPv4 Generation Algorithm (`World::GenerateIP`) ........................ [NET01]
    - InterNIC Indexing & Hidden Node Topologies ............................. [NET02]
-   - Passive vs. Active Trace FSM Mechanics ................................. [NET03]
+   - Decompiled Active Tracing Algorithm (`trace.cpp`) ...................... [NET03]
+   - Decompiled Passive Tracing Algorithm (`police.cpp`) .................... [NET04]
+   - The Hacker's Anti-Forensics & Trace Evasion Playbook ................... [NET05]
 5. [Master Directory of Secret & Easter Egg IPs](#5-master-directory-of-secret--easter-egg-ips) ..... [SECR]
    - The Introversion Software LAN & Founder Vault .......................... [SEC01]
    - Protovision Game Server (WarGames 'Joshua' System) ..................... [SEC02]
@@ -137,6 +139,106 @@ char* World::GenerateIP() {
   1. Manually typing the direct IP into the Connection menu.
   2. Finding IP records inside compromised file systems (`/usr/`, `/etc/`, database records).
   3. Receiving mission payloads from ARC, Arunmor, or anonymous BBS clients.
+
+---
+
+### C. Decompiled Active Tracing Algorithm (`trace.cpp`) [NET03]
+
+In the Uplink engine (`trace.cpp` and `connection.cpp`), active tracing is calculated on every game tick during an open connection:
+
+```cpp
+// Decompiled from Trace::Update() in trace.cpp
+void Trace::Update() {
+    if (!active) return;
+    
+    // Base speed determined by target computer security rating (1 to 10)
+    Computer* comp = game->GetWorld()->GetComputer(target_ip);
+    float base_speed = (float)comp->tracespeed; // e.g. 5.0 to 25.0
+    
+    // Each bounced node in the chain adds defensive latency buffer
+    int chain_length = game->GetWorld()->GetPlayer()->connection.GetSize();
+    
+    // Active trace progress per game second
+    float step = (base_speed / (float)(chain_length * 2.5f)) * (game->GetSpeedModifier());
+    trace_progress += step;
+    
+    // Remaining time in seconds displayed on Trace Tracker HUD
+    time_remaining = (100.0f - trace_progress) / step;
+    
+    if (trace_progress >= 100.0f) {
+        trace_progress = 100.0f;
+        // Game Over: Federal SWAT Raid sequence triggered
+        game->GetWorld()->GetPlayer()->GameOverTraceComplete();
+    }
+}
+```
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                       ACTIVE TRACE MATHEMATICAL MODEL                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  Trace_Time (sec) = (100.0 * Chain_Length * 2.5) / Target_Trace_Speed       │
+│                                                                             │
+│  • Single Direct Hop (Length 1, Speed 20):   Time = (100 * 1 * 2.5)/20 = 12.5s│
+│  • 10-Node Bounce Chain (Length 10, Speed 20): Time = (100 * 10 * 2.5)/20 = 125s│
+│  • 20-Node Bounce Chain (Length 20, Speed 20): Time = (100 * 20 * 2.5)/20 = 250s│
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### D. Decompiled Passive Tracing Algorithm (`police.cpp`) [NET04]
+
+When you disconnect from a compromised system, the target sysadmin files an automated incident report. The police start a **Passive Trace** investigating logs hop-by-hop along your bounce route:
+
+```cpp
+// Decompiled from Police::Update() in police.cpp
+void Police::Update() {
+    for (int i = 0; i < investigations.NumItems(); ++i) {
+        Investigation* inv = investigations.GetData(i);
+        Computer* current_node = game->GetWorld()->GetComputer(inv->current_ip);
+        
+        // Find connection log pointing to previous hop
+        AccessLog* log = current_node->logbank.FindLog(inv->search_time, LOG_TYPE_CONNECTION);
+        
+        if (!log) {
+            // Log missing: Check if suspicious deletion pattern exists
+            if (current_node->logbank.HasTombstone(LOG_TYPE_DELETED)) {
+                // Log Eraser v1-v3 left a deleted tombstone! Investigation continues!
+                inv->AdvanceToNextProbableHop();
+            } else {
+                // Clean severance: Trail permanently dead-ended!
+                investigations.RemoveItem(i);
+                continue;
+            }
+        } else if (log->from_ip == player_gateway_ip) {
+            // Trace reached player's physical gateway! Trigger Arrest Warrant!
+            inv->IssueArrestWarrant();
+        } else {
+            // Advance one hop backwards along the route
+            inv->current_ip = log->from_ip;
+        }
+    }
+}
+```
+
+---
+
+### E. The Hacker's Anti-Forensics & Trace Evasion Playbook [NET05]
+
+To guarantee 100% immunity from both Active and Passive traces, adhere strictly to these four mathematical principles:
+
+1. **The InterNIC First-Bounce Axiom**:
+   * Always set **InterNIC** as your very first hop right after your Gateway (`Gateway -> InterNIC -> Node 1 -> Node 2 -> ... -> Target`).
+   * *Why?* InterNIC is publicly editable, has **zero active trace monitors**, and holds the initial connection log connecting directly to your personal Gateway IP.
+2. **Log Eraser v4.0 vs. v1.0–v3.0 (The Tombstone Trap)**:
+   * **Log Eraser v1.0 – v3.0**: Does *not* zero out memory; it overwrites the entry with a `LOG_TYPE_DELETED` flag. Police algorithms recognize this tombstone, request backup router tables, and continue the trace right past it!
+   * **Log Eraser v4.0**: Completely wipes the raw memory allocation down to zero bytes (`logbank.ZeroMemory()`). The police algorithm encounters a completely missing log with zero tombstone, causing `investigations.RemoveItem()` to execute and **permanently terminate the investigation**!
+3. **Transparent Bypassing (Proxy Bypass v5.0 & Firewall Bypass v5.0)**:
+   * Never use *Proxy Disable* or *Firewall Disable*—shutting down the security daemon immediately alerts the remote sysadmin and triggers the active trace timer.
+   * Running `Proxy Bypass v5.0` and `Firewall Bypass v5.0` allows your packets to spoof legitimate system traffic without waking the monitoring daemons, giving you **infinite time** to crack passwords and steal files!
+4. **The Gateway Self-Destruct Failsafe**:
+   * If a passive trace ever reaches >90% on your Gateway, purchase a Gateway Motion Sensor + Gateway Bomb / Nuclear Self-Destruct. Triggering destruction incinerates your local hardware, wipes all evidence, and preserves your offshore bank balances!
 
 ---
 
