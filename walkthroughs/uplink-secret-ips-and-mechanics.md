@@ -229,6 +229,39 @@ $$\text{Active Trace Window (Seconds)} = \frac{100.0 \times \text{Chain Length} 
 
 ---
 
+#### 3. Read-Only (Guest) vs. Read-Write (Admin) Access Mechanics
+
+How does permission tiering affect the security daemons and trace monitors?
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      PERMISSION TIER & TRACE BEHAVIOR                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  TIER 1: READ-ONLY / GUEST  │ Active Trace: NEVER TRIGGERS (0% Speed).      │
+│                             │ Capabilities: Browse public info/search.      │
+│                             │ Log Editing : FORBIDDEN (No anti-forensics).  │
+├─────────────────────────────┼───────────────────────────────────────────────┤
+│  TIER 2: READ-WRITE / USER  │ Active Trace: IDLE until unauthorized access. │
+│                             │ Capabilities: Check balance / user records.   │
+│                             │ Log Editing : FORBIDDEN (User logs created).  │
+├─────────────────────────────┼───────────────────────────────────────────────┤
+│  TIER 3: READ-WRITE / ADMIN │ Active Trace: FULL SPEED (Unless bypassed).   │
+│                             │ Capabilities: Full read/write/delete/format.  │
+│                             │ Log Editing : ALLOWED (Log Eraser v4.0 works).│
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+* **On the Target Server**:
+  1. **Read-Only / Guest Screens (`TYPE_READONLY`)**: The server's security monitor (`comp->security.is_active_trace`) is completely disabled. You can stay connected to InterNIC search, news servers, or company public info screens for real-world hours without a trace ever starting.
+  2. **Read-Write / User Screens (`TYPE_USER`)**: Logging in with authorized user credentials (e.g. your own bank account) does not trigger an alarm. However, the moment you attempt to access unlisted directories, escalate privileges, or run cracking software, the active trace monitor wakes up instantly.
+  3. **Read-Write / Admin Screens (`TYPE_ADMIN`)**: Cracking or forcing Admin access trips the highest-priority active trace at full `comp->tracespeed`. Only `Proxy Bypass v5.0` and `Firewall Bypass v5.0` can keep the monitor asleep.
+* **On Intermediate Bounce Nodes**:
+  * **Does having ANY user account on a bounce node change active trace speed?** **NO.** Whether you have no account, a Guest account, a Standard User account, or Admin root privileges on a bounced server, `Trace::Update()` awards the exact same **$2.5\text{ seconds}$ latency multiplier per hop**.
+  * **Can a Standard User account sanitize the passive trace trail?** **NO.** A standard User account (`TYPE_USER`) lacks file write permissions to `/var/log` and `LogBank`. Attempting to run `Log Eraser` on a standard user account returns a permission error.
+  * **Admin Root Privileges (`TYPE_ADMIN`)**: Only Admin privileges (as found on **InterNIC** or compromised mainframes) grant write authority to `LogBank`, enabling `Log Eraser v4.0` to zero out raw memory and permanently terminate police investigations!
+
+---
+
 ### D. Decompiled Passive Tracing Algorithm (`police.cpp`) [NET04]
 
 When you disconnect from a compromised system, the target sysadmin files an automated incident report. The police start a **Passive Trace** investigating logs hop-by-hop along your bounce route:
