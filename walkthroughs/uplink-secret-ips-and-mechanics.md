@@ -417,6 +417,30 @@ When you perform actions on remote systems, the C++ engine generates three hiera
 2. **The InterNIC Bound (The Sandbox)**:
    * On InterNIC, **no automated audit routine exists in the source code**. You can delete only your personal connection log, or wipe all 50 logs in the bank—InterNIC never files police reports!
 
+#### 3. The "Visual UI Gap" Quirk: Does an Unclosed Blank Row Attract Suspicion?
+In vanilla Uplink (and Ambrosia Software Mac OS 9/OS X ports), players frequently noticed that erasing a log with Log Eraser v4.0 left a visible **blank line / empty gap** in the `LogScreen` list without shifting the remaining logs upward to close the gap.
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      UI RENDERING vs. ENGINE MEMORY                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  • OPENGL UI LAYER : Cached button widgets leave a temporary blank row.     │
+│  • C++ ENGINE LAYER: LList<AccessLog*> removes node & frees memory instantly│
+│  • POLICE ENGINE   : Inspects in-memory LList, NOT the OpenGL render buffer!│
+│  • VERDICT         : The UI gap has ZERO effect on police or traces!        │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+* **Data Structure Forensics (`logbank.cpp`)**:
+  * In the C++ engine, `LogBank` stores logs in a doubly-linked list (`LList<AccessLog*> logs`).
+  * When `Log Eraser v4.0` completes, it executes `logbank->logs.RemoveData(index)` and `delete log;`. The log node is **completely excised from system memory immediately**.
+* **Why the Visual Gap Occurs (`logscreen_interface.cpp`)**:
+  * Uplink's UI library (*Eclipse GUI / `EclRegisterButton`*) statically allocates button widgets when a window opens. Erasing a log clears the text caption of the target widget (`EclSetButtonText(btn, "")`) rather than recalculating the $(x, y)$ layout of every subsequent row on the fly.
+* **Does the Police Algorithm Detect the Gap?**:
+  * **NO.** `Police::Update()` iterates directly over the in-memory `LList<AccessLog*>`. It never queries the OpenGL frame buffer. Since the node was unlinked and has no `LOG_TYPE_DELETED` tombstone, the police investigation hits a hard dead end and **drops the case immediately**.
+* **How to Refresh the UI**:
+  * Disconnecting or clicking "Back" triggers `LogScreenInterface::Create()`, which iterates over the freshly unlinked `LList` and redraws the UI with **zero visual gaps**.
+
 ---
 
 ### H. What Happens When a Computer is Destroyed / Revelation Infection (`computer.cpp`) [NET08]
