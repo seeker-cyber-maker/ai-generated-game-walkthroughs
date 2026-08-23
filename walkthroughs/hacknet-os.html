@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacknet-OS: Security Forensics & Walkthrough Compendium</title>
+  <style>
+    :root {
+      --bg-main: #060913;
+      --bg-card: #0d1527;
+      --bg-sidebar: #090e1d;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --text-muted: #64748b;
+      --accent: #00ff66;
+      --accent-glow: rgba(0, 255, 102, 0.15);
+      --cyan: #06b6d4;
+      --red: #ef4444;
+      --gold: #f59e0b;
+      --font-mono: "Fira Code", "Courier New", Courier, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    #sidebar {
+      width: 300px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    #sidebar h2 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: var(--font-mono);
+      margin-bottom: 8px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.85rem;
+      outline: none;
+      font-family: var(--font-mono);
+    }
+    .search-box:focus { border-color: var(--accent); }
+
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .nav-item a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .nav-item a:hover {
+      background-color: var(--accent-glow);
+      color: var(--accent);
+    }
+    .nav-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      float: right;
+    }
+
+    #content {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 1100px;
+      overflow-y: auto;
+    }
+
+    header {
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+    }
+    header .meta {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      gap: 16px;
+      font-family: var(--font-mono);
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: var(--cyan);
+      margin: 32px 0 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      font-family: var(--font-mono);
+    }
+    h3 {
+      font-size: 1.05rem;
+      color: var(--accent);
+      margin: 20px 0 10px 0;
+    }
+    p, ul { margin-bottom: 16px; color: #cbd5e1; font-size: 0.95rem; }
+    ul { padding-left: 24px; }
+    li { margin-bottom: 6px; }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    /* Terminal Simulator */
+    .terminal-window {
+      background-color: #030712;
+      border: 1px solid #10b981;
+      border-radius: 6px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      color: #10b981;
+      margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+    }
+    .terminal-output {
+      height: 180px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    .terminal-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .terminal-prompt { color: #38bdf8; font-weight: bold; }
+    .terminal-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #10b981;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px 0;
+      font-size: 0.85rem;
+    }
+    th, td {
+      padding: 8px 12px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    th {
+      background-color: rgba(255, 255, 255, 0.04);
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+    tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.01); }
+
+    pre, code {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+    pre {
+      background-color: #030712;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      overflow-x: auto;
+      margin: 12px 0 16px 0;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="sidebar">
+    <h2>Hacknet Console</h2>
+    <input type="text" id="search" class="search-box" placeholder="Search systems...">
+    
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#terminal">Live CLI Terminal <span class="nav-tag">[EXEC]</span></a></li>
+      <li class="nav-item"><a href="#tools">Port Exploit Matrix <span class="nav-tag">[TOOL]</span></a></li>
+      <li class="nav-item"><a href="#naix">Naix GUI Recovery <span class="nav-tag">[WLK04]</span></a></li>
+      <li class="nav-item"><a href="#lore">The Bit Mystery <span class="nav-tag">[LORE]</span></a></li>
+      <li class="nav-item"><a href="#fast">Speedrun Geodesic <span class="nav-tag">[FAST]</span></a></li>
+      <li class="nav-item"><a href="#labyrinths">Labyrinths Expansion <span class="nav-tag">[LABY]</span></a></li>
+    </ul>
+  </nav>
+
+  <main id="content">
+    <header>
+      <h1>HACKNET-OS SECURITY LAB</h1>
+      <div class="meta">
+        <span>Team Fractal Alligator (2015)</span> • 
+        <span>Target: Terminal OS Engine v5.069</span> • 
+        <span>Author: AI Cybersecurity Researcher and Reverse-Engineer</span>
+      </div>
+    </header>
+
+    <section id="terminal" class="card">
+      <h2>Interactive Hacknet CLI Simulator [EXEC]</h2>
+      <p>Simulate terminal commands right in your browser (try <code>help</code>, <code>scan</code>, <code>probe</code>, <code>PortHack</code>, <code>connect 216.240.42.1</code>, <code>cat notes.txt</code>, <code>reboot</code>):</p>
+      
+      <div class="terminal-window">
+        <div class="terminal-output" id="term-out">
+[HACKNET-OS v5.069] System Initialized.<br>
+Node Connected: 127.0.0.1 (Localhost Gateway)<br>
+RAM Available: 400 MB / 400 MB<br>
+Type 'help' for command manual.<br>
+        </div>
+        <div class="terminal-input-row">
+          <span class="terminal-prompt" id="term-prompt">user@gateway:~$</span>
+          <input type="text" class="terminal-input" id="term-in" autofocus>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools" class="card">
+      <h2>Master Penetration Toolkit & Port Matrix [TOOL]</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Executable</th>
+            <th>Port Target</th>
+            <th>RAM Req</th>
+            <th>Execution Time</th>
+            <th>Acquisition Node</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>PortHack.exe</strong></td><td>Root UID</td><td>200 MB</td><td>Instant</td><td>Default starting binary</td></tr>
+          <tr><td><strong>FTPBounce.exe</strong></td><td>Port 21 (FTP)</td><td>150 MB</td><td>4.2 sec</td><td>Default starting binary</td></tr>
+          <tr><td><strong>SSHcrack.exe</strong></td><td>Port 22 (SSH)</td><td>180 MB</td><td>6.0 sec</td><td>Entropy Contract Asset Drop</td></tr>
+          <tr><td><strong>SMTPoverflow.exe</strong></td><td>Port 25 (SMTP)</td><td>160 MB</td><td>5.5 sec</td><td>CSEC Infiltration Server</td></tr>
+          <tr><td><strong>WebServerWorm.exe</strong></td><td>Port 80 (HTTP)</td><td>190 MB</td><td>7.0 sec</td><td>Academic Database Workstation</td></tr>
+          <tr><td><strong>SQL_MemCorrupt.exe</strong></td><td>Port 1433 (SQL)</td><td>210 MB</td><td>8.5 sec</td><td>DECSoft Mainframe Drop</td></tr>
+          <tr><td><strong>KBT_PortTest.exe</strong></td><td>Port 6881 (KBT)</td><td>170 MB</td><td>6.0 sec</td><td>Prometheus Investigation Node</td></tr>
+          <tr><td><strong>Decypher.exe</strong></td><td>.dec Encrypted</td><td>100 MB</td><td>3.0 sec</td><td>DECSoft Mainframe Internal</td></tr>
+          <tr><td><strong>DECHead.exe</strong></td><td>Headers Extract</td><td>80 MB</td><td>Instant</td><td>DECSoft Website Mirror</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="naix" class="card">
+      <h2>Naix Active Counter-Hack: Emergency GUI Recovery [WLK04]</h2>
+      <p>When you probe Naix's private server, Naix deletes your <code>/sys/x-server.sys</code>, crashing your display to raw text mode. Follow this exact terminal sequence to recover:</p>
+      <pre>
+connect 216.240.42.1
+probe
+PortHack
+cd sys
+scp x-server.sys /sys/
+disconnect
+reboot -i</pre>
+    </section>
+
+    <section id="lore" class="card">
+      <h2>The Bit Mystery & EnTech Conspiracy [LORE]</h2>
+      <p>Bit developed Hacknet-OS, an unstoppable autonomous security kernel. Defense contractor EnTech licensed the code to build <strong>Project Prometheus</strong>, an offensive cyber-warfare weapon. When Bit refused to surrender the master keys, EnTech hacked his cardiac pacemaker to trigger a fatal arrhythmia, activating Bit's 14-day Dead Man's Switch to contact you.</p>
+    </section>
+
+    <section id="fast" class="card">
+      <h2>The 15-Step Speedrun Geodesic [FAST]</h2>
+      <ol style="padding-left: 24px; color: #cbd5e1;">
+        <li>Connect to Bit Ghost Node; execute probe -> PortHack -> claim /bin/.</li>
+        <li>Register with Entropy Contract Hub.</li>
+        <li>Complete Milburg High contract; modify GPA to 4.0.</li>
+        <li>Download SSHcrack.exe from Entropy Asset Drop.</li>
+        <li>Infiltrate Academic Database; download WebServerWorm.exe.</li>
+        <li>Complete CSEC qualification exam; join CSEC Hub.</li>
+        <li>Crack DECSoft Mainframe; download SQL_MemCorrupt.exe & Decypher.exe.</li>
+        <li>Solve eOS mobile malware contract; acquire EOSDeviceScanner.exe.</li>
+        <li>Probe ThemeHackComp; trigger Naix counter-attack.</li>
+        <li>Recover x-server.sys from gateway; reboot GUI.</li>
+        <li>Complete CSEC Project Bit lead; locate EnTech server network.</li>
+        <li>Infiltrate EnTech Workstation 04; extract Romulus / Prometheus IPs.</li>
+        <li>Crack EnTech Prometheus daemon; disable core security monitor.</li>
+        <li>Access EnTech Offline Backup; wipe /sys/ kernel binaries with <code>rm *</code>.</li>
+        <li>Disconnect and trigger final system reboot for game victory!</li>
+      </ol>
+    </section>
+
+    <section id="labyrinths" class="card">
+      <h2>Labyrinths Expansion Forensics [LABY]</h2>
+      <p>Features collaborative attacks with Kaguya, Coel, and D3f4ult. Introduces <strong>Signal Jammers</strong> neutralized via <code>SignalScramble.exe</code> and runtime heap inspection via <code>MemDumpGenerator.exe</code>.</p>
+    </section>
+  </main>
+
+  <script>
+    const termOut = document.getElementById('term-out');
+    const termIn = document.getElementById('term-in');
+    const prompt = document.getElementById('term-prompt');
+    let currentNode = "127.0.0.1";
+    let isRoot = false;
+
+    function printOut(text) {
+      termOut.innerHTML += text + "<br>";
+      termOut.scrollTop = termOut.scrollHeight;
+    }
+
+    termIn.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const cmd = termIn.value.trim();
+        printOut(`<span style="color:#38bdf8">${prompt.textContent}</span> ${cmd}`);
+        termIn.value = "";
+
+        const parts = cmd.split(' ');
+        const base = parts[0].toLowerCase();
+
+        switch(base) {
+          case 'help':
+            printOut("Available Commands: connect &lt;ip&gt;, disconnect, probe, scan, PortHack, cat &lt;file&gt;, rm &lt;file&gt;, scp &lt;file&gt; &lt;dest&gt;, ls, reboot, clear");
+            break;
+          case 'clear':
+            termOut.innerHTML = "";
+            break;
+          case 'probe':
+            printOut(`Probing ${currentNode}...<br>Port 21: FTP (Open)<br>Port 22: SSH (Open)<br>Port 25: SMTP (Open)<br>Open Ports Required: 2<br>Proxy: None | Firewall: None`);
+            break;
+          case 'porthack':
+            printOut(`Executing PortHack on ${currentNode}...<br>[████████████████] 100%<br>ACCESS GRANTED: Root UID (0) Escalated!`);
+            isRoot = true;
+            prompt.textContent = `root@${currentNode}:~#`;
+            break;
+          case 'scan':
+            printOut("Scanning node links...<br>Discovered: 216.240.42.1 (Naix Gateway)<br>Discovered: 192.168.1.100 (Entropy Hub)<br>Discovered: 212.43.12.8 (CSEC Central)");
+            break;
+          case 'connect':
+            if (parts[1]) {
+              currentNode = parts[1];
+              isRoot = false;
+              prompt.textContent = `user@${currentNode}:~$`;
+              printOut(`Connected to remote host ${currentNode}.`);
+            } else {
+              printOut("Usage: connect &lt;ip_address&gt;");
+            }
+            break;
+          case 'disconnect':
+            currentNode = "127.0.0.1";
+            isRoot = false;
+            prompt.textContent = `user@gateway:~$`;
+            printOut("Disconnected. Returned to local gateway.");
+            break;
+          case 'ls':
+            printOut("sys/   bin/   log/   home/   notes.txt");
+            break;
+          case 'cat':
+            if (parts[1] === "notes.txt") {
+              printOut("[Bit's Note] If you are reading this, I am already dead. Find EnTech. Protect Hacknet-OS.");
+            } else {
+              printOut(`File ${parts[1] || ''} not found.`);
+            }
+            break;
+          case 'reboot':
+            printOut("Broadcasting reboot interrupt...<br>GUI Reinitialized. System Online.");
+            break;
+          default:
+            if (cmd) printOut(`Command '${base}' not recognized. Type 'help' for manual.`);
+        }
+      }
+    });
+
+    document.getElementById('search').addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(term) ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

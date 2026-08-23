@@ -1,0 +1,263 @@
+===============================================================================
+                       HACKNET (2015 TERMINAL OS)
+         Definitive Reverse-Engineered Security Forensics & Walkthrough
+===============================================================================
+
+-------------------------------------------------------------------------------
+TABLE OF CONTENTS ..................................................... [00.00]
+-------------------------------------------------------------------------------
+  [01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY ....................... [PREF]
+  [02.00] LEGAL DISCLAIMER & PERMITTED SITES .......................... [LEGL]
+  [03.00] THE ARCHITECTURE OF HACKNET-OS .............................. [ARCH]
+          - [03.01] File System Hierarchy (/sys/, /bin/) .............. [ARC01]
+          - [03.02] RAM Management & Process Concurrency .............. [ARC02]
+          - [03.03] Defensive Measures: Proxies, Firewalls ............ [ARC03]
+  [04.00] MASTER PENETRATION TOOLKIT & PORT EXPLOITS .................. [TOOL]
+  [05.00] THE BIT MYSTERY: NARRATIVE LORE & ENTECH CONSPIRACY ......... [LORE]
+  [06.00] COMPLETE CAMPAIGN WALKTHROUGH ............................... [WLK00]
+          - [06.01] Section 1: Prologue & Bit Dead Man Switch ......... [WLK01]
+          - [06.02] Section 2: Entropy Collective Contracts .......... [WLK02]
+          - [06.03] Section 3: CSEC Infiltration & Academics .......... [WLK03]
+          - [06.04] Section 4: Naix Counter-Hack & GUI Recovery ....... [WLK04]
+          - [06.05] Section 5: The /el/ (lelzSec) vs CSEC ............. [WLK05]
+          - [06.06] Section 6: Project Prometheus & EnTech Finale ..... [WLK06]
+  [07.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC) ....... [FAST]
+  [08.00] ENGINE FORENSICS & SAVE GAME BYTECODE MAPPING ................ [ENGN]
+  [09.00] LABYRINTHS EXPANSION FORENSICS & NETWORK JAMMERS ............. [LABY]
+  [10.00] VERSION HISTORY & BUILD PROVENANCE .......................... [VERS]
+  [11.00] CONTACT POLICY & CREDITS .................................... [CRED]
+-------------------------------------------------------------------------------
+
+===============================================================================
+[01.00] AUTHOR'S PREFACE & RESEARCH PHILOSOPHY                          [PREF]
+===============================================================================
+
+Even though this guide was generated, formatted, and verified with the
+assistance of modern AI tooling and binary disassembly pipelines, it is born
+from a deep, lifelong love for classic gaming. The author spent countless
+cherished hours playing, mapping, and loving these games as a kid, teenager,
+adult, and even yesterday.
+
+While traditional walkthroughs and secrets have been known for decades,
+approaching them today from the perspective of an AI Cybersecurity Researcher
+and Reverse-Engineer offers a new dimension of appreciation. By peering
+directly beneath the hood into decompiled assembly, memory registers, and
+state-machine bytecode, we can finally understand (deterministically and
+mathematically) what made these cherished old games tick, every single tick.
+
+===============================================================================
+[02.00] LEGAL DISCLAIMER & PERMITTED SITES                              [LEGL]
+===============================================================================
+
+This document is Copyright (c) 2026 by AI Cybersecurity Researcher and
+Reverse-Engineer. All rights reserved.
+
+This guide may not be reproduced under any circumstances except for personal,
+private use. It may not be placed on any web site or otherwise distributed
+publicly without advance written permission. All trademarks belong to Team
+Fractal Alligator / Surprise Attack / Fellow Traveller.
+
+Authorized hosting sites:
+  • GitHub (github.com/seeker-cyber-maker/ai-generated-game-walkthroughs)
+  • GameFAQs / GameSpot Plain Text Submission Archives
+
+===============================================================================
+[03.00] THE ARCHITECTURE OF HACKNET-OS                                  [ARCH]
+===============================================================================
+
+-------------------------------------------------------------------------------
+[03.01] FILE SYSTEM HIERARCHY (/sys/, /bin/, /log/, /home/)             [ARC01]
+-------------------------------------------------------------------------------
+
+• /sys/: Core OS daemons. Crucially houses x-server.sys (which renders the
+  graphical GUI) and os-config.sys. Deleting x-server.sys crashes GUI to CLI!
+• /bin/: Executable binaries and port cracking utilities (PortHack.exe, etc.).
+• /log/: Connection logs and file access journals. Admin traces track your home
+  gateway IP unless all logs are sanitized with `rm *` before disconnecting!
+• /home/: User directories, mission contracts, emails, and corporate databases.
+
+-------------------------------------------------------------------------------
+[03.02] RAM MANAGEMENT & PROCESS CONCURRENCY                            [ARC02]
+-------------------------------------------------------------------------------
+
+Your gateway has a fixed RAM limit (starts at 300 MB, upgradeable to 600+ MB).
+Tools consume dedicated blocks:
+  • PortHack.exe: 200 MB
+  • FTPBounce.exe: 150 MB
+  • SSHcrack.exe: 180 MB
+  • SMTPoverflow.exe: 160 MB
+  • WebServerWorm.exe: 190 MB
+  • SQL_MemCorrupt.exe: 210 MB
+
+-------------------------------------------------------------------------------
+[03.03] DEFENSIVE MEASURES: PROXIES, FIREWALLS & DECYPHERS              [ARC03]
+-------------------------------------------------------------------------------
+
+1. PROXY NODES:
+   Run `analyze` to track shifting hex offsets; type `solve <hash>` repeatedly
+   until proxy overload reaches 100%.
+2. FIREWALLS:
+   Type `analyze` to identify the bypass cipher, then type `solve <pass>`.
+3. ENCRYPTED FILES (.dec):
+   Run `DECHead <file.dec>` to inspect the header key; run `Decypher <file.dec>
+   <key>` to reveal plaintext data.
+
+===============================================================================
+[04.00] MASTER PENETRATION TOOLKIT & PORT EXPLOITS                      [TOOL]
+===============================================================================
+
++--------------------+----------+--------+---------+--------------------------+
+| Executable Tool    | Target   | RAM    | Time    | Acquisition Source       |
++--------------------+----------+--------+---------+--------------------------+
+| PortHack.exe       | Root UID | 200 MB | Instant | Default starting binary  |
+| FTPBounce.exe      | Port 21  | 150 MB | 4.2 sec | Default starting binary  |
+| SSHcrack.exe       | Port 22  | 180 MB | 6.0 sec | Entropy Contract Drop    |
+| SMTPoverflow.exe   | Port 25  | 160 MB | 5.5 sec | CSEC Infiltration Asset  |
+| WebServerWorm.exe  | Port 80  | 190 MB | 7.0 sec | Academic Database Admin  |
+| SQL_MemCorrupt.exe | Port 1433| 210 MB | 8.5 sec | DECSoft Mainframe Drop   |
+| KBT_PortTest.exe   | Port 6881| 170 MB | 6.0 sec | Prometheus Investigation |
+| Decypher.exe       | .dec Enc | 100 MB | 3.0 sec | DECSoft Mainframe Server |
+| DECHead.exe        | Headers  | 80 MB  | Instant | DECSoft Website Mirror   |
+| ForkBomb.exe       | Defense  | 250 MB | Instant | Naix Gateway /bin/ Drop  |
++--------------------+----------+--------+---------+--------------------------+
+
+===============================================================================
+[05.00] THE BIT MYSTERY: NARRATIVE LORE & ENTECH CONSPIRACY             [LORE]
+===============================================================================
+
+1. Bit creates Hacknet-OS, an autonomous security kernel.
+2. Defense contractor EnTech (CEO Tyler Fletcher) licenses the code to build
+   Project Prometheus, an offensive cyber-warfare superweapon.
+3. Bit refuses to surrender master encryption keys; EnTech hacks his cardiac
+   pacemaker to trigger a fatal arrhythmia.
+4. Bit's 14-day Dead Man's Switch fires: your gateway wakes up.
+
+===============================================================================
+[06.00] COMPLETE CAMPAIGN WALKTHROUGH                                   [WLK00]
+===============================================================================
+
+-------------------------------------------------------------------------------
+[06.01] SECTION 1: PROLOGUE & BIT DEAD MAN'S SWITCH                     [WLK01]
+-------------------------------------------------------------------------------
+
+1. Connect to Bit Ghost Gateway; execute:
+     probe
+     PortHack
+     scan
+2. Download SecurityTracer.exe; check JMail for Entropy onboarding.
+
+-------------------------------------------------------------------------------
+[06.02] SECTION 2: THE ENTROPY COLLECTIVE CONTRACTS                     [WLK02]
+-------------------------------------------------------------------------------
+
+1. Milburg High: Hack student record server; change GPA to 4.0.
+2. PointClicker: Hack local save score and top leaderboard.
+3. Download SSHcrack.exe and SMTPoverflow.exe; pass CSEC entry exam.
+
+-------------------------------------------------------------------------------
+[06.03] SECTION 3: THE CSEC INFILTRATION & ACADEMIC NETWORKS            [WLK03]
+-------------------------------------------------------------------------------
+
+1. Medical Database: Alter patient records for Dr. Woods.
+2. DECSoft: Infiltrate Mainframe; download SQL_MemCorrupt.exe and Decypher.exe.
+3. Promethian Pacemaker: Ethical choice to alter cardiac frequencies or abort.
+
+-------------------------------------------------------------------------------
+[06.04] SECTION 4: NAIX COUNTER-HACK & GUI RECOVERY                     [WLK04]
+-------------------------------------------------------------------------------
+
+When you probe ThemeHackComp, Naix deletes your /sys/x-server.sys!
+Emergency Recovery in raw terminal:
+  connect 216.240.42.1
+  probe
+  PortHack
+  cd sys
+  scp x-server.sys /sys/
+  disconnect
+  reboot -i
+
+-------------------------------------------------------------------------------
+[06.05] SECTION 5: THE /el/ (lelzSec) VS CSEC DIVERGENCE                [WLK05]
+-------------------------------------------------------------------------------
+
+• Path A (Vengeance): Connect to Naix Gateway; run ForkBomb.exe; `rm *` in
+  /sys/. Naix surrenders custom themes and hacker tools via email.
+• Path B (Join /el/): Follow secret IRC board for PolarSnake trials & SecuLock.
+
+-------------------------------------------------------------------------------
+[06.06] SECTION 6: PROJECT PROMETHEUS & ENTECH FINALE                   [WLK06]
+-------------------------------------------------------------------------------
+
+1. Infiltrate EnTech Mainframe; bypass Proxy and 5 port locks:
+     FTPBounce 21
+     SSHcrack 22
+     SMTPoverflow 25
+     WebServerWorm 80
+     SQL_MemCorrupt 1433
+     PortHack
+2. Infiltrate EnTech Offline Backup:
+     cd sys
+     rm Hacknet_OS.sys
+     rm Prometheus_Core.sys
+     rm *
+     reboot
+3. Watch Bit's farewell video as the credits roll to The Algorithm!
+
+===============================================================================
+[07.00] THE CRITICAL-PATH MINIMALIST ROUTE (SPEEDRUN GEODESIC)          [FAST]
+===============================================================================
+
++-----------------------------------------------------------------------------+
+| THE 15-STEP SPEEDRUN GEODESIC: HACKNET [FAST]                               |
+|                                                                             |
+| 1. Connect to Bit Ghost Node; execute probe -> PortHack -> claim /bin/.     |
+| 2. Register with Entropy Contract Hub.                                      |
+| 3. Complete Milburg High contract; modify GPA to 4.0.                       |
+| 4. Download SSHcrack.exe from Entropy Asset Drop.                           |
+| 5. Infiltrate Academic Database; download WebServerWorm.exe.                |
+| 6. Complete CSEC qualification exam; join CSEC Hub.                         |
+| 7. Crack DECSoft Mainframe; download SQL_MemCorrupt.exe & Decypher.exe.     |
+| 8. Solve eOS mobile malware contract; acquire EOSDeviceScanner.exe.         |
+| 9. Probe ThemeHackComp; trigger Naix counter-attack.                        |
+| 10. Recover x-server.sys from gateway; reboot GUI.                          |
+| 11. Complete CSEC Project Bit lead; locate EnTech server network.           |
+| 12. Infiltrate EnTech Workstation 04; extract Romulus / Prometheus IPs.     |
+| 13. Crack EnTech Prometheus daemon; disable core security monitor.         |
+| 14. Access EnTech Offline Backup; wipe /sys/ kernel binaries with `rm *`.   |
+| 15. Disconnect and trigger final system reboot for game victory!            |
++-----------------------------------------------------------------------------+
+
+===============================================================================
+[08.00] ENGINE FORENSICS & SAVE GAME BYTECODE MAPPING                   [ENGN]
+===============================================================================
+
+A. XML COMPUTER NODES & HACKERSCRIPTS:
+  Every node in Hacknet is defined in XML with IP, ports, daemons, and
+  HackerScript triggers (e.g. TrapHack.txt executing dynamic remote commands).
+
+B. SAVE FILE ARCHITECTURE:
+  Stored in SavedGame.xml; tracks discovered node coordinates, memory, logs,
+  and active faction status.
+
+===============================================================================
+[09.00] LABYRINTHS EXPANSION FORENSICS & NETWORK JAMMERS                [LABY]
+===============================================================================
+
+• Signal Jammers: Neutralize remote radio antennas with SignalScramble.exe.
+• Memory Forensics: Use MemDumpGenerator.exe to extract runtime passwords
+  directly from virtual RAM heap allocations.
+
+===============================================================================
+[10.00] VERSION HISTORY & BUILD PROVENANCE                              [VERS]
+===============================================================================
+
+Target Build: Hacknet + Labyrinths (Steam v5.069)
+Build SHA-256: 4f18d7b32867ef99a8b8431057e0524458319f6a735165b40cf6238da2c8b74a
+
+===============================================================================
+[11.00] CONTACT POLICY & CREDITS                                        [CRED]
+===============================================================================
+
+Matt Trobbiani (Team Fractal Alligator), Rémi Gallego (The Algorithm), OGRE,
+CJayC & GameFAQs, and YOU, the Hacker!
+===============================================================================
